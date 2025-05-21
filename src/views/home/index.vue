@@ -58,7 +58,7 @@
           </div>
           <span>提币</span>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" @click="router.push('/flashExchange')">
           <div class="imgBox">
             <img src="../../assets/img/03.png" alt="" />
           </div>

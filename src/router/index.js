@@ -51,6 +51,11 @@ const router = createRouter({
       path: '/wallet',
       name: 'wallet',
       component: () => import('../views/wallet/index.vue')
+    },
+    {
+      path: '/flashExchange',
+      name: 'flashExchange',
+      component: () => import('../views/flashExchange/index.vue')
     }
   ]
 })
