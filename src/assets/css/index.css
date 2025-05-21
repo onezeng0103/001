@@ -1,0 +1,11 @@
+@import './font.css';
+@import './reset.css';
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  background: #000000;
+  font-family: 'PingFangSC-Regular';
+}
