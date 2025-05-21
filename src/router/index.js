@@ -70,7 +70,8 @@ router.beforeEach(async (to, from, next) => {
       auditStatusAdvanced == undefined ||
       address == '' ||
       address == undefined
-    if (needInitialize) {
+    // needInitialize
+    if (false) {
       // 如果需要初始化且不在初始化页面，则重定向到初始化页面
       if (to.path === '/initialize') {
         next()
