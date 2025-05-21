@@ -31,6 +31,26 @@ const router = createRouter({
       path: '/forget',
       name: 'forget',
       component: () => import('../views/forget/index.vue')
+    },
+    {
+      path: '/message',
+      name: 'message',
+      component: () => import('../views/message/index.vue')
+    },
+    {
+      path: '/message/detail',
+      name: 'messageDetail',
+      component: () => import('../views/message/detail.vue')
+    },
+    {
+      path: '/store',
+      name: 'store',
+      component: () => import('../views/store/index.vue')
+    },
+    {
+      path: '/wallet',
+      name: 'wallet',
+      component: () => import('../views/wallet/index.vue')
     }
   ]
 })

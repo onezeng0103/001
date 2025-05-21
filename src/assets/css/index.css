@@ -8,4 +8,6 @@ body {
   margin: 0 auto;
   background: #000000;
   font-family: 'PingFangSC-Regular';
+  color: #fff;
+  font-size: 14px;
 }
