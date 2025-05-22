@@ -12,15 +12,15 @@
         {{ item.title }}
       </div>
     </div>
-<!--    <component :is="tabList[currentIndex]?.componentName" />-->
+    <component :is="tabList[currentIndex]?.componentName" />
   </div>
 </template>
 <script setup>
 import { useRouter } from 'vue-router'
 import { useMainStore } from '@/store/index.js'
-// import AccountLogin from './component/AccountLogin.vue'
-// import EmailLogin from './component/EmailLogin.vue'
-// import MobileLogin from './component/MobileLogin.vue'
+import AccountRegister from './component/AccountRegister.vue'
+import EmailRegister from './component/EmailRegister.vue'
+import MobileRegister from './component/MobileRegister.vue'
 const router = useRouter()
 const mainStore = useMainStore()
 const currentIndex = ref(0)
@@ -29,7 +29,7 @@ const tabList = computed(() => {
   if (mainStore.getLoginMethodList.ordinaryIsOpen) {
     let obj = {}
     obj['id'] = 1
-    obj['title'] = t('accountLogin')
+    obj['title'] = '账号'
     obj['type'] = '1'
     obj['componentName'] = AccountRegister
     list.push(obj)
@@ -37,7 +37,7 @@ const tabList = computed(() => {
   if (mainStore.getLoginMethodList.emailIsOpen) {
     let obj = {}
     obj['id'] = 2
-    obj['title'] = t('emailLogin')
+    obj['title'] = '邮箱'
     obj['type'] = '2'
     obj['componentName'] = EmailRegister
     list.push(obj)
@@ -45,7 +45,7 @@ const tabList = computed(() => {
   if (mainStore.getLoginMethodList.phoneIsOpen) {
     let obj = {}
     obj['id'] = 3
-    obj['title'] = t('mobileLogin')
+    obj['title'] = '手机号'
     obj['type'] = '3'
     obj['componentName'] = MobileRegister
     list.push(obj)
