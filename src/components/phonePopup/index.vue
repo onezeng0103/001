@@ -2,6 +2,7 @@
   <van-popup v-model:show="props.showBottom" position="bottom" :style="{ height: '100%' }">
     <div style="background-color: transparent">
       <div style="height: 667px">
+
         <div style="height: 44px">
           <div
             style="
@@ -84,6 +85,7 @@
             </div>
           </div>
         </div>
+
         <div class="next-list light">
           <div class="next-search" style="top: 44px">
             <img class="next-search-img"  src="data:image/png;base64,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"
@@ -134,10 +136,12 @@
             </div>
           </uni-scroll-view>
         </div>
+
       </div>
     </div>
   </van-popup>
 </template>
+
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { getAreaCode } from '@/api/user'
@@ -193,6 +197,7 @@ onMounted(() => {
   codeList()
 })
 </script>
+
 <style lang="scss" scoped>
 ::-webkit-scrollbar {
   width: 0;
