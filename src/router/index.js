@@ -78,9 +78,19 @@ const router = createRouter({
       component: () => import('../views/trade/index.vue')
     },
     {
+      path: '/flash',
+      name: 'flash',
+      component: () => import('../views/flash/index.vue')
+    },
+    {
       path: '/userauth',
       name: 'userAuth',
       component: () => import('../views/userAuth/index.vue')
+    },
+    {
+      path: '/langList',
+      name: 'langList',
+      component: () => import('../views/langList/index.vue')
     }
   ]
 })

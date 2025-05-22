@@ -1,5 +1,8 @@
 <template>
-  <div class="home">
+  <div
+    class="home"
+    :style="{ overflow: showInfoPopup ? 'hidden' : '', height: showInfoPopup ? '100vh' : '' }"
+  >
     <div class="nav-bar">
       <div class="nav-bar-header">
         <div class="nav-bar">
@@ -101,6 +104,16 @@
       </div>
     </div>
   </div>
+  <div class="black" v-if="showInfoPopup" @click="showInfoPopup = !showInfoPopup"></div>
+  <div class="rule_box" v-if="showInfoPopup">
+    <div class="close" @click="showInfoPopup = !showInfoPopup"></div>
+    <div class="content">
+      <div class="content-item" v-for="(item, index) in newList">
+        <div class="number">{{ index + 1 }}</div>
+        <div class="title">{{ item.title }}</div>
+      </div>
+    </div>
+  </div>
 </template>
 <script setup>
 import { useRouter } from 'vue-router'
@@ -142,11 +155,20 @@ const handleIndex = (index) => {
   currentIndex.value = index
 }
 const isRed = ref(false)
+const showInfoPopup = ref(false)
+const newList = ref([])
 onMounted(() => {
   publiceNoticeFun()
   if (isSign.value) {
     getInfo().then((res) => {
-      isRed.value = res.rows?.some((item) => item.type == 1 && item.status == 0)
+      if (res.code == '200' && res.rows.length > 0) {
+        isRed.value = res.rows?.some((item) => item.type == 1 && item.status == 0)
+        newList.value = res.rows
+        showInfoPopup.value = true
+      } else {
+        isRed.value = false
+        showInfoPopup.value = false
+      }
     })
   } else {
     isRed.value = false
@@ -306,6 +328,62 @@ onMounted(() => {
         }
       }
     }
+  }
+}
+.black {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+.rule_box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: url('../../assets/img/popup.png') no-repeat center center;
+  background-size: 100% 100%;
+  width: 340px;
+  height: 260px;
+  z-index: 101;
+  .content {
+    position: absolute;
+    top: 92px;
+    left: 4px;
+    right: 0;
+    bottom: 0;
+    width: 98%;
+    border-radius: 20px;
+    height: 63%;
+    padding: 20px;
+    color: #fff;
+    overflow-y: auto;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    &-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      .number {
+        font-size: 12px;
+        margin-right: 10px;
+      }
+    }
+  }
+  .close {
+    position: absolute;
+    top: 8px;
+    right: 1px;
+    width: 20px;
+    height: 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
   }
 }
 </style>

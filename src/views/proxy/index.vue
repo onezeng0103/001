@@ -213,7 +213,7 @@
       <div class="advertisement">
         <div class="advertisement-top">
           <div class="advertisement-top-left">
-            <img src="../../assets/img/11.png" alt="" />
+            <img src="../../assets/img/27.png" alt="" />
             <div class="text">AI智能代投</div>
           </div>
           <div class="advertisement-top-right">
@@ -226,19 +226,19 @@
         <div class="advertisement-btn">
           <div class="advertisement-btn-item">
             <div class="icon">
-              <img src="../../assets/img/10.png" alt="" />
+              <img src="../../assets/img/28.png" alt="" />
             </div>
             <div class="text">智能预测</div>
           </div>
           <div class="advertisement-btn-item">
             <div class="icon">
-              <img src="../../assets/img/10.png" alt="" />
+              <img src="../../assets/img/29.png" alt="" />
             </div>
             <div class="text">自动代投</div>
           </div>
           <div class="advertisement-btn-item">
             <div class="icon">
-              <img src="../../assets/img/10.png" alt="" />
+              <img src="../../assets/img/30.png" alt="" />
             </div>
             <div class="text">风控管理</div>
           </div>
@@ -247,50 +247,97 @@
     </div>
   </div>
   <van-popup v-model:show="showBottom" round position="bottom">
-    <div style="display: flex; align-items: center; justify-content: flex-end">
-      <svg
-        @click="showBottom = !showBottom"
-        t="1747853459405"
-        class="icon"
-        viewBox="0 0 1024 1024"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-        p-id="1494"
-        width="24"
-        height="24"
-      >
-        <path
-          d="M512 451.669333l211.2-211.2 60.330667 60.330667-211.2 211.2 211.2 211.2-60.330667 60.330667-211.2-211.2-211.2 211.2-60.330667-60.330667 211.2-211.2-211.2-211.2L300.8 240.469333z"
-          p-id="1495"
-          fill="#000"
-        ></path>
-      </svg>
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <div></div>
+      <div style="font-size: 14px">代投设置</div>
+      <div>
+        <svg
+          @click="showBottom = !showBottom"
+          t="1747853459405"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="1494"
+          width="24"
+          height="24"
+        >
+          <path
+            d="M512 451.669333l211.2-211.2 60.330667 60.330667-211.2 211.2 211.2 211.2-60.330667 60.330667-211.2-211.2-211.2 211.2-60.330667-60.330667 211.2-211.2-211.2-211.2L300.8 240.469333z"
+            p-id="1495"
+            fill="#000"
+          ></path>
+        </svg>
+      </div>
     </div>
     <div
       style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px"
     >
-      <div style="display: flex; align-items: center; flex-direction: column">
-        <div>{{ userInfo?.totalNum || 0 }}</div>
-        <div style="font-size: 12px; color: #999999; margin-top: 5px">代投天数</div>
-      </div>
-      <div style="display: flex; align-items: center; flex-direction: column">
-        <div>{{ userInfo.yesterdayAmountEarn }}</div>
-        <div style="font-size: 12px; color: #999999; margin-top: 5px">昨日收益</div>
-      </div>
-      <div style="display: flex; align-items: center; flex-direction: column">
-        <div>{{ userInfo.totalAmountEarn?.toFixed(2) }}</div>
-        <div style="font-size: 12px; color: #999999; margin-top: 5px">累计收益</div>
+      <img
+        :src="info.icon"
+        alt=""
+        style="width: 36px; height: 36px; border-radius: 50%; margin-right: 20px"
+      />
+      <div style="flex: 1; display: flex; align-items: center; justify-content: space-between">
+        <div style="display: flex; align-items: center; flex-direction: column">
+          <div>{{ userInfo?.totalNum || 0 }}</div>
+          <div style="font-size: 12px; color: #999999; margin-top: 5px">代投天数</div>
+        </div>
+        <div style="display: flex; align-items: center; flex-direction: column">
+          <div>{{ userInfo.yesterdayAmountEarn }}</div>
+          <div style="font-size: 12px; color: #999999; margin-top: 5px">昨日收益</div>
+        </div>
+        <div style="display: flex; align-items: center; flex-direction: column">
+          <div>{{ userInfo.totalAmountEarn?.toFixed(2) }}</div>
+          <div style="font-size: 12px; color: #999999; margin-top: 5px">累计收益</div>
+        </div>
       </div>
     </div>
-    <div style="margin-top: 20px; color: #000000; font-weight: 500; font-size: 16px">固定金额</div>
-    <div class="input-box" style="background: #f5f5f5">
-      <input
-        v-model.trim="price"
-        type="number"
-        maxlength="140"
-        :placeholder="info.limitMin ? '最小' + info.limitMin : ''"
-        style="color: #000000 !important"
-      />
+    <div
+      style="
+        background: #fbfbfb;
+        border-radius: 9px 9px 9px 9px;
+        padding: 10px 15px;
+        margin-top: 20px;
+      "
+    >
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <div style="color: #000000; font-weight: 500; font-size: 16px">金额</div>
+        <div style="color: rgba(0, 0, 0, 0.18); font-size: 12px">
+          可用{{ availableBalance }} USDT
+        </div>
+      </div>
+
+      <div class="input-box">
+        <img style="height: 36px; width: 36px" src="../../assets/img/dollar.png" alt="" />
+        <input
+          v-model.trim="price"
+          type="number"
+          maxlength="140"
+          :placeholder="info.limitMin ? '最小' + info.limitMin : ''"
+          style="color: #000000 !important"
+        />
+      </div>
+      <div
+        style="display: flex; align-items: center; justify-content: space-between; margin-top: 15px"
+      >
+        <div
+          :class="currentIndex == index ? 'boxActive' : ''"
+          style="
+            width: 20%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: rgba(240, 240, 240, 1);
+            border-radius: 6px;
+          "
+          v-for="(item, index) in proportionList"
+          :key="item"
+          @click="handleCurrentIndex(item, index)"
+        >
+          {{ item }}%
+        </div>
+      </div>
     </div>
     <div class="btn2" @click="submit">确认</div>
   </van-popup>
@@ -373,13 +420,18 @@ const submit = () => {
     showToast('请输入固定金额')
   }
 }
+const proportionList = [1, 25, 75, 100]
+const currentIndex = ref(null)
+const handleCurrentIndex = (item, index) => {
+  currentIndex.value = index
+  price.value = availableBalance.value * (item / 100)
+}
 onMounted(() => {
   getUserInfoApi().then((res) => {
     userInfo.value = res.data
   })
   getProjectListApi().then((res) => {
     projectList.value = res.data
-    console.log(projectList.value)
   })
 })
 </script>
@@ -602,7 +654,6 @@ onMounted(() => {
   margin-top: 15px;
   height: 46px;
   border-radius: 10px;
-  padding: 0px 18px;
   display: flex;
   align-items: center;
 }
@@ -618,5 +669,9 @@ onMounted(() => {
   font-weight: 400;
   font-size: 16px;
   color: #000000;
+}
+.boxActive {
+  background: rgba(0, 0, 0, 1) !important;
+  color: rgba(186, 236, 87, 1) !important;
 }
 </style>

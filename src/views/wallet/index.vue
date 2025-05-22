@@ -6,7 +6,12 @@
         <div class="name">
           <div class="title">
             {{ userInfo?.user?.loginName }}
-            <div class="box">未认证</div>
+            <div class="box">
+              <template v-if="advancedAuth == null || advancedAuth == 0">未认证</template>
+              <template v-if="advancedAuth == 1">已认证</template>
+              <template v-if="advancedAuth == 3">审核中</template>
+              <template v-if="advancedAuth == 2">审核失败</template>
+            </div>
           </div>
           <div class="price">
             资产金额
@@ -57,7 +62,8 @@
         </div>
       </div>
       <div class="certification" @click="router.push('/userauth')">
-        <img src="../../assets/img/certified.png" alt="" />
+        <img v-if="advancedAuth == 1" src="../../assets/img/certified.png" alt="" />
+        <img v-else src="../../assets/img/certified2.png" alt="" />
         实名认证
       </div>
     </div>
@@ -154,6 +160,17 @@
         </div>
       </van-collapse-item>
     </van-collapse>
+    <div class="more">
+      <div
+        class="more-item"
+        v-for="(item, index) in moreList"
+        :key="index"
+        @click="handleMore(item)"
+      >
+        <img :src="item.icon" alt="" />
+        <div>{{ item.title }}</div>
+      </div>
+    </div>
   </div>
 </template>
 <script setup>
@@ -165,7 +182,11 @@ import { _numberWithCommas } from '@/utils/public'
 import { _add } from '@/utils/decimal'
 import { priceFormat } from '@/utils/decimal.js'
 import { getFinanceAmountApi } from '@/api/common/index.js'
+import { signOut } from '@/api/user'
 import router from '@/router'
+import { showToast } from 'vant'
+import { dispatchCustomEvent } from '@/utils'
+
 const mainStore = useMainStore()
 const userStore = useUserStore()
 const { t } = useI18n()
@@ -173,6 +194,9 @@ const { userInfo } = storeToRefs(userStore)
 const path = computed(() => {
   let tempPath = mainStore.getLogoList?.logo || mainStore.getLogoList?.logoD
   return tempPath
+})
+const advancedAuth = computed(() => {
+  return userInfo.value.detail?.auditStatusAdvanced
 })
 const isEye = ref(true)
 const getIsMock = computed(() => userStore.userInfo.user?.type === '2')
@@ -299,6 +323,68 @@ const list = ref([
     link: ''
   }
 ])
+const moreList = ref([
+  {
+    title: 'APP下载',
+    icon: new URL('../../assets/img/21.png', import.meta.url).href,
+    link: '',
+    key: 'appDownload'
+  },
+  {
+    title: '在线客服',
+    icon: new URL('../../assets/img/22.png', import.meta.url).href,
+    link: '',
+    key: 'onlineService'
+  },
+  {
+    title: '服务条款',
+    icon: new URL('../../assets/img/23.png', import.meta.url).href,
+    link: '',
+    key: 'serviceTerms'
+  },
+  {
+    title: '关于我们',
+    icon: new URL('../../assets/img/24.png', import.meta.url).href,
+    link: '',
+    key: 'aboutUs'
+  },
+  {
+    title: '切换语言',
+    icon: new URL('../../assets/img/25.png', import.meta.url).href,
+    link: '/langList',
+    key: 'switchLanguage'
+  },
+  {
+    title: '退出',
+    icon: new URL('../../assets/img/26.png', import.meta.url).href,
+    link: '',
+    key: 'logout'
+  }
+])
+const handleMore = (item) => {
+  if (item.key == 'logout') {
+    signOut()
+      .then((res) => {
+        if (res.code == '200') {
+          showToast('退出成功！')
+          userStore.signOut()
+          router.replace('/')
+          handleClose()
+          isSign.value = false
+          setTimeout(() => location.reload(), 10)
+        } else {
+          showToast(res.msg)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  } else if (item.key == 'onlineService') {
+    dispatchCustomEvent('event_serviceChange')
+  } else {
+    router.push(item.link)
+  }
+}
 const handleClick = (item) => {
   if (item.link) {
     router.push(item.link)
@@ -420,6 +506,30 @@ onMounted(() => {
       .name {
         font-size: 10px;
         margin-top: 5px;
+      }
+    }
+  }
+  .more {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+
+    &-item {
+      display: flex;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 8px 8px 8px 8px;
+      img {
+        width: 20px;
+        height: 20px;
+      }
+      div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        margin-left: 10px;
       }
     }
   }

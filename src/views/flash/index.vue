@@ -1,12 +1,12 @@
 <template>
-  <div class="trade">
-    <div class="trade-top">
-      <div class="trade-top-left">
-        <div class="trade-top-left-info">
-          <div class="trade-top-left-info-profile">
+  <div class="flash">
+    <div class="flash-top">
+      <div class="flash-top-left">
+        <div class="flash-top-left-info">
+          <div class="flash-top-left-info-profile">
             <img :src="path" alt="" />
           </div>
-          <div class="trade-top-left-info-price">
+          <div class="flash-top-left-info-price">
             <div class="name">{{ userInfo?.user?.loginName }}</div>
             <div class="text">
               资金金额
@@ -56,7 +56,7 @@
             </div>
           </div>
         </div>
-        <div class="trade-top-left-price">
+        <div class="flash-top-left-price">
           {{ availableBalance }}
           <span v-if="form.type == 0" style="font-size: 12px">USDT</span>
           <span v-else style="font-size: 12px">
@@ -68,27 +68,27 @@
           </span>
         </div>
       </div>
-      <div class="trade-top-right"></div>
+      <div class="flash-top-right"></div>
     </div>
-    <div class="trade-tab">
-      <div class="trade-tab-item active">现货交易</div>
-      <div class="trade-tab-item">合约交易</div>
-      <div class="trade-tab-item">秒合约</div>
-      <div class="trade-tab-item">期权交易</div>
+    <div class="flash-tab">
+      <div class="flash-tab-item">现货交易</div>
+      <div class="flash-tab-item">合约交易</div>
+      <div class="flash-tab-item active">秒合约</div>
+      <div class="flash-tab-item">期权交易</div>
     </div>
-    <div class="trade-tip">
-      <div class="trade-tip-left">
+    <div class="flash-tip">
+      <div class="flash-tip-left">
         <img src="../../assets/img/31.png" alt="" />
         <div class="text">
           <div class="text-title">智能代投</div>
           <div class="text-desc">定期利率低于活期</div>
         </div>
       </div>
-      <div class="trade-tip-right" @click="router.push('/proxy')">立即前往</div>
+      <div class="flash-tip-right" @click="router.push('/proxy')">立即前往</div>
     </div>
-    <div class="trade-main">
-      <div class="trade-main-top">
-        <div class="trade-main-top-left" @click="showLeft = true">
+    <div class="flash-main">
+      <div class="flash-main-top">
+        <div class="flash-main-top-left" @click="showLeft = true">
           <img class="icon" :src="coinInfo.logo" alt="" />
           <span class="name">{{ coinInfo.showSymbol }}</span>
           <svg
@@ -107,16 +107,16 @@
             ></path>
           </svg>
         </div>
-        <div class="trade-main-top-right">
+        <div class="flash-main-top-right">
           <div
-            class="trade-main-top-right-item"
+            class="flash-main-top-right-item"
             :class="{ active: form.type === '0' }"
             @click="form.type = '0'"
           >
             买入
           </div>
           <div
-            class="trade-main-top-right-item"
+            class="flash-main-top-right-item"
             :class="{ active: form.type === '1' }"
             @click="form.type = '1'"
           >
@@ -124,14 +124,14 @@
           </div>
         </div>
       </div>
-      <div class="trade-main-tip">
-        <div class="trade-main-tip-item">
-          <div class="trade-main-tip-item-name">价格</div>
-          <div class="trade-main-tip-item-symbol">{{ coinInfo.baseCoinUpperCase }}</div>
+      <div class="flash-main-tip">
+        <div class="flash-main-tip-item">
+          <div class="flash-main-tip-item-name">价格</div>
+          <div class="flash-main-tip-item-symbol">{{ coinInfo.baseCoinUpperCase }}</div>
         </div>
-        <div class="trade-main-tip-item">
-          <div class="trade-main-tip-item-name">成交量</div>
-          <div class="trade-main-tip-item-symbol">
+        <div class="flash-main-tip-item">
+          <div class="flash-main-tip-item-name">成交量</div>
+          <div class="flash-main-tip-item-symbol">
             {{
               coinInfo.customizeFlag === 2
                 ? matchText(coinInfo.showSymbol, '/USDT')
@@ -140,19 +140,18 @@
           </div>
         </div>
       </div>
-      <Handicap :coinInfo="coinInfo" @set-trade-price="setTradePrice" />
-      <div class="trade-main-tab">
+      <div class="flash-main-tab">
         <div
           v-for="item in delegateTypeList"
           :key="item.value"
-          class="trade-main-tab-item"
+          class="flash-main-tab-item"
           :class="{ actives: item.value === form.delegateType }"
           @click="checkedDelegateType(item)"
         >
           {{ item.label }}
         </div>
       </div>
-      <div class="trade-main-slider">
+      <div class="flash-main-slider">
         <van-slider
           active-color="#c4eb6e"
           inactive-color="#232323"
@@ -162,7 +161,7 @@
         />
       </div>
       <template v-if="form.delegateType == 0">
-        <div class="trade-main-input">
+        <div class="flash-main-input">
           <input
             type="text"
             v-model="form.price"
@@ -171,7 +170,7 @@
           />
           <span>USDT</span>
         </div>
-        <div class="trade-main-input">
+        <div class="flash-main-input">
           <input
             type="text"
             v-model="form.count"
@@ -191,7 +190,7 @@
           </span>
         </div>
       </template>
-      <div class="trade-main-input">
+      <div class="flash-main-input">
         <input
           type="text"
           v-model="form.turnover"
@@ -200,7 +199,7 @@
           maxlength="140"
         />
       </div>
-      <div class="trade-main-btn">
+      <div class="flash-main-btn">
         <div class="btn" @click="submit">
           <span v-if="form.type == 0">买入</span>
           <span v-else>卖出</span>
@@ -212,7 +211,6 @@
       </div>
     </div>
   </div>
-  <LeftPopup :showLeft="showLeft" @close="showLeft = false" />
 </template>
 <script setup>
 import { useMainStore } from '@/store'
@@ -222,8 +220,6 @@ import { useRouter, useRoute } from 'vue-router'
 import { submitOrderCurrencyApi } from '@/api/trade'
 import { showToast } from 'vant'
 import { _div, _mul, _toFixed, priceFormat } from '@/utils/decimal'
-import Handicap from './component/handicap.vue'
-import LeftPopup from './component/leftPopup.vue'
 const mainStore = useMainStore()
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
@@ -436,7 +432,7 @@ onMounted(() => {
 })
 </script>
 <style lang="scss" scoped>
-.trade {
+.flash {
   padding: 20px 10px 0px;
   padding-bottom: 80px;
   &-top {
