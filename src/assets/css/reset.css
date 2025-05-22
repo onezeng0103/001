@@ -30,3 +30,9 @@ input::placeholder {
 .badge_down {
   background: #ff5c51;
 }
+.price_up {
+  color: #35ad7a;
+}
+.price_down {
+  color: #ff5c51;
+}

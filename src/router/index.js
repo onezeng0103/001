@@ -56,6 +56,16 @@ const router = createRouter({
       path: '/flashExchange',
       name: 'flashExchange',
       component: () => import('../views/flashExchange/index.vue')
+    },
+    {
+      path: '/proxy',
+      name: 'proxy',
+      component: () => import('../views/proxy/index.vue')
+    },
+    {
+      path: '/trade',
+      name: 'trade',
+      component: () => import('../views/trade/index.vue')
     }
   ]
 })

@@ -31,7 +31,6 @@ import { useRouter, useRoute } from 'vue-router'
 import { useMainStore } from '@/store'
 const mainStore = useMainStore()
 const getTabbarList = computed(() => {
-  console.log(mainStore.getTabbarList)
   let arr = [
     {
       imgUrl: new URL('../../assets/img/06.png', import.meta.url).href,

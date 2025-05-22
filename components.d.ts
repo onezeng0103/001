@@ -14,6 +14,8 @@ declare module 'vue' {
     PhonePopup: typeof import('./src/components/phonePopup/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    VanCollapse: typeof import('vant/es')['Collapse']
+    VanCollapseItem: typeof import('vant/es')['CollapseItem']
     VanConfigProvider: typeof import('vant/es')['ConfigProvider']
     VanCountDown: typeof import('vant/es')['CountDown']
     VanDatePicker: typeof import('vant/es')['DatePicker']
