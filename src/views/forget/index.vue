@@ -151,8 +151,10 @@
           </div>
         </div>
 
-        <div class="form-item-label" style="color: #000000;font-weight: 500;font-size: 16px;">验证码</div>
-        <div class="input-box" style="background: #F5F5F5;">
+        <div class="form-item-label" style="color: #000000; font-weight: 500; font-size: 16px">
+          验证码
+        </div>
+        <div class="input-box" style="background: #f5f5f5">
           <input
             v-model="code"
             type="number"
@@ -160,7 +162,7 @@
             placeholder="请输入验证码"
             class="uni-input-input"
             autocomplete="off"
-            style="color: #000000 !important;"
+            style="color: #000000 !important"
           />
           <div class="icon">
             <span v-if="!flag" @click="emailCode('FIND_PASSWORD', email)">重新发送</span>
@@ -170,10 +172,7 @@
           </div>
         </div>
 
-        <div class="btn2" @click="confirm">
-          确认
-        </div>
-
+        <div class="btn2" @click="confirm">确认</div>
       </div>
     </div>
   </div>
@@ -226,14 +225,11 @@ const confirm = () => {
 </script>
 
 <style lang="scss" scoped>
-//.forget{
-//
-//}
-.btn2{
+.btn2 {
   margin-top: 30px;
   width: 347px;
   height: 41px;
-  background: linear-gradient( 306deg, #BAEC57 0%, #FFE414 100%);
+  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
   border-radius: 21px 21px 21px 21px;
   display: flex;
   justify-content: center;
@@ -308,7 +304,6 @@ const confirm = () => {
   background-color: #121212;
 }
 
-
 .forget .body-wrap .login-mode .item {
   width: 100%;
   height: 100%;
@@ -374,8 +369,6 @@ const confirm = () => {
   z-index: 101;
   box-sizing: border-box;
   background: #fff;
-  //border: 1px solid;
-  //border-image: linear-gradient(180deg, rgba(186, 236, 87, 1), rgba(255, 255, 255, 0)) 1 1;
   transform: translateY(100%);
   transition: all 0.3s;
   border-top-right-radius: 15px;

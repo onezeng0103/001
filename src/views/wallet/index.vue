@@ -56,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="certification">
+      <div class="certification" @click="router.push('/userauth')">
         <img src="../../assets/img/certified.png" alt="" />
         实名认证
       </div>
@@ -165,6 +165,7 @@ import { _numberWithCommas } from '@/utils/public'
 import { _add } from '@/utils/decimal'
 import { priceFormat } from '@/utils/decimal.js'
 import { getFinanceAmountApi } from '@/api/common/index.js'
+import router from '@/router'
 const mainStore = useMainStore()
 const userStore = useUserStore()
 const { t } = useI18n()

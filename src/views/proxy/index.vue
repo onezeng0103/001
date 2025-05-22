@@ -71,6 +71,7 @@
             </span>
           </div>
           <div
+            @click="router.push('/proxy/records')"
             style="
               display: flex;
               flex-direction: row;
@@ -89,7 +90,7 @@
       <div class="info">
         <div class="title">
           <div class="text">资产金额</div>
-          <div class="text">跟单记录</div>
+          <div class="text" @click="router.push('/proxy/earnings')">收益记录</div>
         </div>
         <div class="price">
           <div class="top">
@@ -146,14 +147,14 @@
               <div class="total-item">
                 今日收益
                 <template v-if="isEye">
-                  <span>{{ info?.todayAmountEarn.toFixed(2) }}</span>
+                  <span>{{ userInfo?.todayAmountEarn.toFixed(2) }}</span>
                 </template>
                 <template v-else>******</template>
               </div>
               <div class="total-item">
                 累计收益
                 <template v-if="isEye">
-                  <span>{{ info?.totalAmountEarn?.toFixed(2) }}</span>
+                  <span>{{ userInfo?.totalAmountEarn?.toFixed(2) }}</span>
                 </template>
                 <template v-else>******</template>
               </div>
@@ -192,14 +193,16 @@
                 </div>
                 <div>
                   分润比例
-                  <span>{{ userInfo.levelRate * 100 }}%</span>
+                  <span>{{ userInfo?.levelRate * 100 }}%</span>
                 </div>
                 <div>
                   日收益率
                   <span>{{ item.oddsMinShow }}%-{{ item.oddsMaxShow }}%</span>
                 </div>
               </div>
-              <div class="box-item-btn">一键代投</div>
+              <div class="box-item-btn">
+                <div class="btn" @click="handleProxy(item)">一键代投</div>
+              </div>
             </div>
           </div>
         </template>
@@ -243,6 +246,54 @@
       </div>
     </div>
   </div>
+  <van-popup v-model:show="showBottom" round position="bottom">
+    <div style="display: flex; align-items: center; justify-content: flex-end">
+      <svg
+        @click="showBottom = !showBottom"
+        t="1747853459405"
+        class="icon"
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        p-id="1494"
+        width="24"
+        height="24"
+      >
+        <path
+          d="M512 451.669333l211.2-211.2 60.330667 60.330667-211.2 211.2 211.2 211.2-60.330667 60.330667-211.2-211.2-211.2 211.2-60.330667-60.330667 211.2-211.2-211.2-211.2L300.8 240.469333z"
+          p-id="1495"
+          fill="#000"
+        ></path>
+      </svg>
+    </div>
+    <div
+      style="display: flex; align-items: center; justify-content: space-between; margin-top: 20px"
+    >
+      <div style="display: flex; align-items: center; flex-direction: column">
+        <div>{{ userInfo?.totalNum || 0 }}</div>
+        <div style="font-size: 12px; color: #999999; margin-top: 5px">代投天数</div>
+      </div>
+      <div style="display: flex; align-items: center; flex-direction: column">
+        <div>{{ userInfo.yesterdayAmountEarn }}</div>
+        <div style="font-size: 12px; color: #999999; margin-top: 5px">昨日收益</div>
+      </div>
+      <div style="display: flex; align-items: center; flex-direction: column">
+        <div>{{ userInfo.totalAmountEarn?.toFixed(2) }}</div>
+        <div style="font-size: 12px; color: #999999; margin-top: 5px">累计收益</div>
+      </div>
+    </div>
+    <div style="margin-top: 20px; color: #000000; font-weight: 500; font-size: 16px">固定金额</div>
+    <div class="input-box" style="background: #f5f5f5">
+      <input
+        v-model.trim="price"
+        type="number"
+        maxlength="140"
+        :placeholder="info.limitMin ? '最小' + info.limitMin : ''"
+        style="color: #000000 !important"
+      />
+    </div>
+    <div class="btn2" @click="submit">确认</div>
+  </van-popup>
 </template>
 
 <script setup>
@@ -250,7 +301,9 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store/user/index'
 import { storeToRefs } from 'pinia'
 import { _numberWithCommas } from '@/utils/public'
-import { getUserInfoApi, getProjectListApi } from '@/api/proxy'
+import { getUserInfoApi, getProjectListApi, getCreateOrderApi } from '@/api/proxy'
+import { showToast } from 'vant'
+import dayjs from 'dayjs'
 const router = useRouter()
 const userStore = useUserStore()
 const { asset } = storeToRefs(userStore)
@@ -262,15 +315,71 @@ const availableBalance = computed(() => {
   )
 })
 const isEye = ref(true)
-const info = ref()
+const userInfo = ref()
 const projectList = ref([])
-
+const showBottom = ref(false)
+const info = ref()
+const handleProxy = (item) => {
+  info.value = item
+  showBottom.value = true
+}
+const price = ref()
+const now = ref(dayjs())
+const inTime = computed(() => {
+  const startTime = dayjs(info.value.startTime)
+  const endTime = dayjs(info.value.endTime)
+  return now.value.isAfter(startTime) && now.value.isBefore(endTime)
+})
+const submit = () => {
+  if (price.value) {
+    if (!inTime.value) {
+      showToast('不在shi j')
+      return
+    }
+    const levelId = userInfo.value.levelId
+    const limitLevelIds = info.value.limitLevelIds
+    if (!limitLevelIds.includes(levelId)) {
+      showToast('vip等级不足')
+      return
+    }
+    if (price.value > info.value.limitMax) {
+      showToast('金额大于最大金额' + info.value.limitMax)
+      return
+    }
+    if (price.value > availableBalance.value) {
+      showToast('金额大于可用余额' + availableBalance.value)
+      return
+    }
+    if (price.value < info.value.limitMin) {
+      showToast('金额小于最小金额' + info.value.limitMin)
+      return
+    }
+    const data = {
+      amount: price.value,
+      brokerNo: info.value.brokerNo
+    }
+    getCreateOrderApi(data)
+      .then((res) => {
+        if (res.code == 200) {
+          showToast('代投成功')
+          price.value = ''
+          showBottom.value = false
+        } else {
+          showToast(res.msg)
+        }
+      })
+      .catch((err) => {})
+  } else {
+    showToast('请输入固定金额')
+  }
+}
 onMounted(() => {
   getUserInfoApi().then((res) => {
-    info.value = res.data
+    userInfo.value = res.data
   })
   getProjectListApi().then((res) => {
     projectList.value = res.data
+    console.log(projectList.value)
   })
 })
 </script>
@@ -398,17 +507,23 @@ onMounted(() => {
             }
           }
           &-btn {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            width: 80%;
-            height: 29px;
-            background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
-            border-radius: 15px 15px 15px 15px;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #000;
+            .btn {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              text-align: center;
+              width: 80%;
+              height: 29px;
+              background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+              border-radius: 15px 15px 15px 15px;
+              margin-top: 20px;
+              font-size: 14px;
+              color: #000;
+            }
           }
         }
       }
@@ -477,5 +592,31 @@ onMounted(() => {
       }
     }
   }
+}
+.van-popup {
+  background: #fff !important;
+  padding: 30px;
+  color: #000;
+}
+.input-box {
+  margin-top: 15px;
+  height: 46px;
+  border-radius: 10px;
+  padding: 0px 18px;
+  display: flex;
+  align-items: center;
+}
+.btn2 {
+  margin-top: 30px;
+  width: 347px;
+  height: 41px;
+  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  border-radius: 21px 21px 21px 21px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 16px;
+  color: #000000;
 }
 </style>

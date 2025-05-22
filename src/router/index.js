@@ -63,9 +63,24 @@ const router = createRouter({
       component: () => import('../views/proxy/index.vue')
     },
     {
+      path: '/proxy/records',
+      name: 'proxyRecords',
+      component: () => import('../views/proxy/records.vue')
+    },
+    {
+      path: '/proxy/earnings',
+      name: 'proxyEarnings',
+      component: () => import('../views/proxy/earnings.vue')
+    },
+    {
       path: '/trade',
       name: 'trade',
       component: () => import('../views/trade/index.vue')
+    },
+    {
+      path: '/userauth',
+      name: 'userAuth',
+      component: () => import('../views/userAuth/index.vue')
     }
   ]
 })

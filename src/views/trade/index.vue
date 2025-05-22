@@ -68,13 +68,7 @@
           </span>
         </div>
       </div>
-      <div class="trade-top-right">
-        <div class="trade-top-right-price">111</div>
-        <div class="trade-top-right-text">
-          今日收益
-          <span>(0.00%)</span>
-        </div>
-      </div>
+      <div class="trade-top-right"></div>
     </div>
     <div class="trade-tab">
       <div class="trade-tab-item active">现货交易</div>
@@ -676,6 +670,7 @@ onMounted(() => {
         height: 29px;
         display: flex;
         align-items: center;
+        color: #000;
         justify-content: center;
         background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
         border-radius: 15px 15px 15px 15px;
