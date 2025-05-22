@@ -146,7 +146,7 @@
             <div class="element">
               <div
                 class="element-list"
-                :class="formData.title===item.name? 'aaa':'bbb'"
+                :class="formData.title === item.name ? 'elect' : ''"
                 v-for="item in certificate"
                 :key="item.type"
                 @click="close(item)"
@@ -173,7 +173,7 @@
           />
         </div>
         <div class="message-list">
-          <div>身份证：</div>
+          <div>{{ formData.title||'身份证' }}：</div>
           <!--          <div>请输入身份证号码</div>-->
           <input
             v-model.trim="formData.number"
@@ -202,19 +202,22 @@
 
       <div class="upd">
         <div style="font-weight: 500; font-size: 16px; color: #ffffff">请上传身份证照片</div>
-        <div class="upd-list">
-          <div>上传证件照正面</div>
-        </div>
-        <div class="upd-list">
-          <div>上传证件照反面</div>
-        </div>
-        <div class="upd-list">
-          <div>上传手持证件照</div>
-        </div>
+        <van-uploader v-model="fileList1" :after-read="afterRead1" class="upd-list">
+          <img v-if="fileList1.length == 0" style="width: 36px;height: 36px;" src="@/assets/img/Frame.png">
+          <div v-if="fileList1.length == 0" class="text">上传证件照正面</div>
+        </van-uploader>
+        <van-uploader v-model="fileList2" :after-read="afterRead2" class="upd-list">
+          <img v-if="fileList2.length == 0" style="width: 36px;height: 36px;" src="@/assets/img/Frame.png">
+          <div v-if="fileList2.length == 0" class="text">上传证件照反面</div>
+        </van-uploader>
+        <van-uploader v-model="fileList3" :after-read="afterRead3" class="upd-list">
+          <img v-if="fileList3.length == 0" style="width: 36px;height: 36px;" src="@/assets/img/Frame.png">
+          <div v-if="fileList3.length == 0" class="text">上传手持证件照</div>
+        </van-uploader>
       </div>
     </div>
 
-    <div class="btn">提交认证</div>
+    <div class="btn" @click="submit">提交认证</div>
   </div>
 
   <!--  <CertificateCom :showBottom="showBottom" :list="certificate" @close="close" />-->
@@ -375,11 +378,11 @@ const submit = () => {
   uploadKYC(params).then((res) => {
     if (res.code == '200') {
       showToast('提交成功，请等待...')
-      const initializeElement = document.querySelector('.initialize')
-      initializeElement.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })
+      // const initializeElement = document.querySelector('.initialize')
+      // initializeElement.scrollTo({
+      //   top: 0,
+      //   behavior: 'smooth'
+      // })
       router.push('/')
     } else {
       showToast(res.msg)
@@ -408,6 +411,11 @@ const submit = () => {
     font-size: 14px;
     color: #999999;
   }
+
+  .elect {
+    background: #BAEC57;
+    color: #000000;
+  }
 }
 
 .btn {
@@ -430,7 +438,21 @@ const submit = () => {
   .upd-list {
     margin-top: 15px;
     border-radius: 6px 6px 6px 6px;
-    border: 1px solid #baec57;
+    border: 1px dashed #baec57;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 0;
+    :deep(.van-uploader__input-wrapper){
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .text{
+      margin-top: 15px;
+      font-size: 14px;
+      color: #999999;
+    }
   }
 }
 
