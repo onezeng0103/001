@@ -173,8 +173,7 @@
           />
         </div>
         <div class="message-list">
-          <div>{{ formData.title||'身份证' }}：</div>
-          <!--          <div>请输入身份证号码</div>-->
+          <div>{{ formData.title || '身份证' }}：</div>
           <input
             v-model.trim="formData.number"
             type="text"
@@ -182,36 +181,35 @@
             enterkeyhint="done"
             autocomplete="off"
             style="text-align: right"
-            placeholder="请输入身份证号码"
+            placeholder="请输入"
           />
         </div>
-        <!--        <div class="message-list">-->
-        <!--          <div>手机号：</div>-->
-        <!--          &lt;!&ndash;          <div>请输入手机号码</div>&ndash;&gt;-->
-        <!--          <input-->
-        <!--            v-model.trim="formData.userName"-->
-        <!--            type="text"-->
-        <!--            maxlength="140"-->
-        <!--            enterkeyhint="done"-->
-        <!--            autocomplete="off"-->
-        <!--            style="text-align: right"-->
-        <!--            placeholder="请输入手机号码"-->
-        <!--          />-->
-        <!--        </div>-->
       </div>
 
       <div class="upd">
         <div style="font-weight: 500; font-size: 16px; color: #ffffff">请上传身份证照片</div>
         <van-uploader v-model="fileList1" :after-read="afterRead1" class="upd-list">
-          <img v-if="fileList1.length == 0" style="width: 36px;height: 36px;" src="@/assets/img/Frame.png">
+          <img
+            v-if="fileList1.length == 0"
+            style="width: 36px; height: 36px"
+            src="@/assets/img/Frame.png"
+          />
           <div v-if="fileList1.length == 0" class="text">上传证件照正面</div>
         </van-uploader>
         <van-uploader v-model="fileList2" :after-read="afterRead2" class="upd-list">
-          <img v-if="fileList2.length == 0" style="width: 36px;height: 36px;" src="@/assets/img/Frame.png">
+          <img
+            v-if="fileList2.length == 0"
+            style="width: 36px; height: 36px"
+            src="@/assets/img/Frame.png"
+          />
           <div v-if="fileList2.length == 0" class="text">上传证件照反面</div>
         </van-uploader>
         <van-uploader v-model="fileList3" :after-read="afterRead3" class="upd-list">
-          <img v-if="fileList3.length == 0" style="width: 36px;height: 36px;" src="@/assets/img/Frame.png">
+          <img
+            v-if="fileList3.length == 0"
+            style="width: 36px; height: 36px"
+            src="@/assets/img/Frame.png"
+          />
           <div v-if="fileList3.length == 0" class="text">上传手持证件照</div>
         </van-uploader>
       </div>
@@ -219,8 +217,6 @@
 
     <div class="btn" @click="submit">提交认证</div>
   </div>
-
-  <!--  <CertificateCom :showBottom="showBottom" :list="certificate" @close="close" />-->
   <PhonePopup :showBottom="showBottom2" @close="handleClose" />
 </template>
 
@@ -231,20 +227,10 @@ import { useUserStore } from '@/store/user'
 import { storageDict } from '@/config/dict'
 import { uploadImg } from '@/api/common/index.js'
 import { uploadKYC } from '@/api/user'
-import CertificateCom from './component/certificate.vue'
 import PhonePopup from '@/components/phonePopup/index.vue'
-
-// const showPopover = ref(false) // 委托类型
-// const showDepthPopup = ref(false)
 const showPopoverNum = ref(false) //弹窗
 
 const handleShowPopoverNum = () => {
-  // if (showPopover.value) {
-  //   showPopover.value = false
-  // }
-  // if (showDepthPopup.value) {
-  //   showDepthPopup.value = false
-  // }
   showPopoverNum.value = !showPopoverNum.value
 }
 
@@ -252,9 +238,6 @@ const router = useRouter()
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 const current = ref(localStorage.getItem(storageDict.LANGUAGE))
-const advancedAuth = computed(() => {
-  return userInfo.value.detail?.auditStatusAdvanced
-})
 const formData = ref({
   userName: '',
   title: '',
@@ -378,11 +361,6 @@ const submit = () => {
   uploadKYC(params).then((res) => {
     if (res.code == '200') {
       showToast('提交成功，请等待...')
-      // const initializeElement = document.querySelector('.initialize')
-      // initializeElement.scrollTo({
-      //   top: 0,
-      //   behavior: 'smooth'
-      // })
       router.push('/')
     } else {
       showToast(res.msg)
@@ -402,7 +380,6 @@ const submit = () => {
   .element-list {
     width: 119px;
     height: 29px;
-    //background: #BAEC57;
     border-radius: 2px 2px 2px 2px;
     display: flex;
     align-items: center;
@@ -413,7 +390,7 @@ const submit = () => {
   }
 
   .elect {
-    background: #BAEC57;
+    background: #baec57;
     color: #000000;
   }
 }
@@ -443,12 +420,12 @@ const submit = () => {
     align-items: center;
     flex-direction: column;
     padding: 30px 0;
-    :deep(.van-uploader__input-wrapper){
+    :deep(.van-uploader__input-wrapper) {
       display: flex;
       align-items: center;
       flex-direction: column;
     }
-    .text{
+    .text {
       margin-top: 15px;
       font-size: 14px;
       color: #999999;
@@ -472,7 +449,6 @@ const submit = () => {
 
 .optionNationality {
   width: 112px;
-  //height: 50px;
   background: rgba(255, 255, 255, 0.07);
   border-radius: 8px 8px 8px 8px;
   display: flex;

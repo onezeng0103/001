@@ -91,6 +91,11 @@ const router = createRouter({
       path: '/langList',
       name: 'langList',
       component: () => import('../views/langList/index.vue')
+    },
+    {
+      path: '/invaite',
+      name: 'invaite',
+      component: () => import('../views/invaite/index.vue')
     }
   ]
 })

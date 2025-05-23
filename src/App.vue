@@ -11,7 +11,7 @@ const VITE_APP_TITLE = import.meta.env.VITE_APP_TITLE
 document.title = VITE_APP_TITLE
 const route = useRoute()
 const isShow = computed(() => {
-  const list = ['/', '/store', '/trade', '/contract', '/wallet']
+  const list = ['/', '/store', '/trade', '/contract', '/wallet', '/invaite']
   console.log('123', list.includes(route.path), route.path)
 
   return list.includes(route.path)
