@@ -300,7 +300,7 @@ const list = ref([
   {
     title: '修改密码',
     icon: new URL('../../assets/img/16.png', import.meta.url).href,
-    link: ''
+    link: '/changePassword'
   },
   {
     title: '绑定提现密码',
@@ -310,7 +310,7 @@ const list = ref([
   {
     title: '绑定提现地址',
     icon: new URL('../../assets/img/18.png', import.meta.url).href,
-    link: ''
+    link: '/withdrawDeposit'
   },
   {
     title: '绑定手机号',
@@ -320,7 +320,7 @@ const list = ref([
   {
     title: '绑定邮箱',
     icon: new URL('../../assets/img/20.png', import.meta.url).href,
-    link: ''
+    link: '/emailAuthentication'
   }
 ])
 const moreList = ref([

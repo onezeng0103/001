@@ -1,3 +1,88 @@
+<script setup>
+import { useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/store/user'
+import { showToast } from 'vant'
+import { reactive, ref } from 'vue'
+import { updateLoginPwd } from '@/api/user'
+
+const userStore = useUserStore()
+const newPwd = ref(true)
+const oldPwd = ref(true)
+const NPwd = ref(true)
+const form = ref({
+  newPwd: '',
+  oldPwd: '',
+  NPwd: ''
+})
+const setKeyVal = (val) => {
+  if (val == 'oldPwd') {
+    oldPwd.value = !oldPwd.value
+  } else if (val == 'newPwd') {
+    newPwd.value = !newPwd.value
+  } else {
+    NPwd.value = !NPwd.value
+  }
+}
+const showPwdDiff = ref(false)
+const pwdDiff = () => {
+  showPwdDiff.value = !(form.value.newPwd == form.value.NPwd)
+}
+const submit = () => {
+  if (form.value.oldPwd == '') {
+    showToast('请输入旧密码')
+    // _toast('Fund_password_pleaseOld')
+    return
+  }
+  if (form.value.newPwd == '') {
+    showToast('请输入新密码')
+    // _toast('Fund_password_pleaseNew')
+    return
+  }
+  if (form.value.newPwd !== form.value.NPwd) {
+    showToast('两次密码不一致')
+    // _toast('register_pwd_diff')
+    return
+  }
+
+  updateLoginPwd(form.value.oldPwd, form.value.newPwd, userStore?.userInfo?.user?.userId).then(
+    (res) => {
+      if (res.code == '200') {
+        showToast('修改成功')
+        // _toast('Bank_update_success')
+        form.value.newPwd = form.value.NPwd = form.value.oldPwd = ''
+      } else {
+        showToast(res.msg)
+      }
+    }
+  )
+}
+
+
+const router = useRouter()
+const { userInfo } = storeToRefs(userStore)
+
+// 进入路由已请求  ---> 用户数据
+// userStore.getUserInfo()
+// ??
+const notPwd = ref(false)
+//修改登录密码的方式(true普通，false邮箱)
+const updateLoginPwdMethod = ref(true)
+//是否已有登录密码
+const loginPassword = ref(userInfo.value.user?.loginPassword || '')
+//导航数据
+const cuttentRight = { iconRight: [{ iconName: 'kefu', clickTo: 'event_serviceChange' }] }
+
+const changeMethod = () => {
+  // 是否绑定邮箱
+  if (!userInfo.value.user?.email) {
+    return showToast('请先绑定邮箱')
+  }
+
+  updateLoginPwdMethod.value = !updateLoginPwdMethod.value
+}
+</script>
+
 <template>
   <div>
     <div style="height: 44px">
@@ -67,7 +152,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>绑定提现密码</span>
+              <span>设置登陆密码</span>
             </span>
           </div>
           <div
@@ -83,63 +168,11 @@
       </div>
     </div>
 
-    <template v-if="!notPwd && success">
-      <div class="content">
-        <div class="input">
-          <input v-model="formData.password" :type="form.pwd ? 'text' : 'password'" />
-          <div class="icon">
-            <svg
-              @click="form.pwd = !form.pwd"
-              v-if="!form.pwd"
-              t="1747823302565"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="21623"
-              width="25"
-              height="25"
-            >
-              <path
-                d="M801.2 570.4l-0.1-0.1c-0.2-0.4-0.5-0.7-0.8-1.1 40.1-25.4 79.1-56.7 116.8-93.7 13.7-13.5 14.5-36.9 1.7-51.5-12.1-13.8-31.9-14.6-44.9-1.8-151.6 149-319.9 192.7-500.7 130.1-75.3-26.1-137.8-66.3-176.9-95.5-18.7-14-34.1-26.8-45.5-36.8-13.2-11.7-32.3-10.3-43.9 3.2l-1.2 1.4 1.1-1.3c-13.1 15.2-11.6 39.4 3.2 52.5 26.5 23.5 71.7 59.8 130.7 93.3-0.1 0.2-0.2 0.3-0.4 0.5-0.1 0.1-0.2 0.3-0.3 0.4-0.4 0.6-0.8 1.1-1.2 1.7l-0.1 0.1c-0.3 0.5-0.7 1.1-1 1.7-0.1 0.2-0.2 0.3-0.3 0.5-0.3 0.6-0.7 1.3-1 1.9l-51.8 115.6c-1.8 4-2.7 8.2-2.8 12.4v1.6c0.1 3.6 0.8 7.2 2.1 10.5 0.3 0.7 0.6 1.5 0.9 2.2 0.3 0.7 0.7 1.4 1 2 0.2 0.4 0.5 0.9 0.8 1.3 3.2 5.2 8 9.6 14.1 12.3 0.5 0.2 1 0.4 1.6 0.7 0.2 0.1 0.3 0.1 0.5 0.2 0.4 0.1 0.7 0.3 1.1 0.4 0.2 0.1 0.4 0.1 0.6 0.2 0.3 0.1 0.6 0.2 1 0.3 0.2 0.1 0.5 0.1 0.7 0.2 0.3 0.1 0.6 0.2 0.9 0.2 0.2 0.1 0.5 0.1 0.7 0.1 0.3 0.1 0.6 0.1 0.9 0.2 0.2 0 0.5 0.1 0.7 0.1 0.3 0 0.6 0.1 0.9 0.1 0.2 0 0.5 0 0.7 0.1 0.3 0 0.6 0.1 0.9 0.1h2.2c0.6 0 1.2 0 1.8-0.1h0.2c0.7 0 1.3-0.1 2-0.2 0.2 0 0.3 0 0.5-0.1 0.6-0.1 1.1-0.2 1.7-0.3 0.1 0 0.2 0 0.3-0.1 0.7-0.1 1.3-0.3 1.9-0.5 0.2 0 0.3-0.1 0.4-0.1 0.5-0.2 1.1-0.3 1.6-0.5 0.1 0 0.2-0.1 0.4-0.1 0.6-0.2 1.2-0.5 1.9-0.8 0.1-0.1 0.3-0.1 0.4-0.2 0.5-0.2 1-0.5 1.5-0.8 0.1-0.1 0.2-0.1 0.4-0.2 0.6-0.3 1.2-0.7 1.7-1 0.1-0.1 0.2-0.1 0.3-0.2 0.5-0.3 1-0.6 1.4-1 0.1-0.1 0.2-0.2 0.4-0.3 0.5-0.4 1.1-0.8 1.6-1.3 0.1-0.1 0.2-0.2 0.3-0.2 0.4-0.4 0.9-0.8 1.3-1.2 0.1-0.1 0.2-0.2 0.4-0.3 0.5-0.5 0.9-1 1.4-1.5l0.2-0.2c0.4-0.5 0.8-0.9 1.2-1.4 0.1-0.1 0.2-0.3 0.3-0.4 0.4-0.6 0.8-1.1 1.2-1.7l0.1-0.1c0.3-0.5 0.7-1.1 1-1.7 0.1-0.2 0.2-0.3 0.3-0.5 0.3-0.6 0.7-1.3 1-1.9l16.1-35.8 35.8-79.8c0.7-1.5 1.2-3 1.6-4.5 17.4 7.9 35.7 15.4 54.7 22.1 14 4.9 28.1 9.3 42 13L369.9 776c-0.1 0.6-0.2 1.2-0.2 1.8-0.8 7.3 1 14.4 4.7 20.3l1.2 1.8 0.9 1.2c0.6 0.8 1.3 1.6 2 2.3l1.1 1.1c4.5 4.2 10.2 7.2 16.8 8.3 0.8 0.1 1.6 0.2 2.3 0.3h0.5c0.8 0.1 1.5 0.1 2.3 0.1h1.4c0.4 0 0.9 0 1.3-0.1h0.2c0.5 0 1-0.1 1.5-0.2 0.2 0 0.3 0 0.5-0.1 0.3-0.1 0.7-0.1 1-0.2 0.2 0 0.4-0.1 0.6-0.1 0.3-0.1 0.6-0.1 0.9-0.2 0.2 0 0.4-0.1 0.6-0.1 0.3-0.1 0.6-0.1 0.8-0.2 0.2-0.1 0.4-0.1 0.6-0.2 0.3-0.1 0.5-0.2 0.8-0.3 0.2-0.1 0.4-0.1 0.6-0.2 0.3-0.1 0.5-0.2 0.8-0.3 0.2-0.1 0.4-0.1 0.6-0.2 0.3-0.1 0.5-0.2 0.8-0.3 0.2-0.1 0.4-0.2 0.5-0.2 0.3-0.1 0.6-0.3 0.9-0.4 0.2-0.1 0.3-0.2 0.5-0.2 0.4-0.2 0.8-0.4 1.1-0.6 0.1 0 0.1-0.1 0.2-0.1 0.4-0.2 0.8-0.5 1.2-0.8 0.1-0.1 0.3-0.2 0.4-0.3 0.3-0.2 0.5-0.4 0.8-0.6 0.2-0.1 0.3-0.2 0.5-0.3 0.2-0.2 0.5-0.4 0.7-0.5 0.2-0.1 0.3-0.3 0.5-0.4 0.2-0.2 0.4-0.4 0.7-0.5 0.2-0.1 0.3-0.3 0.5-0.4l0.6-0.6c0.2-0.1 0.3-0.3 0.5-0.4l0.6-0.6 0.4-0.4c0.2-0.2 0.4-0.4 0.6-0.7l0.4-0.4c0.2-0.2 0.4-0.5 0.6-0.7 0.1-0.1 0.2-0.3 0.3-0.4 0.3-0.4 0.6-0.7 0.8-1.1l0.1-0.1c0.3-0.4 0.6-0.8 0.8-1.2 0.1-0.1 0.2-0.3 0.3-0.4 0.2-0.3 0.3-0.6 0.5-0.9 0.1-0.2 0.2-0.3 0.3-0.5 0.1-0.3 0.3-0.5 0.4-0.8l0.3-0.6c0.1-0.3 0.3-0.5 0.4-0.8l0.3-0.6c0.1-0.3 0.2-0.5 0.3-0.8 0.1-0.2 0.2-0.4 0.2-0.6 0.1-0.3 0.2-0.6 0.3-0.8 0.1-0.2 0.1-0.4 0.2-0.6l0.3-0.9c0.1-0.2 0.1-0.4 0.2-0.6 0.1-0.3 0.2-0.7 0.2-1 0-0.2 0.1-0.3 0.1-0.5l0.3-1.5 23.1-140.6c24.4 3.6 48.8 5.4 72.9 5.4 13.2 0 26.3-0.5 39.4-1.6l18.4 111.9 4 24.4 0.3 1.5c0 0.2 0.1 0.3 0.1 0.5 0.1 0.3 0.2 0.7 0.2 1 0.1 0.2 0.1 0.4 0.2 0.6l0.3 0.9c0.1 0.2 0.1 0.4 0.2 0.6 0.1 0.3 0.2 0.6 0.3 0.8 0.1 0.2 0.2 0.4 0.2 0.6 0.1 0.3 0.2 0.5 0.3 0.8l0.3 0.6c0.1 0.3 0.2 0.5 0.4 0.8l0.3 0.6c0.1 0.3 0.3 0.5 0.4 0.8 0.1 0.2 0.2 0.3 0.3 0.5 0.2 0.3 0.3 0.6 0.5 0.9 0.1 0.1 0.2 0.3 0.2 0.4 0.3 0.4 0.5 0.8 0.8 1.2v0.1c0.3 0.4 0.5 0.8 0.8 1.1 0.1 0.1 0.2 0.3 0.3 0.4 0.2 0.3 0.4 0.5 0.6 0.8l0.4 0.4c0.2 0.2 0.4 0.4 0.6 0.7l0.4 0.4 0.6 0.6 0.4 0.4 0.6 0.6c0.2 0.1 0.3 0.3 0.5 0.4 0.2 0.2 0.4 0.4 0.7 0.6 0.2 0.1 0.3 0.3 0.5 0.4 0.2 0.2 0.5 0.4 0.7 0.5 0.2 0.1 0.3 0.2 0.5 0.3 0.3 0.2 0.5 0.4 0.8 0.6 0.1 0.1 0.3 0.2 0.4 0.3 0.4 0.3 0.8 0.5 1.2 0.8 0 0 0.1 0 0.1 0.1 0.4 0.2 0.8 0.4 1.1 0.6 0.1 0.1 0.3 0.1 0.4 0.2 0.3 0.1 0.6 0.3 0.9 0.4 0.2 0.1 0.4 0.2 0.5 0.2 0.3 0.1 0.5 0.2 0.8 0.4 0.2 0.1 0.4 0.2 0.6 0.2 0.3 0.1 0.5 0.2 0.8 0.3 0.2 0.1 0.4 0.1 0.6 0.2 0.3 0.1 0.5 0.2 0.8 0.3 0.2 0.1 0.4 0.1 0.6 0.2 0.3 0.1 0.6 0.2 0.8 0.2 0.2 0.1 0.4 0.1 0.6 0.1 0.3 0.1 0.6 0.1 0.9 0.2 0.2 0 0.4 0.1 0.6 0.1 0.3 0.1 0.7 0.1 1 0.2 0.2 0 0.3 0.1 0.5 0.1 0.5 0.1 1 0.1 1.5 0.2h0.2c0.4 0 0.9 0.1 1.3 0.1H622.4c0.8 0 1.5 0 2.3-0.1h0.5c0.8-0.1 1.6-0.2 2.3-0.3 9.3-1.5 16.9-6.9 21.7-14.2 0.8-1.3 1.6-2.6 2.2-4 0.4-0.9 0.8-1.9 1.2-2.9 0.5-1.5 0.9-3 1.2-4.5s0.5-3.1 0.5-4.7v-1.6c0-1.1-0.1-2.2-0.2-3.2-0.1-0.5-0.1-1.1-0.2-1.6L631.7 640c38.5-8.4 76.2-21.7 113.1-39.7 0.1 0.2 0.1 0.3 0.2 0.5l51.8 115.6c0.3 0.7 0.6 1.3 1 1.9 0.1 0.2 0.2 0.3 0.3 0.5 0.3 0.6 0.6 1.1 1 1.7l0.1 0.1c0.4 0.6 0.8 1.2 1.2 1.7 0.1 0.1 0.2 0.3 0.3 0.4 0.4 0.5 0.8 1 1.1 1.4l0.2 0.2c0.5 0.5 0.9 1 1.4 1.5 0.1 0.1 0.2 0.2 0.4 0.3 0.4 0.4 0.9 0.8 1.3 1.2 0.1 0.1 0.2 0.2 0.3 0.2 0.5 0.4 1 0.9 1.6 1.3 0.1 0.1 0.2 0.2 0.4 0.3 0.5 0.3 0.9 0.7 1.4 1 0.1 0.1 0.2 0.1 0.3 0.2 0.6 0.4 1.1 0.7 1.7 1 0.1 0.1 0.2 0.1 0.4 0.2 0.5 0.3 1 0.5 1.5 0.8 0.1 0.1 0.3 0.1 0.4 0.2 0.6 0.3 1.2 0.5 1.9 0.8 0.1 0 0.2 0.1 0.4 0.1 0.5 0.2 1.1 0.4 1.6 0.5 0.2 0 0.3 0.1 0.5 0.1 0.6 0.2 1.3 0.3 1.9 0.5 0.1 0 0.2 0 0.3 0.1 0.6 0.1 1.1 0.2 1.7 0.3 0.2 0 0.3 0.1 0.5 0.1 0.7 0.1 1.3 0.2 2 0.2h0.2c0.6 0 1.2 0.1 1.8 0.1h2.2c0.3 0 0.6 0 0.9-0.1 0.2 0 0.5 0 0.7-0.1 0.3 0 0.6-0.1 0.9-0.1 0.2 0 0.5-0.1 0.7-0.1 0.3 0 0.6-0.1 0.9-0.2 0.2 0 0.5-0.1 0.7-0.1 0.3-0.1 0.6-0.1 0.9-0.2 0.2-0.1 0.5-0.1 0.7-0.2 0.3-0.1 0.6-0.2 1-0.3 0.2-0.1 0.4-0.1 0.6-0.2 0.4-0.1 0.7-0.2 1.1-0.4 0.2-0.1 0.3-0.1 0.5-0.2 0.5-0.2 1-0.4 1.6-0.7 16.1-7.2 23.3-26.2 16.1-42.3l-51.8-115.6c-0.3-0.7-0.6-1.3-1-1.9-0.1-0.2-0.2-0.3-0.3-0.5-0.4-0.5-0.7-1.1-1.1-1.7z"
-                p-id="21624"
-                fill="#999999"
-              ></path>
-            </svg>
-            <svg
-              v-else
-              @click="form.pwd = !form.pwd"
-              t="1747823189861"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="20574"
-              width="25"
-              height="25"
-            >
-              <path
-                d="M512 279.272727c171.985455 0 328.610909 162.909091 388.421818 232.727273-59.810909 69.818182-216.436364 232.727273-388.421818 232.727273S183.389091 581.818182 123.578182 512c59.810909-69.818182 216.436364-232.727273 388.421818-232.727273m0-69.818182C298.589091 209.454545 117.76 407.970909 56.785455 483.374545a44.916364 44.916364 0 0 0 0 57.25091C117.76 616.029091 298.589091 814.545455 512 814.545455s394.24-198.516364 455.214545-273.92a44.916364 44.916364 0 0 0 0-57.25091C906.24 407.970909 725.410909 209.454545 512 209.454545z"
-                fill="#999999"
-                p-id="20575"
-              ></path>
-              <path
-                d="M512 442.181818a69.818182 69.818182 0 1 1-69.818182 69.818182 69.818182 69.818182 0 0 1 69.818182-69.818182m0-69.818182a139.636364 139.636364 0 1 0 139.636364 139.636364 139.636364 139.636364 0 0 0-139.636364-139.636364z"
-                fill="#999999"
-                p-id="20576"
-              ></path>
-            </svg>
-          </div>
-        </div>
-        <div class="btnBox" @click="submit">确定</div>
-      </div>
-    </template>
-
-    <template v-if="notPwd && !success">
+    <template v-if="loginPassword && updateLoginPwdMethod">
       <div class="content2">
         <div class="tip">旧密码</div>
         <div class="input">
-          <input v-model="form1.oldPwd" :type="oldPwd ? 'text' : 'password'" placeholder="请输入" />
+          <input v-model="form.oldPwd" :type="oldPwd ? 'text' : 'password'" placeholder="请输入" />
           <div class="icon">
             <svg
               @click="oldPwd = !oldPwd"
@@ -186,7 +219,7 @@
         </div>
         <div class="tip">新密码</div>
         <div class="input">
-          <input v-model="form1.newPwd" :type="newPwd ? 'text' : 'password'" placeholder="请输入" />
+          <input v-model="form.newPwd" :type="newPwd ? 'text' : 'password'" placeholder="请输入" />
           <div class="icon">
             <svg
               @click="newPwd = !newPwd"
@@ -234,7 +267,7 @@
         <div class="tip">确认密码</div>
         <div class="input">
           <input
-            v-model="form1.NPwd"
+            v-model="form.NPwd"
             :type="NPwd ? 'text' : 'password'"
             placeholder="请输入"
             @input="pwdDiff"
@@ -284,143 +317,30 @@
           </div>
         </div>
         <!--        <p v-if="showPwdDiff" class="pwdDiff">*两次密码不一致</p>-->
-        <div class="btnBox" @click="changePwd1">确定</div>
-      </div>
-    </template>
+        <div class="btnBox" @click="submit">确定</div>
 
-    <template v-if="notPwd && success">
-      <div class="content1">
-        <img src="@/assets/img/cg.png" class="imgLoad" />
-        <div class="text">已设置资金密码</div>
-        <div class="btnBox" @click="changePwd" style="width: 345px">修改安全密码</div>
-        <div class="forgot" @click="toCustorm">忘记安全密码？</div>
+        <div v-if="loginPassword" class="box">
+          <div v-if="!updateLoginPwdMethod" class="set" @click="changeMethod">
+            使用原密码修改
+          </div>
+          <div v-else class="set" @click="changeMethod">使用邮箱修改</div>
+        </div>
       </div>
     </template>
   </div>
 </template>
 
-<script setup>
-import { showToast } from 'vant'
-import { reactive, watch, ref } from 'vue'
-import { setFundPwd } from '@/api/user'
-import { useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/store/user/index'
+<style scoped lang="scss">
+.box {
+  padding: 0 15px;
 
-import { updateFundPwd } from '@/api/user'
-
-const newPwd = ref(false)
-const oldPwd = ref(false)
-const NPwd = ref(false)
-const form1 = ref({
-  newPwd: '',
-  oldPwd: '',
-  NPwd: ''
-})
-const setKeyVal = (val) => {
-  if (val == 'oldPwd') {
-    oldPwd.value = !oldPwd.value
-  } else if (val == 'newPwd') {
-    newPwd.value = !newPwd.value
-  } else {
-    NPwd.value = !NPwd.value
+  .set {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 15px;
+    color: #ffffff;
   }
 }
-// const emit = defineEmits(['setPwd'])
-// form.pwd.value = !form.pwd.value
-const success1 = ref(false)
-// watch(success1, (newValue) => {
-//   emit('setPwd', newValue)
-// })
-const showPwdDiff = ref(false)
-const pwdDiff = () => {
-  showPwdDiff.value = !(form1.value.newPwd == form1.value.NPwd)
-}
-const changePwd1 = () => {
-  if (form1.value.oldPwd == '') {
-    showToast('请输入旧密码')
-    // _toast('Fund_password_pleaseOld')
-    return
-  }
-  if (form1.value.newPwd == '') {
-    showToast('请输入新密码')
-    // _toast('Fund_password_pleaseNew')
-    return
-  }
-  if (form1.value.newPwd !== form1.value.NPwd) {
-    showToast('两次密码不一致')
-    // _toast('register_pwd_diff')
-    return
-  }
-  updateFundPwd(form1.value.oldPwd, form1.value.newPwd, 1).then((res) => {
-    if (res.code == '200') {
-      showToast('资金密码修改成功')
-      // _toast('Fund_password_update_success')
-      success1.value = true
-      notPwd.value = true
-      userStore.getUserInfo()
-    } else {
-      showToast(res.msg)
-    }
-  })
-}
-
-const userStore = useUserStore()
-userStore.getUserInfo()
-// 用户信息
-const { userInfo } = storeToRefs(userStore)
-const cuttentRight = { iconRight: [{ iconName: 'kefu', clickTo: 'event_serviceChange' }] }
-// 用户是否设置过资金密码(userInfo.detail?.userTardPwd)
-
-const notPwd = ref(userInfo.value.detail?.userTardPwd)
-const success = ref(true)
-const changePwd = () => {
-  notPwd.value = true
-  success.value = false
-  userStore.getUserInfo()
-}
-const toCustorm = () => {
-  showToast('请联系客服')
-}
-
-const router = useRouter()
-const form = reactive({
-  pwd: false
-})
-const setVal = () => {
-  form.pwd = !form.pwd
-}
-watch(
-  () => form.pwd,
-  (newValue, oldValue) => {
-    console.log(newValue, oldValue)
-  }
-)
-
-const formData = ref({
-  password: ''
-})
-
-const submit = () => {
-  if (formData.value.password == '') {
-    showToast('请输入资金密码')
-    return
-  }
-
-  setFundPwd(formData.value.password).then((res) => {
-    if (res.code == '200') {
-      showToast('设置成功')
-      success.value = true
-      notPwd.value = true
-      userStore.getUserInfo()
-    } else {
-      showToast(res.msg)
-    }
-  })
-}
-</script>
-
-<style lang="scss" scoped>
 .content2 {
   padding: 30px 15px 0 15px;
 
@@ -464,65 +384,6 @@ const submit = () => {
     font-size: 12px;
   }
 }
-
-.content1 {
-  padding: 50px 15px 0;
-
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .forgot {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 14px;
-    color: #ffffff;
-  }
-
-  .imgLoad {
-    width: 167px;
-    height: 167px;
-    margin-bottom: 10px;
-  }
-
-  .text {
-    font-size: 14px;
-    color: rgba(192, 198, 204, 0.7);
-  }
-}
-
-.content {
-  padding: 30px 15px 0 15px;
-
-  .input {
-    padding: 0 15px;
-    width: 100%;
-    height: 50px;
-    background: rgba(255, 255, 255, 0.07);
-    border-radius: 3px;
-    border: 1px solid #4c4e53;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-
-    input {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      padding: 0 10px;
-      font-size: 14px;
-      color: #ffffff;
-    }
-  }
-
-  .icon {
-    font-size: 16px;
-  }
-}
-
 .btnBox {
   margin: 40px 0 30px;
   padding: 15px 0;
@@ -530,7 +391,7 @@ const submit = () => {
   align-items: center;
   justify-content: center;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   color: #000000;
   text-align: left;
   font-style: normal;

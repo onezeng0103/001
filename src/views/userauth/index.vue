@@ -83,139 +83,160 @@
       </div>
     </div>
 
-    <div style="margin: 35px 10px 0 10px">
-      <div style="display: flex; align-items: center; justify-content: space-between">
-        <div>国籍</div>
+    <template v-if="advancedAuth == '0' || advancedAuth == null">
+      <div style="margin: 35px 10px 0 10px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div>国籍</div>
 
-        <div class="optionNationality" @click="showBottom2 = true">
-          <span class="optionNationality-text">
-            {{ current == 'zh' ? action.chineseName : action.englishName }}
-          </span>
-          <!--          <span class="optionNationality-text">中国</span>-->
-          <div>
-            <svg
-              t="1747924804750"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="9044"
-              width="12"
-              height="12"
-            >
-              <path
-                d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
-                fill="#BAEC57"
-                p-id="9045"
-              ></path>
-            </svg>
-          </div>
-        </div>
-
-        <div>认证方式</div>
-
-        <div class="optionNationality fui-dropdown__menu" @click="handleShowPopoverNum()">
-          <!--          <span class="optionNationality-text">{{ current == 'zh' ? action.chineseName : action.englishName }}</span>-->
-          <span class="optionNationality-text">{{ formData.title }}</span>
-          <div>
-            <svg
-              t="1747924804750"
-              class="icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="9044"
-              width="12"
-              height="12"
-            >
-              <path
-                d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
-                fill="#BAEC57"
-                p-id="9045"
-              ></path>
-            </svg>
-          </div>
-
-          <div
-            :class="
-              showPopoverNum
-                ? 'fui-dropdown__menu-list fui-ddm__down fui-ddm__down-show'
-                : 'fui-dropdown__menu-list fui-ddm__down'
-            "
-          >
-            <div class="element">
-              <div
-                class="element-list"
-                :class="formData.title === item.name ? 'elect' : ''"
-                v-for="item in certificate"
-                :key="item.type"
-                @click="close(item)"
+          <div class="optionNationality" @click="showBottom2 = true">
+            <span class="optionNationality-text">
+              {{ current == 'zh' ? action.chineseName : action.englishName }}
+            </span>
+            <div>
+              <svg
+                t="1747924804750"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="9044"
+                width="12"
+                height="12"
               >
-                {{ item.name }}
+                <path
+                  d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
+                  fill="#BAEC57"
+                  p-id="9045"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <div>认证方式</div>
+
+          <div class="optionNationality fui-dropdown__menu" @click="handleShowPopoverNum()">
+            <span class="optionNationality-text">{{ formData.title }}</span>
+            <div>
+              <svg
+                t="1747924804750"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="9044"
+                width="12"
+                height="12"
+              >
+                <path
+                  d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
+                  fill="#BAEC57"
+                  p-id="9045"
+                ></path>
+              </svg>
+            </div>
+
+            <div
+              :class="
+                showPopoverNum
+                  ? 'fui-dropdown__menu-list fui-ddm__down fui-ddm__down-show'
+                  : 'fui-dropdown__menu-list fui-ddm__down'
+              "
+            >
+              <div class="element">
+                <div
+                  class="element-list"
+                  :class="formData.title === item.name ? 'elect' : ''"
+                  v-for="item in certificate"
+                  :key="item.type"
+                  @click="close(item)"
+                >
+                  {{ item.name }}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="message">
-        <div class="message-list">
-          <div>姓名：</div>
-          <!--          <div>请输入真实姓名</div>-->
-          <input
-            v-model.trim="formData.userName"
-            type="text"
-            maxlength="140"
-            enterkeyhint="done"
-            autocomplete="off"
-            style="text-align: right"
-            placeholder="请输入真实姓名"
-          />
+        <div class="message">
+          <div class="message-list">
+            <div>姓名：</div>
+            <input
+              v-model.trim="formData.userName"
+              type="text"
+              maxlength="140"
+              enterkeyhint="done"
+              autocomplete="off"
+              style="text-align: right"
+              placeholder="请输入真实姓名"
+            />
+          </div>
+          <div class="message-list">
+            <div>{{ formData.title || '身份证' }}：</div>
+            <input
+              v-model.trim="formData.number"
+              type="text"
+              maxlength="140"
+              enterkeyhint="done"
+              autocomplete="off"
+              style="text-align: right"
+              placeholder="请输入"
+            />
+          </div>
         </div>
-        <div class="message-list">
-          <div>{{ formData.title || '身份证' }}：</div>
-          <input
-            v-model.trim="formData.number"
-            type="text"
-            maxlength="140"
-            enterkeyhint="done"
-            autocomplete="off"
-            style="text-align: right"
-            placeholder="请输入"
-          />
+
+        <div class="upd">
+          <div style="font-weight: 500; font-size: 16px; color: #ffffff">请上传身份证照片</div>
+          <van-uploader v-model="fileList1" :after-read="afterRead1" class="upd-list">
+            <img
+              v-if="fileList1.length == 0"
+              style="width: 36px; height: 36px"
+              src="@/assets/img/Frame.png"
+            />
+            <div v-if="fileList1.length == 0" class="text">上传证件照正面</div>
+          </van-uploader>
+          <van-uploader v-model="fileList2" :after-read="afterRead2" class="upd-list">
+            <img
+              v-if="fileList2.length == 0"
+              style="width: 36px; height: 36px"
+              src="@/assets/img/Frame.png"
+            />
+            <div v-if="fileList2.length == 0" class="text">上传证件照反面</div>
+          </van-uploader>
+          <van-uploader v-model="fileList3" :after-read="afterRead3" class="upd-list">
+            <img
+              v-if="fileList3.length == 0"
+              style="width: 36px; height: 36px"
+              src="@/assets/img/Frame.png"
+            />
+            <div v-if="fileList3.length == 0" class="text">上传手持证件照</div>
+          </van-uploader>
         </div>
       </div>
+      <div class="btn" @click="submit">提交认证</div>
+    </template>
 
-      <div class="upd">
-        <div style="font-weight: 500; font-size: 16px; color: #ffffff">请上传身份证照片</div>
-        <van-uploader v-model="fileList1" :after-read="afterRead1" class="upd-list">
-          <img
-            v-if="fileList1.length == 0"
-            style="width: 36px; height: 36px"
-            src="@/assets/img/Frame.png"
-          />
-          <div v-if="fileList1.length == 0" class="text">上传证件照正面</div>
-        </van-uploader>
-        <van-uploader v-model="fileList2" :after-read="afterRead2" class="upd-list">
-          <img
-            v-if="fileList2.length == 0"
-            style="width: 36px; height: 36px"
-            src="@/assets/img/Frame.png"
-          />
-          <div v-if="fileList2.length == 0" class="text">上传证件照反面</div>
-        </van-uploader>
-        <van-uploader v-model="fileList3" :after-read="afterRead3" class="upd-list">
-          <img
-            v-if="fileList3.length == 0"
-            style="width: 36px; height: 36px"
-            src="@/assets/img/Frame.png"
-          />
-          <div v-if="fileList3.length == 0" class="text">上传手持证件照</div>
-        </van-uploader>
+    <template v-if="advancedAuth == '3'">
+      <div class="content1">
+        <img src="@/assets/img/shz.png" class="imgLoad" />
+        <div class="text">审核中</div>
       </div>
-    </div>
+    </template>
 
-    <div class="btn" @click="submit">提交认证</div>
+    <template v-if="advancedAuth == '2'">
+      <div class="content1">
+        <img src="@/assets/img/sb.png" class="imgLoad" />
+        <div class="text">审核失败</div>
+      </div>
+
+      <div class="btn" @click="reSubmit">重新提交</div>
+    </template>
+
+    <template v-if="advancedAuth == '1'">
+      <div class="content1">
+        <img src="@/assets/img/cg.png" class="imgLoad" />
+        <div class="text">认证成功</div>
+      </div>
+    </template>
   </div>
   <PhonePopup :showBottom="showBottom2" @close="handleClose" />
 </template>
@@ -228,6 +249,14 @@ import { storageDict } from '@/config/dict'
 import { uploadImg } from '@/api/common/index.js'
 import { uploadKYC } from '@/api/user'
 import PhonePopup from '@/components/phonePopup/index.vue'
+
+const userStore = useUserStore()
+userStore.getUserInfo()
+// 用户信息
+const { userInfo } = storeToRefs(userStore)
+const advancedAuth = ref(userInfo.value.detail?.auditStatusAdvanced)
+
+//
 const showPopoverNum = ref(false) //弹窗
 
 const handleShowPopoverNum = () => {
@@ -235,8 +264,8 @@ const handleShowPopoverNum = () => {
 }
 
 const router = useRouter()
-const userStore = useUserStore()
-const { userInfo } = storeToRefs(userStore)
+// const userStore = useUserStore()
+// const { userInfo } = storeToRefs(userStore)
 const current = ref(localStorage.getItem(storageDict.LANGUAGE))
 const formData = ref({
   userName: '',
@@ -361,15 +390,228 @@ const submit = () => {
   uploadKYC(params).then((res) => {
     if (res.code == '200') {
       showToast('提交成功，请等待...')
-      router.push('/')
+      // router.push('/')
+      advancedAuth.value = 3
     } else {
       showToast(res.msg)
+      advancedAuth.value = 2
     }
   })
+}
+
+/**
+ * 认证失败 重新认证
+ */
+const reSubmit = () => {
+  advancedAuth.value = '0'
 }
 </script>
 
 <style lang="scss" scoped>
+.content1 {
+  padding: 100px 15px 0;
+
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .forgot {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #ffffff;
+  }
+
+  .imgLoad {
+    width: 167px;
+    height: 167px;
+    margin-bottom: 10px;
+  }
+
+  .text {
+    font-size: 14px;
+    color: rgba(192, 198, 204, 0.7);
+  }
+}
+
+.van-cell {
+  height: 46px;
+  border-radius: 3px;
+  padding: 0 10px;
+  font-size: 14px;
+  color: var(--ex-select-font-color) !important;
+  display: flex;
+  align-items: center;
+}
+
+.van-cell:after {
+  border-bottom: 0px !important;
+}
+:deep(.van-action-sheet__item, .van-action-sheet__cancel) {
+  background-color: #0e1327 !important;
+}
+.label {
+  color: var(--ex-input-label-color2);
+  text-align: left;
+}
+.content {
+  padding: 30px 15px 0 15px;
+  color: var(--ex-default-font-color);
+
+  .tip {
+    font-size: 12px;
+    color: #8885fb;
+  }
+  .tip_info {
+    font-size: 12px;
+  }
+  .advanced_txt {
+    font-size: 0.373333rem;
+    margin-bottom: 0.64rem;
+    text-align: left;
+    .tips {
+      width: 0.426667rem;
+      height: 0.426667rem;
+      margin: 0 0.053333rem;
+      vertical-align: top;
+    }
+  }
+
+  .form {
+    padding-top: 0.133333rem;
+    font-size: 0.373333rem;
+    .label {
+      color: var(--ex-input-label-color2);
+      text-align: left;
+    }
+    .formInput {
+      align-items: center;
+      margin: 0.24rem 0 0.64rem;
+
+      input {
+        padding: 0 0.373333rem;
+        width: 100%;
+        height: 1.226667rem;
+        font-size: 0.373333rem;
+        border-radius: 0.213333rem;
+        background: var(--ex-input-background-color);
+        border: 0.026667rem solid rgba(0, 0, 0, 0);
+        &::placeholder {
+          color: var(--ex-input-font-color);
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  .upload {
+    margin: 30px 0 10px 0;
+
+    .photo {
+      font-size: 14px;
+      color: var(--ex-default-font-color);
+    }
+
+    span {
+      font-size: 14px;
+      color: var(--ex-passive-font-color);
+    }
+  }
+
+  .upload-box {
+    .item {
+      height: 194px;
+      background: var(--ex-default-background-color);
+      border-radius: 0.213333rem;
+      border: 0.026667rem dashed var(--ex-border-color10);
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+
+      .van-uploader {
+        width: 100%;
+
+        :deep(.van-uploader__wrapper) {
+          width: 100%;
+          height: 100%;
+          display: block;
+
+          .van-uploader__input-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .van-uploader__preview {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+
+            .van-uploader__preview-image {
+              width: 100%;
+              height: 194px;
+            }
+          }
+
+          .van-uploader__preview-delete {
+            width: 20px;
+            height: 20px;
+
+            .van-uploader__preview-delete-icon {
+              font-size: 22px;
+            }
+          }
+        }
+      }
+
+      .img {
+        // width: 100%;
+        // height: 100%;
+        width: 50px;
+        height: 50px;
+        min-width: none;
+        min-height: none;
+        object-fit: contain;
+        margin: 50px 0 20px 0;
+      }
+
+      .tit {
+        box-sizing: border-box;
+        width: 100%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 400;
+        color: var(--ex-passive-font-color);
+      }
+    }
+  }
+
+  .btnBox {
+    width: 100%;
+    margin: 50px 0;
+  }
+}
+
+.success {
+  margin: 100px 0;
+}
+
+:deep(.van-action-sheet__content) {
+  button {
+    background: var(--ex-select-dialog-background-color);
+    color: var(--ex-select-dialog-font-color);
+    height: 45px;
+    // border: 1px solid var(--ex-select-dialog-boder-color);
+  }
+}
+
+
 .element {
   background: #121212;
   border-radius: 8px 8px 8px 8px;
@@ -420,11 +662,13 @@ const submit = () => {
     align-items: center;
     flex-direction: column;
     padding: 30px 0;
+
     :deep(.van-uploader__input-wrapper) {
       display: flex;
       align-items: center;
       flex-direction: column;
     }
+
     .text {
       margin-top: 15px;
       font-size: 14px;
