@@ -54,6 +54,7 @@ import { priceFormat } from '@/utils/decimal.js'
 import { useRouter, useRoute } from 'vue-router'
 import { dispatchCustomEvent } from '@/utils'
 const route = useRoute()
+const { replace } = useRouter()
 const tradeStore = useTradeStore()
 const props = defineProps({
   showLeft: {
@@ -66,25 +67,91 @@ const searchName = ref('')
 const currentList = ref(tradeStore.secondContractCoinList)
 const handleClick = (item) => {
   let type = ''
-  if ($route.query.type == 1) {
+  if (route.query.type == 1) {
     type = 'spot'
-  } else if ($route.query.type == 2) {
+  } else if (route.query.type == 2) {
     type = 'contract'
   }
-  if (!$route.query.type) {
+  if (!route.query.type) {
     replace(`${route.path}?symbol=${item.coin}`)
   } else {
     replace(`${route.path}?symbol=${item.coin}&type=${route.query.type}`)
   }
-  coinInfo.value = item
   dispatchCustomEvent('event_tradeSymbolChange', {
     type: type,
     symbol: item.symbol,
     coin: item.coin,
     coinInfo: item
   })
-
-  showLeft.value = false
+  emit('close')
 }
 </script>
-<style scoped lang="scss"></style>
+<style lang="scss" scoped>
+.van-popup {
+  background: #fff !important;
+}
+.search {
+  margin-bottom: 10px;
+  width: 100%;
+  height: 38px;
+  border-radius: 8px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  img {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+  }
+  input {
+    color: #000 !important;
+  }
+}
+.tip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: 8px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  color: #000;
+  font-size: 12px;
+  margin-top: 2%;
+}
+.list {
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  color: #000;
+  font-size: 12px;
+  margin-top: 10px;
+  &-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    &-left {
+      display: flex;
+      align-items: center;
+      img {
+        width: 25px;
+        height: 25px;
+      }
+      .showSymbol {
+        margin-left: 10px;
+        font-size: 14px;
+      }
+    }
+    &-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      &-price {
+        font-size: 12px;
+      }
+    }
+  }
+}
+</style>

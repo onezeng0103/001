@@ -57,15 +57,13 @@
           </div>
         </div>
         <div class="flash-top-left-price">
-          {{ availableBalance }}
-          <span v-if="form.type == 0" style="font-size: 12px">USDT</span>
-          <span v-else style="font-size: 12px">
-            {{
-              coinInfo.customizeFlag === 2
-                ? matchText(coinInfo.showSymbol, '/USDT')
-                : coinInfo.coin?.toUpperCase()
-            }}
-          </span>
+          <template v-if="isEye">
+            {{ availableBalance }}
+            <span style="font-size: 12px">USDT</span>
+          </template>
+          <template v-else>
+            <span style="font-size: 12px">****</span>
+          </template>
         </div>
       </div>
       <div class="flash-top-right"></div>
@@ -107,139 +105,104 @@
             ></path>
           </svg>
         </div>
-        <div class="flash-main-top-right">
-          <div
-            class="flash-main-top-right-item"
-            :class="{ active: form.type === '0' }"
-            @click="form.type = '0'"
-          >
-            买入
-          </div>
-          <div
-            class="flash-main-top-right-item"
-            :class="{ active: form.type === '1' }"
-            @click="form.type = '1'"
-          >
-            卖出
-          </div>
-        </div>
+        <div class="flash-main-top-right"></div>
       </div>
-      <div class="flash-main-tip">
-        <div class="flash-main-tip-item">
-          <div class="flash-main-tip-item-name">价格</div>
-          <div class="flash-main-tip-item-symbol">{{ coinInfo.baseCoinUpperCase }}</div>
-        </div>
-        <div class="flash-main-tip-item">
-          <div class="flash-main-tip-item-name">成交量</div>
-          <div class="flash-main-tip-item-symbol">
-            {{
-              coinInfo.customizeFlag === 2
-                ? matchText(coinInfo.showSymbol, '/USDT')
-                : coinInfo.coinUpperCase
-            }}
-          </div>
-        </div>
-      </div>
-      <div class="flash-main-tab">
-        <div
-          v-for="item in delegateTypeList"
-          :key="item.value"
-          class="flash-main-tab-item"
-          :class="{ actives: item.value === form.delegateType }"
-          @click="checkedDelegateType(item)"
+      <Candlestick :coinInfo="coinInfo" type="secondContract" />
+    </div>
+    <div class="flash-btn">
+      <div class="fall" @click="showBtn(0)">看跌</div>
+      <div class="rose" @click="showBtn(1)">看涨</div>
+    </div>
+  </div>
+  <LeftPopup :showLeft="showLeft" @close="showLeft = false" />
+  <van-popup v-model:show="showOrder" round position="bottom">
+    <div style="display: flex; align-items: center; justify-content: space-between">
+      <div></div>
+      <div style="font-size: 14px">购买（{{ coinInfo.showSymbol }}）</div>
+      <div>
+        <svg
+          @click="showOrder = !showOrder"
+          t="1747853459405"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="1494"
+          width="24"
+          height="24"
         >
-          {{ item.label }}
-        </div>
+          <path
+            d="M512 451.669333l211.2-211.2 60.330667 60.330667-211.2 211.2 211.2 211.2-60.330667 60.330667-211.2-211.2-211.2 211.2-60.330667-60.330667 211.2-211.2-211.2-211.2L300.8 240.469333z"
+            p-id="1495"
+            fill="#000"
+          ></path>
+        </svg>
       </div>
-      <div class="flash-main-slider">
-        <van-slider
-          active-color="#c4eb6e"
-          inactive-color="#232323"
-          button-size="16"
-          v-model="form.slider"
-          @change="sliderChange"
-        />
-      </div>
-      <template v-if="form.delegateType == 0">
-        <div class="flash-main-input">
-          <input
-            type="text"
-            v-model="form.price"
-            :placeholder="`成交金额(${coinInfo.baseCoinUpperCase})`"
-            maxlength="140"
-          />
-          <span>USDT</span>
-        </div>
-        <div class="flash-main-input">
-          <input
-            type="text"
-            v-model="form.count"
-            :placeholder="`数量(${
-              coinInfo.customizeFlag === 2
-                ? matchText(coinInfo.showSymbol, '/USDT')
-                : coinInfo.coin.toUpperCase()
-            })`"
-            maxlength="140"
-          />
-          <span>
-            {{
-              coinInfo.customizeFlag === 2
-                ? matchText(coinInfo.showSymbol, '/USDT')
-                : coinInfo.coin.toUpperCase()
-            }}
-          </span>
-        </div>
-      </template>
-      <div class="flash-main-input">
-        <input
-          type="text"
-          v-model="form.turnover"
-          @input="turnoverChange"
-          :placeholder="`成交金额(${coinInfo.baseCoinUpperCase})`"
-          maxlength="140"
-        />
-      </div>
-      <div class="flash-main-btn">
-        <div class="btn" @click="submit">
-          <span v-if="form.type == 0">买入</span>
-          <span v-else>卖出</span>
-          <span v-if="coinInfo.customizeFlag == 2">
-            {{ coinInfo.showSymbol.replace('/USDT', '') }}
-          </span>
-          <span>{{ coinInfo.coinUpperCase }}</span>
+    </div>
+    <div class="cycle">
+      <div class="cycle-title">交割周期</div>
+      <div class="cycle-box">
+        <div class="cycle-box-item" v-for="(item, index) in cycleList" :key="index">
+          <div>{{ getItemPeriod(item) }}</div>
+          <div>收益{{ _mul(item.odds, 100) }}%</div>
         </div>
       </div>
     </div>
-  </div>
+  </van-popup>
 </template>
 <script setup>
-import { useMainStore } from '@/store'
-import { useUserStore } from '@/store/user'
+import dayjs from 'dayjs'
+import { useRoute } from 'vue-router'
 import { useTradeStore } from '@/store/trade'
-import { useRouter, useRoute } from 'vue-router'
-import { submitOrderCurrencyApi } from '@/api/trade'
-import { showToast } from 'vant'
-import { _div, _mul, _toFixed, priceFormat } from '@/utils/decimal'
-const mainStore = useMainStore()
+import { useMainStore } from '@/store'
+import { priceFormat } from '@/utils/decimal.js'
+import Candlestick from './component/candlestick.vue'
+import LeftPopup from './component/leftPopup.vue'
+import { useUserStore } from '@/store/user/index'
+import { _mul, _toFixed } from '@/utils/decimal'
+import { useI18n } from 'vue-i18n'
+import { DIFF_FREEZE_ASSETS } from '@/config/index'
+import {
+  createSecondContractOrder,
+  getPeriodList,
+  secondContractOrderselectOrderList
+} from '@/api/trade/index'
+import { _timeFormat } from '@/utils/public'
+import { formatExpectedProfit, formatTime, profitAndloss } from '@/utils/filters'
+
+const { t } = useI18n()
 const userStore = useUserStore()
-const { userInfo } = storeToRefs(userStore)
-const tradeStore = useTradeStore()
-const router = useRouter()
-const route = useRoute()
-const form = reactive({
-  type: '0',
-  delegateType: 1
-})
+const mainStore = useMainStore()
 const { asset } = storeToRefs(userStore)
+const tradeStore = useTradeStore()
+const $route = useRoute()
+const isEye = ref(true)
+const showLeft = ref(false)
+const showTotal = ref(false)
+const firstNum = ref(0)
+const secondNum = ref(0)
+const earnTotal = ref(0)
+const coinInfo = ref({})
+const showOrder = ref(false)
+const searchName = ref('')
+const currentList = ref(tradeStore.secondContractCoinList)
+const cycleList = ref([]) // 周期列表
+const cycleObj = ref({})
+const quantity = ref('')
+const titleFlag = ref(1)
+const cycleIndex = ref(0)
+const currentRate = ref(0) // 倒计时
+const selectAll = ref(false)
+const showMessage = ref(false)
+const message = ref('')
+const historyList = ref([])
+const historyNewList = ref([])
+const currentEntruset = ref(0) // 委托状态 0 进行中 1 完成
+const all = ref(t(`all`, ['ebc']))
 const availableBalance = computed(() => {
   let tempValue = 0
   if (asset.value.length) {
-    if (form.type == '0') {
-      tempValue = asset.value.filter((item) => item.symbol === 'usdt')[0]?.availableAmount || 0
-    } else {
-      tempValue =
-        asset.value.filter((item) => item.symbol === coinInfo.value.coin)[0]?.availableAmount || 0
-    }
+    tempValue = asset.value.filter((item) => item.symbol === 'usdt')[0]?.availableAmount || 0
   }
   return tempValue
 })
@@ -247,93 +210,18 @@ const path = computed(() => {
   let tempPath = mainStore.getLogoList?.logo || mainStore.getLogoList?.logoD
   return tempPath
 })
-const isEye = ref(true)
-const coinInfo = ref({})
-const showLeft = ref(false)
-// 初始化展示币种信息
-const init = () => {
-  if (route.query.symbol) {
-    coinInfo.value = tradeStore.spotCoinList.filter((item, index) => {
-      return item.coin === route.query.symbol
-    })[0]
-    if (!coinInfo.value) {
-      coinInfo.value = tradeStore.spotCoinList[0]
-    }
-  } else {
-    coinInfo.value = tradeStore.spotCoinList[0]
-  }
-}
-// 币种开盘价等
-
 const coinPriceInfo = computed(() => {
   return tradeStore.allCoinPriceInfo[coinInfo.value.coin] || {}
 })
-/**
- * 设置交易价格
- */
-const setTradePrice = (val) => {
-  if (form.delegateType == 0) {
-    // 限价触发
-    form.price = priceFormat(val)
-    priceChange(form.price)
-  }
+
+function calculateProgress(item) {
+  const totalTime = item.time // 总时长为 10 秒
+  const progress = (item.countdown / totalTime) * 100
+  return progress
 }
-/**
- * 滑块监听
- */
-const sliderChange = (val) => {
-  val = val / 100
-  let tempPrice = 0
-  if (form.delegateType == 0) {
-    // 限价
-    tempPrice = form.price
-  } else if (form.delegateType == 1) {
-    // 市价
-    tempPrice = coinPriceInfo.value.close
-  }
-  if (Number(tempPrice)) {
-    if (form.delegateType == 1 && form.type == 1) {
-      // 市价&&卖出
-      form.count = _mul(availableBalance.value, val)
-    } else if (form.delegateType == 0 && form.type == 1) {
-      // 限价&&卖出
-      form.count = _mul(availableBalance.value, val)
-      form.turnover = _toFixed(_mul(form.count, tempPrice))
-    } else {
-      // (市价&&买入)||(限价&&买入)
-      form.count = _mul(_div(availableBalance.value, tempPrice), val)
-      form.turnover = _toFixed(_mul(form.count, tempPrice))
-    }
-  }
-}
-/**
- * 成交金额监听
- */
-const turnoverChange = () => {
-  let val = form.turnover
-  if (Number(val) > Number(availableBalance.value)) {
-    // 输入金额大于可用余额
-    form.turnover = availableBalance.value
-    val = availableBalance.value
-  }
-  let tempPrice = 0
-  if (form.delegateType == 0) {
-    // 限价
-    tempPrice = form.price
-  } else if (form.delegateType == 1) {
-    // 市价
-    tempPrice = coinPriceInfo.value.close
-  }
-  // 根据成交额 价格 计算数量
-  if (Number(tempPrice)) {
-    form.count = _div(val, tempPrice)
-    form.slider = parseInt(_mul(_div(val, availableBalance.value), 100))
-  }
-}
-const orderListBoxRef = ref(null)
 // 监听路由展示对应币种信息
 watch(
-  () => route.query.symbol,
+  () => $route.query.symbol,
   (val) => {
     coinInfo.value = tradeStore.spotCoinList.filter((item) => {
       return item.coin === val
@@ -343,93 +231,549 @@ watch(
     deep: true
   }
 )
-// 重置表单
-const restForm = () => {
-  let tempForm = {
-    ...form,
-    price: '', // 价格
-    count: '', // 数量
-    turnover: '', // 成交金额
-    slider: 0 // 滑块
-  }
-  Object.assign(form, tempForm) //复制tempForm到form
-}
-const delegateTypeList = [
-  { label: '市价委托', value: '1' },
-  { label: '限价委托', value: '0' }
-]
-// 当前选中交易价格类型：限价/市价
-const currentDelegateType = ref({})
-// 切换限价/市价
-const checkedDelegateType = (item) => {
-  console.log(item.value !== form.delegateType)
-  if (item.value !== form.delegateType) {
-    form.delegateType = item.value
-    currentDelegateType.value = item
-    console.log(form.delegateType)
-  }
-  restForm()
-}
-checkedDelegateType(delegateTypeList[0])
-/**
- * 提交表单
- */
-const submit = async () => {
-  let msg = false
-  if (form.delegateType == 1 && form.type == 1) {
-    // 市价&&卖出
-    if (!form.count) {
-      msg = '请输入数量'
-    } else if (form.count > availableBalance.value) {
-      msg = '可用余额不足'
+const assetDetails = computed(() => {
+  let list = []
+  //[{icon: 'usdt', title: 'USDT', keyong: 100, zhanyong: 100, zhehe: 100}]
+  asset.value.forEach((item) => {
+    // 之前两块多平台判断逻辑是一样的 -> 精简合并
+    let obj = {}
+    obj['keyong'] = priceFormat(item.availableAmount)
+    // rxce冻结金额=占用+冻结
+    if (DIFF_FREEZE_ASSETS.includes(__config._APP_ENV)) {
+      let temp = 0
+      if (freezeList.value) {
+        freezeList.value.forEach((itm) => {
+          if (itm.coin == item.symbol && item.type == 1) {
+            temp = itm.price
+          }
+        })
+      }
+      obj['zhanyong'] = priceFormat(_add(item.occupiedAmount, temp))
+    } else {
+      obj['zhanyong'] = priceFormat(item.occupiedAmount)
     }
-  } else if (form.delegateType == 0 && form.type == 1) {
-    // 限价&&卖出
-    if (!form.price) {
-      msg = '请输入价格'
-    } else if (!form.count) {
-      msg = '请输入数量'
-    } else if (form.count > availableBalance.value) {
-      msg = '可用余额不足'
+    obj['zhehe'] = priceFormat(item.exchageAmount)
+    if (item.symbol == 'usdt') {
+      obj['icon'] = 'usdt'
+      obj['loge'] = item.loge
+      obj['title'] = 'USDT'
+      list.unshift(obj)
+    } else {
+      obj['loge'] = item.loge
+      obj['title'] = item.symbol?.replace('usdt', '').trim().toLocaleUpperCase()
+      obj['icon'] = item.symbol?.replace('usdt', '').trim()
+      list.push(obj)
+    }
+  })
+  return list
+})
+
+// 计算账户余额
+const amountSum = computed(() => {
+  let sum = 0
+  for (let i = 0; i < assetDetails.value.length; i++) {
+    sum += Number(assetDetails.value[i].zhehe)
+  }
+  return sum.toLocaleString()
+})
+
+const _getConfig = (key) => {
+  let value = ''
+  if (key) {
+    value = window.__config[key] || ''
+  }
+  return value
+}
+const quantityList = ref([
+  {
+    name: '100',
+    show: true
+  },
+  {
+    name: '500',
+    show: true
+  },
+  {
+    name: '1000',
+    show: true
+  },
+  {
+    name: '2000',
+    show: true
+  },
+  {
+    name: '5000',
+    show: true
+  },
+  {
+    name: '10000',
+    show: true
+  },
+  {
+    name: '20000',
+    show: true
+  },
+  // 全部
+  {
+    name: all.value,
+    show: true
+  }
+])
+const getType = (value) => {
+  if (value > 0) {
+    return t('profits')
+  } else if (value < 0) {
+    return t('loss')
+  } else {
+    return t('flat')
+  }
+}
+
+const showBtn = (e) => {
+  availableBalance.value =
+    asset.value.filter((item) => {
+      return item.symbol === 'usdt'
+    })[0].availableAmount + ''
+  quantity.value = ''
+  titleFlag.value = e // 1涨 0 跌
+  showOrder.value = true
+  cycleIndex.value = 0
+  currentRate.value = 0
+  selectAll.value = false
+  getCycleList()
+}
+
+const getItemPeriod = (item) => {
+  if (item.period >= 3600) {
+    return item.period / 3600 + 'h'
+  } else {
+    return item.period + 's'
+  }
+}
+
+const fifterTimeDown = (data) => {
+  if (data.length > 0) {
+    if (!currentEntruset.value) {
+      data.forEach((element, i) => {
+        if (element.time <= 0) {
+          data.splice(i, 1)
+        }
+      })
+    }
+    return data
+  } else {
+    return data
+  }
+}
+const currentDate = ref(dayjs().format('YYYY-MM-DD'))
+const getList = async (status) => {
+  const res = await secondContractOrderselectOrderList({ status: status })
+  if (res.code === 200) {
+    const result = res.data
+    if (status) {
+      secondNum.value = result.filter((item) => item.createTime.includes(currentDate.value)).length
+      earnTotal.value = result.reduce((accumulator, currentValue) => {
+        if (currentValue.createTime.includes(currentDate.value)) {
+          return (
+            accumulator + Number(profitAndloss(currentValue.betAmount, currentValue.rewardAmount))
+          )
+        } else {
+          return accumulator
+        }
+      }, 0)
+    } else {
+      firstNum.value = result.length
+    }
+    historyList.value = fifterTimeDown(result)
+    historyNewList.value = historyList.value
+
+    if (!status) {
+      historyNewList.value.forEach((item) => {
+        item.countdown = item.time ? item.time : 0
+        item.flag = true
+        item.isUpdate = false
+
+        watchEffect(() => {
+          if (item.countdown >= 0) {
+            item.isUpdate = true
+            setTimeout(() => {
+              item.countdown--
+            }, 1000)
+          } else {
+            if (!currentEntruset.value && item.countdown !== 0 && item.flag) {
+              getList(currentEntruset.value)
+              if (item.isUpdate) {
+                item.isUpdate = false
+                getNumber(1)
+                getList(currentEntruset.value)
+              }
+            }
+          }
+        })
+      })
     }
   } else {
-    // (市价&&买入)||(限价&&买入)
-    if (!form.turnover) {
-      msg = '请输入成交金额'
-    } else if (form.turnover <= 0) {
-      msg = '成交金额不正确'
-    } else if (form.turnover > availableBalance.value) {
-      msg = '可用余额不足'
+  }
+}
+
+const onClickTab = (index) => {
+  cycleIndex.value = index
+  cycleObj.value = cycleList.value[index]
+}
+
+const getCycleList = async () => {
+  try {
+    const res = await getPeriodList({ secondId: coinInfo.value.id })
+    console.log('res', res)
+    if (res.code === 200) {
+      cycleList.value = res.data
+      console.log('cycleList', cycleList.value)
+      cycleObj.value = cycleList.value[0]
     }
+  } catch (error) {
+    console.log(error)
   }
-  if (msg) {
-    showToast(msg)
-    return
-  }
-  let params = {
-    symbol: coinInfo.value.coin, //交易币种(e.g btc)
-    coin: coinInfo.value.baseCoin, //结算币种(usdt)
-    delegateTotal: form.count, //委托总量
-    delegatePrice: form.price, //委托价格
-    delegateValue: form.turnover, //委托价值
-    delegateType: form.delegateType, //委托类型（0限价1市价）
-    type: form.type //（0买入1卖出）
-  }
-  const res = await submitOrderCurrencyApi(params)
-  // 购买成功
-  if (res.code == 200) {
-    userStore.getUserInfo()
-    showToast(res.msg)
-    restForm()
-    // 刷新
-    orderListBoxRef.value.refresh()
+}
+
+const initVoinInfo = () => {
+  if ($route.query.symbol) {
+    coinInfo.value = tradeStore.secondContractCoinList.filter((item, index) => {
+      return item.coin === $route.query.symbol
+    })[0]
+    if (!coinInfo.value) {
+      coinInfo.value = tradeStore.secondContractCoinList[0]
+    }
   } else {
-    showToast(res.msg)
+    coinInfo.value = tradeStore.secondContractCoinList[0]
   }
+}
+const showCenter = ref(false)
+const centerData = ref({})
+const handleShowCenter = (value) => {
+  centerData.value = value
+  showCenter.value = true
+}
+const returnTime = (time) => {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+  console.log('timeZone', timeZone)
+  const timePart = time.split(' ')[1]
+  return timePart.split(':').slice(0, 2).join(':')
 }
 onMounted(() => {
-  init()
+  initVoinInfo()
+  if (['gmdoin'].includes(__config._APP_ENV)) {
+    quantityList.value = [
+      {
+        name: '100',
+        show: true
+      },
+      {
+        name: '5000',
+        show: true
+      },
+      {
+        name: '20000',
+        show: true
+      },
+      {
+        name: '50000',
+        show: true
+      },
+      {
+        name: '100000',
+        show: true
+      },
+      {
+        name: '200000',
+        show: true
+      },
+      {
+        show: false
+      },
+      // 全部
+      {
+        name: all.value,
+        show: true
+      }
+    ]
+  } else if (['gmtoin'].includes(__config._APP_ENV)) {
+    quantityList.value = [
+      {
+        name: '100',
+        show: true
+      },
+      {
+        name: '5000',
+        show: true
+      },
+      {
+        name: '20000',
+        show: true
+      },
+      {
+        name: '50000',
+        show: true
+      },
+      {
+        name: '100000',
+        show: true
+      },
+      {
+        name: '200000',
+        show: true
+      },
+      {
+        name: '500000',
+        show: true
+      },
+      // 全部
+      {
+        name: all.value,
+        show: true
+      }
+    ]
+  } else if (['bitfly'].includes(__config._APP_ENV)) {
+    quantityList.value = [
+      {
+        name: '200',
+        show: true
+      },
+      {
+        name: '500',
+        show: true
+      },
+      {
+        name: '1000',
+        show: true
+      },
+      {
+        name: '5000',
+        show: true
+      },
+      {
+        name: '10000',
+        show: true
+      },
+      {
+        name: '50000',
+        show: true
+      },
+      {
+        name: '100000',
+        show: true
+      },
+      // 全部
+      {
+        name: all.value,
+        show: true
+      }
+    ]
+  } else if (['rxce'].includes(__config._APP_ENV)) {
+    quantityList.value = [
+      {
+        name: '100',
+        show: true
+      },
+      {
+        name: '300',
+        show: true
+      },
+      {
+        name: '500',
+        show: true
+      },
+      {
+        name: '1000',
+        show: true
+      },
+      {
+        name: '2000',
+        show: true
+      },
+      {
+        name: '3000',
+        show: true
+      },
+      {
+        name: '5000',
+        show: true
+      },
+      {
+        name: '10000',
+        show: true
+      },
+      // 全部
+      {
+        name: all.value,
+        show: true
+      }
+    ]
+  } else if (['trustwallet', 'gatedefi'].includes(__config._APP_ENV)) {
+    quantityList.value = [
+      {
+        name: '500',
+        show: true
+      },
+      {
+        name: '1000',
+        show: true
+      },
+      {
+        name: '1500',
+        show: true
+      },
+      {
+        name: '2000',
+        show: true
+      },
+      {
+        name: '3000',
+        show: true
+      },
+      {
+        name: '4000',
+        show: true
+      },
+      {
+        name: '5000',
+        show: true
+      },
+      // 全部
+      {
+        name: all.value,
+        show: true
+      }
+    ]
+  } else if (['hfm2'].includes(__config._APP_ENV)) {
+    quantityList.value = [
+      {
+        name: '100',
+        show: true
+      },
+      {
+        name: '500',
+        show: true
+      },
+      {
+        name: '1000',
+        show: true
+      },
+      {
+        name: '2000',
+        show: true
+      },
+      {
+        name: '8000',
+        show: true
+      },
+      {
+        name: '10000',
+        show: true
+      },
+      {
+        name: '15000',
+        show: true
+      },
+      // 全部
+      {
+        name: all.value,
+        show: true
+      }
+    ]
+  }
+  getList(0)
+  getNumber(1)
 })
+
+const chooseNums = (e) => {
+  if (e === all.value) {
+    quantity.value = availableBalance.value
+    selectAll.value = true
+  } else {
+    quantity.value = e
+    selectAll.value = false
+  }
+}
+
+const determine = async () => {
+  if (Number(quantity.value) < cycleObj.value.minAmount) {
+    // 最少输入
+    showOrder.value = false
+    showMessage.value = true
+    message.value = `${t(`minimum_input`)} ${cycleObj.value.minAmount} USDT`
+    return
+  }
+  if (Number(quantity.value) > cycleObj.value.maxAmount) {
+    showOrder.value = false
+    showMessage.value = true
+    message.value = `${t(`Maximum_input`)} ${cycleObj.value.maxAmount} USDT`
+    return
+  }
+  if (Number(quantity.value) > availableBalance.value) {
+    showOrder.value = false
+    showMessage.value = true
+    message.value = t(`Input_amount_exceeds`)
+    return
+  }
+  let data = {
+    betContent: titleFlag.value,
+    betAmount: quantity.value,
+    openPrice: coinPriceInfo.value.close,
+    openTime: new Date().getTime(),
+    symbol: coinInfo.value.symbol,
+    coinSymbol: coinInfo.value.coin,
+    baseSymbol: 'usdt',
+    periodId: cycleObj.value.id
+  }
+
+  try {
+    const res = await createSecondContractOrder(data)
+    if (res.code === 200) {
+      showOrder.value = false
+      showMessage.value = true
+      message.value = t('order_success')
+      updateList()
+    } else {
+      showOrder.value = false
+      showMessage.value = true
+      message.value = res.msg
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const getNumber = async (status) => {
+  try {
+    const res = await secondContractOrderselectOrderList({ status: status })
+    if (res.code === 200) {
+      const result = res.data
+      if (status) {
+        secondNum.value = result.length
+        earnTotal.value = result.reduce((accumulator, currentValue) => {
+          return (
+            accumulator + Number(profitAndloss(currentValue.betAmount, currentValue.rewardAmount))
+          )
+        }, 0)
+      } else {
+        firstNum.value = result.length
+      }
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const switchingEntrust = (e) => {
+  currentEntruset.value = e
+  historyNewList.value = []
+  getList(e)
+}
+
+const updateList = () => {
+  historyNewList.value = []
+  getList(currentEntruset.value)
+}
 </script>
 <style lang="scss" scoped>
 .flash {
@@ -576,101 +920,62 @@ onMounted(() => {
           margin-left: 5px;
         }
       }
-      &-right {
-        display: flex;
-        align-items: center;
-
-        background: rgba(255, 255, 255, 0.07);
-        border-radius: 18px 18px 18px 18px;
-        &-item {
-          font-size: 10px;
-          color: #fff;
-          display: flex;
-          padding: 3px 7px;
-          align-items: center;
-          justify-content: center;
-        }
-        .active {
-          background: #baec57;
-          border-radius: 18px 18px 18px 18px;
-          padding: 3px 7px;
-          color: #000;
-        }
-      }
     }
-    &-tip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 15px;
-      &-item {
-        margin-top: 15px;
-        display: flex;
-        align-items: end;
-        color: #fff;
-        &-name {
-          font-size: 12px;
-        }
-        &-symbol {
-          margin-left: 5px;
-          font-size: 10px;
-        }
-      }
-    }
-    &-tab {
-      margin-top: 15px;
-      border: 1px solid #222222;
-      border-left: none;
-      border-right: none;
-      padding: 8px 16px;
-      display: flex;
-      &-item {
-        margin-right: 30px;
-        font-size: 13px;
-        color: rgba(153, 153, 153, 1);
-      }
-      .actives {
-        color: #fff;
-      }
-    }
-    &-slider {
-      margin: 15px 0;
-    }
-    &-input {
-      margin-bottom: 15px;
-      height: 40px;
-      width: 100%;
-      border: 1px solid rgb(186, 236, 87);
-      border-radius: 10px;
-      padding: 0 10px;
-      display: flex;
-      align-items: center;
-      input {
-        width: 100%;
-        height: 100%;
-        border: none;
-        outline: none;
-        background: transparent;
-      }
-    }
-    &-btn {
-      width: 100%;
-
+  }
+  &-btn {
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    .rose {
+      border-radius: 14px;
+      width: 40%;
+      height: 35px;
+      background-color: rgba(23, 172, 0, 1);
+      color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-
-      .btn {
-        text-align: center;
-        width: 80%;
-        height: 29px;
-        display: flex;
-        align-items: center;
-        color: #000;
-        justify-content: center;
-        background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
-        border-radius: 15px 15px 15px 15px;
-      }
+    }
+    .fall {
+      border-radius: 14px;
+      width: 40%;
+      height: 35px;
+      background-color: rgba(255, 100, 100, 1);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+.van-popup {
+  background: #fff !important;
+  padding: 30px;
+  color: #000;
+}
+.cycle {
+  &-title {
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 10px;
+  }
+  &-box {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    &-item {
+      width: 53.3333333333%;
+      height: auto;
+      background-color: rgb(251, 251, 251);
+      border-radius: 8px;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      box-sizing: border-box;
+      margin-right: 10px;
     }
   }
 }

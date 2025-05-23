@@ -96,6 +96,11 @@ const router = createRouter({
       path: '/invaite',
       name: 'invaite',
       component: () => import('../views/invaite/index.vue')
+    },
+    {
+      path: '/fund-password',
+      name: 'fundPassword',
+      component: () => import('../views/fund-password/index.vue')
     }
   ]
 })

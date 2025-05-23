@@ -305,7 +305,7 @@ const list = ref([
   {
     title: '绑定提现密码',
     icon: new URL('../../assets/img/17.png', import.meta.url).href,
-    link: ''
+    link: '/fund-password'
   },
   {
     title: '绑定提现地址',
