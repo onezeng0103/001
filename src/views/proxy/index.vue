@@ -207,7 +207,7 @@
           </div>
         </template>
         <template v-else>
-          <NoData2 />
+          <NoData />
         </template>
       </div>
       <div class="advertisement">
@@ -647,7 +647,7 @@ onMounted(() => {
 }
 .van-popup {
   background: #fff !important;
-  padding: 30px;
+  padding: 15px;
   color: #000;
 }
 .input-box {
@@ -674,5 +674,4 @@ onMounted(() => {
   background: rgba(0, 0, 0, 1) !important;
   color: rgba(186, 236, 87, 1) !important;
 }
-
 </style>

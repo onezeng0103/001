@@ -12,7 +12,7 @@ input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  color: #fff !important;
+  color: #fff;
 }
 .van-dialog__header {
   background: #fff !important;

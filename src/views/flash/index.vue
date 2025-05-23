@@ -70,7 +70,7 @@
     </div>
     <div class="flash-tab">
       <div class="flash-tab-item" @click="router.push('/trade')">现货交易</div>
-      <div class="flash-tab-item">合约交易</div>
+      <div class="flash-tab-item" @click="router.push('/contract')">合约交易</div>
       <div class="flash-tab-item active">秒合约</div>
       <div class="flash-tab-item">期权交易</div>
     </div>

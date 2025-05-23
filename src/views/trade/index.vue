@@ -72,7 +72,7 @@
     </div>
     <div class="trade-tab">
       <div class="trade-tab-item active">现货交易</div>
-      <div class="trade-tab-item">合约交易</div>
+      <div class="trade-tab-item" @click="router.push('/contract')">合约交易</div>
       <div class="trade-tab-item" @click="router.push('/flash')">秒合约</div>
       <div class="trade-tab-item">期权交易</div>
     </div>
@@ -211,6 +211,7 @@
         </div>
       </div>
     </div>
+    <OrderBox ref="orderListBoxRef" :coinInfo="coinInfo" />
   </div>
   <LeftPopup :showLeft="showLeft" @close="showLeft = false" />
 </template>
@@ -224,6 +225,7 @@ import { showToast } from 'vant'
 import { _div, _mul, _toFixed, priceFormat } from '@/utils/decimal'
 import Handicap from './component/handicap.vue'
 import LeftPopup from './component/leftPopup.vue'
+import OrderBox from './component/orderBox.vue'
 const mainStore = useMainStore()
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)

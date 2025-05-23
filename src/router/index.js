@@ -78,6 +78,11 @@ const router = createRouter({
       component: () => import('../views/trade/index.vue')
     },
     {
+      path: '/contract',
+      name: 'contract',
+      component: () => import('../views/contract/index.vue')
+    },
+    {
       path: '/flash',
       name: 'flash',
       component: () => import('../views/flash/index.vue')
