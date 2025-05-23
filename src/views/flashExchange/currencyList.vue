@@ -87,8 +87,8 @@
     <div class="list">
       <div class="list-item" v-for="item in list" :key="item.coin" @click="handleClose(item)">
         <div style="display: flex; align-items: center">
-          <img :src="item.icon" alt="" style="height: 28px; width: 28px" />
-          <div>{{ item.coin?.toUpperCase() }}</div>
+          <img :src="item.icon" alt="" style="height: 28px; width: 28px; border-radius: 50%" />
+          <div style="margin-left: 10px">{{ item.coin?.toUpperCase() }}</div>
         </div>
         <div>
           <van-icon name="checked" color="#3070ec" size="20" v-if="info.coin == item.coin" />
@@ -121,9 +121,9 @@ const handleClose = (value) => {
 </script>
 
 <style scoped lang="scss">
-.list{
+.list {
   margin: 0 10px;
-  .list-item{
+  .list-item {
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>切换语言</span>
+              <span>{{ t('selectLanguage') }}</span>
             </span>
           </div>
           <div
@@ -80,6 +80,20 @@
               color: rgba(153, 153, 153, 1);
             "
           ></div>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div
+        class="item"
+        v-for="(item, index) in languageList"
+        :key="index"
+        @click="setLanguage(item)"
+      >
+        <div>{{ item.remark }}</div>
+        <div>
+          <van-icon name="checked" color="#3070ec" size="20" v-if="current === item.dictValue" />
+          <van-icon name="checked" color="#444444" size="20" v-else />
         </div>
       </div>
     </div>
@@ -107,3 +121,19 @@ const setLanguage = (item) => {
 }
 const languageList = mainStore.languageList
 </script>
+<style scoped lang="scss">
+.langList {
+  .main {
+    padding: 10px;
+    .item {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+}
+</style>

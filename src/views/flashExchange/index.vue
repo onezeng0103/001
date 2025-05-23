@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div style="margin: 15px 10px;font-size: 14px;color: #FFFFFF;">
+    <div style="margin: 15px 10px; font-size: 14px; color: #ffffff">
       实时最优价兑换，支持跨链资产
     </div>
 
@@ -94,7 +94,11 @@
       </div>
       <div class="item-unb">
         <div style="display: flex; align-items: center" @click="showAction('from')">
-          <img :src="list1Current?.icon" alt="" style="width: 30px; height: 30px" />
+          <img
+            :src="list1Current?.icon"
+            alt=""
+            style="width: 30px; height: 30px; border-radius: 50%"
+          />
           <div class="unb">{{ list1Current?.coin?.toUpperCase() }}</div>
           <div>
             <svg
@@ -179,10 +183,7 @@
             </svg>
           </div>
         </div>
-        <div>
-          <!--          <input type="text" style="text-align: right" placeholder="转出数量" />-->
-          {{ toNum }}
-        </div>
+        <div>{{ toNum }}</div>
       </div>
     </div>
 
@@ -204,18 +205,6 @@
       <template v-for="item in texChangeList" :key="item">
         <div class="list-item">
           <div style="display: flex; align-items: center">
-            <!--            <div style="display: flex; align-items: center; margin-right: 10px">-->
-            <!--              <img-->
-            <!--                src="https://mifengcha.oss-cn-beijing.aliyuncs.com/static/coinInfo/tron.png"-->
-            <!--                alt=""-->
-            <!--                style="width: 25px; height: 25px"-->
-            <!--              />-->
-            <!--              <img-->
-            <!--                src="https://mifengcha.oss-cn-beijing.aliyuncs.com/static/coinInfo/tron.png"-->
-            <!--                alt=""-->
-            <!--                class="move"-->
-            <!--              />-->
-            <!--            </div>-->
             <div style="display: flex; align-items: center">
               <div style="font-size: 10px; color: #ffffff">
                 {{ item?.fromCoin?.toUpperCase() }}
@@ -256,12 +245,8 @@
     </div>
   </div>
 
-  <van-popup
-    v-model:show="showBottom"
-    position="bottom"
-    :style="{ height: '100%' }"
-  >
-      <CurrencyList :showBottom="showBottom" @close="handleClose" :list="action" :info="info" />
+  <van-popup v-model:show="showBottom" position="bottom" :style="{ height: '100%' }">
+    <CurrencyList :showBottom="showBottom" @close="handleClose" :list="action" :info="info" />
   </van-popup>
 </template>
 
@@ -276,7 +261,7 @@ import { useUserStore } from '@/store/user/index'
 import { priceFormat } from '@/utils/decimal.js'
 import CurrencyList from './currencyList.vue'
 import { _numberWithCommas } from '@/utils/public'
-import { Popup } from 'vant';
+import { Popup } from 'vant'
 
 const router = useRouter()
 const accountStore = useAccountStore()
