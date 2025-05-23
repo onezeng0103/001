@@ -674,4 +674,5 @@ onMounted(() => {
   background: rgba(0, 0, 0, 1) !important;
   color: rgba(186, 236, 87, 1) !important;
 }
+
 </style>

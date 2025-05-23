@@ -83,6 +83,11 @@ const router = createRouter({
       component: () => import('../views/flash/index.vue')
     },
     {
+      path: '/flashOption',
+      name: 'flashOption',
+      component: () => import('../views/flashOption/index.vue')
+    },
+    {
       path: '/userauth',
       name: 'userAuth',
       component: () => import('../views/userAuth/index.vue')

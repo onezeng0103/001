@@ -71,10 +71,10 @@
       <div class="trade-top-right"></div>
     </div>
     <div class="trade-tab">
-      <div class="trade-tab-item active">现货交易</div>
+      <div class="trade-tab-item">现货交易</div>
       <div class="trade-tab-item">合约交易</div>
       <div class="trade-tab-item" @click="router.push('/flash')">秒合约</div>
-      <div class="trade-tab-item">期权交易</div>
+      <div class="trade-tab-item active">期权交易</div>
     </div>
     <div class="trade-tip">
       <div class="trade-tip-left">
@@ -108,133 +108,105 @@
           </svg>
         </div>
         <div class="trade-main-top-right">
-          <div
-            class="trade-main-top-right-item"
-            :class="{ active: form.type === '0' }"
-            @click="form.type = '0'"
-          >
-            买入
-          </div>
-          <div
-            class="trade-main-top-right-item"
-            :class="{ active: form.type === '1' }"
-            @click="form.type = '1'"
-          >
-            卖出
-          </div>
+          {{ currentTime }}
         </div>
       </div>
-      <div class="trade-main-tip">
-        <div class="trade-main-tip-item">
-          <div class="trade-main-tip-item-name">价格</div>
-          <div class="trade-main-tip-item-symbol">{{ coinInfo.baseCoinUpperCase }}</div>
-        </div>
-        <div class="trade-main-tip-item">
-          <div class="trade-main-tip-item-name">成交量</div>
-          <div class="trade-main-tip-item-symbol">
-            {{
-              coinInfo.customizeFlag === 2
-                ? matchText(coinInfo.showSymbol, '/USDT')
-                : coinInfo.coinUpperCase
-            }}
-          </div>
+      <TradeOptionContract :coinInfo="coinInfo" />
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 10px;
+          color: rgba(153, 153, 153, 1);
+          font-size: 12px;
+          font-weight: 500;
+        "
+      >
+        <div>下单中</div>
+        <div style="color: #fff">{{ timeRangeCountdown.split('/')[0] }}</div>
+      </div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 10px;
+          color: rgba(153, 153, 153, 1);
+          font-size: 12px;
+          font-weight: 500;
+        "
+      >
+        <div>剩余时间</div>
+        <div style="color: #fff">{{ timeRangeCountdown.split('/')[1] }}</div>
+      </div>
+      <div class="link"></div>
+      <div style="display: flex; align-items: center; justify-content: space-between">
+        <div style="color: #fff; font-size: 12px">快速交易</div>
+        <div style="color: rgba(153, 153, 153, 1); font-size: 10px">
+          可用余额 {{ availableBalance }}
+          <span style="margin-left: 2px">USDT</span>
         </div>
       </div>
-      <Handicap :coinInfo="coinInfo" @set-trade-price="setTradePrice" />
-      <div class="trade-main-tab">
-        <div
-          v-for="item in delegateTypeList"
-          :key="item.value"
-          class="trade-main-tab-item"
-          :class="{ actives: item.value === form.delegateType }"
-          @click="checkedDelegateType(item)"
-        >
-          {{ item.label }}
-        </div>
+      <div class="input-box">
+        <input v-model="orderAmount" type="text" placeholder="请输入数量" />
+        <span style="color: rgba(153, 153, 153, 1); font-size: 12px">最大</span>
       </div>
-      <div class="trade-main-slider">
-        <van-slider
-          active-color="#c4eb6e"
-          inactive-color="#232323"
-          button-size="16"
-          v-model="form.slider"
-          @change="sliderChange"
-        />
-      </div>
-      <template v-if="form.delegateType == 0">
-        <div class="trade-main-input">
-          <input
-            type="text"
-            v-model="form.price"
-            :placeholder="`成交金额(${coinInfo.baseCoinUpperCase})`"
-            maxlength="140"
-          />
-          <span>USDT</span>
-        </div>
-        <div class="trade-main-input">
-          <input
-            type="text"
-            v-model="form.count"
-            :placeholder="`数量(${
-              coinInfo.customizeFlag === 2
-                ? matchText(coinInfo.showSymbol, '/USDT')
-                : coinInfo.coin.toUpperCase()
-            })`"
-            maxlength="140"
-          />
-          <span>
-            {{
-              coinInfo.customizeFlag === 2
-                ? matchText(coinInfo.showSymbol, '/USDT')
-                : coinInfo.coin.toUpperCase()
-            }}
-          </span>
-        </div>
-      </template>
-      <div class="trade-main-input">
-        <input
-          type="text"
-          v-model="form.turnover"
-          @input="turnoverChange"
-          :placeholder="`成交金额(${coinInfo.baseCoinUpperCase})`"
-          maxlength="140"
-        />
-      </div>
-      <div class="trade-main-btn">
-        <div class="btn" @click="submit">
-          <span v-if="form.type == 0">买入</span>
-          <span v-else>卖出</span>
-          <span v-if="coinInfo.customizeFlag == 2">
-            {{ coinInfo.showSymbol.replace('/USDT', '') }}
-          </span>
-          <span>{{ coinInfo.coinUpperCase }}</span>
-        </div>
-      </div>
+      <el-slider
+        size="small"
+        v-model="userBalance"
+        @input="onSliderChange"
+        style="margin-top: 10px"
+        :format-tooltip="(e) => e + '%'"
+      ></el-slider>
+    </div>
+    <div class="btn">
+      <div class="fall" @click="showBtn(1)">看跌</div>
+      <div class="rose" @click="showBtn(0)">看涨</div>
     </div>
   </div>
-  <LeftPopup :showLeft="showLeft" @close="showLeft = false" />
+  <LeftPopup
+    :showLeft="showLeft"
+    @close="showLeft = false"
+    @handleGetOptionIssue="handleGetOptionIssue"
+  />
 </template>
 <script setup>
+import dayjs from 'dayjs'
 import { useMainStore } from '@/store'
 import { useUserStore } from '@/store/user'
 import { useTradeStore } from '@/store/trade'
 import { useRouter, useRoute } from 'vue-router'
-import { submitOrderCurrencyApi } from '@/api/trade'
 import { showToast } from 'vant'
-import { _div, _mul, _toFixed, priceFormat } from '@/utils/decimal'
-import Handicap from './component/handicap.vue'
+import { submitOption } from '@/api/option.js'
+import { getOptionIssueList, getOptionCurrentIssue } from '@/api/option.js'
+import {
+  timeRangeCountdown,
+  updateTimeRangeCountdown,
+  currentTimeSpace
+} from '@/utils/timeRangeCountdown.js'
+import { _div, _mul, _toFixed } from '@/utils/decimal'
 import LeftPopup from './component/leftPopup.vue'
+import TradeOptionContract from './component/tradeOptionContract.vue'
 const mainStore = useMainStore()
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 const tradeStore = useTradeStore()
 const router = useRouter()
 const route = useRoute()
+const timeSpace = ref([])
 const form = reactive({
   type: '0',
   delegateType: 1
 })
 const { asset } = storeToRefs(userStore)
+const userBalance = ref(0)
+const orderAmount = ref(undefined)
+const countdownCompleted = ref(false)
+
+const onSliderChange = () => {
+  orderAmount.value = _toFixed(((userBalance.value / 100) * availableBalance.value).toFixed(0), 0)
+}
 const availableBalance = computed(() => {
   let tempValue = 0
   if (asset.value.length) {
@@ -254,6 +226,27 @@ const path = computed(() => {
 const isEye = ref(true)
 const coinInfo = ref({})
 const showLeft = ref(false)
+const currentTime = ref('')
+const fetchOptionCurrentIssue = () => {
+  getOptionCurrentIssue(
+    coinInfo.value.coin,
+    currentTimeSpace.value.optionId,
+    currentTimeSpace.value.period
+  ).then((res) => {
+    const timestamp = res.data?.serverTimeStamp
+    // console.log(timestamp, dayjs().valueOf(), timestamp - dayjs().valueOf());
+  })
+}
+const handleGetOptionIssue = async () => {
+  await getOptionIssueList(coinInfo.value.coin).then((res) => {
+    timeSpace.value = res.data
+    currentTimeSpace.value = res.data[0] || {}
+  })
+  fetchOptionCurrentIssue()
+}
+const updateTime = () => {
+  currentTime.value = dayjs().format('MM-DD HH:mm:ss')
+}
 // 初始化展示币种信息
 const init = () => {
   if (route.query.symbol) {
@@ -267,74 +260,7 @@ const init = () => {
     coinInfo.value = tradeStore.spotCoinList[0]
   }
 }
-// 币种开盘价等
 
-const coinPriceInfo = computed(() => {
-  return tradeStore.allCoinPriceInfo[coinInfo.value.coin] || {}
-})
-/**
- * 设置交易价格
- */
-const setTradePrice = (val) => {
-  if (form.delegateType == 0) {
-    // 限价触发
-    form.price = priceFormat(val)
-    priceChange(form.price)
-  }
-}
-/**
- * 滑块监听
- */
-const sliderChange = (val) => {
-  val = val / 100
-  let tempPrice = 0
-  if (form.delegateType == 0) {
-    // 限价
-    tempPrice = form.price
-  } else if (form.delegateType == 1) {
-    // 市价
-    tempPrice = coinPriceInfo.value.close
-  }
-  if (Number(tempPrice)) {
-    if (form.delegateType == 1 && form.type == 1) {
-      // 市价&&卖出
-      form.count = _mul(availableBalance.value, val)
-    } else if (form.delegateType == 0 && form.type == 1) {
-      // 限价&&卖出
-      form.count = _mul(availableBalance.value, val)
-      form.turnover = _toFixed(_mul(form.count, tempPrice))
-    } else {
-      // (市价&&买入)||(限价&&买入)
-      form.count = _mul(_div(availableBalance.value, tempPrice), val)
-      form.turnover = _toFixed(_mul(form.count, tempPrice))
-    }
-  }
-}
-/**
- * 成交金额监听
- */
-const turnoverChange = () => {
-  let val = form.turnover
-  if (Number(val) > Number(availableBalance.value)) {
-    // 输入金额大于可用余额
-    form.turnover = availableBalance.value
-    val = availableBalance.value
-  }
-  let tempPrice = 0
-  if (form.delegateType == 0) {
-    // 限价
-    tempPrice = form.price
-  } else if (form.delegateType == 1) {
-    // 市价
-    tempPrice = coinPriceInfo.value.close
-  }
-  // 根据成交额 价格 计算数量
-  if (Number(tempPrice)) {
-    form.count = _div(val, tempPrice)
-    form.slider = parseInt(_mul(_div(val, availableBalance.value), 100))
-  }
-}
-const orderListBoxRef = ref(null)
 // 监听路由展示对应币种信息
 watch(
   () => route.query.symbol,
@@ -346,93 +272,82 @@ watch(
   {
     deep: true
   }
-)
-// 重置表单
-const restForm = () => {
-  let tempForm = {
-    ...form,
-    price: '', // 价格
-    count: '', // 数量
-    turnover: '', // 成交金额
-    slider: 0 // 滑块
+) /**看涨 0涨 1跌 */
+const showBtn = (betContent) => {
+  // 倒计时完成
+  countdownCompleted.value = false
+
+  if (!orderAmount.value || orderAmount.value < currentTimeSpace.value.minAmount) {
+    return showToast(`下单金额不能小于${currentTimeSpace.value.minAmount}USDT`)
   }
-  Object.assign(form, tempForm) //复制tempForm到form
-}
-const delegateTypeList = [
-  { label: '市价委托', value: '1' },
-  { label: '限价委托', value: '0' }
-]
-// 当前选中交易价格类型：限价/市价
-const currentDelegateType = ref({})
-// 切换限价/市价
-const checkedDelegateType = (item) => {
-  console.log(item.value !== form.delegateType)
-  if (item.value !== form.delegateType) {
-    form.delegateType = item.value
-    currentDelegateType.value = item
-    console.log(form.delegateType)
+  if (orderAmount.value > currentTimeSpace.value.maxAmount) {
+    return showToast(`下单金额不能大于${currentTimeSpace.value.maxAmount}USDT`)
   }
-  restForm()
-}
-checkedDelegateType(delegateTypeList[0])
-/**
- * 提交表单
- */
-const submit = async () => {
-  let msg = false
-  if (form.delegateType == 1 && form.type == 1) {
-    // 市价&&卖出
-    if (!form.count) {
-      msg = '请输入数量'
-    } else if (form.count > availableBalance.value) {
-      msg = '可用余额不足'
+
+  let data = {
+    betContent,
+    betAmount: orderAmount.value,
+    periodId: currentTimeSpace.value.id
+  }
+
+  submitOption(data).then((res) => {
+    if (res.code === 500) {
+      showToast(res.msg)
+    } else {
+      orderResult.value = res.data
+
+      const targetCloseTime = orderResult.value.closeTime
+      const currentTime = dayjs()
+      const closeTimeObj = dayjs(targetCloseTime).add(13, 'hour')
+
+      const duration = dayjs.duration(closeTimeObj.diff(currentTime))
+      const minutes = duration.minutes()
+      const seconds = duration.seconds()
+      let initialDuration = dayjs.duration({ minutes, seconds })
+
+      const countdown = () => {
+        // 每秒更新一次倒计时
+        interval = setInterval(() => {
+          // 将剩余时间格式化为mm ss的形式
+          const minutes = initialDuration.minutes()
+          const seconds = initialDuration.seconds()
+          const formattedTime = `${String(minutes).padStart(2, '0')}${String(seconds).padStart(
+            2,
+            '0'
+          )}`
+          countdownDisplay.value = formattedTime
+          // 判断倒计时是否结束
+          if (initialDuration.asSeconds() <= 0) {
+            clearInterval(interval)
+            countdownCompleted.value = true
+          } else {
+            // 减少1秒
+            initialDuration = initialDuration.subtract(1, 'second')
+          }
+        }, 1000)
+      }
+
+      // 启动倒计时
+      countdown()
+
+      getOrderListApi()
+
+      showCenter.value = true
+      userBalance.value = 0
     }
-  } else if (form.delegateType == 0 && form.type == 1) {
-    // 限价&&卖出
-    if (!form.price) {
-      msg = '请输入价格'
-    } else if (!form.count) {
-      msg = '请输入数量'
-    } else if (form.count > availableBalance.value) {
-      msg = '可用余额不足'
-    }
-  } else {
-    // (市价&&买入)||(限价&&买入)
-    if (!form.turnover) {
-      msg = '请输入成交金额'
-    } else if (form.turnover <= 0) {
-      msg = '成交金额不正确'
-    } else if (form.turnover > availableBalance.value) {
-      msg = '可用余额不足'
-    }
-  }
-  if (msg) {
-    showToast(msg)
-    return
-  }
-  let params = {
-    symbol: coinInfo.value.coin, //交易币种(e.g btc)
-    coin: coinInfo.value.baseCoin, //结算币种(usdt)
-    delegateTotal: form.count, //委托总量
-    delegatePrice: form.price, //委托价格
-    delegateValue: form.turnover, //委托价值
-    delegateType: form.delegateType, //委托类型（0限价1市价）
-    type: form.type //（0买入1卖出）
-  }
-  const res = await submitOrderCurrencyApi(params)
-  // 购买成功
-  if (res.code == 200) {
-    userStore.getUserInfo()
-    showToast(res.msg)
-    restForm()
-    // 刷新
-    orderListBoxRef.value.refresh()
-  } else {
-    showToast(res.msg)
-  }
+  })
 }
-onMounted(() => {
+onMounted(async () => {
   init()
+  await handleGetOptionIssue()
+  updateTime()
+  const updateTimeTimer = setInterval(updateTime, 1000)
+  updateTimeRangeCountdown()
+  const updateTimeRangeCountdownTimer = setInterval(updateTimeRangeCountdown, 1000)
+  onUnmounted(() => {
+    clearInterval(updateTimeTimer)
+    clearInterval(updateTimeRangeCountdownTimer)
+  })
 })
 </script>
 <style lang="scss" scoped>
@@ -581,101 +496,72 @@ onMounted(() => {
         }
       }
       &-right {
-        display: flex;
-        align-items: center;
-
-        background: rgba(255, 255, 255, 0.07);
-        border-radius: 18px 18px 18px 18px;
-        &-item {
-          font-size: 10px;
-          color: #fff;
-          display: flex;
-          padding: 3px 7px;
-          align-items: center;
-          justify-content: center;
-        }
-        .active {
-          background: #baec57;
-          border-radius: 18px 18px 18px 18px;
-          padding: 3px 7px;
-          color: #000;
-        }
+        color: rgba(153, 153, 153, 1);
+        font-size: 12px;
       }
     }
-    &-tip {
+    .link {
+      width: 100%;
+      height: 1px;
+      background: rgba(34, 34, 34, 1);
+      margin: 10px 0;
+    }
+    .input-box {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 15px;
-      &-item {
-        margin-top: 15px;
-        display: flex;
-        align-items: end;
-        color: #fff;
-        &-name {
-          font-size: 12px;
-        }
-        &-symbol {
-          margin-left: 5px;
-          font-size: 10px;
-        }
-      }
-    }
-    &-tab {
-      margin-top: 15px;
-      border: 1px solid #222222;
-      border-left: none;
-      border-right: none;
-      padding: 8px 16px;
-      display: flex;
-      &-item {
-        margin-right: 30px;
-        font-size: 13px;
-        color: rgba(153, 153, 153, 1);
-      }
-      .actives {
-        color: #fff;
-      }
-    }
-    &-slider {
-      margin: 15px 0;
-    }
-    &-input {
-      margin-bottom: 15px;
-      height: 40px;
+      margin-top: 10px;
       width: 100%;
-      border: 1px solid rgb(186, 236, 87);
-      border-radius: 10px;
+      height: 28px;
+      border-radius: 6px 6px 6px 6px;
+      border: 1px solid #baec57;
       padding: 0 10px;
-      display: flex;
-      align-items: center;
+
       input {
-        width: 100%;
-        height: 100%;
+        flex: 1;
+        background: transparent;
         border: none;
         outline: none;
-        background: transparent;
+        margin-right: 10px;
+        color: #fff;
       }
     }
-    &-btn {
-      width: 100%;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .btn {
-        text-align: center;
-        width: 80%;
-        height: 29px;
-        display: flex;
-        align-items: center;
-        color: #000;
-        justify-content: center;
-        background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
-        border-radius: 15px 15px 15px 15px;
-      }
-    }
+  }
+}
+:deep(.el-slider__button) {
+  border: 2px solid #baec57;
+}
+:deep(.el-slider__bar) {
+  background: #baec57;
+}
+.btn {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  width: 100%;
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .rose {
+    border-radius: 14px;
+    width: 40%;
+    height: 35px;
+    background-color: rgba(23, 172, 0, 1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fall {
+    border-radius: 14px;
+    width: 40%;
+    height: 35px;
+    background-color: rgba(255, 100, 100, 1);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>
