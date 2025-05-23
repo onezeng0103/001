@@ -33,6 +33,21 @@ const router = createRouter({
       component: () => import('../views/forget/index.vue')
     },
     {
+      path: '/withdrawDeposit',
+      name: 'withdrawDeposit',
+      component: () => import('../views/withdrawDeposit/index.vue')
+    },
+    {
+      path: '/emailAuthentication',
+      name: 'emailAuthentication',
+      component: () => import('../views/emailAuthentication/index.vue')
+    },
+    {
+      path: '/changePassword',
+      name: 'changePassword',
+      component: () => import('../views/changePassword/index.vue')
+    },
+    {
       path: '/message',
       name: 'message',
       component: () => import('../views/message/index.vue')
