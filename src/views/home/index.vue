@@ -49,7 +49,7 @@
         </van-swipe-item>
       </van-swipe>
       <div class="menu">
-        <div class="menu-item">
+        <div class="menu-item" @click="router.push('/recharge')">
           <div class="imgBox">
             <img src="../../assets/img/01.png" alt="" />
           </div>

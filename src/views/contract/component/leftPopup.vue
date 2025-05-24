@@ -53,7 +53,6 @@ import { useRouter } from 'vue-router'
 import { useTradeStore } from '@/store/trade'
 import { priceFormat } from '@/utils/decimal.js'
 import { filterKeyCoin } from '@/utils/filters'
-import { letterLargeToSmall, letterSmallToLarge } from '@/utils/filters'
 const { t } = useI18n()
 const router = useRouter()
 const tradeStore = useTradeStore()
@@ -72,18 +71,6 @@ let arrowList = reactive({
   firstIcon: 0
 })
 const listResult = ref(tradeStore.contractCoinList)
-const toDealSort = () => {
-  if (arrowList.firstIcon === 0) {
-    arrowList.firstIcon = 1
-    listResult.value = letterSmallToLarge(list.value, 'coin')
-  } else if (arrowList.firstIcon === 1) {
-    arrowList.firstIcon = 2
-    listResult.value = letterLargeToSmall(list.value, 'coin')
-  } else if (arrowList.firstIcon === 2) {
-    arrowList.firstIcon = 0
-    listResult.value = list.value
-  }
-}
 const handleClick = (item) => {
   router.push(`/contract?symbol=${item.coin}`)
   emits('close')

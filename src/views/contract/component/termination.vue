@@ -73,7 +73,7 @@
       "
     >
       <div style="color: #000000; font-weight: 500; font-size: 16px">
-        {{ type === 0 ? t('stopProfit') : t('stopLoss') }}{{ t('triggerPrice') }}
+        {{ type === 0 ? '止盈' : '止损' }}触发价格
       </div>
       <div
         style="margin-top: 15px; display: flex; align-items: center; justify-content: space-between"
@@ -84,7 +84,7 @@
           v-model.trim="earnPriceValue"
           type="number"
           maxlength="140"
-          :placeholder="t('pleaseEnter')"
+          placeholder="请输入"
           step="0.000000000000000001"
           enterkeyhint="done"
           pattern="[0-9]*"
@@ -94,7 +94,7 @@
         <span style="color: rgb(153, 153, 153)">USDT</span>
       </div>
       <div style="color: #000000; font-weight: 500; font-size: 16px; margin-top: 15px">
-        {{ type === 0 ? t('stopProfit') : t('stopLoss') }}{{ t('delegate') }}
+        {{ type === 0 ? '止盈' : '止损' }}委托
       </div>
       <div
         style="margin-top: 15px; display: flex; align-items: center; justify-content: space-between"
@@ -105,7 +105,7 @@
           style="width: 100%; color: #000"
           type="number"
           maxlength="140"
-          :placeholder="t('tradeAtBestPrice')"
+          placeholder="以当前最优价格交易"
           step="0.000000000000000001"
           disabled
           enterkeyhint="done"
@@ -119,7 +119,7 @@
           type="number"
           style="width: 100%; color: #000"
           maxlength="140"
-          :placeholder="t('pleaseEnter')"
+          placeholder="请输入"
           step="0.000000000000000001"
           enterkeyhint="done"
           pattern="[0-9]*"
@@ -129,31 +129,31 @@
       </div>
     </div>
     <div style="margin-top: 15px">
-      <span style="color: rgb(153, 153, 153)">{{ t('positionAmount') }}：</span>
+      <span style="color: rgb(153, 153, 153)">持仓量：</span>
       <span style="color: #000">
         {{ info.openNum }}
         {{ info.showCoin ? matchText(info.showCoin, '/USDT') : info.symbol.toUpperCase() }}
       </span>
     </div>
     <div style="margin-top: 15px">
-      <span style="color: rgb(153, 153, 153)">{{ t('closeAveragePrice') }}：</span>
+      <span style="color: rgb(153, 153, 153)">开仓均价：</span>
       <span style="color: #000">{{ info.openPrice }} USDT</span>
     </div>
     <div style="margin-top: 15px">
-      <span style="color: rgb(153, 153, 153)">{{ t('latestTransactionPrice') }}：</span>
+      <span style="color: rgb(153, 153, 153)">最新成交价：</span>
       <span style="color: #000">{{ coinPriceInfo.close }} USDT</span>
     </div>
     <div style="margin-top: 15px">
       <span style="color: rgb(255, 100, 100)">*</span>
-      <span style="color: rgb(153, 153, 153)">{{ t('marketPriceTo') }}：</span>
+      <span style="color: rgb(153, 153, 153)">市场价格至：</span>
       <span style="color: #000">{{ coinPriceInfo.close }} USDT</span>
       <span style="color: rgb(153, 153, 153)">
-        {{ t('willTriggerStopProfitDelegate') }}{{ incomeValue }}USDT
+        时将触发止盈委托，成交后预计盈利{{ incomeValue }}USDT
       </span>
     </div>
     <div style="width: 100%; display: flex; align-content: center; justify-content: center">
       <div class="btn2" @click="submit">
-        <span>{{ t('confirm') }}</span>
+        <span>确认</span>
       </div>
     </div>
   </van-popup>

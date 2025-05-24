@@ -548,6 +548,6 @@ const setStudy = (name) => {
   color: rgb(186, 236, 87);
 }
 .candlestick {
-  height: 350px;
+  height: 250px;
 }
 </style>

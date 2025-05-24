@@ -125,7 +125,7 @@ const router = createRouter({
     {
       path: '/userauth',
       name: 'userAuth',
-      component: () => import('../views/userAuth/index.vue')
+      component: () => import('../views/userauth/index.vue')
     },
     {
       path: '/langList',
@@ -141,6 +141,51 @@ const router = createRouter({
       path: '/fund-password',
       name: 'fundPassword',
       component: () => import('../views/fund-password/index.vue')
+    },
+    {
+      path: '/recharge',
+      name: 'recharge',
+      component: () => import('../views/recharge/index.vue')
+    },
+    {
+      path: '/recharge/method',
+      name: 'rechargeMethod',
+      component: () => import('../views/recharge/method.vue')
+    },
+    {
+      path: '/help',
+      name: 'help',
+      component: () => import('../views/help/index.vue')
+    },
+    {
+      path: '/helpDetail/:id',
+      name: 'helpDetail',
+      component: () => import('../views/help/helpDetail.vue')
+    },
+    {
+      path: '/termService',
+      name: 'termService',
+      component: () => import('../views/termService/index.vue')
+    },
+    {
+      path: '/about',
+      name: 'about',
+      component: () => import('../views/about/index.vue')
+    },
+    {
+      path: '/floworder',
+      name: 'floworder',
+      component: () => import('../views/floworder/index.vue')
+    },
+    {
+      path: '/floworder/confirm/:id',
+      name: 'floworderConfirm',
+      component: () => import('../views/floworder/confirm.vue')
+    },
+    {
+      path: '/floworder/mine',
+      name: 'floworderMine',
+      component: () => import('../views/floworder/mine.vue')
     }
   ]
 })

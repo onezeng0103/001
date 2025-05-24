@@ -57,7 +57,12 @@
           </div>
         </div>
         <div class="trade-top-left-price">
-          {{ availableBalance }}
+          <template v-if="isEye">
+            {{ availableBalance }}
+          </template>
+          <template v-else>
+            <span>****</span>
+          </template>
           <span v-if="form.type == 0" style="font-size: 12px">USDT</span>
           <span v-else style="font-size: 12px">
             {{
