@@ -109,6 +109,212 @@
       </div>
       <Candlestick :coinInfo="coinInfo" type="secondContract" />
     </div>
+    <div class="flash-orderBox">
+      <div class="flash-orderBox-tab">
+        <div
+          class="flash-orderBox-tab-item"
+          @click="switchingEntrust(0)"
+          :class="currentEntruset == 0 ? 'active' : ''"
+        >
+          <span>进行中</span>
+        </div>
+        <div
+          class="flash-orderBox-tab-item"
+          @click="switchingEntrust(1)"
+          :class="currentEntruset == 1 ? 'active' : ''"
+        >
+          <span>历史记录</span>
+        </div>
+      </div>
+      <div class="flash-orderBox-list">
+        <template v-if="currentEntruset === 0">
+          <template v-if="historyNewList.length > 0">
+            <div v-for="itemHistroy in historyNewList" :key="itemHistroy.userId">
+              <div style="display: flex; align-items: center; justify-content: space-between">
+                <div style="display: flex; align-items: center">
+                  <div
+                    v-if="Number(itemHistroy.betContent)"
+                    style="
+                      padding: 2px 5px;
+                      background: rgba(23, 172, 0, 1);
+                      border-radius: 5px;
+                      font-size: 10px;
+                      margin-right: 5px;
+                      color: #000;
+                    "
+                  >
+                    看涨
+                  </div>
+                  <div
+                    v-else
+                    style="
+                      padding: 2px 5px;
+                      background: rgba(255, 100, 100, 1);
+                      border-radius: 5px;
+                      font-size: 10px;
+                      margin-right: 5px;
+                      color: #000;
+                    "
+                  >
+                    看跌
+                  </div>
+                  <div>
+                    {{
+                      itemHistroy.showCoin
+                        ? itemHistroy.showCoin
+                        : itemHistroy.coinSymbol.toUpperCase() +
+                          '/' +
+                          itemHistroy.baseSymbol.toUpperCase()
+                    }}-{{ itemHistroy.type }}s
+                  </div>
+                </div>
+              </div>
+              <div style="font-size: 10px; color: rgb(153, 153, 153); margin-top: 10px">
+                {{ itemHistroy?.createTime }}
+              </div>
+              <div class="flash-orderBox-list-item">
+                <div>开单金额</div>
+                <div class="flash-orderBox-list-item-price">{{ itemHistroy.openPrice }}USDT</div>
+              </div>
+              <div class="flash-orderBox-list-item">
+                <div>收益率</div>
+                <div class="flash-orderBox-list-item-price">{{ itemHistroy.rate * 100 }}%</div>
+              </div>
+              <div class="flash-orderBox-list-item">
+                <div>收益</div>
+                <div class="flash-orderBox-list-item-price">
+                  {{
+                    formatExpectedProfit(
+                      Number(itemHistroy.betContent),
+                      itemHistroy.openPrice,
+                      tradeStore.allCoinPriceInfo[itemHistroy.coinSymbol].close,
+                      itemHistroy.betAmount,
+                      itemHistroy.rate
+                    )
+                  }}
+                  {{ itemHistroy.baseSymbol ? itemHistroy.baseSymbol.toUpperCase() : '' }}
+                </div>
+              </div>
+              <div class="flash-orderBox-list-item">
+                <div>
+                  <span style="color: rgb(186, 236, 87)">
+                    {{ formatTime(itemHistroy.countdown) }}
+                  </span>
+                </div>
+                <div style="width: calc(100% - 60px)">
+                  <div style="width: 100%; display: flex; flex-direction: row; align-items: center">
+                    <div
+                      style="
+                        height: 3.5px;
+                        border-radius: 3.5px;
+                        background: #f5f5f5;
+                        width: 100%;
+                        transform: translateZ(0);
+                        flex: 1;
+                        position: relative;
+                        overflow: hidden;
+                      "
+                    >
+                      <div
+                        class="fun-progress_bar"
+                        :style="{
+                          background: 'rgb(186, 236, 87)',
+                          transitionDuration: '0.025s',
+                          transform: `translate3d(-${calculateProgress(itemHistroy)}%, 0px, 0px)`
+                        }"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="line"></div>
+            </div>
+          </template>
+          <template v-else>
+            <NoData />
+          </template>
+        </template>
+        <template v-if="currentEntruset === 1">
+          <template v-if="historyNewList.length > 0">
+            <div
+              v-for="itemHistroy in historyNewList"
+              @click="handleShowCenter(itemHistroy)"
+              :key="itemHistroy.userId"
+            >
+              <div style="display: flex; align-items: center; justify-content: space-between">
+                <div style="display: flex; align-items: center">
+                  <div
+                    v-if="Number(itemHistroy.betContent)"
+                    style="
+                      padding: 2px 5px;
+                      background: rgba(23, 172, 0, 1);
+                      border-radius: 5px;
+                      font-size: 10px;
+                      margin-right: 5px;
+                      color: #000;
+                    "
+                  >
+                    看涨
+                  </div>
+                  <div
+                    v-else
+                    style="
+                      padding: 2px 5px;
+                      background: rgba(255, 100, 100, 1);
+                      border-radius: 5px;
+                      font-size: 10px;
+                      margin-right: 5px;
+                      color: #000;
+                    "
+                  >
+                    看跌
+                  </div>
+                  <div>
+                    {{
+                      itemHistroy.showCoin
+                        ? itemHistroy.showCoin
+                        : itemHistroy.coinSymbol.toUpperCase() +
+                          '/' +
+                          itemHistroy.baseSymbol.toUpperCase()
+                    }}-{{ itemHistroy.type }}s
+                  </div>
+                </div>
+              </div>
+              <div style="font-size: 10px; color: rgb(153, 153, 153); margin-top: 10px">
+                {{ returnTime(itemHistroy?.createTime) }}
+              </div>
+              <div class="flash-orderBox-list-item">
+                <div>开单币种</div>
+                <div class="flash-orderBox-list-item-price">
+                  {{
+                    itemHistroy.showCoin
+                      ? itemHistroy.showCoin
+                      : itemHistroy.coinSymbol.toUpperCase() +
+                        '/' +
+                        itemHistroy.baseSymbol.toUpperCase()
+                  }}
+                </div>
+              </div>
+              <div class="flash-orderBox-list-item">
+                <div>收益率</div>
+                <div class="flash-orderBox-list-item-price">{{ itemHistroy.rate * 100 }}%</div>
+              </div>
+              <div class="flash-orderBox-list-item">
+                <div>盈亏</div>
+                <div class="flash-orderBox-list-item-price">
+                  {{ profitAndloss(itemHistroy.betAmount, itemHistroy.rewardAmount) }}
+                  {{ itemHistroy.baseSymbol ? itemHistroy.baseSymbol.toUpperCase() : '' }}
+                </div>
+              </div>
+              <div class="line"></div>
+            </div>
+          </template>
+          <template v-else>
+            <NoData />
+          </template>
+        </template>
+      </div>
+    </div>
     <div class="flash-btn">
       <div class="fall" @click="showBtn(0)">看跌</div>
       <div class="rose" @click="showBtn(1)">看涨</div>
@@ -139,7 +345,6 @@
         </svg>
       </div>
     </div>
-
     <div class="box">
       <div class="cycle">
         <div class="cycle-title">交割周期</div>
@@ -223,6 +428,96 @@
     :cancelButtonText="t('cancel')"
     show-cancel-button
   ></van-dialog>
+  <van-popup v-model:show="showCenter" round>
+    <div style="width: 300px; height: auto; display: flex; flex-direction: column">
+      <div
+        style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
+      >
+        <div></div>
+        <div style="font-size: 14px">
+          {{
+            centerData.showCoin
+              ? centerData.showCoin
+              : centerData.coinSymbol.toUpperCase() + '/' + centerData.baseSymbol.toUpperCase()
+          }}
+        </div>
+        <div>
+          <svg
+            @click="showCenter = !showCenter"
+            t="1747853459405"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="1494"
+            width="24"
+            height="24"
+          >
+            <path
+              d="M512 451.669333l211.2-211.2 60.330667 60.330667-211.2 211.2 211.2 211.2-60.330667 60.330667-211.2-211.2-211.2 211.2-60.330667-60.330667 211.2-211.2-211.2-211.2L300.8 240.469333z"
+              p-id="1495"
+              fill="#000"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div style="color: rgba(153, 153, 153, 1); font-size: 12px; margin-top: 10px">
+        {{ centerData.createTime }}
+      </div>
+      <div
+        style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
+      >
+        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">开单方向</div>
+        <div style="color: #000; font-size: 12px">
+          <template v-if="Number(centerData.betContent)">看涨</template>
+          <template v-else>看跌</template>
+        </div>
+      </div>
+      <div
+        style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
+      >
+        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">盈亏</div>
+        <div style="color: #000; font-size: 12px">
+          {{ profitAndloss(centerData.betAmount, centerData.rewardAmount) }}
+          {{ centerData.baseSymbol ? centerData.baseSymbol.toUpperCase() : '' }}
+        </div>
+      </div>
+      <div
+        style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
+      >
+        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">开单价/结算价</div>
+        <div style="color: #000; font-size: 12px">
+          {{ centerData.openPrice }} / {{ centerData.closePrice }}
+        </div>
+      </div>
+      <div
+        style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
+      >
+        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">开单价币种</div>
+        <div style="color: #000; font-size: 12px">
+          {{
+            centerData.showCoin
+              ? centerData.showCoin
+              : centerData.coinSymbol.toUpperCase() + '/' + centerData.baseSymbol.toUpperCase()
+          }}
+        </div>
+      </div>
+      <div
+        style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
+      >
+        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">收益率</div>
+        <div style="color: #000; font-size: 12px">{{ centerData.rate * 100 }} %</div>
+      </div>
+      <div
+        style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
+      >
+        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">本期结果</div>
+        <div style="color: #000; font-size: 12px">
+          {{ getType(profitAndloss(centerData.betAmount, centerData.rewardAmount)) }}
+        </div>
+      </div>
+    </div>
+  </van-popup>
 </template>
 <script setup>
 import dayjs from 'dayjs'
@@ -997,7 +1292,48 @@ const updateList = () => {
       }
     }
   }
+  &-orderBox {
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 8px 8px 8px 8px;
+    padding: 14px;
+    &-tab {
+      display: flex;
+      align-items: center;
+      &-item {
+        color: rgb(153, 153, 153);
+        margin-right: 10px;
+      }
+      .active {
+        color: #fff;
+      }
+    }
+    &-list {
+      margin-top: 10px;
+      &-item {
+        font-size: 12px;
+        color: rgb(153, 153, 153);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        &-price {
+          color: #fff;
+        }
+      }
+      .line {
+        margin: 10px 0;
+        width: 100%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
   &-btn {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
     margin-top: 15px;
     display: flex;
     align-items: center;
@@ -1026,7 +1362,7 @@ const updateList = () => {
 }
 .van-popup {
   background: #fff !important;
-  padding: 30px 10px;
+  padding: 15px;
   color: #000;
 }
 .box {
@@ -1101,5 +1437,19 @@ const updateList = () => {
   font-weight: 400;
   font-size: 16px;
   color: #000000;
+}
+.fun-progress_bar {
+  width: 100%;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  transform: translate3d(-100%, 0, 0);
+  transition-delay: 0s;
+  transition-property: transform;
+  transition-timing-function: linear;
+  transition-duration: 0s;
 }
 </style>

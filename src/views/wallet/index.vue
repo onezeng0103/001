@@ -138,7 +138,7 @@
       </div>
     </div>
     <van-collapse v-model="activeNames" :border="false">
-      <van-collapse-item name="1">
+      <van-collapse-item name="safety">
         <template #title>
           <div style="display: flex; align-items: center">
             <img src="../../assets/img/15.png" height="20px" alt="" />
@@ -159,18 +159,22 @@
           </div>
         </div>
       </van-collapse-item>
-    </van-collapse>
-    <div class="more">
-      <div
-        class="more-item"
+      <van-collapse-item
         v-for="(item, index) in moreList"
         :key="index"
+        :name="index"
+        :readonly="true"
         @click="handleMore(item)"
       >
-        <img :src="item.icon" alt="" />
-        <div>{{ item.title }}</div>
-      </div>
-    </div>
+        <template #title>
+          <div style="display: flex; align-items: center">
+            <img :src="item.icon" height="20px" alt="" />
+            <span style="margin-left: 5px; color: #fff; font-size: 12px">{{ item.title }}</span>
+          </div>
+        </template>
+        <template #right-icon></template>
+      </van-collapse-item>
+    </van-collapse>
   </div>
 </template>
 <script setup>
@@ -295,7 +299,7 @@ const allSum = computed(() => {
     Number(platformSum.value) + Number(financSum.value) + Number(contractSum.value)
   )
 })
-const activeNames = ref(['1'])
+const activeNames = ref(['safety'])
 const list = ref([
   {
     title: '修改密码',
@@ -339,13 +343,13 @@ const moreList = ref([
   {
     title: '服务条款',
     icon: new URL('../../assets/img/23.png', import.meta.url).href,
-    link: '',
+    link: '/termService',
     key: 'serviceTerms'
   },
   {
     title: '关于我们',
     icon: new URL('../../assets/img/24.png', import.meta.url).href,
-    link: '',
+    link: '/about',
     key: 'aboutUs'
   },
   {
@@ -362,6 +366,7 @@ const moreList = ref([
   }
 ])
 const handleMore = (item) => {
+  console.log('zhixing')
   if (item.key == 'logout') {
     signOut()
       .then((res) => {
@@ -389,6 +394,9 @@ const handleClick = (item) => {
   if (item.link) {
     router.push(item.link)
   }
+}
+const getImgSrc = (name) => {
+  return new URL(`../../assets/img/${name}.png`, import.meta.url).href
 }
 onMounted(() => {
   getFinanceAmountApi().then((res) => {
@@ -506,30 +514,6 @@ onMounted(() => {
       .name {
         font-size: 10px;
         margin-top: 5px;
-      }
-    }
-  }
-  .more {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 20px;
-
-    &-item {
-      display: flex;
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.07);
-      border-radius: 8px 8px 8px 8px;
-      img {
-        width: 20px;
-        height: 20px;
-      }
-      div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10px;
-        margin-left: 10px;
       }
     }
   }

@@ -7,7 +7,7 @@
   >
     <div style="display: flex; align-items: center; justify-content: space-between">
       <div></div>
-      <div style="font-size: 14px">{{ t('adjustmentMargin') }}</div>
+      <div style="font-size: 14px">调整保证金</div>
       <div>
         <svg
           @click="emit('close')"
@@ -83,7 +83,7 @@
         v-model.trim="money"
         type="number"
         maxlength="140"
-        :placeholder="t('pleaseEnter')"
+        placeholder="请输入"
         step="0.000000000000000001"
         enterkeyhint="done"
         pattern="[0-9]*"
@@ -117,16 +117,16 @@
       </div>
     </div>
     <div style="margin-top: 40px">
-      <span style="color: rgb(153, 153, 153)">{{ t('atMostValue') }}：</span>
+      <span style="color: rgb(153, 153, 153)">最多增加：</span>
       <span style="color: #000">{{ atMostValue }} USDT</span>
     </div>
     <div style="margin-top: 15px">
-      <span style="color: rgb(153, 153, 153)">{{ t('afterQiangpingPrice') }}：</span>
+      <span style="color: rgb(153, 153, 153)">追加后的强平价格：</span>
       <span style="color: #000">{{ qiangpingPrice }} USDT</span>
     </div>
     <div style="width: 100%; display: flex; align-content: center; justify-content: center">
       <div class="btn2" @click="submit">
-        <span>{{ t('confirm') }}</span>
+        <span>确认</span>
       </div>
     </div>
   </van-popup>

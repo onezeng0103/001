@@ -13,7 +13,7 @@
           "
         >
           <span>
-            {{ !item?.type ? t('goingLong') : t('openBlank') }}
+            {{ !item?.type ? '做多' : '开空' }}
           </span>
         </div>
         <span>
@@ -23,67 +23,45 @@
       </div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">
-        {{ t('income') }}
-      </div>
+      <div class="name">收益</div>
       <div class="value">{{ incomeValue }} USDT</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">
-        {{ t('yieldRate') }}
-      </div>
+      <div class="name">收益率</div>
       <div class="value">{{ yieldValue }}%</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">
-        {{ t('positionAmount') }}
-      </div>
+      <div class="name">持仓量</div>
       <div class="value">
         {{ item.openNum }}
         {{ item.showCoin ? matchText(item?.showCoin, '/USDT') : item?.symbol.toUpperCase() }}
       </div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">
-        {{ t('marginAmount') }}
-      </div>
+      <div class="name">持仓担保资产</div>
       <div class="value">{{ item.adjustAmount }} USDT</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">
-        {{ t('guaranteeAssetRatio') }}
-      </div>
+      <div class="name">担保资产率</div>
       <div class="value">{{ guaranteePrice }}%</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">
-        {{ t('openAveragePrice') }}
-      </div>
+      <div class="name">开仓均价</div>
       <div class="value">{{ item.openPrice }} USDT</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">
-        {{ t('latestPrice') }}
-      </div>
+      <div class="name">最新价</div>
       <div class="value">{{ coinPriceInfo.close }} USDT</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">
-        {{ t('estimatedQiangpingPrice') }}
-      </div>
+      <div class="name">预计强平价</div>
       <div class="value">{{ item.closePrice <= 0 ? '--' : item.closePrice }} USDT</div>
     </div>
     <div class="item-footer">
       <div class="item-footer-item" @click="showDetail(item.id)">{{ t('fastClose') }}</div>
-      <div class="item-footer-item" @click="handleAdjustmentMarginBtn(item)">
-        {{ t('adjustmentMargin') }}
-      </div>
-      <div class="item-footer-item" @click="handleTerminationBtn(item, 0)">
-        {{ t('stopProfit') }}
-      </div>
-      <div class="item-footer-item" @click="handleTerminationBtn(item, 1)">
-        {{ t('stopLoss') }}
-      </div>
+      <div class="item-footer-item" @click="handleAdjustmentMarginBtn(item)">调整保证金</div>
+      <div class="item-footer-item" @click="handleTerminationBtn(item, 0)">止盈</div>
+      <div class="item-footer-item" @click="handleTerminationBtn(item, 1)">止损</div>
     </div>
   </div>
 </template>
@@ -166,18 +144,6 @@ const yieldValue = computed(() => {
     }
   }
 })
-const _isRGB = (price) => {
-  let tempVal = ''
-  price = Number(price)
-  if (0 < price) {
-    // buy 涨 sell 跌D
-    tempVal = 'color-primary'
-  } else if (0 > price) {
-    // buy 跌 sell 涨
-    tempVal = 'color-red'
-  }
-  return tempVal
-}
 const showDetail = (curId) => {
   try {
     showLoadingToast({
