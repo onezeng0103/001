@@ -130,7 +130,7 @@
         </div>
         <div class="name">闪兑</div>
       </div>
-      <div class="function-item">
+      <div class="function-item" @click="handleClick('/exchange')">
         <div class="icon">
           <img src="../../assets/img/14.png" />
         </div>
@@ -149,7 +149,7 @@
           v-for="(item, index) in list"
           :key="index"
           style="margin-bottom: 15px"
-          @click="handleClick(item)"
+          @click="handleClick(item.link)"
         >
           <div style="display: flex; align-items: center">
             <img :src="item.icon" height="20px" alt="" />
@@ -385,9 +385,9 @@ const handleMore = (item) => {
     router.push(item.link)
   }
 }
-const handleClick = (item) => {
-  if (item.link) {
-    router.push(item.link)
+const handleClick = (link) => {
+  if (link) {
+    router.push(link)
   }
 }
 onMounted(() => {
