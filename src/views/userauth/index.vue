@@ -644,7 +644,7 @@ const reSubmit = () => {
   align-items: center;
   justify-content: center;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 14px;
   color: #000000;
   text-align: left;
   font-style: normal;

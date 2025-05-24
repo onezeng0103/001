@@ -149,8 +149,111 @@ const submit = () => {
       </div>
     </div>
 
+    <div style="padding: 15px 10px">
+      <div style="font-size: 14px">币种类型</div>
+      <div class="optionNationality" @click="showBottom = true">
+        <span class="optionNationality-text">
+          {{ formData.title }}
+        </span>
+        <div>
+          <svg
+            t="1747924804750"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="9044"
+            width="12"
+            height="12"
+          >
+            <path
+              d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
+              fill="#BAEC57"
+              p-id="9045"
+            ></path>
+          </svg>
+        </div>
+      </div>
 
+      <div style="font-size: 14px;margin-top: 20px">币种类型</div>
+      <div class="optionNationality">
+        <span class="optionNationality-text">
+          <input
+            v-model.trim="formData.address"
+            type="text"
+            maxlength="140"
+            enterkeyhint="done"
+            placeholder="请填写提现地址"
+            class="uni-input-input"
+            autocomplete="off"
+            style="width: 100%"
+          />
+        </span>
+      </div>
+
+      <div class="btn" @click="submit">确定</div>
+
+    </div>
+
+
+
+    <van-popup v-model:show="showBottom" position="bottom">
+      <div style="padding-bottom: 8px;background-color: #f5f5f5">
+        <template v-for="item in coinList" :key="item.type" @click="close(item)">
+          <div class="item" @click="close(item)">{{ item.title }}</div>
+        </template>
+      </div>
+
+      <div class="item" @click="showBottom = false">
+        取消
+      </div>
+
+    </van-popup>
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+
+.btn {
+  margin: 40px 0;
+  padding: 11px 123px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000000;
+  text-align: left;
+  font-style: normal;
+  text-transform: none;
+  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  border-radius: 20px 20px 20px 20px;
+}
+.item{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666666;
+  font-size: 14px;
+  background-color: #ffffff;
+}
+
+.optionNationality {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 8px 8px 8px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  box-sizing: border-box;
+  margin-top: 8px;
+
+  .optionNationality-text {
+    font-weight: 400;
+    font-size: 14px;
+    color: #ffffff;
+  }
+}
+</style>
