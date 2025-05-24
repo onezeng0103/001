@@ -4,6 +4,7 @@ import { showToast } from 'vant'
 import { useMainStore } from '@/store/index'
 import { TronWeb } from 'tronweb'
 import { updateUserWithdrawAddress } from '@/api/account'
+import { filterCoin2 } from '@/utils/public.js'
 
 const router = useRouter()
 const mainStore = useMainStore()
@@ -28,13 +29,14 @@ const coinList = computed(() => {
       } else {
         obj['icon'] = 'card'
         // 银行卡提现
-        obj['title'] = _t18('withdraw_card')
+        obj['title'] = '银行卡提现'
         obj['card'] = filterCoin2(item.rechargeType).toLocaleUpperCase()
       }
 
       list.push(obj)
     }
   })
+  console.log(list,'123')
   return list
 })
 const showBottom = ref(false)
@@ -177,7 +179,7 @@ const submit = () => {
 
       <div style="font-size: 14px;margin-top: 20px">币种类型</div>
       <div class="optionNationality">
-        <span class="optionNationality-text">
+        <div class="optionNationality-text" style="flex: 1">
           <input
             v-model.trim="formData.address"
             type="text"
@@ -186,9 +188,9 @@ const submit = () => {
             placeholder="请填写提现地址"
             class="uni-input-input"
             autocomplete="off"
-            style="width: 100%"
+            style="width: 100%;"
           />
-        </span>
+        </div>
       </div>
 
       <div class="btn" @click="submit">确定</div>

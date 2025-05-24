@@ -83,6 +83,7 @@
         </div>
       </div>
     </div>
+
     <div class="method-main">
       <div class="method-main-form" @click="showBottom = true">
         <div class="method-main-form-label">充值币种</div>

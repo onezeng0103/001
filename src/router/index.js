@@ -88,6 +88,16 @@ const router = createRouter({
       component: () => import('../views/exchange/index.vue')
     },
     {
+      path: '/withdraw',
+      name: 'withdraw',
+      component: () => import('../views/withdraw/index.vue')
+    },
+    {
+      path: '/withdraw/drawings',
+      name: 'drawings',
+      component: () => import('../views/withdraw/drawings.vue')
+    },
+    {
       path: '/proxy',
       name: 'proxy',
       component: () => import('../views/proxy/index.vue')

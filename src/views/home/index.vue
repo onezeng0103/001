@@ -55,7 +55,7 @@
           </div>
           <span>充币</span>
         </div>
-        <div class="menu-item">
+        <div class="menu-item" @click="router.push('/withdraw')">
           <div class="imgBox">
             <img src="../../assets/img/02.png" alt="" />
           </div>
