@@ -79,6 +79,13 @@
           </div>
           <span>内部转账</span>
         </div>
+
+        <div class="menu-item" @click="router.push('/finance')">
+          <div class="imgBox">
+            <img src="../../assets/img/01.png" alt="" />
+          </div>
+          <span>理财</span>
+        </div>
       </div>
       <div class="list-box">
         <div class="list-box-header">

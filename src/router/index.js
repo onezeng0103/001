@@ -33,6 +33,16 @@ const router = createRouter({
       component: () => import('../views/forget/index.vue')
     },
     {
+      path: '/finance',
+      name: 'finance',
+      component: () => import('../views/finance/index.vue')
+    },
+    {
+      path: '/finance/subscribe/:id',
+      name: 'subscribe',
+      component: () => import('../views/subscribe/index.vue')
+    },
+    {
       path: '/withdrawDeposit',
       name: 'withdrawDeposit',
       component: () => import('../views/withdrawDeposit/index.vue')
@@ -71,6 +81,11 @@ const router = createRouter({
       path: '/flashExchange',
       name: 'flashExchange',
       component: () => import('../views/flashExchange/index.vue')
+    },
+    {
+      path: '/exchange',
+      name: 'exchange',
+      component: () => import('../views/exchange/index.vue')
     },
     {
       path: '/proxy',
