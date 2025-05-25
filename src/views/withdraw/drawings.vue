@@ -7,6 +7,10 @@ import { filterCoin2 } from '@/utils/public'
 import { withdrawSubmit, getWithdrawAddressList } from '@/api/account'
 import { debounce } from 'lodash'
 import { emailCode, mobileCode } from '@/api/user'
+<<<<<<< HEAD
+=======
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 const router = useRouter()
 const mainStore = useMainStore()
 const showCode = computed(() => {
@@ -149,6 +153,10 @@ const addressList = ref([])
 const showAddressBottom = ref(false)
 const saveCacheAddressFn = () => {
   getWithdrawAddressList().then((res) => {
+<<<<<<< HEAD
+=======
+    console.log('res', res)
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     addressList.value = res.data.map((item) => ({
       ...item,
       title: item.symbol.toUpperCase()
@@ -168,6 +176,10 @@ onMounted(() => {
   console.log('coinList.value===>', coinList.value)
   list.value = coinList.value
   if (userInfo.value.detail?.userTardPwd == null) {
+<<<<<<< HEAD
+=======
+    // showToast('请设置资金密码')
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     showToast('请设置资金密码')
     setTimeout(() => {
       router.push('/fund-password')
@@ -198,9 +210,17 @@ const coinList = computed(() => {
       list.push(obj)
     }
   })
+<<<<<<< HEAD
   return list
 })
 </script>
+=======
+  console.log('list===>', list)
+  return list
+})
+</script>
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 <template>
   <div class="drawings">
     <div style="height: 44px">
@@ -286,10 +306,22 @@ const coinList = computed(() => {
         </div>
       </div>
     </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     <div style="padding: 20px 10px">
       <div style="font-size: 12px">提现币种</div>
       <div class="details" @click="handleSelectCoin">
         <template v-if="info?.title">
+<<<<<<< HEAD
+=======
+<!--          <img-->
+<!--            src="@/assets/img/usdt.png"-->
+<!--            alt=""-->
+<!--            style="width: 20px; height: 20px; margin-right: 10px"-->
+<!--          />-->
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           <div style="color: #ffffff; flex: 1">
             {{ info?.title }}
           </div>
@@ -297,8 +329,15 @@ const coinList = computed(() => {
         <template v-else>
           <div style="color: #999999; flex: 1">请选择币种</div>
         </template>
+<<<<<<< HEAD
         <div class="triangle-down"></div>
       </div>
+=======
+
+        <div class="triangle-down"></div>
+      </div>
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       <div style="font-size: 12px">提现地址</div>
       <div class="details" @click="showAddressBottom = true">
         <template v-if="address">
@@ -311,6 +350,10 @@ const coinList = computed(() => {
         </template>
         <div class="triangle-down"></div>
       </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       <div
         style="display: flex; justify-content: space-between; align-items: center; font-size: 12px"
       >
@@ -329,6 +372,10 @@ const coinList = computed(() => {
         />
         <div style="margin: 0 10px" @click="allNum">全部</div>
       </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       <div style="font-size: 12px">提现密码</div>
       <div class="details" style="margin-bottom: 20px">
         <input
@@ -393,15 +440,27 @@ const coinList = computed(() => {
         2.请务必确认操作设备的安全，防止信息被窜改或泄露。
       </div>
     </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     <div @click="submit" class="btn" :class="address && allAmount && password ? 'zf' : ''">
       确认
     </div>
   </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
   <van-popup v-model:show="showAddressBottom" position="bottom">
     <div class="lists">
       <div style="display: flex; justify-content: center; position: relative; margin-bottom: 20px">
         <div style="color: #000000">选择提现地址</div>
+<<<<<<< HEAD
         <div class="cha" @click="showAddressBottom = false">
+=======
+        <div class="cha" @click="showAddressBottom=false">
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           <svg
             t="1748095662241"
             class="icon"
@@ -419,6 +478,10 @@ const coinList = computed(() => {
           </svg>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       <div
         class="lists-item"
         v-if="addressList?.length > 0"
@@ -427,6 +490,7 @@ const coinList = computed(() => {
         style="clear: both"
         @click="close(item)"
         :class="{
+<<<<<<< HEAD
           qd: address == item?.address
         }"
       >
@@ -435,11 +499,29 @@ const coinList = computed(() => {
       <div v-else style="color: #000000; display: flex; justify-content: center">暂无填写地址</div>
     </div>
   </van-popup>
+=======
+          qd: address==item?.address
+        }"
+      >
+        <!--        <img style="width: 25px; height: 25px" :src="getImageUrl(item.icon)" />-->
+        {{ item?.address }}
+      </div>
+      <div v-else style="color: #000000;display: flex;justify-content: center" >
+        暂无填写地址
+      </div>
+    </div>
+  </van-popup>
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
   <van-popup v-model:show="showBottom" position="bottom">
     <div class="lists">
       <div style="display: flex; justify-content: center; position: relative; margin-bottom: 20px">
         <div style="color: #000000">选择提现币种</div>
+<<<<<<< HEAD
         <div class="cha" @click="showBottom = false">
+=======
+        <div class="cha" @click="showBottom=false">
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           <svg
             t="1748095662241"
             class="icon"
@@ -466,9 +548,16 @@ const coinList = computed(() => {
         style="clear: both"
         @click="handleClose(item)"
         :class="{
+<<<<<<< HEAD
           qd: item.title == info.title
         }"
       >
+=======
+          qd: item.title==info.title
+        }"
+      >
+        <!--        <img style="width: 25px; height: 25px" :src="getImageUrl(item.icon)" />-->
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         {{ item?.title?.toUpperCase() }}
       </div>
     </div>

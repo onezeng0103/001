@@ -3,6 +3,7 @@
   <div style="height: 44px">
     <div
       style="
+<<<<<<< HEAD
         background: #000;
         border-bottom-color: rgb(238, 238, 238);
         padding-left: 8px;
@@ -13,10 +14,23 @@
         box-sizing: border-box;
         top: 0;
       "
+=======
+          background: #000;
+          border-bottom-color: rgb(238, 238, 238);
+          padding-left: 8px;
+          padding-right: 8px;
+          z-index: 9;
+          position: fixed;
+          width: 100%;
+          box-sizing: border-box;
+          top: 0;
+        "
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     >
       <div style="height: 0px; width: 100%; box-sizing: border-box"></div>
       <div
         style="
+<<<<<<< HEAD
           height: 44px;
           width: 100%;
           display: flex;
@@ -25,10 +39,21 @@
           justify-content: space-between;
           overflow: hidden;
         "
+=======
+            height: 44px;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            overflow: hidden;
+          "
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       >
         <div
           @click="router.back()"
           style="
+<<<<<<< HEAD
             display: flex;
             flex-direction: row;
             width: 4.6875rem;
@@ -78,6 +103,57 @@
             justify-content: flex-end;
             align-items: center;
           "
+=======
+              display: flex;
+              flex-direction: row;
+              width: 4.6875rem;
+              justify-content: flex-start;
+              align-items: center;
+            "
+        >
+            <span style="cursor: pointer">
+              <svg
+                t="1747825997144"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="22723"
+                width="30"
+                height="30"
+              >
+                <path
+                  d="M330.666667 512c0-14.933333 4.266667-29.866667 14.933333-40.533333l234.666667-277.33333399c23.466667-27.733333 64-29.866667 89.6-8.53333301 27.733333 23.466667 29.866667 64 8.53333299 89.6L477.866667 512l200.53333299 236.8c23.466667 27.733333 19.19999999 68.266667-8.53333299 89.6-27.733333 23.466667-68.266667 19.19999999-89.6-8.53333301l-234.666667-277.33333399c-10.666667-10.666667-14.933333-25.6-14.933333-40.533333z"
+                  fill="#ffffff"
+                  p-id="22724"
+                ></path>
+              </svg>
+            </span>
+        </div>
+        <div style="text-transform: capitalize">
+            <span
+              style="
+                font-size: 16px;
+                color: #fff;
+                font-weight: 500;
+                display: block;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              "
+            >
+              <span>邮箱认证</span>
+            </span>
+        </div>
+        <div
+          style="
+              display: flex;
+              flex-direction: row;
+              width: 4.6875rem;
+              justify-content: flex-end;
+              align-items: center;
+            "
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         ></div>
       </div>
     </div>
@@ -88,7 +164,11 @@
       <div class="item">
         <div class="text">邮箱</div>
         <div class="input">
+<<<<<<< HEAD
           <input style="width: 100%" v-model="formData.email" type="text" placeholder="请输入" />
+=======
+          <input style="width: 100%;" v-model="formData.email" type="text" placeholder="请输入" />
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         </div>
       </div>
       <div class="item">
@@ -103,11 +183,21 @@
           </div>
         </div>
       </div>
+<<<<<<< HEAD
       <div class="btnBox" @click="submit">确定</div>
     </div>
     <div v-else class="bind-yes">
       <div class="top">
         <img src="../../assets/img/cg.png" alt="" style="width: 150px; height: 150px" />
+=======
+      <div class="btnBox" @click="submit">
+        确定
+      </div>
+    </div>
+    <div v-else class="bind-yes">
+      <div class="top">
+        <img src="@/assets/img/cg.png" alt="" style="width: 150px; height: 150px;" />
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         <div class="text">恭喜您，邮箱绑定成功</div>
         <div class="email">你的邮箱：{{ email }}</div>
       </div>
@@ -315,6 +405,10 @@ const submit = () => {
       font-size: 14px;
       border-radius: 8px;
       opacity: 1;
+<<<<<<< HEAD
+=======
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     }
     .back {
       font-size: 14px;

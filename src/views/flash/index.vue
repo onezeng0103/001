@@ -80,7 +80,11 @@
         <img src="../../assets/img/31.png" alt="" />
         <div class="text">
           <div class="text-title">智能代投</div>
+<<<<<<< HEAD
           <div class="text-desc">智能分析市场趋势，实时监控价格波动，自动执行最优代投策略</div>
+=======
+          <div class="text-desc">定期利率低于活期</div>
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         </div>
       </div>
       <div class="flash-tip-right" @click="router.push('/proxy')">立即前往</div>
@@ -1240,7 +1244,11 @@ const updateList = () => {
     }
   }
   &-tip {
+<<<<<<< HEAD
     margin-bottom: 15px;
+=======
+    margin-top: 15px;
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     background: #baec57;
     box-shadow: inset 0px -4px 4px 0px #d7ff89;
     border-radius: 10px 10px 10px 10px;
@@ -1249,7 +1257,10 @@ const updateList = () => {
     align-items: center;
     justify-content: space-between;
     &-left {
+<<<<<<< HEAD
       flex: 1;
+=======
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       display: flex;
       align-items: center;
       img {
@@ -1258,7 +1269,10 @@ const updateList = () => {
         margin-right: 10px;
       }
       .text {
+<<<<<<< HEAD
         flex: 1;
+=======
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         color: #000;
         &-title {
           font-size: 22px;

@@ -7,7 +7,11 @@
         <div class="invaite-top_3">直属成员 {{ agentInfo.childCount || 0 }}</div>
       </div>
       <div>
+<<<<<<< HEAD
         <img src="../../assets/img/Frame5.png" style="width: 120px; height: 85px" />
+=======
+        <img src="@/assets/img/Frame5.png" style="width: 120px; height: 85px" />
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       </div>
     </div>
 
@@ -17,7 +21,11 @@
       </div>
       <div style="display: flex; align-items: center; justify-content: space-between">
         <div>
+<<<<<<< HEAD
           <img src="../../assets/img/Frame3.png" style="width: 20px; height: 20px" />
+=======
+          <img src="@/assets/img/Frame3.png" style="width: 20px; height: 20px" />
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         </div>
         <div style="font-weight: 400; font-size: 12px; color: #ffffff">
           {{ agentInfo.childAllCount || 0 }}
@@ -33,7 +41,11 @@
         </div>
         <div style="display: flex; justify-content: space-between; align-items: flex-end">
           <div>
+<<<<<<< HEAD
             <img src="../../assets/img/Frame1.png" style="width: 74px; height: 69px" />
+=======
+            <img src="@/assets/img/Frame1.png" style="width: 74px; height: 69px" />
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           </div>
           <div class="copy-but" @click="toCopy(userInfo?.user?.activeCode)">
             复制
@@ -90,7 +102,11 @@
         </div>
         <div style="display: flex; justify-content: space-between; align-items: flex-end">
           <div>
+<<<<<<< HEAD
             <img src="../../assets/img/Frame2.png" style="width: 74px; height: 69px" />
+=======
+            <img src="@/assets/img/Frame2.png" style="width: 74px; height: 69px" />
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           </div>
           <div class="copy-but" @click="toCopy(shareLink + userInfo?.user?.activeCode)">
             复制
@@ -129,7 +145,11 @@
         <div>
           <div style="font-size: 10px; margin-bottom: 8px">今日注册</div>
           <div>
+<<<<<<< HEAD
             <img src="../../assets/img/Frame4.png" style="width: 14px; height: 14px" />
+=======
+            <img src="@/assets/img/Frame4.png" style="width: 14px; height: 14px" />
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           </div>
         </div>
         <div style="font-weight: 500; font-size: 20px">{{ agentInfo.todayCount || 0 }}</div>
@@ -148,7 +168,11 @@
         <div>
           <div style="font-size: 10px; margin-bottom: 8px">昨日注册</div>
           <div>
+<<<<<<< HEAD
             <img src="../../assets/img/Frame4.png" style="width: 14px; height: 14px" />
+=======
+            <img src="@/assets/img/Frame4.png" style="width: 14px; height: 14px" />
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           </div>
         </div>
         <div style="font-weight: 500; font-size: 20px">{{ agentInfo.yesterdayCount || 0 }}</div>
@@ -157,14 +181,23 @@
   </div>
 
   <van-popup v-model:show="showCenter" round>
+<<<<<<< HEAD
     <div style="background-color: #ffffff; padding: 20px">
       <div style="color: #000000; font-size: 13px">立即加入，一起赚钱</div>
+=======
+    <div style="background-color: #ffffff;padding: 20px">
+      <div style="color: #000000;font-size: 13px">立即加入，一起赚钱</div>
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       <div class="code-box">
         <img :src="QRCodeIMG" class="code-canvas" />
         <div class="color-gray">邀请码</div>
         <div class="color-black">{{ userInfo?.user?.activeCode }}</div>
       </div>
     </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
   </van-popup>
 </template>
 
@@ -242,18 +275,30 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   margin-top: 10px;
+<<<<<<< HEAD
   .code-canvas {
+=======
+  .code-canvas{
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     width: 120px;
     height: 120px;
     background-color: #f5f5f5;
     margin-bottom: 10px;
   }
+<<<<<<< HEAD
   .color-gray {
+=======
+  .color-gray{
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     margin-bottom: 10px;
     font-size: 13px;
     color: #a0a0a0;
   }
+<<<<<<< HEAD
   .color-black {
+=======
+  .color-black{
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     font-size: 14px;
     color: #000000;
   }

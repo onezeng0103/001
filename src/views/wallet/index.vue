@@ -142,7 +142,11 @@
         <template #title>
           <div style="display: flex; align-items: center">
             <img src="../../assets/img/15.png" height="20px" alt="" />
+<<<<<<< HEAD
             <span style="margin-left: 5px; color: #fff; font-size: 17px">安全中心</span>
+=======
+            <span style="margin-left: 5px; color: #fff; font-size: 12px">安全中心</span>
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           </div>
         </template>
         <div
@@ -153,7 +157,11 @@
         >
           <div style="display: flex; align-items: center">
             <img :src="item.icon" height="20px" alt="" />
+<<<<<<< HEAD
             <span style="margin-left: 15px; color: rgba(255, 255, 255, 1); font-size: 15px">
+=======
+            <span style="margin-left: 15px; color: rgba(255, 255, 255, 1); font-size: 10px">
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
               {{ item.title }}
             </span>
           </div>
@@ -169,7 +177,11 @@
         <template #title>
           <div style="display: flex; align-items: center">
             <img :src="item.icon" height="20px" alt="" />
+<<<<<<< HEAD
             <span style="margin-left: 5px; color: #fff; font-size: 17px">{{ item.title }}</span>
+=======
+            <span style="margin-left: 5px; color: #fff; font-size: 12px">{{ item.title }}</span>
+>>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           </div>
         </template>
         <template #right-icon></template>
