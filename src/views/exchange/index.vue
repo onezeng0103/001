@@ -290,7 +290,7 @@ onMounted(() => {
     <div class="lists">
       <div style="display: flex;justify-content: center;position: relative;margin-bottom: 20px">
         <div style="color: #000000">选择划入账户</div>
-        <div class="cha">
+        <div class="cha" @click="showBottom=false">
           <svg
             t="1748095662241"
             class="icon"
