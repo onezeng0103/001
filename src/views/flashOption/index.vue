@@ -71,10 +71,11 @@
       <div class="trade-top-right"></div>
     </div>
     <div class="trade-tab">
-      <div class="trade-tab-item">现货交易</div>
-      <div class="trade-tab-item">合约交易</div>
+      <div class="trade-tab-item" @click="router.push('/trade')">现货交易</div>
+      <div class="trade-tab-item" @click="router.push('/contract')">合约交易</div>
       <div class="trade-tab-item" @click="router.push('/flash')">秒合约</div>
       <div class="trade-tab-item active">期权交易</div>
+      <div class="trade-tab-item" @click="router.push('/floworder')">跟单交易</div>
     </div>
     <div class="trade-tip">
       <div class="trade-tip-left">
@@ -160,6 +161,123 @@
         :format-tooltip="(e) => e + '%'"
       ></el-slider>
     </div>
+    <div class="trade-orderBox">
+      <div class="trade-orderBox-tab">
+        <div
+          class="trade-orderBox-tab-item"
+          :class="currentEntruset == 0 ? 'active' : ''"
+          @click="switchingEntrust(0)"
+        >
+          当前订单
+        </div>
+        <div
+          class="trade-orderBox-tab-item"
+          :class="currentEntruset == 1 ? 'active' : ''"
+          @click="switchingEntrust(1)"
+        >
+          历史订单
+        </div>
+      </div>
+      <div class="trade-orderBox-list">
+        <template v-if="historyNewList?.length > 0">
+          <div
+            class="trade-orderBox-list-item"
+            v-for="(item, index) in historyNewList"
+            :key="index"
+          >
+            <div style="display: flex; align-items: center; justify-content: space-between">
+              <div style="display: flex; align-items: center">
+                <div
+                  v-if="!item.betContent"
+                  style="
+                    padding: 2px 5px;
+                    background: rgba(23, 172, 0, 1);
+                    border-radius: 5px;
+                    font-size: 10px;
+                    margin-right: 5px;
+                    color: #000;
+                  "
+                >
+                  上涨
+                </div>
+                <div
+                  v-else
+                  style="
+                    padding: 2px 5px;
+                    background: rgba(255, 100, 100, 1);
+                    border-radius: 5px;
+                    font-size: 10px;
+                    margin-right: 5px;
+                    color: #000;
+                  "
+                >
+                  下跌
+                </div>
+                <div>
+                  {{ item.symbol?.toUpperCase() }}
+                </div>
+              </div>
+
+              <div v-if="currentEntruset == 1">
+                <div v-if="item.openResult == 1">输</div>
+                <div v-else>赢</div>
+              </div>
+            </div>
+            <div style="font-size: 10px; color: rgb(153, 153, 153); margin-top: 10px">
+              {{ item.createTime }}
+            </div>
+            <div class="trade-orderBox-list-item-coll">
+              <div>期权编号</div>
+              <div class="trade-orderBox-list-item-coll-price">
+                {{ item.orderNo }}
+              </div>
+            </div>
+            <div class="trade-orderBox-list-item-coll">
+              <div>预测周期</div>
+              <div class="trade-orderBox-list-item-coll-price">
+                {{ item.type }}sec({{ item.openTime }})
+              </div>
+            </div>
+            <div class="trade-orderBox-list-item-coll">
+              <div>交易金额(USDT)</div>
+              <div class="trade-orderBox-list-item-coll-price">
+                {{ item.betAmount }}
+              </div>
+            </div>
+            <div class="trade-orderBox-list-item-coll">
+              <div>委托价格(USDT)</div>
+              <div class="trade-orderBox-list-item-coll-price">
+                {{ item.openPrice }}
+              </div>
+            </div>
+            <template v-if="currentEntruser === 1">
+              <div class="trade-orderBox-list-item-coll">
+                <div>平仓价格</div>
+                <div class="trade-orderBox-list-item-coll-price">
+                  {{ item.closePrice }}
+                </div>
+              </div>
+              <div class="trade-orderBox-list-item-coll">
+                <div>收益(USDT)</div>
+                <div class="trade-orderBox-list-item-coll-price">
+                  {{ item.rewardAmount }}
+                </div>
+              </div>
+              <div class="trade-orderBox-list-item-coll">
+                <div>手续费(USDT)</div>
+                <div class="trade-orderBox-list-item-coll-price">
+                  {{ item.feeAmount }}
+                </div>
+              </div>
+            </template>
+            <div class="line"></div>
+          </div>
+        </template>
+        <template v-else>
+          <NoData />
+        </template>
+      </div>
+    </div>
     <div class="btn">
       <div class="fall" @click="showBtn(1)">看跌</div>
       <div class="rose" @click="showBtn(0)">看涨</div>
@@ -170,15 +288,264 @@
     @close="showLeft = false"
     @handleGetOptionIssue="handleGetOptionIssue"
   />
+  <van-popup v-model:show="showCenter" round style="width: 80%" :close-on-click-overlay="false">
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <div
+        v-if="!countdownCompleted"
+        style="font-weight: 700; font-size: 20px; line-height: 24px; color: #000"
+      >
+        下单成功
+      </div>
+      <template v-else>
+        <div
+          v-if="orderAmount.openResult == 1"
+          style="
+            height: 40px;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            border-radius: 48px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 16px;
+            padding-right: 16px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            min-width: 83px;
+            box-sizing: border-box;
+            background: rgb(23, 172, 0);
+          "
+        >
+          赢
+        </div>
+        <div
+          v-else
+          style="
+            height: 40px;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 24px;
+            border-radius: 48px;
+            padding-top: 8px;
+            padding-bottom: 8px;
+            padding-left: 16px;
+            padding-right: 16px;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            min-width: 83px;
+            box-sizing: border-box;
+            background: rgb(255, 100, 100);
+          "
+        >
+          输
+        </div>
+      </template>
+      <div style="display: flex; margin-top: 20px">
+        <div
+          style="
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 62px;
+            display: flex;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 24px;
+            background-color: rgb(153, 153, 153);
+          "
+        >
+          {{ countdownDisplay[0] }}
+        </div>
+        <div
+          style="
+            margin-left: 4px;
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 62px;
+            display: flex;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 24px;
+            background-color: rgb(153, 153, 153);
+          "
+        >
+          {{ countdownDisplay[1] }}
+        </div>
+        <div
+          style="
+            justify-content: center;
+            align-items: center;
+            width: 20px;
+            height: 62px;
+            display: flex;
+            font-weight: 700;
+            font-size: 40px;
+          "
+        >
+          :
+        </div>
+        <div
+          style="
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 62px;
+            display: flex;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 24px;
+            background-color: rgb(153, 153, 153);
+          "
+        >
+          {{ countdownDisplay[2] }}
+        </div>
+        <div
+          style="
+            margin-left: 4px;
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 62px;
+            display: flex;
+            font-weight: 700;
+            font-size: 40px;
+            line-height: 24px;
+            background-color: rgb(153, 153, 153);
+          "
+        >
+          {{ countdownDisplay[3] }}
+        </div>
+      </div>
+      <div style="font-weight: 400; font-size: 14px; line-height: 20px; margin-top: 8px">
+        剩余时间
+      </div>
+      <div style="margin-top: 24px">
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; width: 284px"
+        >
+          <div
+            style="
+              font-size: 13px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 16px;
+              color: rgba(153, 153, 153, 1);
+            "
+          >
+            预测方向
+          </div>
+          <div
+            v-if="!orderResult.betContent"
+            style="
+              padding: 4px 4px;
+              background: rgb(23, 172, 0);
+              border-radius: 3px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+          >
+            上涨
+          </div>
+          <div
+            style="
+              padding: 4px 4px;
+              background: rgb(255, 100, 100);
+              border-radius: 3px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            "
+            v-else
+          >
+            下跌
+          </div>
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 284px;
+            margin-top: 8px;
+          "
+        >
+          <div
+            style="
+              font-size: 13px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 16px;
+              color: rgba(153, 153, 153, 1);
+            "
+          >
+            交易金额(USDT)
+          </div>
+          <div style="font-size: 13px; font-style: normal; font-weight: 700; line-height: 16px">
+            {{ orderResult.betAmount }}
+          </div>
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 284px;
+            margin-top: 8px;
+          "
+        >
+          <div
+            style="
+              font-size: 13px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: 16px;
+              color: rgba(153, 153, 153, 1);
+            "
+          >
+            盈利金额(USDT)
+          </div>
+          <div style="font-size: 13px; font-style: normal; font-weight: 700; line-height: 16px">
+            {{ orderResult.rewardAmount }}
+          </div>
+        </div>
+      </div>
+      <div
+        @click="clickClose"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 40px;
+          margin-top: 24px;
+          border-width: 0px;
+          border-color: transparent;
+          border-radius: 21px;
+          font-size: 16px;
+          color: #000;
+          background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+        "
+      >
+        关闭
+      </div>
+    </div>
+  </van-popup>
 </template>
 <script setup>
-import dayjs from 'dayjs'
 import { useMainStore } from '@/store'
 import { useUserStore } from '@/store/user'
 import { useTradeStore } from '@/store/trade'
 import { useRouter, useRoute } from 'vue-router'
 import { showToast } from 'vant'
-import { submitOption } from '@/api/option.js'
+import { submitOption, getOrderList } from '@/api/option.js'
 import { getOptionIssueList, getOptionCurrentIssue } from '@/api/option.js'
 import {
   timeRangeCountdown,
@@ -188,6 +555,11 @@ import {
 import { _div, _mul, _toFixed } from '@/utils/decimal'
 import LeftPopup from './component/leftPopup.vue'
 import TradeOptionContract from './component/tradeOptionContract.vue'
+import dayjs from 'dayjs'
+import durationPlugin from 'dayjs/plugin/duration'
+
+dayjs.extend(durationPlugin)
+
 const mainStore = useMainStore()
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
@@ -199,10 +571,12 @@ const form = reactive({
   type: '0',
   delegateType: 1
 })
+let interval = null
 const { asset } = storeToRefs(userStore)
 const userBalance = ref(0)
 const orderAmount = ref(undefined)
 const countdownCompleted = ref(false)
+const orderResult = ref({})
 
 const onSliderChange = () => {
   orderAmount.value = _toFixed(((userBalance.value / 100) * availableBalance.value).toFixed(0), 0)
@@ -244,6 +618,19 @@ const handleGetOptionIssue = async () => {
   })
   fetchOptionCurrentIssue()
 }
+const countdownDisplay = ref('0000')
+const showCenter = ref(false)
+const clickClose = () => {
+  showCenter.value = false
+  countdownDisplay.value = '0000'
+}
+watch(showCenter, (open) => {
+  console.log('open', open)
+  if (!open) {
+    countdownDisplay.value = '0000'
+    interval && clearInterval(interval)
+  }
+})
 const updateTime = () => {
   currentTime.value = dayjs().format('MM-DD HH:mm:ss')
 }
@@ -333,9 +720,32 @@ const showBtn = (betContent) => {
       getOrderListApi()
 
       showCenter.value = true
+      console.log('zhixing', showCenter.value)
       userBalance.value = 0
     }
   })
+}
+const getOrderListApi = () => {
+  getOrderList({ isHistory: currentEntruset.value }).then((res) => {
+    historyNewList.value = res.rows || []
+    if (!currentEntruset.value) {
+      if (historyNewList.value.length) {
+        setTimeout(() => {
+          getOrderListApi()
+        }, 1000 * 3)
+      }
+    }
+  })
+}
+const historyNewList = ref([])
+const currentEntruset = ref(0)
+// 获取委托
+const firstNum = ref(0)
+const secondNum = ref(0)
+const switchingEntrust = (e) => {
+  currentEntruset.value = e
+  historyNewList.value = []
+  getOrderListApi()
 }
 onMounted(async () => {
   init()
@@ -422,12 +832,22 @@ onMounted(async () => {
     background: rgba(255, 255, 255, 0.07);
     border-radius: 29px 29px 29px 29px;
     border: 1px solid rgba(186, 236, 87, 0.26);
+    width: auto;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     &-item {
+      width: auto;
       font-size: 14px;
       color: rgba(153, 153, 153, 1);
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-right: 30px;
     }
     .active {
       color: rgba(186, 236, 87, 1);
@@ -527,6 +947,46 @@ onMounted(async () => {
       }
     }
   }
+  &-orderBox {
+    margin-top: 15px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 8px 8px 8px 8px;
+    padding: 14px;
+    &-tab {
+      display: flex;
+      align-items: center;
+      &-item {
+        color: rgb(153, 153, 153);
+        margin-right: 10px;
+      }
+      .active {
+        color: #fff;
+      }
+    }
+    &-list {
+      &-item {
+        width: 100%;
+        margin-top: 10px;
+        &-coll {
+          font-size: 12px;
+          color: rgb(153, 153, 153);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 10px;
+          &-price {
+            color: #fff;
+          }
+        }
+        .line {
+          margin: 10px 0;
+          width: 100%;
+          height: 1px;
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
 }
 :deep(.el-slider__button) {
   border: 2px solid #baec57;
@@ -563,5 +1023,10 @@ onMounted(async () => {
     align-items: center;
     justify-content: center;
   }
+}
+.van-popup {
+  background: #fff !important;
+  padding: 15px;
+  color: #000;
 }
 </style>

@@ -138,6 +138,9 @@
         <NoData />
       </template>
     </div>
+    <div class="btn">
+      <div>近30日代投总收益率:{{ getAllAmountEarn?.toFixed(2) }}</div>
+    </div>
   </div>
 </template>
 <script setup>
@@ -238,6 +241,27 @@ onMounted(() => {
         justify-content: space-between;
         margin-bottom: 10px;
       }
+    }
+  }
+  .btn {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    div {
+      width: 80%;
+      height: 41px;
+      background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+      border-radius: 21px 21px 21px 21px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 400;
+      font-size: 16px;
+      color: #000000;
     }
   }
 }

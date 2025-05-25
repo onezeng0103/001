@@ -9,10 +9,9 @@
           <div class="nav-bar-avatar">
             <img :src="path" alt="avatar" />
           </div>
-          <div class="nav-bar-search">
+          <div class="nav-bar-search" @click="router.push('/search')">
             <img src="../../assets/img/search.png" alt="search" />
             <input type="text" placeholder="点击搜索币种" />
-            <div class="nav-bar-search-button">查找</div>
           </div>
           <div class="nav-bar-button" style="position: relative">
             <img
@@ -77,7 +76,7 @@
           <div class="imgBox">
             <img src="../../assets/img/05.png" alt="" />
           </div>
-          <span>内部转账</span>
+          <span>质押</span>
         </div>
 
         <div class="menu-item" @click="router.push('/finance')">
@@ -240,18 +239,6 @@ onMounted(() => {
           }
           input {
             flex: 1;
-          }
-          .nav-bar-search-button {
-            font-size: 12px;
-            color: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 55px;
-            height: 23px;
-            background: linear-gradient(90deg, #baec57 0%, #b2e752 100%);
-            border-radius: 12px 12px 12px 12px;
-            cursor: pointer;
           }
         }
         .nav-bar-button {

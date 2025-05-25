@@ -359,6 +359,18 @@ const moreList = ref([
     key: 'switchLanguage'
   },
   {
+    title: '资金流水',
+    icon: new URL('../../assets/img/cashflow.png', import.meta.url).href,
+    link: '/cashflow',
+    key: 'cashflow'
+  },
+  {
+    title: '帮助中心',
+    icon: new URL('../../assets/img/help.png', import.meta.url).href,
+    link: '/help',
+    key: 'help'
+  },
+  {
     title: '退出',
     icon: new URL('../../assets/img/26.png', import.meta.url).href,
     link: '',
@@ -408,6 +420,7 @@ onMounted(() => {
 .wallet {
   padding: 10px;
   padding-top: 40px;
+  padding-bottom: 60px;
   .info {
     position: relative;
     .active {

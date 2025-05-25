@@ -308,7 +308,7 @@ const availableBalance = computed(() => {
   return (
     asset.value.filter((item) => {
       return item.symbol === 'usdt'
-    })[0].availableAmount + ''
+    })[0]?.availableAmount + ''
   )
 })
 const profitInfo = ref({})

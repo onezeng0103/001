@@ -18,8 +18,6 @@ import { _initCoinWebSocket } from '@/plugin/socket/index.js'
 import { Dialog } from 'vant'
 import { useMainStore } from '@/store/index.js'
 import NoData from './components/noData/index.vue'
-import NoData2 from './components/noData2/index.vue'
-import NoData3 from './components/noData3/index.vue'
 /**
  * 初始化socket
  */
@@ -29,8 +27,6 @@ const pinia = createPinia()
 app.use(pinia)
 pinia.use(piniaPluginPersistedstate)
 app.component('NoData', NoData)
-app.component('NoData2', NoData2)
-app.component('NoData3', NoData3)
 app.use(router)
 
 app.use(Vant)

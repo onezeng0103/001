@@ -49,7 +49,7 @@
         :class="margin == 0 ? 'active' : ''"
         @click="handleTabs(0)"
       >
-        {{ t('addMargin') }}
+        追加保证金
       </div>
       <div
         style="
@@ -63,7 +63,7 @@
         :class="margin == 1 ? 'active' : ''"
         @click="handleTabs(1)"
       >
-        {{ t('reduceMargin') }}
+        减少保证金
       </div>
     </div>
     <div

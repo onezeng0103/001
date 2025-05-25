@@ -117,6 +117,47 @@
           </div>
         </div>
       </div>
+      <div class="confirm-main-content">
+        <div class="confirm-main-content-top">
+          <div style="color: #fff; font: 14px">跟单模式</div>
+        </div>
+        <div class="confirm-main-content-tab">
+          <div
+            class="confirm-main-content-tab-item"
+            :class="{ active: currentIndex == 0 }"
+            @click="currentIndex = 0"
+          >
+            固定比例
+          </div>
+          <div
+            class="confirm-main-content-tab-item"
+            :class="{ active: currentIndex == 1 }"
+            @click="currentIndex = 1"
+          >
+            固定金额
+          </div>
+        </div>
+        <div class="confirm-main-content-input" v-show="currentIndex == 0">
+          <img style="height: 36px; width: 36px" src="../../assets/img/dollar.png" alt="" />
+          <input type="number" v-model="followRate" placeholder="跟单比例1-500" />
+          <div>%</div>
+        </div>
+        <div class="confirm-main-content-input" v-show="currentIndex == 1">
+          <img style="height: 36px; width: 36px" src="../../assets/img/dollar.png" alt="" />
+          <input type="number" v-model="followAmount" placeholder="跟单金额" />
+          <div>USDT</div>
+        </div>
+        <div class="confirm-main-content-tip">
+          <div style="color: rgb(153, 153, 153); font-size: 12px">
+            可用：
+            <span style="color: #fff">{{ amountSum }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="confirm-btn">
+      <div class="confirm-btn-item" @click="handleFinish">结束跟单</div>
+      <div class="confirm-btn-item" @click="handleConfirm">确认</div>
     </div>
   </div>
 </template>
@@ -199,18 +240,18 @@ const handleFinish = () => {
 }
 const handleConfirm = () => {
   if (activeList.value.length === 0) {
-    showToast(t('pleaseSelectFollowCoin'))
+    showToast('请选择跟单币种')
     return
   }
   if (currentIndex.value == 0) {
     if (!followRate.value) {
-      showToast(t('pleaseEnterFollowRate'))
+      showToast('请输入跟单比例')
       return
     }
   }
   if (currentIndex.value == 1) {
     if (!followAmount.value) {
-      showToast(t('pleaseEnterFollowAmount'))
+      showToast('请输入跟单金额')
       return
     }
   }
@@ -308,6 +349,65 @@ onMounted(() => {
           color: #000;
         }
       }
+    }
+    &-content {
+      margin-top: 15px;
+      padding: 20px 10px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 8px 8px 8px 8px;
+      &-tab {
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 8px 8px 8px 8px;
+        background-color: rgba(153, 153, 153, 0.1);
+        &-item {
+          flex: 1;
+          text-align: center;
+          line-height: 32px;
+          height: 32px;
+        }
+        .active {
+          border-radius: 8px 8px 8px 8px;
+          background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+          color: #000;
+        }
+      }
+      &-input {
+        margin-top: 15px;
+        padding: 0 10px;
+        height: 40px;
+        border-radius: 8px;
+        background-color: rgba(153, 153, 153, 0.1);
+        display: flex;
+        align-items: center;
+        input {
+          flex: 1;
+        }
+      }
+      &-tip {
+        margin-top: 15px;
+      }
+    }
+  }
+  &-btn {
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-item {
+      margin-top: 30px;
+      width: 47%;
+      height: 41px;
+      background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+      border-radius: 21px 21px 21px 21px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: 400;
+      font-size: 16px;
+      color: #000000;
     }
   }
 }

@@ -101,8 +101,8 @@ const props = defineProps({
   }
 })
 const tabList = ref([
-  { label: t('currentOrder'), value: 0, num: 0 },
-  { label: t('historyOrder'), value: 1, num: 0 }
+  { label: '当前委托', value: 0, num: 0 },
+  { label: '历史委托', value: 1, num: 0 }
 ])
 /**
  * 订单数据

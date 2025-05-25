@@ -186,6 +186,21 @@ const router = createRouter({
       path: '/floworder/mine',
       name: 'floworderMine',
       component: () => import('../views/floworder/mine.vue')
+    },
+    {
+      path: '/floworder/apply',
+      name: 'floworderApply',
+      component: () => import('../views/floworder/apply.vue')
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: () => import('../views/search/index.vue')
+    },
+    {
+      path: '/cashflow',
+      name: 'cashflow',
+      component: () => import('../views/cashflow/index.vue')
     }
   ]
 })
