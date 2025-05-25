@@ -138,8 +138,12 @@ onMounted(() => {
 
     <div class="forget-list">
       <div class="forget-list-item" v-for="(item, index) in financialList" :key="index">
-        <div style="display: flex;align-items: center">
-          <img src="@/assets/img/coin-JyvGAUty.png" alt="" style="width: 30px;height: 30px;margin-right: 10px">
+        <div style="display: flex; align-items: center">
+          <img
+            src="../../assets/img/coin-JyvGAUty.png"
+            alt=""
+            style="width: 30px; height: 30px; margin-right: 10px"
+          />
           <div>
             <div class="title">{{ item.title }}</div>
             <samp class="label">回报率{{ item.avgRate }}%</samp>
@@ -153,33 +157,33 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.forget{
+.forget {
   padding: 10px;
-  .forget-list{
+  .forget-list {
     margin-top: 30px;
-    .forget-list-item{
-      background: rgba(255,255,255,0.07);
+    .forget-list-item {
+      background: rgba(255, 255, 255, 0.07);
       border-radius: 8px 8px 8px 8px;
       padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
 
-      .bt{
+      .bt {
         padding: 8px 18px;
-        background: linear-gradient( 306deg, #BAEC57 0%, #FFE414 100%);
+        background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
         border-radius: 15px 15px 15px 15px;
         font-weight: 400;
         font-size: 10px;
         color: #000000;
       }
 
-      .title{
+      .title {
         font-size: 14px;
-        color: #FFFFFF;
+        color: #ffffff;
         //margin-bottom: 10px;
       }
-      .label{
+      .label {
         font-weight: 400;
         font-size: 10px;
         color: #999999;
@@ -187,7 +191,7 @@ onMounted(() => {
       }
     }
   }
-  .forget-top{
+  .forget-top {
     padding: 15px 15px;
     border-radius: 4px;
     margin-top: 15px;
