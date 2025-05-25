@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'PingFangSC-Regular';
+  src: url('../font/PingFang Regular.otf');
+}
+@font-face {
+  font-family: 'Source Han Sans Old Style-Bold';
+  src: url('../font/SourceHanSansSC-Bold-2.otf');
+}
+@font-face {
+  font-family: 'PingFang SC';
+  src: url('../font/PingFang Medium_downcc.otf');
+}

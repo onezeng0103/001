@@ -1,0 +1,44 @@
+input {
+  border: none;
+  outline: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  font-family: inherit;
+  font-size: inherit;
+  box-shadow: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #fff;
+}
+.van-dialog__header {
+  background: #fff !important;
+}
+.van-dialog__content {
+  background: #fff !important;
+}
+div {
+  box-sizing: border-box;
+}
+input::placeholder {
+  color: rgba(153, 153, 153, 1);
+  font-size: 14px;
+}
+.van-popup {
+  background: #000000 !important;
+}
+.badge_up {
+  background: #35ad7a;
+}
+.badge_down {
+  background: #ff5c51;
+}
+.price_up {
+  color: #35ad7a;
+}
+.price_down {
+  color: #ff5c51;
+}

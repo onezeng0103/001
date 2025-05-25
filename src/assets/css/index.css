@@ -1,0 +1,23 @@
+@import './font.css';
+@import './reset.css';
+
+[data-theme='dark'] {
+  --primary-background: #000;
+  --primary-color: #fff;
+  --footerBar-background: #000;
+}
+[data-theme='light'] {
+  --primary-background: #fff;
+  --primary-color: #000;
+  --footerBar-background: #ccc;
+}
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+  margin: 0 auto;
+  background: var(--primary-background);
+  font-family: 'PingFangSC-Regular';
+  color: var(--primary-color);
+  font-size: 14px;
+}
