@@ -247,11 +247,7 @@ onMounted(() => {
       <div style="font-size: 12px">币种</div>
       <div class="details bz">
         <img
-<<<<<<< HEAD
-          src="../..//assets/img/usdt.png"
-=======
-          src="@/assets/img/usdt.png"
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
+          src="../../assets/img/usdt.png"
           alt=""
           style="width: 20px; height: 20px; margin-right: 10px"
         />
@@ -292,15 +288,9 @@ onMounted(() => {
 
   <van-popup v-model:show="showBottom" position="bottom">
     <div class="lists">
-<<<<<<< HEAD
       <div style="display: flex; justify-content: center; position: relative; margin-bottom: 20px">
         <div style="color: #000000">选择划入账户</div>
         <div class="cha" @click="showBottom = false">
-=======
-      <div style="display: flex;justify-content: center;position: relative;margin-bottom: 20px">
-        <div style="color: #000000">选择划入账户</div>
-        <div class="cha" @click="showBottom=false">
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           <svg
             t="1748095662241"
             class="icon"
@@ -335,19 +325,11 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-<<<<<<< HEAD
 .cha {
   position: absolute;
   right: 2px;
   top: 50%;
   transform: translateY(-50%);
-=======
-.cha{
-  position: absolute;
-  right: 2px;
-  top: 50%;
-  transform: translateY(-50%)
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 }
 .lists {
   background-color: #ffffff;

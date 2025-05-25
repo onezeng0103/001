@@ -5,7 +5,6 @@
     <div class="title-item">今日跌涨</div>
   </div>
   <div class="list">
-<<<<<<< HEAD
     <template v-if="listResult?.length > 0">
       <div
         class="list-item"
@@ -43,40 +42,6 @@
     <template v-else>
       <NoData />
     </template>
-=======
-    <div
-      class="list-item"
-      v-for="(item, index) in listResult"
-      :key="index"
-      @click="handleCoinDetail(item)"
-    >
-      <div class="list-item-name">
-        <img :src="item.logo" alt="" />
-        <span>{{ item.showSymbol }}</span>
-      </div>
-      <div class="list-item-price">
-        <span>{{ priceFormat(tradeStore.allCoinPriceInfo[item.coin]?.close) }}</span>
-      </div>
-      <div class="list-item-price2">
-        <div
-          class="box"
-          :class="
-            tradeStore.allCoinPriceInfo[item.coin]?.openPrice <
-            tradeStore.allCoinPriceInfo[item.coin]?.close
-              ? 'badge_up'
-              : 'badge_down'
-          "
-        >
-          {{
-            tradeStore.allCoinPriceInfo[item.coin]?.openPrice <
-            tradeStore.allCoinPriceInfo[item.coin]?.close
-              ? '+'
-              : '-'
-          }}{{ tradeStore.allCoinPriceInfo[item.coin]?.priceChangePercent }}%
-        </div>
-      </div>
-    </div>
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
   </div>
 </template>
 <script setup>

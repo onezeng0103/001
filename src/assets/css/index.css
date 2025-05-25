@@ -1,7 +1,6 @@
 @import './font.css';
 @import './reset.css';
 
-<<<<<<< HEAD
 [data-theme='dark'] {
   --primary-background: #000;
   --primary-color: #fff;
@@ -12,21 +11,13 @@
   --primary-color: #000;
   --footerBar-background: #ccc;
 }
-=======
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 html,
 body {
   width: 100vw;
   height: 100vh;
   margin: 0 auto;
-<<<<<<< HEAD
   background: var(--primary-background);
   font-family: 'PingFangSC-Regular';
   color: var(--primary-color);
-=======
-  background: #000000;
-  font-family: 'PingFangSC-Regular';
-  color: #fff;
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
   font-size: 14px;
 }

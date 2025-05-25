@@ -1,6 +1,5 @@
 <template>
   <div class="search">
-<<<<<<< HEAD
     <div class="search-main">
       <div style="display: flex; align-items: center">
         <div class="input">
@@ -108,20 +107,10 @@ onMounted(() => {
 })
 </script>
 
-=======
-    <div class="search-main">1123123</div>
-  </div>
-</template>
-<script setup>
-import { useRouter } from 'vue-router'
-const router = useRouter()
-</script>
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 <style lang="scss" scoped>
 .search {
   &-main {
     padding: 15px;
-<<<<<<< HEAD
 
     .lists {
       .items {
@@ -159,8 +148,4 @@ const router = useRouter()
   padding-right: 2px;
   display: inline-block;
 }
-=======
-  }
-}
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 </style>

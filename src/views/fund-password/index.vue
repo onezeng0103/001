@@ -283,21 +283,13 @@
             </svg>
           </div>
         </div>
-<<<<<<< HEAD
-=======
-        <!--        <p v-if="showPwdDiff" class="pwdDiff">*两次密码不一致</p>-->
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         <div class="btnBox" @click="changePwd1">确定</div>
       </div>
     </template>
 
     <template v-if="notPwd && success">
       <div class="content1">
-<<<<<<< HEAD
         <img src="../..//assets/img/cg.png" class="imgLoad" />
-=======
-        <img src="@/assets/img/cg.png" class="imgLoad" />
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         <div class="text">已设置资金密码</div>
         <div class="btnBox" @click="changePwd" style="width: 345px">修改安全密码</div>
         <div class="forgot" @click="toCustorm">忘记安全密码？</div>
@@ -324,25 +316,7 @@ const form1 = ref({
   oldPwd: '',
   NPwd: ''
 })
-<<<<<<< HEAD
 const success1 = ref(false)
-=======
-const setKeyVal = (val) => {
-  if (val == 'oldPwd') {
-    oldPwd.value = !oldPwd.value
-  } else if (val == 'newPwd') {
-    newPwd.value = !newPwd.value
-  } else {
-    NPwd.value = !NPwd.value
-  }
-}
-// const emit = defineEmits(['setPwd'])
-// form.pwd.value = !form.pwd.value
-const success1 = ref(false)
-// watch(success1, (newValue) => {
-//   emit('setPwd', newValue)
-// })
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 const showPwdDiff = ref(false)
 const pwdDiff = () => {
   showPwdDiff.value = !(form1.value.newPwd == form1.value.NPwd)
@@ -350,35 +324,19 @@ const pwdDiff = () => {
 const changePwd1 = () => {
   if (form1.value.oldPwd == '') {
     showToast('请输入旧密码')
-<<<<<<< HEAD
-=======
-    // _toast('Fund_password_pleaseOld')
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     return
   }
   if (form1.value.newPwd == '') {
     showToast('请输入新密码')
-<<<<<<< HEAD
-=======
-    // _toast('Fund_password_pleaseNew')
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     return
   }
   if (form1.value.newPwd !== form1.value.NPwd) {
     showToast('两次密码不一致')
-<<<<<<< HEAD
-=======
-    // _toast('register_pwd_diff')
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     return
   }
   updateFundPwd(form1.value.oldPwd, form1.value.newPwd, 1).then((res) => {
     if (res.code == '200') {
       showToast('资金密码修改成功')
-<<<<<<< HEAD
-=======
-      // _toast('Fund_password_update_success')
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       success1.value = true
       notPwd.value = true
       userStore.getUserInfo()
@@ -392,12 +350,6 @@ const userStore = useUserStore()
 userStore.getUserInfo()
 // 用户信息
 const { userInfo } = storeToRefs(userStore)
-<<<<<<< HEAD
-=======
-const cuttentRight = { iconRight: [{ iconName: 'kefu', clickTo: 'event_serviceChange' }] }
-// 用户是否设置过资金密码(userInfo.detail?.userTardPwd)
-
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 const notPwd = ref(userInfo.value.detail?.userTardPwd)
 const success = ref(true)
 const changePwd = () => {
@@ -413,12 +365,6 @@ const router = useRouter()
 const form = reactive({
   pwd: false
 })
-<<<<<<< HEAD
-=======
-const setVal = () => {
-  form.pwd = !form.pwd
-}
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 watch(
   () => form.pwd,
   (newValue, oldValue) => {

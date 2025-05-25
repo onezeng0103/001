@@ -9,11 +9,7 @@ import { VantResolver } from 'unplugin-vue-components/resolvers'
 export default defineConfig({
   plugins: [
     vue(),
-<<<<<<< HEAD
     vueDevTools(),
-=======
-    // vueDevTools(),
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     AutoImport({ imports: ['vue', 'vue-router', 'pinia'] }),
     // 使用 unplugin-vue-components 插件自动引入 Vant 组件
     Components({

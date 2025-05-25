@@ -86,7 +86,6 @@
           <span>理财</span>
         </div>
       </div>
-<<<<<<< HEAD
       <div class="main-tip">
         <div class="main-tip-left">
           <img src="../../assets/img/31.png" alt="" />
@@ -97,8 +96,6 @@
         </div>
         <div class="main-tip-right" @click="router.push('/proxy')">立即前往</div>
       </div>
-=======
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
       <div class="list-box">
         <div class="list-box-header">
           <div
@@ -314,7 +311,6 @@ onMounted(() => {
         }
       }
     }
-<<<<<<< HEAD
     &-tip {
       margin-bottom: 15px;
       background: #baec57;
@@ -354,8 +350,6 @@ onMounted(() => {
       }
     }
 
-=======
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     .list-box {
       width: 100%;
       height: 100%;

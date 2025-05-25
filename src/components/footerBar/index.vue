@@ -17,16 +17,12 @@
           </div>
           <div
             class="uni-tabbar__label"
-<<<<<<< HEAD
             style="
               color: var(--primary-color);
               font-size: 12px;
               line-height: normal;
               margin-top: 3px;
             "
-=======
-            style="color: rgb(137, 137, 137); font-size: 12px; line-height: normal; margin-top: 3px"
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
           >
             {{ item.name }}
           </div>
@@ -111,10 +107,6 @@ const handleClick = (path) => {
       width: 100%;
       height: 1px;
       transform: scaleY(0.5);
-<<<<<<< HEAD
-=======
-      background-color: #000;
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
     }
     .uni-tabbar__item {
       display: flex;
@@ -124,14 +116,8 @@ const handleClick = (path) => {
       flex-direction: column;
       flex: 1;
       font-size: 0;
-<<<<<<< HEAD
       background-color: var(--footerBar-background);
       text-align: center;
-=======
-      background-color: #000;
-      text-align: center;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 
       &.trade-button {
         margin-top: -20px;

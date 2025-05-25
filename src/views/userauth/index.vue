@@ -190,11 +190,7 @@
             <img
               v-if="fileList1.length == 0"
               style="width: 36px; height: 36px"
-<<<<<<< HEAD
               src="../../assets/img/Frame.png"
-=======
-              src="@/assets/img/Frame.png"
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
             />
             <div v-if="fileList1.length == 0" class="text">上传证件照正面</div>
           </van-uploader>
@@ -202,11 +198,7 @@
             <img
               v-if="fileList2.length == 0"
               style="width: 36px; height: 36px"
-<<<<<<< HEAD
               src="../../assets/img/Frame.png"
-=======
-              src="@/assets/img/Frame.png"
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
             />
             <div v-if="fileList2.length == 0" class="text">上传证件照反面</div>
           </van-uploader>
@@ -214,11 +206,7 @@
             <img
               v-if="fileList3.length == 0"
               style="width: 36px; height: 36px"
-<<<<<<< HEAD
               src="../../assets/img/Frame.png"
-=======
-              src="@/assets/img/Frame.png"
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
             />
             <div v-if="fileList3.length == 0" class="text">上传手持证件照</div>
           </van-uploader>
@@ -229,22 +217,14 @@
 
     <template v-if="advancedAuth == '3'">
       <div class="content1">
-<<<<<<< HEAD
         <img src="../../assets/img/shz.png" class="imgLoad" />
-=======
-        <img src="@/assets/img/shz.png" class="imgLoad" />
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         <div class="text">审核中</div>
       </div>
     </template>
 
     <template v-if="advancedAuth == '2'">
       <div class="content1">
-<<<<<<< HEAD
         <img src="../../assets/img/sb.png" class="imgLoad" />
-=======
-        <img src="@/assets/img/sb.png" class="imgLoad" />
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         <div class="text">审核失败</div>
       </div>
 
@@ -253,11 +233,7 @@
 
     <template v-if="advancedAuth == '1'">
       <div class="content1">
-<<<<<<< HEAD
         <img src="../../assets/img/cg.png" class="imgLoad" />
-=======
-        <img src="@/assets/img/cg.png" class="imgLoad" />
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
         <div class="text">认证成功</div>
       </div>
     </template>
@@ -635,10 +611,6 @@ const reSubmit = () => {
   }
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d36d63934f35538ff7fd7111385951028443f0d8
 .element {
   background: #121212;
   border-radius: 8px 8px 8px 8px;
