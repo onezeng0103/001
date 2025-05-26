@@ -199,7 +199,7 @@
       </template>
       <div class="trade-main-input">
         <input
-          type="text"
+          type="number"
           v-model="form.turnover"
           @input="turnoverChange"
           :placeholder="`成交金额(${coinInfo.baseCoinUpperCase})`"

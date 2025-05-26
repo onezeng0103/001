@@ -189,7 +189,7 @@
               <div class="box-item-main">
                 <div>
                   机构保证金
-                  <span>{{ _numberWithCommas(item.bail) }}</span>
+                  <span>{{ _numberWithCommas(8000000) }}</span>
                 </div>
                 <div>
                   机构分润比例
@@ -416,7 +416,11 @@ const codeList = ref('')
 const showKeyboard = ref(false)
 const handleProxy = (item) => {
   info.value = item
-  showCenter.value = true
+  if (info.value?.limitCode == 'code') {
+    showBottom.value = true
+  } else {
+    showCenter.value = true
+  }
 }
 
 const price = ref()
@@ -426,7 +430,11 @@ const inTime = computed(() => {
   const endTime = dayjs(info.value.endTime)
   return now.value.isAfter(startTime) && now.value.isBefore(endTime)
 })
-
+watch(codeList, (newVal) => {
+  if (newVal.length == 6) {
+    showKeyboard.value = false
+  }
+})
 // 处理数字键盘输入
 const onInput = (value) => {
   if (codeList.value.length < 6) {
@@ -765,7 +773,7 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 100;
+  z-index: 9;
 }
 .rule_box {
   position: absolute;
@@ -773,7 +781,7 @@ onMounted(() => {
   left: 50%;
   transform: translate(-50%, -50%);
   background-size: 100% 100%;
-  z-index: 101;
+  z-index: 10;
   background: linear-gradient(226deg, #2f391a 0%, var(--primary-background) 100%);
   border-radius: 22px 22px 22px 22px;
   width: 80%;

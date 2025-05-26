@@ -150,7 +150,7 @@
         </div>
       </div>
       <div class="input-box">
-        <input v-model="orderAmount" type="text" placeholder="请输入数量" />
+        <input v-model="orderAmount" type="number" placeholder="请输入数量" />
         <span style="color: var(--secondary-color); font-size: 12px">最大</span>
       </div>
       <el-slider

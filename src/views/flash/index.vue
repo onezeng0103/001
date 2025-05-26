@@ -369,13 +369,7 @@
             v-model.trim="quantity"
             type="number"
             maxlength="140"
-            :placeholder="`${t(`least`, ['ebc', 'aams'])} ${
-              ['aams'].includes(_getConfig('_APP_ENV'))
-                ? 100
-                : cycleObj && cycleObj.minAmount
-                  ? cycleObj.minAmount
-                  : 0
-            } ${['aams'].includes(_getConfig('_APP_ENV')) ? 'USD' : 'USDT'}`"
+            placeholder="请输入"
             style="color: var(--regular-color) !important"
           />
         </div>
