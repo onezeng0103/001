@@ -39,7 +39,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgb(153, 153, 153);
+          color: var(--secondary-color);
         "
         :class="margin == 1 ? 'active' : ''"
         @click="handleTabs(1)"
@@ -53,7 +53,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgb(153, 153, 153);
+          color: var(--secondary-color);
         "
         :class="margin == 0 ? 'active' : ''"
         @click="handleTabs(0)"
@@ -64,7 +64,7 @@
     <div
       style="
         margin-top: 10px;
-        background: rgb(251, 251, 251);
+        background: var(--primary-color);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -72,7 +72,7 @@
         padding: 10px 15px;
       "
     >
-      <div style="color: #000000; font-weight: 500; font-size: 16px">
+      <div style="color: var(--primary-background); font-weight: 500; font-size: 16px">
         {{ type === 0 ? '止盈' : '止损' }}触发价格
       </div>
       <div
@@ -80,7 +80,7 @@
       >
         <img style="height: 36px; width: 36px" src="../../../assets/img/dollar.png" alt="" />
         <input
-          style="width: 100%; color: #000"
+          style="width: 100%; color: var(--primary-background)"
           v-model.trim="earnPriceValue"
           type="number"
           maxlength="140"
@@ -91,9 +91,16 @@
           class="uni-input-input"
           autocomplete="off"
         />
-        <span style="color: rgb(153, 153, 153)">USDT</span>
+        <span style="color: var(--secondary-color)">USDT</span>
       </div>
-      <div style="color: #000000; font-weight: 500; font-size: 16px; margin-top: 15px">
+      <div
+        style="
+          color: var(--primary-background);
+          font-weight: 500;
+          font-size: 16px;
+          margin-top: 15px;
+        "
+      >
         {{ type === 0 ? '止盈' : '止损' }}委托
       </div>
       <div
@@ -102,7 +109,7 @@
         <img style="height: 36px; width: 36px" src="../../../assets/img/dollar.png" alt="" />
         <input
           v-if="margin == 1"
-          style="width: 100%; color: #000"
+          style="width: 100%; color: var(--primary-background)"
           type="number"
           maxlength="140"
           placeholder="以当前最优价格交易"
@@ -117,7 +124,7 @@
           v-else
           v-model.trim="earnDelegatePriceValue"
           type="number"
-          style="width: 100%; color: #000"
+          style="width: 100%; color: var(--primary-background)"
           maxlength="140"
           placeholder="请输入"
           step="0.000000000000000001"
@@ -125,29 +132,29 @@
           pattern="[0-9]*"
           autocomplete="off"
         />
-        <span style="color: rgb(153, 153, 153)">USDT</span>
+        <span style="color: var(--secondary-color)">USDT</span>
       </div>
     </div>
     <div style="margin-top: 15px">
-      <span style="color: rgb(153, 153, 153)">持仓量：</span>
-      <span style="color: #000">
+      <span style="color: var(--secondary-color)">持仓量：</span>
+      <span style="color: var(--primary-background)">
         {{ info.openNum }}
         {{ info.showCoin ? matchText(info.showCoin, '/USDT') : info.symbol.toUpperCase() }}
       </span>
     </div>
     <div style="margin-top: 15px">
-      <span style="color: rgb(153, 153, 153)">开仓均价：</span>
-      <span style="color: #000">{{ info.openPrice }} USDT</span>
+      <span style="color: var(--secondary-color)">开仓均价：</span>
+      <span style="color: var(--primary-background)">{{ info.openPrice }} USDT</span>
     </div>
     <div style="margin-top: 15px">
-      <span style="color: rgb(153, 153, 153)">最新成交价：</span>
-      <span style="color: #000">{{ coinPriceInfo.close }} USDT</span>
+      <span style="color: var(--secondary-color)">最新成交价：</span>
+      <span style="color: var(--primary-background)">{{ coinPriceInfo.close }} USDT</span>
     </div>
     <div style="margin-top: 15px">
       <span style="color: rgb(255, 100, 100)">*</span>
-      <span style="color: rgb(153, 153, 153)">市场价格至：</span>
-      <span style="color: #000">{{ coinPriceInfo.close }} USDT</span>
-      <span style="color: rgb(153, 153, 153)">
+      <span style="color: var(--secondary-color)">市场价格至：</span>
+      <span style="color: var(--primary-background)">{{ coinPriceInfo.close }} USDT</span>
+      <span style="color: var(--secondary-color)">
         时将触发止盈委托，成交后预计盈利{{ incomeValue }}USDT
       </span>
     </div>
@@ -268,24 +275,24 @@ const submit = () => {
 </script>
 <style lang="scss" scoped>
 .van-popup {
-  background: #fff !important;
+  background: var(--primary-color) !important;
   padding: 15px;
-  color: #000;
+  color: var(--regular-color);
 }
 .active {
-  color: #000 !important;
+  color: var(--regular-color) !important;
 }
 .btn2 {
   margin-top: 30px;
   width: 347px;
   height: 41px;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 21px 21px 21px 21px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 400;
   font-size: 16px;
-  color: #000000;
+  color: var(--regular-color);
 }
 </style>

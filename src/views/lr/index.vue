@@ -37,13 +37,12 @@ const login = () => {
   padding-top: 120px;
   .title {
     font-size: 30px;
-    color: #000;
     font-family: 'Rowdies-Regular';
-    color: #fff;
+    color: var(--primary-color);
   }
   .text {
     font-size: 24px;
-    color: #fff;
+    color: var(--primary-color);
     margin-bottom: 50px;
   }
   .img-box {
@@ -86,11 +85,11 @@ const login = () => {
       justify-content: center;
       width: 150px;
       height: 47px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 49px 49px 49px 49px;
       font-size: 16px;
       font-weight: 400;
-      color: #ffffff;
+      color: var(--primary-color);
     }
     .login {
       display: flex;
@@ -98,11 +97,11 @@ const login = () => {
       justify-content: center;
       width: 150px;
       height: 47px;
-      background: #ffffff;
+      background: var(--primary-color);
       border-radius: 49px 49px 49px 49px;
       font-size: 16px;
       font-weight: 400;
-      color: #000000;
+      color: var(--primary-background);
     }
   }
 }

@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,7 +77,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -86,24 +86,30 @@
     <div class="confirm-main">
       <div class="confirm-main-info">
         <div class="confirm-main-info-item">
-          <div style="color: #fff; font-size: 14px">{{ tradeInfo?.followOrder || 0 }}</div>
-          <div style="color: rgba(153, 153, 153, 1); font-size: 12; margin-top: 5px">带单天数</div>
+          <div style="color: var(--primary-color); font-size: 14px">
+            {{ tradeInfo?.followOrder || 0 }}
+          </div>
+          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">带单天数</div>
         </div>
         <div class="confirm-main-info-item">
-          <div style="color: #fff; font-size: 14px">{{ tradeInfo?.followUser || 0 }}</div>
-          <div style="color: rgba(153, 153, 153, 1); font-size: 12; margin-top: 5px">跟单人数</div>
+          <div style="color: var(--primary-color); font-size: 14px">
+            {{ tradeInfo?.followUser || 0 }}
+          </div>
+          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">跟单人数</div>
         </div>
         <div class="confirm-main-info-item">
-          <div style="color: #fff; font-size: 14px">{{ tradeInfo?.rewardAmount || 0 }}</div>
-          <div style="color: rgba(153, 153, 153, 1); font-size: 12; margin-top: 5px">
+          <div style="color: var(--primary-color); font-size: 14px">
+            {{ tradeInfo?.rewardAmount || 0 }}
+          </div>
+          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
             收益(USDT)
           </div>
         </div>
       </div>
       <div class="confirm-main-type">
         <div class="confirm-main-type-top">
-          <div style="color: #fff; font: 14px">跟单币种</div>
-          <div style="color: rgb(186, 236, 87); font-size: 12px" @click="handleAll">全选</div>
+          <div style="color: var(--primary-color); font: 14px">跟单币种</div>
+          <div style="color: var(--primary-border); font-size: 12px" @click="handleAll">全选</div>
         </div>
         <div class="confirm-main-type-content">
           <div
@@ -119,7 +125,7 @@
       </div>
       <div class="confirm-main-content">
         <div class="confirm-main-content-top">
-          <div style="color: #fff; font: 14px">跟单模式</div>
+          <div style="color: var(--primary-color); font: 14px">跟单模式</div>
         </div>
         <div class="confirm-main-content-tab">
           <div
@@ -148,9 +154,9 @@
           <div>USDT</div>
         </div>
         <div class="confirm-main-content-tip">
-          <div style="color: rgb(153, 153, 153); font-size: 12px">
+          <div style="color: var(--secondary-color); font-size: 12px">
             可用：
-            <span style="color: #fff">{{ amountSum }}</span>
+            <span style="color: var(--primary-color)">{{ amountSum }}</span>
           </div>
         </div>
       </div>
@@ -305,7 +311,7 @@ onMounted(() => {
       justify-content: space-between;
       margin-top: 15px;
       padding: 20px 10px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       &-item {
         display: flex;
@@ -316,7 +322,7 @@ onMounted(() => {
     &-type {
       margin-top: 15px;
       padding: 20px 10px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       &-top {
         display: flex;
@@ -332,7 +338,7 @@ onMounted(() => {
         flex-wrap: wrap;
         margin-top: 15px;
         &-item {
-          background-color: rgba(153, 153, 153, 0.1);
+          background-color: var(--secondary-color);
           height: 32px;
           width: 30%;
           box-sizing: border-box;
@@ -345,15 +351,19 @@ onMounted(() => {
           margin-bottom: 10px;
         }
         .active {
-          background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
-          color: #000;
+          background: linear-gradient(
+            306deg,
+            var(--primary-border) 0%,
+            var(--secondary-background) 100%
+          );
+          color: var(--primary-background);
         }
       }
     }
     &-content {
       margin-top: 15px;
       padding: 20px 10px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       &-tab {
         margin-top: 15px;
@@ -361,7 +371,7 @@ onMounted(() => {
         align-items: center;
         justify-content: space-between;
         border-radius: 8px 8px 8px 8px;
-        background-color: rgba(153, 153, 153, 0.1);
+        background-color: var(--secondary-color);
         &-item {
           flex: 1;
           text-align: center;
@@ -370,8 +380,12 @@ onMounted(() => {
         }
         .active {
           border-radius: 8px 8px 8px 8px;
-          background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
-          color: #000;
+          background: linear-gradient(
+            306deg,
+            var(--primary-border) 0%,
+            var(--secondary-background) 100%
+          );
+          color: var(--primary-background);
         }
       }
       &-input {
@@ -379,7 +393,7 @@ onMounted(() => {
         padding: 0 10px;
         height: 40px;
         border-radius: 8px;
-        background-color: rgba(153, 153, 153, 0.1);
+        background-color: var(--secondary-color);
         display: flex;
         align-items: center;
         input {
@@ -400,14 +414,18 @@ onMounted(() => {
       margin-top: 30px;
       width: 47%;
       height: 41px;
-      background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+      background: linear-gradient(
+        306deg,
+        var(--primary-border) 0%,
+        var(--secondary-background) 100%
+      );
       border-radius: 21px 21px 21px 21px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-weight: 400;
       font-size: 16px;
-      color: #000000;
+      color: var(--primary-background);
     }
   }
 }

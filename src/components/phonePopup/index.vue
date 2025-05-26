@@ -6,8 +6,8 @@
         <div style="height: 44px">
           <div
             style="
-              background: #000;
-              border-bottom-color: rgb(238, 238, 238);
+              background: var(--primary-background);
+              border-bottom-color:var(--regular-border);
               padding-left: 8px;
               padding-right: 8px;
               z-index: 9;
@@ -62,7 +62,7 @@
                 <span
                   style="
                     font-size: 16px;
-                    color: #fff;
+                    color: var(--primary-color);
                     font-weight: 500;
                     display: block;
                     overflow: hidden;
@@ -216,7 +216,7 @@ onMounted(() => {
   height: auto;
   padding: 0.625rem 0.9375rem;
   box-sizing: border-box;
-  background: #000;
+  background: var(--primary-background);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,12 +238,12 @@ onMounted(() => {
   background: rgba(255,255,255,0.07);
   border-radius: 10px;
   font-size: 0.875rem;
-  color:rgba(153, 153, 153, 1);
+  color:var(--secondary-color);
   display: flex;
   align-items: center;
 }
 .next-list .next-search .next-placeholder {
-  color: rgba(153, 153, 153, 1);
+  color: var(--secondary-color);
 }
 .next-list .next-scroll-left {
   height: 90%;
@@ -259,7 +259,7 @@ onMounted(() => {
   text-align: left;
   line-height: 1.875rem;
   font-size: 0.9375rem;
-  color: #fff;
+  color: var(--primary-color);
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -270,7 +270,7 @@ onMounted(() => {
   height: 2.5rem;
   padding: 0 0.9375rem;
   box-sizing: border-box;
-  background-color: var(--white);
+  background-color: var(--primary-background);
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -302,7 +302,7 @@ onMounted(() => {
 .next-list .next-scroll-left .left-list .left-item-card .left-item-card-info .left-item-card-name {
   font-size: 0.875rem;
   line-height: 0.875rem;
-  color: #fff;
+  color: var(--primary-color);
 }
 .next-list .next-scroll-left .left-list .left-item-card .left-item-card-info .left-item-card-phone {
   margin-top: 0.4375rem;

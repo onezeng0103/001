@@ -170,7 +170,7 @@
                   </div>
                 </div>
               </div>
-              <div style="font-size: 10px; color: rgb(153, 153, 153); margin-top: 10px">
+              <div style="font-size: 10px; color: var(--secondary-color); margin-top: 10px">
                 {{ itemHistroy?.createTime }}
               </div>
               <div class="flash-orderBox-list-item">
@@ -198,7 +198,7 @@
               </div>
               <div class="flash-orderBox-list-item">
                 <div>
-                  <span style="color: rgb(186, 236, 87)">
+                  <span style="color: var(--primary-border)">
                     {{ formatTime(itemHistroy.countdown) }}
                   </span>
                 </div>
@@ -208,7 +208,7 @@
                       style="
                         height: 3.5px;
                         border-radius: 3.5px;
-                        background: #f5f5f5;
+                        background: var(--placeholder-color);
                         width: 100%;
                         transform: translateZ(0);
                         flex: 1;
@@ -219,7 +219,7 @@
                       <div
                         class="fun-progress_bar"
                         :style="{
-                          background: 'rgb(186, 236, 87)',
+                          background: 'var(--primary-border)',
                           transitionDuration: '0.025s',
                           transform: `translate3d(-${calculateProgress(itemHistroy)}%, 0px, 0px)`
                         }"
@@ -376,7 +376,7 @@
                   ? cycleObj.minAmount
                   : 0
             } ${['aams'].includes(_getConfig('_APP_ENV')) ? 'USD' : 'USDT'}`"
-            style="color: #000000 !important"
+            style="color: var(--regular-color) !important"
           />
         </div>
         <div
@@ -409,7 +409,7 @@
               height: 30px;
               margin-top: 10px;
               border-radius: 8px;
-              background-color: rgb(240, 240, 240);
+              background-color: var(--placeholder-color);
             "
           >
             {{ item.name }}
@@ -462,14 +462,14 @@
           </svg>
         </div>
       </div>
-      <div style="color: rgba(153, 153, 153, 1); font-size: 12px; margin-top: 10px">
+      <div style="color: var(--secondary-color); font-size: 12px; margin-top: 10px">
         {{ centerData.createTime }}
       </div>
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">开单方向</div>
-        <div style="color: #000; font-size: 12px">
+        <div style="color: var(--secondary-color); font-size: 12px">开单方向</div>
+        <div style="color: var(--regular-color); font-size: 12px">
           <template v-if="Number(centerData.betContent)">看涨</template>
           <template v-else>看跌</template>
         </div>
@@ -477,8 +477,8 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">盈亏</div>
-        <div style="color: #000; font-size: 12px">
+        <div style="color: var(--secondary-color); font-size: 12px">盈亏</div>
+        <div style="color: var(--regular-color); font-size: 12px">
           {{ profitAndloss(centerData.betAmount, centerData.rewardAmount) }}
           {{ centerData.baseSymbol ? centerData.baseSymbol.toUpperCase() : '' }}
         </div>
@@ -486,16 +486,16 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">开单价/结算价</div>
-        <div style="color: #000; font-size: 12px">
+        <div style="color: var(--secondary-color); font-size: 12px">开单价/结算价</div>
+        <div style="color: var(--regular-color); font-size: 12px">
           {{ centerData.openPrice }} / {{ centerData.closePrice }}
         </div>
       </div>
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">开单价币种</div>
-        <div style="color: #000; font-size: 12px">
+        <div style="color: var(--secondary-color); font-size: 12px">开单价币种</div>
+        <div style="color: var(--regular-color); font-size: 12px">
           {{
             centerData.showCoin
               ? centerData.showCoin
@@ -506,14 +506,16 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">收益率</div>
-        <div style="color: #000; font-size: 12px">{{ centerData.rate * 100 }} %</div>
+        <div style="color: var(--secondary-color); font-size: 12px">收益率</div>
+        <div style="color: var(--regular-color); font-size: 12px">
+          {{ centerData.rate * 100 }} %
+        </div>
       </div>
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: rgba(153, 153, 153, 1); font-size: 12px">本期结果</div>
-        <div style="color: #000; font-size: 12px">
+        <div style="color: var(--secondary-color); font-size: 12px">本期结果</div>
+        <div style="color: var(--regular-color); font-size: 12px">
           {{ getType(profitAndloss(centerData.betAmount, centerData.rewardAmount)) }}
         </div>
       </div>
@@ -1171,14 +1173,14 @@ const updateList = () => {
         }
         &-price {
           .name {
-            color: rgba(255, 255, 255, 1);
+            color: var(--primary-color);
             font-size: 12px;
             margin-bottom: 4px;
           }
           .text {
             display: flex;
             align-items: center;
-            color: rgba(153, 153, 153, 1);
+            color: var(--secondary-color);
             font-size: 12px;
             .eys {
               display: flex;
@@ -1190,7 +1192,7 @@ const updateList = () => {
       }
       &-price {
         font-size: 20px;
-        color: #fff;
+        color: var(--primary-color);
         margin-top: 10px;
       }
     }
@@ -1200,11 +1202,11 @@ const updateList = () => {
       align-items: end;
       &-price {
         font-size: 18px;
-        color: rgba(186, 236, 87, 1);
+        color: var(--primary-border);
       }
       &-text {
         margin-top: 20px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         font-size: 10px;
         span {
           margin-left: 5px;
@@ -1215,9 +1217,9 @@ const updateList = () => {
   &-tab {
     margin-top: 15px;
     padding: 18px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 29px 29px 29px 29px;
-    border: 1px solid rgba(186, 236, 87, 0.26);
+    border: 1px solid var(--primary-border);
     width: auto;
     display: flex;
     align-items: center;
@@ -1230,20 +1232,20 @@ const updateList = () => {
     &-item {
       width: auto;
       font-size: 14px;
-      color: rgba(153, 153, 153, 1);
+      color: var(--secondary-color);
       cursor: pointer;
       flex-shrink: 0;
       margin-right: 30px;
     }
     .active {
-      color: rgba(186, 236, 87, 1);
+      color: var(--primary-border);
     }
   }
   &-tip {
     margin-bottom: 15px;
     margin-top: 15px;
-    background: #baec57;
-    box-shadow: inset 0px -4px 4px 0px #d7ff89;
+    background: var(--primary-border);
+    box-shadow: inset 0px -4px 4px 0px var(--secondary-background);
     border-radius: 10px 10px 10px 10px;
     padding: 10px 16px;
     display: flex;
@@ -1260,7 +1262,7 @@ const updateList = () => {
       }
       .text {
         flex: 1;
-        color: #000;
+        color: var(--primary-background);
         &-title {
           font-size: 22px;
           font-weight: 900;
@@ -1272,15 +1274,15 @@ const updateList = () => {
     }
     &-right {
       border-radius: 16px 16px 16px 16px;
-      border: 1px solid #000000;
+      border: 1px solid var(--primary-background);
       padding: 4px 11px;
       font-size: 12px;
-      color: #000;
+      color: var(--primary-background);
     }
   }
   &-main {
     margin-top: 15px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 8px 8px 8px 8px;
     padding: 14px;
     &-top {
@@ -1298,7 +1300,7 @@ const updateList = () => {
         .name {
           margin-left: 5px;
           font-size: 12px;
-          color: rgba(153, 153, 153, 1);
+          color: var(--secondary-color);
         }
         svg {
           margin-left: 5px;
@@ -1308,47 +1310,48 @@ const updateList = () => {
   }
   &-orderBox {
     margin-top: 15px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 8px 8px 8px 8px;
     padding: 14px;
     &-tab {
       display: flex;
       align-items: center;
       &-item {
-        color: rgb(153, 153, 153);
+        color: var(--secondary-color);
         margin-right: 10px;
       }
       .active {
-        color: #fff;
+        color: var(--primary-color);
       }
     }
     &-list {
       margin-top: 10px;
       &-item {
         font-size: 12px;
-        color: rgb(153, 153, 153);
+        color: var(--secondary-color);
         display: flex;
         align-items: center;
         justify-content: space-between;
         margin-top: 10px;
         &-price {
-          color: #fff;
+          color: var(--primary-color);
         }
       }
       .line {
         margin: 10px 0;
         width: 100%;
         height: 1px;
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--placeholder-color);
       }
     }
   }
   &-btn {
     position: fixed;
-    bottom: 10px;
+    bottom: 70px;
     left: 0;
     width: 100%;
     margin-top: 15px;
+    z-index: 100;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -1357,7 +1360,7 @@ const updateList = () => {
       width: 40%;
       height: 35px;
       background-color: rgba(23, 172, 0, 1);
-      color: #fff;
+      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1367,7 +1370,7 @@ const updateList = () => {
       width: 40%;
       height: 35px;
       background-color: rgba(255, 100, 100, 1);
-      color: #fff;
+      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1375,12 +1378,12 @@ const updateList = () => {
   }
 }
 .van-popup {
-  background: #fff !important;
+  background: var(--primary-color) !important;
   padding: 15px;
   color: #000;
 }
 .box {
-  background: rgb(251, 251, 251);
+  background: var(--primary-color);
   border-radius: 9px;
   padding: 10px 15px;
   margin-top: 20px;
@@ -1388,7 +1391,7 @@ const updateList = () => {
     margin-top: 15px;
     &-title {
       font-size: 14px;
-      color: #000;
+      color: var(--primary-background);
       margin-bottom: 10px;
     }
     .input-box {
@@ -1412,7 +1415,7 @@ const updateList = () => {
         display: inline-block;
         width: 120px;
         height: auto;
-        background-color: rgb(240, 240, 240);
+        background-color: var(--placeholder-color);
         border-radius: 8px;
         padding: 10px;
         text-align: center;
@@ -1427,30 +1430,30 @@ const updateList = () => {
     }
   }
   .tagBtn-selected {
-    background: rgb(0, 0, 0) !important;
-    color: rgb(186, 236, 87) !important;
+    background: var(--primary-background) !important;
+    color: var(--primary-border) !important;
   }
 }
 .color-white {
-  background: rgba(0, 0, 0, 1) !important;
-  color: rgba(186, 236, 87, 1) !important;
+  background: var(--primary-background) !important;
+  color: var(--primary-border) !important;
 }
 .color-gray {
-  background: rgba(240, 240, 240, 1) !important;
-  color: #000 !important;
+  background: var(--placeholder-color) !important;
+  color: var(--primary-background) !important;
 }
 .btn2 {
   margin-top: 30px;
   width: 347px;
   height: 41px;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 21px 21px 21px 21px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 400;
   font-size: 16px;
-  color: #000000;
+  color: var(--primary-background);
 }
 .fun-progress_bar {
   width: 100%;

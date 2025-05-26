@@ -31,12 +31,12 @@ const activeIndex = ref(0)
     margin-bottom: 28px;
     &-item {
       font-size: 12px;
-      color: rgba(153, 153, 153, 1);
+      color: var(--secondary-color);
       margin-right: 25px;
       cursor: pointer;
     }
     .active {
-      color: rgba(186, 236, 87, 1);
+      color: var(--primary-border);
       font-size: 14px;
     }
   }

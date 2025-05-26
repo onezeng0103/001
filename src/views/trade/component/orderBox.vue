@@ -22,11 +22,11 @@
               <div
                 style="
                   padding: 2px 5px;
-                  background: rgb(186, 236, 87);
+                  background: var(--primary-border);
                   border-radius: 5px;
                   font-size: 10px;
                   margin-right: 5px;
-                  color: #000;
+                  color: var(--primary-color);
                 "
               >
                 <template v-if="item.type == 0">买入</template>
@@ -45,11 +45,11 @@
               @click="cancelOrder(item)"
               style="
                 padding: 2px 5px;
-                background: rgb(186, 236, 87);
+                background: var(--primary-border);
                 border-radius: 5px;
                 font-size: 10px;
                 margin-right: 5px;
-                color: #000;
+                color: var(--primary-color);
               "
             >
               撤单
@@ -57,7 +57,7 @@
           </div>
           <div
             v-if="item.delegateType"
-            style="font-size: 10px; color: rgb(153, 153, 153); margin-top: 10px"
+            style="font-size: 10px; color: var(--secondary-color); margin-top: 10px"
           >
             {{ _timeFormat(item.params?.delegateTime, 'HH:mm MM/DD', true) }}
           </div>
@@ -193,38 +193,38 @@ defineExpose({
 <style lang="scss" scoped>
 .order-box {
   margin-top: 15px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--regular-background);
   border-radius: 8px 8px 8px 8px;
   padding: 14px;
   &-tab {
     display: flex;
     align-items: center;
     &-item {
-      color: rgb(153, 153, 153);
+      color: var(--secondary-color);
       margin-right: 10px;
     }
     .active {
-      color: #fff;
+      color: var(--primary-color);
     }
   }
   &-list {
     margin-top: 10px;
     &-item {
       font-size: 12px;
-      color: rgb(153, 153, 153);
+      color: var(--secondary-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 10px;
       &-price {
-        color: #fff;
+        color: var(--primary-color);
       }
     }
     .line {
       margin: 10px 0;
       width: 100%;
       height: 1px;
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--regular-background);
     }
   }
 }

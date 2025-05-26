@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -79,7 +79,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           >
             我的跟单
@@ -93,7 +93,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           >
             我的主页
@@ -191,7 +191,7 @@
           <div>交易专家</div>
           <div
             style="
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
               font-size: 12px;
               display: flex;
               align-items: center;
@@ -281,7 +281,7 @@
           height: 30px;
           line-height: 30px;
           text-align: center;
-          background: rgb(240, 240, 240);
+          background: var(--primary-color);
           border-radius: 6px;
           margin-bottom: 15px;
         "
@@ -373,7 +373,7 @@ const isEye = ref(true)
     padding: 0 10px;
     .info {
       padding: 20px 10px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       margin-bottom: 15px;
       .title {
@@ -381,7 +381,7 @@ const isEye = ref(true)
         align-items: center;
         justify-content: space-between;
         .text {
-          color: #999999;
+          color: var(--secondary-color);
           font-size: 12px;
         }
       }
@@ -390,7 +390,7 @@ const isEye = ref(true)
         .top {
           font-weight: 600;
           font-size: 20px;
-          color: #ffffff;
+          color: var(--primary-color);
           text-align: left;
           font-style: normal;
           text-transform: none;
@@ -408,7 +408,7 @@ const isEye = ref(true)
           .left {
             .total-item {
               margin-bottom: 5px;
-              color: #999999;
+              color: var(--secondary-color);
               font-size: 12px;
               span {
                 margin-left: 5px;
@@ -416,7 +416,7 @@ const isEye = ref(true)
             }
           }
           .right {
-            color: #999999;
+            color: var(--secondary-color);
             font-size: 12px;
             span {
               margin-left: 5px;
@@ -430,7 +430,7 @@ const isEye = ref(true)
       margin-top: 15px;
       display: flex;
       align-items: center;
-      border: 1px solid rgba(186, 236, 87, 1);
+      border: 1px solid var(--primary-border);
       border-radius: 14px;
       img {
         margin-right: 5px;
@@ -442,17 +442,17 @@ const isEye = ref(true)
     .list {
       margin-top: 15px;
       padding: 20px 10px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
     }
   }
 }
 .van-popup {
-  background: #fff !important;
+  background: var(--primary-color) !important;
   padding: 15px;
-  color: #000;
+  color: var(--primary-background);
 }
 .active {
-  border: 1px solid #000;
+  border: 1px solid var(--primary-background);
 }
 </style>

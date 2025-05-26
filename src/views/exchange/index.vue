@@ -117,8 +117,8 @@ onMounted(() => {
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -173,7 +173,7 @@ onMounted(() => {
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -204,7 +204,7 @@ onMounted(() => {
       >
         <div style="flex: 1; margin-right: 20px">
           <div style="display: flex; align-items: center" @click="handleShowBottom(true)">
-            <div style="width: 30px; color: #999999">从</div>
+            <div style="width: 30px; color: var(--secondary-color)">从</div>
             <div class="nub">
               {{ returnName(params.transferOutAccount) }}
               <div class="triangle-down"></div>
@@ -212,11 +212,11 @@ onMounted(() => {
           </div>
 
           <div
-            style="border-bottom: 1px solid rgba(255, 255, 255, 0.5); margin: 10px 0 10px 30px"
+            style="border-bottom: 1px solid var(--secondary-color); margin: 10px 0 10px 30px"
           ></div>
 
           <div style="display: flex; align-items: center" @click="handleShowBottom(true)">
-            <div style="width: 30px; color: #999999">到</div>
+            <div style="width: 30px; color: var(--secondary-color)">到</div>
             <div class="nub">
               {{ returnName(params.transferInAccount) }}
               <div class="triangle-down"></div>
@@ -251,7 +251,7 @@ onMounted(() => {
           alt=""
           style="width: 20px; height: 20px; margin-right: 10px"
         />
-        <div style="color: #999999">USDT</div>
+        <div style="color: var(--secondary-color)">USDT</div>
       </div>
 
       <div
@@ -278,7 +278,7 @@ onMounted(() => {
       </div>
 
       <div style="margin-top: 20px">划转须知</div>
-      <div style="font-size: 12px; margin-top: 10px; color: #a0a0a0">
+      <div style="font-size: 12px; margin-top: 10px; color: var(--secondary-color)">
         只有将资产划转到对应的帐户才可以进行交易。 帐户间的划转不收取手续费。
       </div>
     </div>
@@ -289,7 +289,7 @@ onMounted(() => {
   <van-popup v-model:show="showBottom" position="bottom">
     <div class="lists">
       <div style="display: flex; justify-content: center; position: relative; margin-bottom: 20px">
-        <div style="color: #000000">选择划入账户</div>
+        <div style="color: var(--regular-color)">选择划入账户</div>
         <div class="cha" @click="showBottom = false">
           <svg
             t="1748095662241"
@@ -332,13 +332,13 @@ onMounted(() => {
   transform: translateY(-50%);
 }
 .lists {
-  background-color: #ffffff;
+  background-color: var(--primary-color);
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   padding: 15px;
 
   .lists-item {
-    color: #999999;
+    color: var(--secondary-color);
     height: 44px;
     display: flex;
     align-items: center;
@@ -347,8 +347,8 @@ onMounted(() => {
 
   .qd {
     border-radius: 5px;
-    background-color: #f0f0f0;
-    color: #4d9eb1;
+    background-color: var(--primary-color);
+    color: var(--primary-border);
   }
 }
 
@@ -357,18 +357,17 @@ onMounted(() => {
     border-radius: 4px;
     padding: 15px;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--regular-background);
     margin-bottom: 15px;
 
     .nub {
       flex: 1;
-      background: rgba(255, 255, 255, 0.1);
+      background: var(--regular-background);
       height: 35px;
       display: flex;
       align-items: center;
       border-radius: 4px;
       padding: 6px;
-      //font-size: 16px;
       justify-content: space-between;
 
       .triangle-down {
@@ -376,7 +375,7 @@ onMounted(() => {
         height: 0;
         border-left: 4px solid transparent;
         border-right: 4px solid transparent;
-        border-top: 4px solid #999;
+        border-top: 4px solid var(--secondary-color);
         margin-right: 5px;
       }
     }
@@ -398,16 +397,16 @@ onMounted(() => {
   justify-content: center;
   font-weight: 400;
   font-size: 14px;
-  color: #999999;
+  color: var(--secondary-color);
   text-align: left;
   font-style: normal;
   text-transform: none;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--regular-background);
   border-radius: 20px 20px 20px 20px;
 }
 
 .zf {
-  color: #000000;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  color: var(--regular-color);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
 }
 </style>

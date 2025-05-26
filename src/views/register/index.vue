@@ -52,12 +52,6 @@ const tabList = computed(() => {
   }
   return list
 })
-const register = () => {
-  router.push('/register')
-}
-const login = () => {
-  router.push('/login')
-}
 </script>
 <style lang="scss" scoped>
 .login {
@@ -67,7 +61,7 @@ const login = () => {
     font-family: 'Source Han Sans Old Style-Bold';
     font-weight: bold;
     font-size: 36px;
-    color: #ffffff;
+    color: var(--primary-color);
     text-align: left;
     font-style: normal;
     text-transform: none;
@@ -81,7 +75,7 @@ const login = () => {
       font-family: PingFang SC;
       font-weight: 400;
       font-size: 16px;
-      color: #ffffff;
+      color: var(--primary-color);
       text-align: left;
       font-style: normal;
       text-transform: none;
@@ -100,7 +94,7 @@ const login = () => {
         display: block;
         width: 2px;
         height: 16px;
-        background: #baec57;
+        background: var(--primary-border);
         border-radius: 1px 1px 1px 1px;
       }
     }

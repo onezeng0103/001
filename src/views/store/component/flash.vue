@@ -101,7 +101,7 @@ const listResult = ref(currentCoinList.value)
     .showSymbol {
       margin-left: 5px;
       font-size: 14px;
-      color: #fff;
+      color: var(--primary-color);
       display: flex;
       align-items: end;
       .type {
@@ -119,13 +119,17 @@ const listResult = ref(currentCoinList.value)
       justify-content: center;
       padding: 5px 10px;
       height: 22px;
-      background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+      background: linear-gradient(
+        306deg,
+        var(--primary-border) 0%,
+        var(--secondary-background) 100%
+      );
       border-radius: 4px 4px 4px 4px;
-      color: #000;
+      color: var(--primary-color);
       font-size: 12px;
     }
     margin-left: 10px;
-    color: #fff;
+    color: var(--primary-color);
   }
 }
 </style>

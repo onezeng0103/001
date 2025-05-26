@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,7 +77,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -86,20 +86,26 @@
     <div class="mine-main">
       <div class="mine-main-info">
         <div class="mine-main-info-item">
-          <div style="color: #fff; font-size: 14px">{{ profitInfo?.betAmount || 0 }}</div>
-          <div style="color: rgba(153, 153, 153, 1); font-size: 12; margin-top: 5px">
+          <div style="color: var(--primary-color); font-size: 14px">
+            {{ profitInfo?.betAmount || 0 }}
+          </div>
+          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
             跟单总金额(USDT)
           </div>
         </div>
         <div class="mine-main-info-item">
-          <div style="color: #fff; font-size: 14px">{{ profitInfo?.profitAndLoss || 0 }}</div>
-          <div style="color: rgba(153, 153, 153, 1); font-size: 12; margin-top: 5px">
+          <div style="color: var(--primary-color); font-size: 14px">
+            {{ profitInfo?.profitAndLoss || 0 }}
+          </div>
+          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
             已实现总盈亏(USDT)
           </div>
         </div>
         <div class="mine-main-info-item">
-          <div style="color: #fff; font-size: 14px">{{ profitInfo?.profitRate || 0 }}</div>
-          <div style="color: rgba(153, 153, 153, 1); font-size: 12; margin-top: 5px">
+          <div style="color: var(--primary-color); font-size: 14px">
+            {{ profitInfo?.profitRate || 0 }}
+          </div>
+          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
             总收益率(USDT)
           </div>
         </div>
@@ -128,14 +134,18 @@
                     <img src="../../assets/img/01.png" alt="" />
                   </div>
                   <div style="margin-left: 10px">
-                    <div style="color: #fff; font-size: 14px">{{ item.traderName }}</div>
-                    <div style="color: rgb(153, 153, 153); font-size: 12px">
-                      跟单天数
-                      <span style="color: #fff">{{ item.followDay }}</span>
+                    <div style="color: var(--primary-color); font-size: 14px">
+                      {{ item.traderName }}
                     </div>
-                    <div style="color: rgb(153, 153, 153); font-size: 12px">
+                    <div style="color: var(--secondary-color); font-size: 12px">
+                      跟单天数
+                      <span style="color: var(--primary-color)">{{ item.followDay }}</span>
+                    </div>
+                    <div style="color: var(--secondary-color); font-size: 12px">
                       跟单方式
-                      <span style="color: #fff">{{ returnFollowName(item.followType) }}</span>
+                      <span style="color: var(--primary-color)">
+                        {{ returnFollowName(item.followType) }}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -144,13 +154,15 @@
                 </div>
               </div>
               <div class="mine-main-list-item-info">
-                <div style="color: rgb(153, 153, 153); font-size: 12px">
+                <div style="color: var(--secondary-color); font-size: 12px">
                   跟单总收益
-                  <span style="color: #fff">{{ item.followAmount || '0.00' }} USD</span>
+                  <span style="color: var(--primary-color)">
+                    {{ item.followAmount || '0.00' }} USD
+                  </span>
                 </div>
-                <div style="color: rgb(153, 153, 153); font-size: 12px; margin-top: 10px">
+                <div style="color: var(--secondary-color); font-size: 12px; margin-top: 10px">
                   跟单时间
-                  <span style="color: #fff">
+                  <span style="color: var(--primary-color)">
                     {{ _timeFormat(item.createTime, 'MM/DD HH:mm', true) }}
                   </span>
                 </div>
@@ -266,17 +278,17 @@ onMounted(() => {
     &-list {
       margin-top: 15px;
       padding: 20px 10px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       &-tab {
         display: flex;
         align-items: center;
         &-item {
-          color: rgb(153, 153, 153);
+          color: var(--secondary-color);
           margin-left: 10px;
         }
         .active {
-          color: rgb(186, 236, 87);
+          color: var(--primary-border);
         }
       }
       &-item {
@@ -287,7 +299,7 @@ onMounted(() => {
           align-items: center;
           justify-content: space-between;
           padding-bottom: 20px;
-          border-bottom: 1px solid rgb(153, 153, 153);
+          border-bottom: 1px solid var(--secondary-color);
           .avatar {
             width: 24px;
             height: 24px;
@@ -301,8 +313,12 @@ onMounted(() => {
           &-btn {
             font-size: 12px;
             padding: 2px 5px;
-            color: #000;
-            background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+            color: var(--primary-background);
+            background: linear-gradient(
+              306deg,
+              var(--primary-border) 0%,
+              var(--secondary-background) 100%
+            );
             border-radius: 14px;
           }
         }

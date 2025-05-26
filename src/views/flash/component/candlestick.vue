@@ -539,13 +539,13 @@ const setStudy = (name) => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: rgba(255, 255, 255, 1);
+  color: var(--primary-color);
   font-size: 10px;
   font-weight: 500;
   margin-top: 10px;
 }
 .active {
-  color: rgb(186, 236, 87);
+  color: var(--primary-border);
 }
 .candlestick {
   height: 250px;

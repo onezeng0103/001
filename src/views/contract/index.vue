@@ -209,8 +209,8 @@
           style="padding: 0 10px; height: 30px; margin-top: 20px; position: relative"
         >
           <van-slider
-            active-color="#c4eb6e"
-            inactive-color="#232323"
+            active-color="var(--primary-border)"
+            inactive-color="var(--placeholder-border)"
             button-size="16"
             v-model="sliderValue"
           />
@@ -246,7 +246,7 @@
         style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px"
       >
         <div style="display: flex; flex-direction: column; align-items: center">
-          <div style="color: #fff; font-size: 14px">
+          <div style="color: var(--primary-color); font-size: 14px">
             {{ bearableValue ? _toFixed(bearableValue, 4) : 0 }}
             {{
               coinInfo.customizeFlag === 2
@@ -254,14 +254,16 @@
                 : coinInfo.coin?.toUpperCase()
             }}
           </div>
-          <div style="color: rgba(153, 153, 153, 1); font-size: 10px; margin-top: 5px">可空开</div>
+          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">可空开</div>
         </div>
         <div style="display: flex; flex-direction: column; align-items: center">
-          <div style="color: #fff; font-size: 14px">{{ _toFixed(marginValue, 4) }} USDT</div>
-          <div style="color: rgba(153, 153, 153, 1); font-size: 10px; margin-top: 5px">保证金</div>
+          <div style="color: var(--primary-color); font-size: 14px">
+            {{ _toFixed(marginValue, 4) }} USDT
+          </div>
+          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">保证金</div>
         </div>
         <div style="display: flex; flex-direction: column; align-items: center">
-          <div style="color: #fff; font-size: 14px">
+          <div style="color: var(--primary-color); font-size: 14px">
             {{ coinInfo.shareNumber }}
             {{
               coinInfo.customizeFlag === 2
@@ -270,7 +272,7 @@
             }}
             / {{ t('number') }}
           </div>
-          <div style="color: rgba(153, 153, 153, 1); font-size: 10px; margin-top: 5px">
+          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">
             合约面值
           </div>
         </div>
@@ -325,7 +327,7 @@
               height: auto;
               padding: 12px 0;
               box-sizing: border-box;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+              border-bottom: 1px solid var(--regular-background);
             "
           >
             <div
@@ -341,9 +343,9 @@
               <div style="display: flex; align-items: center; justify-content: flex-start">
                 <div
                   style="
-                    background-color: rgb(186, 236, 87);
+                    background-color: var(--primary-border);
                     font-size: 10px;
-                    color: #000;
+                    color: var(--regular-color);
                     border-radius: 5px;
                     padding: 2px 5px;
                     margin-right: 5px;
@@ -360,9 +362,9 @@
               </div>
               <div
                 style="
-                  background-color: rgb(186, 236, 87);
+                  background-color: var(--primary-border);
                   font-size: 10px;
-                  color: #000;
+                  color: var(--regular-color);
                   border-radius: 5px;
                   padding: 2px 5px;
                   margin-right: 5px;
@@ -373,8 +375,8 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">时间</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">时间</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{
                   _timeFormat(
                     item.params?.delegateTime || item.delegateTime,
@@ -385,26 +387,28 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">委托总量</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">委托总量</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.delegateTotal }}
                 {{ item.showCoin ? matchText(item.showCoin, '/USDT') : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">委托价格</div>
-              <div style="color: #fff; font-size: 12px">{{ item.delegatePrice }} USDT</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">委托价格</div>
+              <div style="color: var(--primary-color); font-size: 12px">
+                {{ item.delegatePrice }} USDT
+              </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">已成交量</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">已成交量</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.dealNum ? item.dealNum : '0' }}
                 {{ item.showCoin ? matchText(item.showCoin, '/USDT') : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">成交均价</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">成交均价</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.dealPrice ? item.dealPrice : '---' }}
               </div>
             </div>
@@ -443,9 +447,9 @@
               <div style="display: flex; align-items: center; justify-content: flex-start">
                 <div
                   style="
-                    background-color: rgb(186, 236, 87);
+                    background-color: var(--primary-border);
                     font-size: 10px;
-                    color: #000;
+                    color: var(--regular-color);
                     border-radius: 5px;
                     padding: 2px 5px;
                     margin-right: 5px;
@@ -462,9 +466,9 @@
               </div>
               <div
                 style="
-                  background-color: rgb(186, 236, 87);
+                  background-color: var(--primary-border);
                   font-size: 10px;
-                  color: #000;
+                  color: var(--regular-color);
                   border-radius: 5px;
                   padding: 2px 5px;
                   margin-right: 5px;
@@ -475,35 +479,35 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">委托时间</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">委托时间</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{
                   _timeFormat(item.params?.createTime || item.createTime, 'DD/MM/YYYY HH:mm', true)
                 }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">委托类型</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">委托类型</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.lossType ? '止损' : '止盈' }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">委托总量</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">委托总量</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.lossType ? item.loseNumber : item.earnNumber }}
                 {{ item.showCoin ? item.showCoin : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">委托价格</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">委托价格</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.delegateType ? '市价委托' : item.loseDelegatePrice + ' USDT' }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">触发价格</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">触发价格</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.lossType ? item.losePrice : item.earnPrice }}
                 USDT
               </div>
@@ -527,7 +531,7 @@
               height: auto;
               padding: 12px 0;
               box-sizing: border-box;
-              border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+              border-bottom: 1px solid var(--regular-background);
             "
           >
             <div
@@ -543,9 +547,9 @@
               <div style="display: flex; align-items: center; justify-content: flex-start">
                 <div
                   style="
-                    background-color: rgb(186, 236, 87);
+                    background-color: var(--primary-border);
                     font-size: 10px;
-                    color: #000;
+                    color: var(--regular-color);
                     border-radius: 5px;
                     padding: 2px 5px;
                     margin-right: 5px;
@@ -560,36 +564,46 @@
                 </span>
                 <div style="font-size: 10px; margin-left: 5px">{{ item?.leverage }}X</div>
               </div>
-              <div style="font-size: 10px; color: #000">
+              <div style="font-size: 10px; color: var(--regular-color)">
                 <span>{{ item.status ? '完成成交' : '等待成交' }}</span>
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">委托总量</div>
-              <div style="color: #fff; font-size: 12px">
+              <div style="font-size: 12px; color: var(--secondary-color)">委托总量</div>
+              <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.openNum }}
                 {{ item.showCoin ? matchText(item.showCoin, '/USDT') : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">委托价值</div>
-              <div style="color: #fff; font-size: 12px">{{ item.entrustmentValue }} USDT</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">委托价值</div>
+              <div style="color: var(--primary-color); font-size: 12px">
+                {{ item.entrustmentValue }} USDT
+              </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">委托价格</div>
-              <div style="color: #fff; font-size: 12px">{{ item.openPrice }} USDT</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">委托价格</div>
+              <div style="color: var(--primary-color); font-size: 12px">
+                {{ item.openPrice }} USDT
+              </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">平仓价格</div>
-              <div style="color: #fff; font-size: 12px">{{ item.dealPrice }} USDT</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">平仓价格</div>
+              <div style="color: var(--primary-color); font-size: 12px">
+                {{ item.dealPrice }} USDT
+              </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">收益率</div>
-              <div style="color: #fff; font-size: 12px">{{ yieldHisValue(item) }}%</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">收益率</div>
+              <div style="color: var(--primary-color); font-size: 12px">
+                {{ yieldHisValue(item) }}%
+              </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: rgb(153, 153, 153)">收益</div>
-              <div style="color: #fff; font-size: 12px">{{ _toFixed(item.earn, 4) }} USDT</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">收益</div>
+              <div style="color: var(--primary-color); font-size: 12px">
+                {{ _toFixed(item.earn, 4) }} USDT
+              </div>
             </div>
           </div>
         </template>
@@ -1229,14 +1243,14 @@ onMounted(() => {
         }
         &-price {
           .name {
-            color: rgba(255, 255, 255, 1);
+            color: var(--primary-color);
             font-size: 12px;
             margin-bottom: 4px;
           }
           .text {
             display: flex;
             align-items: center;
-            color: rgba(153, 153, 153, 1);
+            color: var(--secondary-color);
             font-size: 12px;
             .eys {
               display: flex;
@@ -1248,7 +1262,7 @@ onMounted(() => {
       }
       &-price {
         font-size: 20px;
-        color: #fff;
+        color: var(--primary-color);
         margin-top: 10px;
       }
     }
@@ -1258,11 +1272,11 @@ onMounted(() => {
       align-items: end;
       &-price {
         font-size: 18px;
-        color: rgba(186, 236, 87, 1);
+        color: var(--primary-border);
       }
       &-text {
         margin-top: 20px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         font-size: 10px;
         span {
           margin-left: 5px;
@@ -1273,9 +1287,9 @@ onMounted(() => {
   &-tab {
     margin-top: 15px;
     padding: 18px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 29px 29px 29px 29px;
-    border: 1px solid rgba(186, 236, 87, 0.26);
+    border: 1px solid var(--primary-border);
     width: auto;
     display: flex;
     align-items: center;
@@ -1288,20 +1302,20 @@ onMounted(() => {
     &-item {
       width: auto;
       font-size: 14px;
-      color: rgba(153, 153, 153, 1);
+      color: var(--secondary-color);
       cursor: pointer;
       flex-shrink: 0;
       margin-right: 30px;
     }
     .active {
-      color: rgba(186, 236, 87, 1);
+      color: var(--primary-border);
     }
   }
   &-tip {
     margin-bottom: 15px;
     margin-top: 15px;
-    background: #baec57;
-    box-shadow: inset 0px -4px 4px 0px #d7ff89;
+    background: var(--primary-border);
+    box-shadow: inset 0px -4px 4px 0px var(--secondary-border);
     border-radius: 10px 10px 10px 10px;
     padding: 10px 16px;
     display: flex;
@@ -1318,7 +1332,7 @@ onMounted(() => {
       }
       .text {
         flex: 1;
-        color: #000;
+        color: var(--regular-color);
         &-title {
           font-size: 22px;
           font-weight: 900;
@@ -1330,15 +1344,15 @@ onMounted(() => {
     }
     &-right {
       border-radius: 16px 16px 16px 16px;
-      border: 1px solid #000000;
+      border: 1px solid var(--primary-background);
       padding: 4px 11px;
       font-size: 12px;
-      color: #000;
+      color: var(--regular-color);
     }
   }
   &-main {
     margin-top: 15px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 8px 8px 8px 8px;
     padding: 14px;
     &-top {
@@ -1356,7 +1370,7 @@ onMounted(() => {
         .name {
           margin-left: 5px;
           font-size: 12px;
-          color: rgba(153, 153, 153, 1);
+          color: var(--secondary-color);
         }
         svg {
           margin-left: 5px;
@@ -1366,21 +1380,21 @@ onMounted(() => {
         display: flex;
         align-items: center;
 
-        background: rgba(255, 255, 255, 0.07);
+        background: var(--regular-background);
         border-radius: 18px 18px 18px 18px;
         &-item {
           font-size: 10px;
-          color: #fff;
+          color: var(--primary-color);
           display: flex;
           padding: 3px 7px;
           align-items: center;
           justify-content: center;
         }
         .active {
-          background: #baec57;
+          background: var(--primary-border);
           border-radius: 18px 18px 18px 18px;
           padding: 3px 7px;
-          color: #000;
+          color: var(--regular-color);
         }
       }
     }
@@ -1393,7 +1407,7 @@ onMounted(() => {
         margin-top: 15px;
         display: flex;
         align-items: end;
-        color: #fff;
+        color: var(--primary-color);
         &-name {
           font-size: 12px;
         }
@@ -1448,19 +1462,23 @@ onMounted(() => {
         height: 20px;
         border-radius: 12px;
         font-size: 10px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         display: flex;
         align-items: center;
         justify-content: center;
       }
       .active {
-        color: #000;
-        background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+        color: var(--regular-color);
+        background: linear-gradient(
+          306deg,
+          var(--primary-border) 0%,
+          var(--secondary-background) 100%
+        );
       }
     }
     &-tab {
       margin-top: 15px;
-      border: 1px solid #222222;
+      border: 1px solid var(--placeholder-border);
       border-left: none;
       border-right: none;
       padding: 8px 16px;
@@ -1468,17 +1486,17 @@ onMounted(() => {
       &-item {
         margin-right: 30px;
         font-size: 13px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
       }
       .actives {
-        color: #fff;
+        color: var(--primary-color);
       }
     }
     &-input {
       margin-bottom: 15px;
       height: 40px;
       width: 100%;
-      border: 1px solid rgb(186, 236, 87);
+      border: 1px solid var(--primary-border);
       border-radius: 10px;
       padding: 0 10px;
       display: flex;
@@ -1494,7 +1512,7 @@ onMounted(() => {
   }
   &-orderBox {
     margin-top: 15px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 8px 8px 8px 8px;
     padding: 14px;
     &-tab {
@@ -1502,11 +1520,11 @@ onMounted(() => {
       align-items: center;
       &-item {
         font-size: 12px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         margin-right: 10px;
       }
       .active {
-        color: #fff;
+        color: var(--primary-color);
       }
     }
   }
@@ -1517,7 +1535,7 @@ onMounted(() => {
   width: 40%;
   height: 35px;
   background-color: rgb(23, 172, 0);
-  color: #fff;
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1528,7 +1546,7 @@ onMounted(() => {
   width: 40%;
   height: 35px;
   background-color: rgb(255, 100, 100);
-  color: #fff;
+  color: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1540,6 +1558,6 @@ onMounted(() => {
   background-color: #35ad7a;
 }
 .color-black {
-  color: rgb(186, 236, 87);
+  color: var(--primary-border);
 }
 </style>

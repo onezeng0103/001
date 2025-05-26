@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,7 +77,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -94,8 +94,8 @@
             />
           </div>
           <div style="margin-left: 10px">
-            <div style="color: #fff; font-size: 14px">充币</div>
-            <div style="color: rgba(168, 168, 168, 1); font-size: 12px">
+            <div style="color: var(--primary-color); font-size: 14px">充币</div>
+            <div style="color: var(--secondary-color); font-size: 12px">
               从链上钱包或交易所转入数字货币
             </div>
           </div>
@@ -129,8 +129,8 @@
             />
           </div>
           <div style="margin-left: 10px">
-            <div style="color: #fff; font-size: 14px">C2C交易</div>
-            <div style="color: rgba(168, 168, 168, 1); font-size: 12px">
+            <div style="color: var(--primary-color); font-size: 14px">C2C交易</div>
+            <div style="color: var(--secondary-color); font-size: 12px">
               灵活选择 100+付款方式，0 手续费
             </div>
           </div>

@@ -89,7 +89,7 @@ const handleCoinDetail = (item) => {
   justify-content: space-between;
   margin-bottom: 13px;
   .title-item {
-    color: rgba(153, 153, 153, 1);
+    color: var(--secondary-color);
     font-size: 10px;
     &:nth-child(1) {
       width: 20%;
@@ -110,7 +110,7 @@ const handleCoinDetail = (item) => {
     margin-bottom: 20px;
     display: flex;
     align-items: center;
-    color: rgba(255, 255, 255, 1);
+    color: var(--primary-color);
     font-size: 12px;
     &-name {
       display: flex;

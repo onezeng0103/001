@@ -30,47 +30,44 @@
             <div
               class="items"
               @click="router.push(`/flash?symbol=${item.coin}`)"
-
               v-for="(item, index) in currentCoinList"
               :key="index"
             >
               <div style="display: flex; align-items: center">
                 <div style="font-size: 14px; margin-right: 4px">{{ item.coin?.toUpperCase() }}</div>
-                <div style="font-size: 12px; color: #a0a0a0">/ USDT</div>
+                <div style="font-size: 12px; color: var(--secondary-color)">/ USDT</div>
               </div>
               <div style="display: flex; flex-direction: column; align-items: flex-end">
                 <div
                   :class="
-                  _isRFD(
-                    tradeStore.allCoinPriceInfo[item.coin]?.openPrice,
-                    tradeStore.allCoinPriceInfo[item.coin]?.close
-                  )
-                "
-                  style="font-size: 14px; color: #4d9eb1"
+                    _isRFD(
+                      tradeStore.allCoinPriceInfo[item.coin]?.openPrice,
+                      tradeStore.allCoinPriceInfo[item.coin]?.close
+                    )
+                  "
+                  style="font-size: 14px; color: var(--primary-border)"
                 >
                   {{ priceFormat(tradeStore.allCoinPriceInfo[item.coin]?.close) }}
                 </div>
                 <div class="rise">
                   <div
                     :class="
-                  _isRFD(
-                    tradeStore.allCoinPriceInfo[item.coin]?.openPrice,
-                    tradeStore.allCoinPriceInfo[item.coin]?.close
-                  )
-                "
-                    style="font-size: 12px; color: #4d9eb1"
+                      _isRFD(
+                        tradeStore.allCoinPriceInfo[item.coin]?.openPrice,
+                        tradeStore.allCoinPriceInfo[item.coin]?.close
+                      )
+                    "
+                    style="font-size: 12px; color: var(--primary-border)"
                   >
                     {{ tradeStore.allCoinPriceInfo[item.coin]?.priceChangePercent }}%
                   </div>
                 </div>
-
               </div>
             </div>
           </template>
           <template v-else>
-            <no-data/>
+            <no-data />
           </template>
-
         </div>
       </div>
     </div>
@@ -109,7 +106,7 @@
             >
               <div style="display: flex; align-items: center">
                 <div style="font-size: 14px; margin-right: 4px">{{ item.coin?.toUpperCase() }}</div>
-                <div style="font-size: 12px; color: #a0a0a0">/ USDT</div>
+                <div style="font-size: 12px; color: var(--secondary-color)">/ USDT</div>
               </div>
               <div style="display: flex; flex-direction: column; align-items: flex-end">
                 <div
@@ -119,7 +116,7 @@
                       tradeStore.allCoinPriceInfo[item.coin]?.close
                     )
                   "
-                  style="font-size: 14px; color: #4d9eb1"
+                  style="font-size: 14px; color: var(--primary-border)"
                 >
                   {{ priceFormat(tradeStore.allCoinPriceInfo[item.coin]?.close) }}
                 </div>
@@ -131,7 +128,7 @@
                         tradeStore.allCoinPriceInfo[item.coin]?.close
                       )
                     "
-                    style="font-size: 12px; color: #4d9eb1"
+                    style="font-size: 12px; color: var(--primary-border)"
                   >
                     {{ tradeStore.allCoinPriceInfo[item.coin]?.priceChangePercent }}%
                   </div>
@@ -191,7 +188,6 @@ onMounted(() => {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        //background-color: rgba(255, 255, 255, 0.1);
         border-radius: 6px;
         padding: 5px 10px;
         margin-bottom: 7px;
@@ -200,7 +196,7 @@ onMounted(() => {
 
     .input {
       flex: 1;
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: var(--regular-background);
       border-radius: 34px;
       margin-right: 10px;
       padding: 0 7px;

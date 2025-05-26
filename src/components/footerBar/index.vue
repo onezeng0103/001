@@ -116,7 +116,7 @@ const handleClick = (path) => {
       flex-direction: column;
       flex: 1;
       font-size: 0;
-      background-color: var(--footerBar-background);
+      background-color: var(--primary-background);
       text-align: center;
 
       &.trade-button {

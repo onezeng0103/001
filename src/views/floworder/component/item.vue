@@ -152,7 +152,7 @@ onMounted(() => {
       .name {
         margin-left: 10px;
         font-size: 14px;
-        color: #fff;
+        color: var(--primary-color);
       }
     }
     &-right {
@@ -160,11 +160,11 @@ onMounted(() => {
       flex-direction: column;
       align-items: flex-end;
       .price {
-        color: rgba(255, 255, 255, 1);
+        color: var(--primary-color);
         font-size: 16px;
       }
       .text {
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         font-size: 12px;
         margin-top: 5px;
       }
@@ -176,7 +176,7 @@ onMounted(() => {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-top: 20px;
-    color: rgba(153, 153, 153, 1);
+    color: var(--secondary-color);
     font-size: 12px;
     & > *:nth-child(odd) {
       text-align: left; /* 奇数项左对齐 */
@@ -205,16 +205,20 @@ onMounted(() => {
       text-align: center;
       width: 80%;
       height: 29px;
-      background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+      background: linear-gradient(
+        306deg,
+        var(--primary-border) 0%,
+        var(--secondary-background) 100%
+      );
       border-radius: 15px 15px 15px 15px;
       margin-top: 20px;
       font-size: 14px;
-      color: #000;
+      color: var(--primary-background);
     }
   }
   &-link {
     margin: 20px 0px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--placeholder-color);
   }
 }
 </style>

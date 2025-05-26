@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--regular-border);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,7 +77,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -135,11 +135,11 @@ const list = ref([
     type: 'finance',
     component: finance
   },
-  {
-    name: '借贷',
-    type: 'loan',
-    component: loan
-  },
+  // {
+  //   name: '借贷',
+  //   type: 'loan',
+  //   component: loan
+  // },
   {
     name: '合约',
     type: 'contract',
@@ -187,20 +187,20 @@ onMounted(() => {
       white-space: nowrap;
       scrollbar-width: none;
       padding-bottom: 20px;
-      border-bottom: 1px solid #222222;
+      border-bottom: 1px solid var(--placeholder-border);
       &::-webkit-scrollbar {
         display: none;
       }
       &-item {
         width: auto;
         margin-right: 20px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         font-size: 14px;
         font-weight: 500;
         cursor: pointer;
         flex-shrink: 0;
         &.active {
-          color: rgba(186, 236, 87, 1);
+          color: var(--primary-border);
         }
       }
     }

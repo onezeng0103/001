@@ -39,8 +39,8 @@ onMounted(() => {
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -95,7 +95,7 @@ onMounted(() => {
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -145,11 +145,6 @@ onMounted(() => {
     <div class="forget-list">
       <div class="forget-list-item" v-for="(item, index) in productList" :key="index">
         <div style="display: flex; align-items: center">
-          <!--          <img-->
-          <!--            src="../../assets/img/coin-JyvGAUty.png"-->
-          <!--            alt=""-->
-          <!--            style="width: 30px; height: 30px; margin-right: 10px"-->
-          <!--          />-->
           <div>
             <div class="title">{{ item.title }}</div>
             <samp class="label">回报率{{ item.minOdds }}%~{{ item.maxOdds }}%</samp>
@@ -169,7 +164,7 @@ onMounted(() => {
     margin-top: 30px;
 
     .forget-list-item {
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       padding: 15px 20px;
       display: flex;
@@ -179,23 +174,27 @@ onMounted(() => {
 
       .bt {
         padding: 8px 18px;
-        background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+        background: linear-gradient(
+          306deg,
+          var(--primary-border) 0%,
+          var(--secondary-background) 100%
+        );
         border-radius: 15px 15px 15px 15px;
         font-weight: 400;
         font-size: 12px;
-        color: #000000;
+        color: var(--primary-background);
       }
 
       .title {
         font-size: 14px;
-        color: #ffffff;
+        color: var(--primary-color);
         //margin-bottom: 10px;
       }
 
       .label {
         font-weight: 400;
         font-size: 10px;
-        color: #999999;
+        color: var(--secondary-color);
         margin-right: 15px;
       }
     }

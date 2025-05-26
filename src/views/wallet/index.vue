@@ -142,7 +142,9 @@
         <template #title>
           <div style="display: flex; align-items: center">
             <img src="../../assets/img/15.png" height="20px" alt="" />
-            <span style="margin-left: 5px; color: #fff; font-size: 17px">安全中心</span>
+            <span style="margin-left: 5px; color: var(--primary-color); font-size: 17px">
+              安全中心
+            </span>
           </div>
         </template>
         <div
@@ -153,7 +155,7 @@
         >
           <div style="display: flex; align-items: center">
             <img :src="item.icon" height="20px" alt="" />
-            <span style="margin-left: 15px; color: rgba(255, 255, 255, 1); font-size: 15px">
+            <span style="margin-left: 15px; color: var(--primary-color); font-size: 15px">
               {{ item.title }}
             </span>
           </div>
@@ -169,7 +171,9 @@
         <template #title>
           <div style="display: flex; align-items: center">
             <img :src="item.icon" height="20px" alt="" />
-            <span style="margin-left: 5px; color: #fff; font-size: 17px">{{ item.title }}</span>
+            <span style="margin-left: 5px; color: var(--primary-color); font-size: 17px">
+              {{ item.title }}
+            </span>
           </div>
         </template>
         <template #right-icon></template>
@@ -438,13 +442,13 @@ onMounted(() => {
         .title {
           display: flex;
           align-items: center;
-          color: rgba(255, 255, 255, 1);
+          color: var(--primary-color);
           font-size: 12px;
           .box {
             margin-left: 10px;
             padding: 2px;
             border-radius: 2px 2px 2px 2px;
-            border: 1px solid #baec57;
+            border: 1px solid var(--primary-border);
             font-size: 6px;
           }
         }
@@ -452,7 +456,7 @@ onMounted(() => {
           margin-top: 5px;
           display: flex;
           align-items: center;
-          color: rgba(153, 153, 153, 1);
+          color: var(--secondary-color);
           font-size: 12px;
           margin-right: 10px;
           .eys {
@@ -471,7 +475,7 @@ onMounted(() => {
       align-items: center;
       padding: 5px;
       border-radius: 6px 6px 6px 6px;
-      border: 1px solid #baec57;
+      border: 1px solid var(--primary-border);
       font-size: 10px;
       img {
         width: 20px;
@@ -496,7 +500,7 @@ onMounted(() => {
     }
     .price {
       margin-top: 5px;
-      color: rgba(153, 153, 153, 1);
+      color: var(--secondary-color);
       font-size: 14px;
     }
   }
@@ -505,7 +509,7 @@ onMounted(() => {
     margin-bottom: 20px;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 8px 8px 8px 8px;
     padding: 14px;
     display: flex;
@@ -532,14 +536,14 @@ onMounted(() => {
   }
   :deep(.van-cell) {
     border: none;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
 
     &:after {
       border-bottom: 0 !important;
     }
   }
   :deep(.van-collapse-item__content) {
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     padding: 0 16px 10px;
   }
   .van-collapse {

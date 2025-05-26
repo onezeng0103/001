@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,7 +77,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -103,15 +103,21 @@
           <div>
             {{ info?.totalNum || 0 }}
           </div>
-          <div style="font-size: 12px; color: #999; margin-top: 5px">跟投天数</div>
+          <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
+            跟投天数
+          </div>
         </div>
         <div class="box-item">
           <div>{{ info?.todayAmountEarn }}</div>
-          <div style="font-size: 12px; color: #999; margin-top: 5px">今日收益</div>
+          <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
+            今日收益
+          </div>
         </div>
         <div class="box-item">
           <div>{{ info?.totalAmountEarn?.toFixed(2) }}</div>
-          <div style="font-size: 12px; color: #999; margin-top: 5px">累计收益</div>
+          <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
+            累计收益
+          </div>
         </div>
       </div>
       <template v-if="orderList.length > 0">
@@ -198,7 +204,7 @@ onMounted(() => {
         &-price {
           margin-top: 10px;
           font-size: 12px;
-          color: #999;
+          color: var(--secondary-color);
           span {
             font-size: 16px;
           }
@@ -221,7 +227,7 @@ onMounted(() => {
       justify-content: space-between;
       margin-top: 15px;
       padding: 15px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       &-item {
         display: flex;
@@ -232,7 +238,7 @@ onMounted(() => {
     }
     .list {
       margin-top: 15px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       padding: 10px;
       &-item {
@@ -254,14 +260,18 @@ onMounted(() => {
     div {
       width: 80%;
       height: 41px;
-      background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+      background: linear-gradient(
+        306deg,
+        var(--primary-border) 0%,
+        var(--secondary-background) 100%
+      );
       border-radius: 21px 21px 21px 21px;
       display: flex;
       justify-content: center;
       align-items: center;
       font-weight: 400;
       font-size: 16px;
-      color: #000000;
+      color: var(--primary-color);
     }
   }
 }

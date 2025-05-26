@@ -248,25 +248,25 @@ const forget = () => {
   &-label {
     margin-top: 30px;
     margin-bottom: 15px;
-    color: #fff;
+    color: var(--primary-color);
   }
   .input-box {
     height: 46px;
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     padding: 0px 18px;
     display: flex;
     align-items: center;
     .area-code {
       width: 50px;
       font-size: 14px;
-      color: rgba(153, 153, 153, 1);
+      color: var(--secondary-color);
       display: flex;
       align-items: center;
       justify-content: center;
       padding-right: 10px;
       margin-right: 10px;
-      border-right: 1px solid rgba(153, 153, 153, 1);
+      border-right: 1px solid var(--secondary-color);
       .fui-icon {
         margin-left: 8px;
       }
@@ -275,20 +275,20 @@ const forget = () => {
       flex: 1;
     }
     .icon {
-      color: #999;
+      color: var(--secondary-color);
       font-size: 14px;
     }
   }
   &-text {
     margin-top: 10px;
     font-size: 12px;
-    color: rgba(255, 255, 255, 1);
+    color: var(--primary-color);
   }
 }
 .tip {
   margin-top: 10px;
   font-size: 12px;
-  color: #fff;
+  color: var(--primary-color);
   cursor: pointer;
 }
 .btn {
@@ -297,12 +297,12 @@ const forget = () => {
   align-items: center;
   justify-content: center;
   height: 47px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--regular-background);
   border-radius: 24px 24px 24px 24px;
   font-family: PingFang SC;
   font-weight: 500;
   font-size: 14px;
-  color: #ffffff;
+  color: var(--primary-color);
   font-style: normal;
   text-transform: none;
   cursor: pointer;
@@ -313,9 +313,9 @@ const forget = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
+  color: var(--secondary-color);
   span {
-    color: #fff;
+    color: var(--primary-color);
     cursor: pointer;
   }
 }

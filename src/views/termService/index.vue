@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--regular-border);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -49,7 +49,7 @@
               >
                 <path
                   d="M631.04 161.941333a42.666667 42.666667 0 0 1 63.061333 57.386667l-2.474666 2.730667-289.962667 292.245333 289.706667 287.402667a42.666667 42.666667 0 0 1 2.730666 57.6l-2.474666 2.752a42.666667 42.666667 0 0 1-57.6 2.709333l-2.752-2.474667-320-317.44a42.666667 42.666667 0 0 1-2.709334-57.6l2.474667-2.752 320-322.56z"
-                  fill="#ffffff"
+                  fill="var(--primary-color)"
                   p-id="27856"
                 ></path>
               </svg>
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,14 +77,16 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
       </div>
     </div>
     <div class="termService-main">
-      <template v-if="currentHtml">123123</template>
+      <template v-if="currentHtml">
+        <div v-html="currentHtml"></div>
+      </template>
       <template v-else>
         <NoData />
       </template>

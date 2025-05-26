@@ -12,14 +12,16 @@
     </div>
 
     <div class="invaite-middle">
-      <div style="font-weight: 500; font-size: 12px; color: #ffffff; margin-bottom: 10px">
+      <div
+        style="font-weight: 500; font-size: 12px; color: var(--primary-color); margin-bottom: 10px"
+      >
         下级成员
       </div>
       <div style="display: flex; align-items: center; justify-content: space-between">
         <div>
           <img src="../../assets/img/Frame3.png" style="width: 20px; height: 20px" />
         </div>
-        <div style="font-weight: 400; font-size: 12px; color: #ffffff">
+        <div style="font-weight: 400; font-size: 12px; color: var(--primary-color)">
           {{ agentInfo.childAllCount || 0 }}
         </div>
       </div>
@@ -28,7 +30,7 @@
     <div class="invaite-below">
       <div class="below">
         <div style="font-weight: 500; font-size: 12px; margin: 10px 0 0 10px">邀请码</div>
-        <div style="font-size: 10px; color: #999999; margin: 5px 0 3px 10px">
+        <div style="font-size: 10px; color: var(--secondary-color); margin: 5px 0 3px 10px">
           {{ userInfo?.user?.activeCode }}
         </div>
         <div style="display: flex; justify-content: space-between; align-items: flex-end">
@@ -62,7 +64,7 @@
         <div
           style="
             font-size: 10px;
-            color: #999999;
+            color: var(--secondary-color);
             margin: 5px 10px 3px 10px;
             display: flex;
             justify-content: space-between;
@@ -157,8 +159,8 @@
   </div>
 
   <van-popup v-model:show="showCenter" round>
-    <div style="background-color: #ffffff; padding: 20px">
-      <div style="color: #000000; font-size: 13px">立即加入，一起赚钱</div>
+    <div style="background-color: var(--primary-color); padding: 20px">
+      <div style="color: var(--primary-background); font-size: 13px">立即加入，一起赚钱</div>
       <div class="code-box">
         <img :src="QRCodeIMG" class="code-canvas" />
         <div class="color-gray">邀请码</div>
@@ -235,7 +237,7 @@ onMounted(() => {
 .code-box {
   padding: 30px 30px;
   box-sizing: border-box;
-  background-color: #f5f5f5;
+  background-color: var(--placeholder-color);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -245,17 +247,17 @@ onMounted(() => {
   .code-canvas {
     width: 120px;
     height: 120px;
-    background-color: #f5f5f5;
+    background-color: var(--placeholder-color);
     margin-bottom: 10px;
   }
   .color-gray {
     margin-bottom: 10px;
     font-size: 13px;
-    color: #a0a0a0;
+    color: var(--secondary-color);
   }
   .color-black {
     font-size: 14px;
-    color: #000000;
+    color: var(--primary-background);
   }
 }
 
@@ -269,11 +271,11 @@ onMounted(() => {
     margin-top: 10px;
 
     .below {
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
 
       .copy-but {
-        background: #baec57;
+        background: var(--primary-border);
         border-radius: 20px 20px 20px 20px;
         display: flex;
         justify-content: center;
@@ -282,7 +284,7 @@ onMounted(() => {
         padding: 5px 19px;
         font-weight: 400;
         font-size: 10px;
-        color: #000000;
+        color: var(--primary-background);
       }
     }
   }
@@ -290,7 +292,7 @@ onMounted(() => {
   .invaite-middle {
     margin-top: 15px;
     padding: 10px 12px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 8px 8px 8px 8px;
   }
 
@@ -304,20 +306,20 @@ onMounted(() => {
     .invaite-top_1 {
       font-weight: 400;
       font-size: 16px;
-      color: #999999;
+      color: var(--secondary-color);
     }
 
     .invaite-top_2 {
       font-weight: 500;
       font-size: 28px;
-      color: #ffffff;
+      color: var(--primary-color);
       margin: 5px 0;
     }
 
     .invaite-top_3 {
       font-weight: 400;
       font-size: 12px;
-      color: #999999;
+      color: var(--secondary-color);
     }
   }
 }

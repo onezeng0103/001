@@ -4,7 +4,7 @@
       <div class="row-left">
         <div
           style="
-            background-color: rgb(186, 236, 87);
+            background-color: var(--primary-border);
             font-size: 10px;
             color: #000;
             border-radius: 5px;
@@ -179,7 +179,7 @@ const handleTerminationBtn = (value, type) => {
   height: auto;
   padding: 12px 0;
   box-sizing: border-box;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--regular-background);
   .row {
     width: 100%;
     height: auto;
@@ -195,7 +195,7 @@ const handleTerminationBtn = (value, type) => {
   }
   .name {
     font-size: 12px;
-    color: rgb(153, 153, 153);
+    color: var(--secondary-color);
   }
   .value {
     color: #fff;
@@ -210,7 +210,7 @@ const handleTerminationBtn = (value, type) => {
     .item-footer-item {
       padding: 2px 5px;
       border-radius: 5px;
-      background-color: rgb(186, 236, 87);
+      background-color: var(--primary-border);
       color: #000;
       font-size: 12px;
     }

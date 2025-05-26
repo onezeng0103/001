@@ -160,9 +160,6 @@ const close = (item) => {
   console.log(address.value, item)
   showAddressBottom.value = false
 }
-const getImageUrl = (name) => {
-  return new URL(`../../assets/img/${name}.png`, import.meta.url).href
-}
 onMounted(() => {
   saveCacheAddressFn()
   console.log('coinList.value===>', coinList.value)
@@ -181,11 +178,7 @@ const list = ref([])
 
 const coinList = computed(() => {
   let list = []
-  // console.log(mainStore.getWithdrawList);
-  // mainStore.getWithdrawList.pop()
   mainStore.getWithdrawList.forEach((item, index) => {
-    // console.log('当前',index,item)
-    // status:0关闭，1开启
     if (item.status == '1') {
       let obj = {}
       obj['type'] = 1 //提现
@@ -206,8 +199,8 @@ const coinList = computed(() => {
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--regular-border);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -252,7 +245,7 @@ const coinList = computed(() => {
               >
                 <path
                   d="M631.04 161.941333a42.666667 42.666667 0 0 1 63.061333 57.386667l-2.474666 2.730667-289.962667 292.245333 289.706667 287.402667a42.666667 42.666667 0 0 1 2.730666 57.6l-2.474666 2.752a42.666667 42.666667 0 0 1-57.6 2.709333l-2.752-2.474667-320-317.44a42.666667 42.666667 0 0 1-2.709334-57.6l2.474667-2.752 320-322.56z"
-                  fill="#ffffff"
+                  fill="var(--primary-color)"
                   p-id="27856"
                 ></path>
               </svg>
@@ -262,7 +255,7 @@ const coinList = computed(() => {
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -280,7 +273,7 @@ const coinList = computed(() => {
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -290,24 +283,24 @@ const coinList = computed(() => {
       <div style="font-size: 12px">提现币种</div>
       <div class="details" @click="handleSelectCoin">
         <template v-if="info?.title">
-          <div style="color: #ffffff; flex: 1">
+          <div style="color: var(--primary-color); flex: 1">
             {{ info?.title }}
           </div>
         </template>
         <template v-else>
-          <div style="color: #999999; flex: 1">请选择币种</div>
+          <div style="color: var(--secondary-color); flex: 1">请选择币种</div>
         </template>
         <div class="triangle-down"></div>
       </div>
       <div style="font-size: 12px">提现地址</div>
       <div class="details" @click="showAddressBottom = true">
         <template v-if="address">
-          <div style="color: #ffffff; flex: 1">
+          <div style="color: var(--primary-color); flex: 1">
             {{ address }}
           </div>
         </template>
         <template v-else>
-          <div style="color: #999999; flex: 1">请选择提现地址</div>
+          <div style="color: var(--secondary-color); flex: 1">请选择提现地址</div>
         </template>
         <div class="triangle-down"></div>
       </div>
@@ -386,10 +379,10 @@ const coinList = computed(() => {
       </div>
 
       <div style="font-size: 14px">温馨提示</div>
-      <div style="font-size: 12px; color: #a0a0a0; margin-top: 10px">
+      <div style="font-size: 12px; color: var(--secondary-color); margin-top: 10px">
         1.为确保资产安全，当您的账户安全策略发生变更或进行密码修改时，将暂时不能提现。账号重新登录后，需等待1小时后方可提领。
       </div>
-      <div style="font-size: 12px; color: #a0a0a0; margin-top: 10px">
+      <div style="font-size: 12px; color: var(--secondary-color); margin-top: 10px">
         2.请务必确认操作设备的安全，防止信息被窜改或泄露。
       </div>
     </div>
@@ -400,7 +393,7 @@ const coinList = computed(() => {
   <van-popup v-model:show="showAddressBottom" position="bottom">
     <div class="lists">
       <div style="display: flex; justify-content: center; position: relative; margin-bottom: 20px">
-        <div style="color: #000000">选择提现地址</div>
+        <div style="color: var(--primary-background)">选择提现地址</div>
         <div class="cha" @click="showAddressBottom = false">
           <svg
             t="1748095662241"
@@ -432,13 +425,15 @@ const coinList = computed(() => {
       >
         {{ item?.address }}
       </div>
-      <div v-else style="color: #000000; display: flex; justify-content: center">暂无填写地址</div>
+      <div v-else style="color: var(--primary-background); display: flex; justify-content: center">
+        暂无填写地址
+      </div>
     </div>
   </van-popup>
   <van-popup v-model:show="showBottom" position="bottom">
     <div class="lists">
       <div style="display: flex; justify-content: center; position: relative; margin-bottom: 20px">
-        <div style="color: #000000">选择提现币种</div>
+        <div style="color: var(--primary-background)">选择提现币种</div>
         <div class="cha" @click="showBottom = false">
           <svg
             t="1748095662241"
@@ -484,13 +479,13 @@ const coinList = computed(() => {
 }
 
 .lists {
-  background-color: #ffffff;
+  background-color: var(--primary-color);
   border-top-right-radius: 15px;
   border-top-left-radius: 15px;
   padding: 15px;
 
   .lists-item {
-    color: #999999;
+    color: var(--secondary-color);
     height: 44px;
     display: flex;
     align-items: center;
@@ -499,8 +494,8 @@ const coinList = computed(() => {
 
   .qd {
     border-radius: 5px;
-    background-color: #f0f0f0;
-    color: #4d9eb1;
+    background-color: var(--primary-background);
+    color: var(--primary-border);
   }
 }
 
@@ -513,24 +508,24 @@ const coinList = computed(() => {
     justify-content: center;
     font-weight: 400;
     font-size: 14px;
-    color: #999999;
+    color: var(--secondary-color);
     text-align: left;
     font-style: normal;
     text-transform: none;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--regular-background);
     border-radius: 20px 20px 20px 20px;
   }
 
   .zf {
-    color: #000000;
-    background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+    color: var(--primary-background);
+    background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   }
 
   .details {
     border-radius: 4px;
     padding: 12px 10px;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--regular-background);
     margin-bottom: 15px;
     margin-top: 10px;
     display: flex;
@@ -542,7 +537,7 @@ const coinList = computed(() => {
     height: 0;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
-    border-top: 4px solid #999;
+    border-top: 4px solid var(--secondary-color);
     margin-right: 5px;
   }
 }

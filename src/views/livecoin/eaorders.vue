@@ -85,8 +85,8 @@ const type = ref(route.query.type || 1)
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -141,7 +141,7 @@ const type = ref(route.query.type || 1)
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -170,8 +170,8 @@ const type = ref(route.query.type || 1)
         <div
           class="t"
           :style="{
-            color: type == 1 ? '#baec57' : '',
-            borderBlockEnd: type == 1 ? '1px solid rgb(186, 236, 87)' : ''
+            color: type == 1 ? 'var(--primary-border)' : '',
+            borderBlockEnd: type == 1 ? '1px solid var(--primary-border)' : ''
           }"
           style="margin-right: 10px"
           @click="type = 1"
@@ -181,8 +181,8 @@ const type = ref(route.query.type || 1)
         <div
           class="t"
           :style="{
-            color: type == 2 ? '#baec57' : '',
-            borderBlockEnd: type == 2 ? '1px solid rgb(186, 236, 87)' : ''
+            color: type == 2 ? 'var(--primary-border)' : '',
+            borderBlockEnd: type == 2 ? '1px solid var(--primary-border)' : ''
           }"
           @click="type = 2"
         >
@@ -208,8 +208,8 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: #a0a0a0">锁仓天数(天)</div>
-            <div style="font-size: 14px; color: #ffffff">{{ item.days }}</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">锁仓天数(天)</div>
+            <div style="font-size: 14px; color: var(--primary-color)">{{ item.days }}</div>
           </div>
           <div
             style="
@@ -219,8 +219,8 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: #a0a0a0">日收益率</div>
-            <div style="font-size: 14px; color: #ffffff">{{ item.avgRate }}%</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">日收益率</div>
+            <div style="font-size: 14px; color: var(--primary-color)">{{ item.avgRate }}%</div>
           </div>
           <div
             style="
@@ -230,10 +230,10 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: #a0a0a0">
+            <div style="font-size: 13px; color: var(--secondary-color)">
               投入金额({{ item.coin ? item.coin.toUpperCase() : '' }})
             </div>
-            <div style="font-size: 14px; color: #ffffff">{{ item.amount }}</div>
+            <div style="font-size: 14px; color: var(--primary-color)">{{ item.amount }}</div>
           </div>
           <div
             style="
@@ -243,10 +243,10 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: #a0a0a0">
+            <div style="font-size: 13px; color: var(--secondary-color)">
               预估收益({{ item.coin ? item.coin.toUpperCase() : '' }})
             </div>
-            <div style="font-size: 14px; color: #ffffff">
+            <div style="font-size: 14px; color: var(--primary-color)">
               {{ priceFormat((item.amount * item.days * 0.05) / 100, 6) }}
             </div>
           </div>
@@ -258,8 +258,8 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: #a0a0a0">到账时间</div>
-            <div style="font-size: 14px; color: #ffffff">
+            <div style="font-size: 13px; color: var(--secondary-color)">到账时间</div>
+            <div style="font-size: 14px; color: var(--primary-color)">
               {{
                 timeOfreceipt(item.settlementType, item.days, item.params.createTime) === '每日结算'
                   ? '每日结算'
@@ -268,19 +268,29 @@ const type = ref(route.query.type || 1)
             </div>
           </div>
           <div style="display: flex; justify-content: space-between; align-items: center">
-            <div style="font-size: 13px; color: #a0a0a0">状态</div>
-            <div style="font-size: 14px; color: #ffffff">{{ investmentStatus(item.status)?.name }}</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">状态</div>
+            <div style="font-size: 14px; color: var(--primary-color)">
+              {{ investmentStatus(item.status)?.name }}
+            </div>
           </div>
         </div>
       </template>
 
       <template v-if="type == 2">
         <div class="details" v-for="(item, index) in list1" :key="index">
-          <div style="font-size: 14px; margin-bottom: 10px;display: flex; align-items: center;justify-content: space-between">
+          <div
+            style="
+              font-size: 14px;
+              margin-bottom: 10px;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
+          >
             <div style="display: flex; align-items: center">
               <div>
                 <img
-                  style="width: 28px;height: 28px; margin-right: 10px"
+                  style="width: 28px; height: 28px; margin-right: 10px"
                   src="../../../src/assets/img/usdt.png"
                   alt=""
                 />
@@ -297,8 +307,10 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: #a0a0a0">投注金额</div>
-            <div style="font-size: 14px; color: #ffffff">{{ priceFormat(item.amount) }}</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">投注金额</div>
+            <div style="font-size: 14px; color: var(--primary-color)">
+              {{ priceFormat(item.amount) }}
+            </div>
           </div>
           <div
             style="
@@ -308,8 +320,8 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: #a0a0a0">状态</div>
-            <div style="font-size: 14px; color: #ffffff">
+            <div style="font-size: 13px; color: var(--secondary-color)">状态</div>
+            <div style="font-size: 14px; color: var(--primary-color)">
               <template v-if="item.status == 0">进行中</template>
               <template v-if="item.status == 1">已完成</template>
               <template v-if="item.status == 2">已赎回</template>
@@ -323,24 +335,9 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: #a0a0a0">
-              日收益率
-            </div>
-            <div style="font-size: 14px; color: #ffffff">{{ item.minOdds }}%~{{ item.maxOdds }}%</div>
-          </div>
-          <div
-            style="
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              margin: 8px 0;
-            "
-          >
-            <div style="font-size: 13px; color: #a0a0a0">
-              周期
-            </div>
-            <div style="font-size: 14px; color: #ffffff">
-              {{ item.days }}天
+            <div style="font-size: 13px; color: var(--secondary-color)">日收益率</div>
+            <div style="font-size: 14px; color: var(--primary-color)">
+              {{ item.minOdds }}%~{{ item.maxOdds }}%
             </div>
           </div>
           <div
@@ -351,8 +348,19 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: #a0a0a0">开始日期</div>
-            <div style="font-size: 14px; color: #ffffff">
+            <div style="font-size: 13px; color: var(--secondary-color)">周期</div>
+            <div style="font-size: 14px; color: var(--primary-color)">{{ item.days }}天</div>
+          </div>
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin: 8px 0;
+            "
+          >
+            <div style="font-size: 13px; color: var(--secondary-color)">开始日期</div>
+            <div style="font-size: 14px; color: var(--primary-color)">
               {{ _timeFormat(item.params?.createTime) }}
             </div>
           </div>
@@ -366,22 +374,22 @@ const type = ref(route.query.type || 1)
 .eaorders {
   .bt {
     padding: 8px 18px;
-    background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+    background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
     border-radius: 15px 15px 15px 15px;
     font-weight: 400;
     font-size: 12px;
-    color: #000000;
+    color: var(--primary-background);
   }
   .details {
     border-radius: 10px;
     padding: 15px;
     box-sizing: border-box;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--regular-background);
     margin: 15px 0;
   }
 
   .eaorders-title {
-    color: #a0a0a0;
+    color: var(--secondary-color);
     display: flex;
     align-items: center;
     font-weight: 900 !important;

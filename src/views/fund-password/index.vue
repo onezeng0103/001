@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -401,7 +401,7 @@ const submit = () => {
 
   .tip {
     font-size: 14px;
-    color: #a7afb7;
+    color: var(--secondary-color);
     margin-bottom: 10px;
     text-align: left;
   }
@@ -410,7 +410,7 @@ const submit = () => {
     padding: 0 15px;
     width: 100%;
     height: 50px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -443,7 +443,7 @@ const submit = () => {
 .content1 {
   padding: 50px 15px 0;
 
-  color: #ffffff;
+  color: var(--primary-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -452,7 +452,7 @@ const submit = () => {
     margin-top: 30px;
     text-align: center;
     font-size: 14px;
-    color: #ffffff;
+    color: var(--primary-color);
   }
 
   .imgLoad {
@@ -463,7 +463,7 @@ const submit = () => {
 
   .text {
     font-size: 14px;
-    color: rgba(192, 198, 204, 0.7);
+    color: var(--secondary-color);
   }
 }
 
@@ -474,9 +474,9 @@ const submit = () => {
     padding: 0 15px;
     width: 100%;
     height: 50px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 3px;
-    border: 1px solid #4c4e53;
+    border: 1px solid var(--secondary-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -489,7 +489,7 @@ const submit = () => {
       align-items: center;
       padding: 0 10px;
       font-size: 14px;
-      color: #ffffff;
+      color: var(--primary-color);
     }
   }
 
@@ -506,12 +506,11 @@ const submit = () => {
   justify-content: center;
   font-weight: 400;
   font-size: 12px;
-  color: #000000;
+  color: var(--primary-background);
   text-align: left;
   font-style: normal;
   text-transform: none;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 20px 20px 20px 20px;
-  //margin-top: 50px;
 }
 </style>

@@ -101,7 +101,7 @@ const handleClick = (item) => {
 </script>
 <style lang="scss" scoped>
 .van-popup {
-  background: #fff !important;
+  background: var(--primary-background) !important;
 }
 .search {
   margin-bottom: 10px;
@@ -112,14 +112,14 @@ const handleClick = (item) => {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  background: #f5f5f5;
+  background: var(--regular-background);
   img {
     width: 16px;
     height: 16px;
     margin-right: 10px;
   }
   input {
-    color: #000 !important;
+    color: var(--primary-color) !important;
   }
 }
 .tip {
@@ -130,14 +130,14 @@ const handleClick = (item) => {
   border-radius: 8px;
   padding: 0 10px;
   box-sizing: border-box;
-  color: #000;
+  color: var(--primary-color);
   font-size: 12px;
   margin-top: 2%;
 }
 .list {
   height: calc(100vh - 100px);
   overflow-y: auto;
-  color: #000;
+  color: var(--primary-color);
   font-size: 12px;
   margin-top: 10px;
   &-item {

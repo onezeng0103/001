@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--regular-border);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -78,7 +78,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           >
             交易记录
@@ -320,29 +320,35 @@
       <div style="flex: 1; display: flex; align-items: center; justify-content: space-between">
         <div style="display: flex; align-items: center; flex-direction: column">
           <div>{{ userInfo?.totalNum || 0 }}</div>
-          <div style="font-size: 12px; color: #999999; margin-top: 5px">跟投天数</div>
+          <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
+            跟投天数
+          </div>
         </div>
         <div style="display: flex; align-items: center; flex-direction: column">
           <div>{{ userInfo.yesterdayAmountEarn }}</div>
-          <div style="font-size: 12px; color: #999999; margin-top: 5px">昨日收益</div>
+          <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
+            昨日收益
+          </div>
         </div>
         <div style="display: flex; align-items: center; flex-direction: column">
           <div>{{ userInfo.totalAmountEarn?.toFixed(2) }}</div>
-          <div style="font-size: 12px; color: #999999; margin-top: 5px">累计收益</div>
+          <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
+            累计收益
+          </div>
         </div>
       </div>
     </div>
     <div
       style="
-        background: #fbfbfb;
+        background: var(--primary-color);
         border-radius: 9px 9px 9px 9px;
         padding: 10px 15px;
         margin-top: 20px;
       "
     >
       <div style="display: flex; align-items: center; justify-content: space-between">
-        <div style="color: #000000; font-weight: 500; font-size: 16px">金额</div>
-        <div style="color: rgba(0, 0, 0, 0.18); font-size: 12px">
+        <div style="color: var(--primary-background); font-weight: 500; font-size: 16px">金额</div>
+        <div style="color: var(--regular-background); font-size: 12px">
           可用{{ availableBalance }} USDT
         </div>
       </div>
@@ -354,7 +360,7 @@
           type="number"
           maxlength="140"
           :placeholder="info.limitMin ? '最小' + info.limitMin : ''"
-          style="color: #000000 !important"
+          style="color: var(--primary-background) !important"
         />
       </div>
       <div
@@ -367,7 +373,7 @@
             height: 30px;
             line-height: 30px;
             text-align: center;
-            background: rgba(240, 240, 240, 1);
+            background: var(--primary-color);
             border-radius: 6px;
           "
           v-for="(item, index) in proportionList"
@@ -519,7 +525,7 @@ onMounted(() => {
     padding: 0 10px;
     .info {
       padding: 20px 10px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       margin-bottom: 15px;
       .title {
@@ -527,7 +533,7 @@ onMounted(() => {
         align-items: center;
         justify-content: space-between;
         .text {
-          color: #999999;
+          color: var(--secondary-color);
           font-size: 12px;
         }
       }
@@ -536,7 +542,7 @@ onMounted(() => {
         .top {
           font-weight: 600;
           font-size: 20px;
-          color: #ffffff;
+          color: var(--primary-color);
           text-align: left;
           font-style: normal;
           text-transform: none;
@@ -554,7 +560,7 @@ onMounted(() => {
           .left {
             .total-item {
               margin-bottom: 5px;
-              color: #999999;
+              color: var(--secondary-color);
               font-size: 12px;
               span {
                 margin-left: 5px;
@@ -562,7 +568,7 @@ onMounted(() => {
             }
           }
           .right {
-            color: #999999;
+            color: var(--secondary-color);
             font-size: 12px;
             span {
               margin-left: 5px;
@@ -575,7 +581,7 @@ onMounted(() => {
       .box {
         margin-top: 15px;
         padding: 20px 10px;
-        background: rgba(255, 255, 255, 0.07);
+        background: var(--regular-background);
         border-radius: 8px 8px 8px 8px;
         &-item {
           &-top {
@@ -598,7 +604,7 @@ onMounted(() => {
               .name {
                 margin-left: 10px;
                 font-size: 14px;
-                color: #fff;
+                color: var(--primary-color);
               }
             }
             &-right {
@@ -606,11 +612,11 @@ onMounted(() => {
               flex-direction: column;
               align-items: flex-end;
               .price {
-                color: rgba(255, 255, 255, 1);
+                color: var(--primary-color);
                 font-size: 16px;
               }
               .text {
-                color: rgba(153, 153, 153, 1);
+                color: var(--secondary-color);
                 font-size: 12px;
                 margin-top: 5px;
               }
@@ -622,7 +628,7 @@ onMounted(() => {
             grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-top: 20px;
-            color: rgba(153, 153, 153, 1);
+            color: var(--secondary-color);
             font-size: 12px;
             & > *:nth-child(odd) {
               text-align: left; /* 奇数项左对齐 */
@@ -647,11 +653,15 @@ onMounted(() => {
               text-align: center;
               width: 80%;
               height: 29px;
-              background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+              background: linear-gradient(
+                306deg,
+                var(--primary-border) 0%,
+                var(--secondary-background) 100%
+              );
               border-radius: 15px 15px 15px 15px;
               margin-top: 20px;
               font-size: 14px;
-              color: #000;
+              color: var(--regular-color);
             }
           }
         }
@@ -660,7 +670,7 @@ onMounted(() => {
     .advertisement {
       margin-top: 15px;
       padding: 20px 10px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       &-top {
         display: flex;
@@ -675,20 +685,20 @@ onMounted(() => {
             margin-right: 10px;
           }
           .text {
-            color: rgba(255, 255, 255, 1);
+            color: var(--primary-color);
             font-size: 12px;
           }
         }
         &-right {
           .text {
-            color: rgba(153, 153, 153, 1);
+            color: var(--secondary-color);
             font-size: 10px;
           }
         }
       }
       &-tip {
         font-size: 10px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         margin-top: 10px;
       }
       &-btn {
@@ -700,7 +710,7 @@ onMounted(() => {
           width: 100%;
           height: 100%;
           border-radius: 6px 6px 6px 6px;
-          border: 1px solid rgba(186, 236, 87, 1);
+          border: 1px solid var(--primary-border);
           padding: 16px 13px;
           display: flex;
           align-items: center;
@@ -715,7 +725,7 @@ onMounted(() => {
           }
           .text {
             font-size: 10px;
-            color: rgba(255, 255, 255, 1);
+            color: var(--primary-color);
           }
         }
       }
@@ -723,9 +733,9 @@ onMounted(() => {
   }
 }
 .van-popup {
-  background: #fff !important;
+  background: var(--primary-color) !important;
   padding: 15px;
-  color: #000;
+  color: var(--regular-color);
 }
 .input-box {
   margin-top: 15px;
@@ -738,18 +748,18 @@ onMounted(() => {
   margin-top: 30px;
   width: 347px;
   height: 41px;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 21px 21px 21px 21px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 400;
   font-size: 16px;
-  color: #000000;
+  color: var(--regular-color);
 }
 .boxActive {
-  background: rgba(0, 0, 0, 1) !important;
-  color: rgba(186, 236, 87, 1) !important;
+  background: var(--primary-background) !important;
+  color: var(--primary-border) !important;
 }
 
 .black {
@@ -758,7 +768,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: var(--regular-background);
   z-index: 100;
 }
 .rule_box {
@@ -768,7 +778,7 @@ onMounted(() => {
   transform: translate(-50%, -50%);
   background-size: 100% 100%;
   z-index: 101;
-  background: linear-gradient(226deg, #2f391a 0%, #000000 100%);
+  background: linear-gradient(226deg, #2f391a 0%, var(--primary-background) 100%);
   border-radius: 22px 22px 22px 22px;
   width: 80%;
   height: auto;
@@ -809,14 +819,14 @@ onMounted(() => {
     align-items: center;
     .content-title {
       font-size: 22px;
-      color: #fff;
+      color: var(--primary-colo);
     }
     .content-tip {
       margin-top: 5px;
       font-size: 16px;
-      color: #fff;
+      color: var(--primary-colo);
       span {
-        color: #baec57;
+        color: var(--primary-border);
         font-size: 18px;
         margin-right: 5px;
       }
@@ -827,17 +837,21 @@ onMounted(() => {
     }
     .content-btn {
       margin-top: 20px;
-      color: #000;
+      color: var(--regular-color);
       width: 100%;
       height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+      background: linear-gradient(
+        306deg,
+        var(--primary-border) 0%,
+        var(--secondary-background) 100%
+      );
       border-radius: 6px 6px 6px 6px;
     }
     .content-text {
-      color: #baec57;
+      color: var(--primary-border);
       margin-top: 15px;
       font-size: 12px;
     }
@@ -846,14 +860,14 @@ onMounted(() => {
 :deep(.van-password-input) {
   margin: 0px;
   .van-password-input__item {
-    border: 1px solid #baec57;
+    border: 1px solid var(--primary-border);
     border-radius: 4px;
     background-color: transparent;
-    color: #fff;
+    color: var(--primary-colo);
   }
 }
 :deep(.van-key) {
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
-  color: #000;
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
+  color: var(--regular-color);
 }
 </style>

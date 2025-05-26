@@ -3,19 +3,19 @@
     <template v-if="rowList.length > 0">
       <div class="recharge-cell" v-for="(item, index) in rowList" :key="index">
         <template v-if="item.type == 0">
-          <div class="row" style="color: #baec57">
+          <div class="row" style="color: var(--primary-border)">
             <span>提现</span>
             <span>- {{ priceFormat(item.amount) }}</span>
           </div>
           <div
             class="row"
             v-if="item?.remark && item.remark != '' && item.remark != null"
-            style="color: rgb(153, 153, 153)"
+            style="color: var(--secondary-color)"
           >
             <span>备注</span>
             <span>{{ item.remark }}</span>
           </div>
-          <div class="row" style="color: rgb(153, 153, 153)">
+          <div class="row" style="color: var(--secondary-color)">
             <span>{{ _timeFormat(item?.params?.createTime) }}</span>
             <span>
               <template v-if="item?.status == 0">审核中</template>
@@ -25,19 +25,19 @@
           </div>
         </template>
         <template v-if="item.type == 1 && item.giveType == 0">
-          <div class="row" style="color: #baec57">
+          <div class="row" style="color: var(--primary-border)">
             <span>系统扣款</span>
             <span>- {{ priceFormat(item.amount) }}</span>
           </div>
           <div
             class="row"
             v-if="item?.remark && item.remark != '' && item.remark != null"
-            style="color: rgb(153, 153, 153)"
+            style="color: var(--secondary-color)"
           >
             <span>备注</span>
             <span>{{ item.remark }}</span>
           </div>
-          <div class="row" style="color: rgb(153, 153, 153)">
+          <div class="row" style="color: var(--secondary-color)">
             <span>{{ _timeFormat(item?.params?.createTime) }}</span>
             <span>
               <template v-if="item?.status == 0">审核中</template>

@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -151,10 +151,13 @@
           </div>
         </div>
 
-        <div class="form-item-label" style="color: #000000; font-weight: 500; font-size: 16px">
+        <div
+          class="form-item-label"
+          style="color: var(--primary-background); font-weight: 500; font-size: 16px"
+        >
           验证码
         </div>
-        <div class="input-box" style="background: #f5f5f5">
+        <div class="input-box" style="background: var(--placeholder-color)">
           <input
             v-model="code"
             type="number"
@@ -162,7 +165,7 @@
             placeholder="请输入验证码"
             class="uni-input-input"
             autocomplete="off"
-            style="color: #000000 !important"
+            style="color: var(--primary-background) !important"
           />
           <div class="icon">
             <span v-if="!flag" @click="emailCode('FIND_PASSWORD', email)">重新发送</span>
@@ -229,33 +232,33 @@ const confirm = () => {
   margin-top: 30px;
   width: 347px;
   height: 41px;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 21px 21px 21px 21px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 400;
   font-size: 16px;
-  color: #000000;
+  color: var(--primary-background);
 }
 .form-item {
   &-label {
     margin-top: 30px;
     margin-bottom: 15px;
-    color: #fff;
+    color: var(--primary-color);
   }
 
   &-text {
     margin-top: 10px;
     font-size: 12px;
-    color: rgba(255, 255, 255, 1);
+    color: var(--primary-color);
   }
 }
 
 .input-box {
   height: 46px;
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--regular-background);
   padding: 0px 18px;
   display: flex;
   align-items: center;
@@ -263,13 +266,13 @@ const confirm = () => {
   .area-code {
     width: 50px;
     font-size: 14px;
-    color: rgba(153, 153, 153, 1);
+    color: var(--secondary-color);
     display: flex;
     align-items: center;
     justify-content: center;
     padding-right: 10px;
     margin-right: 10px;
-    border-right: 1px solid rgba(153, 153, 153, 1);
+    border-right: 1px solid var(--secondary-color);
 
     .fui-icon {
       margin-left: 8px;
@@ -281,7 +284,7 @@ const confirm = () => {
   }
 
   .icon {
-    color: #999;
+    color: var(--secondary-color);
     font-size: 14px;
   }
 }
@@ -301,7 +304,7 @@ const confirm = () => {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  background-color: #121212;
+  background-color: var(--primary-background);
 }
 
 .forget .body-wrap .login-mode .item {
@@ -310,29 +313,15 @@ const confirm = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
+  color: var(--primary-color);
 }
 
 .form-item-label {
   margin-top: 30px;
   margin-bottom: 15px;
-  color: #fff;
+  color: var(--primary-color);
   font-size: 12px;
 }
-
-//.form-item .input-box {
-//  height: 46px;
-//  border-radius: 10px;
-//  background: rgba(255, 255, 255, 0.07);
-//  padding: 0px 18px;
-//  display: flex;
-//  align-items: center;
-//
-//  .icon {
-//    color: #999;
-//    font-size: 14px;
-//  }
-//}
 
 .btn {
   margin-top: 60px;
@@ -340,12 +329,12 @@ const confirm = () => {
   align-items: center;
   justify-content: center;
   height: 47px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--regular-background);
   border-radius: 24px 24px 24px 24px;
   font-family: PingFang SC;
   font-weight: 500;
   font-size: 14px;
-  color: #ffffff;
+  color: var(--primary-color);
   font-style: normal;
   text-transform: none;
   cursor: pointer;
@@ -357,7 +346,7 @@ const confirm = () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: var(--primary-background);
   z-index: 100;
 }
 
@@ -368,7 +357,7 @@ const confirm = () => {
   left: 0;
   z-index: 101;
   box-sizing: border-box;
-  background: #fff;
+  background: var(--primary-color);
   transform: translateY(100%);
   transition: all 0.3s;
   border-top-right-radius: 15px;
@@ -381,10 +370,9 @@ const confirm = () => {
     justify-content: center;
     align-items: center;
     width: 100%;
-    //color: #ffffff;
 
     .icon {
-      color: #fff;
+      color: var(--primary-color);
       font-size: 14px;
     }
 

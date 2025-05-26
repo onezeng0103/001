@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div style="margin: 15px 10px; font-size: 14px; color: #ffffff">
+    <div style="margin: 15px 10px; font-size: 14px; color: var(--primary-color)">
       实时最优价兑换，支持跨链资产
     </div>
 
@@ -190,7 +190,7 @@
     <div class="item" style="margin-top: 10px">
       <div class="item-top">
         <div>手续费 0.05%</div>
-        <div style="color: #ffffff">
+        <div style="color: var(--primary-color)">
           交换价格： 1 {{ list1Current?.coin?.toUpperCase() }} = {{ curRate }}
           {{ list2Current?.coin?.toUpperCase() }}
         </div>
@@ -199,14 +199,14 @@
 
     <div class="btn" @click="submit">开始兑换</div>
 
-    <div style="margin: 0 0 15px 10px; font-size: 14px; color: #ffffff">兑换记录</div>
+    <div style="margin: 0 0 15px 10px; font-size: 14px; color: var(--primary-color)">兑换记录</div>
 
     <div class="list">
       <template v-for="item in texChangeList" :key="item">
         <div class="list-item">
           <div style="display: flex; align-items: center">
             <div style="display: flex; align-items: center">
-              <div style="font-size: 10px; color: #ffffff">
+              <div style="font-size: 10px; color: var(--primary-color)">
                 {{ item?.fromCoin?.toUpperCase() }}
               </div>
               <svg
@@ -231,7 +231,7 @@
                   fill="#999999"
                 ></path>
               </svg>
-              <div style="font-size: 10px; color: #ffffff">
+              <div style="font-size: 10px; color: var(--primary-color)">
                 {{ item?.toCoin?.toUpperCase() }}
               </div>
             </div>
@@ -261,7 +261,6 @@ import { useUserStore } from '@/store/user/index'
 import { priceFormat } from '@/utils/decimal.js'
 import CurrencyList from './currencyList.vue'
 import { _numberWithCommas } from '@/utils/public'
-import { Popup } from 'vant'
 
 const router = useRouter()
 const accountStore = useAccountStore()
@@ -542,7 +541,7 @@ const submit = () => {
         height: 25px;
         margin-left: -10px;
         border-radius: 50%;
-        background-color: #000000;
+        background-color: var(--primary-background);
       }
 
       .get {
@@ -553,7 +552,7 @@ const submit = () => {
       .minus {
         font-weight: 400;
         font-size: 10px;
-        color: #999999;
+        color: var(--secondary-color);
       }
     }
   }
@@ -566,11 +565,11 @@ const submit = () => {
     justify-content: center;
     font-weight: 400;
     font-size: 12px;
-    color: #000000;
+    color: var(--primary-background);
     text-align: left;
     font-style: normal;
     text-transform: none;
-    background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+    background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
     border-radius: 20px 20px 20px 20px;
   }
 
@@ -584,7 +583,7 @@ const submit = () => {
       justify-content: space-between;
       font-weight: 400;
       font-size: 12px;
-      color: #999999;
+      color: var(--secondary-color);
       text-align: left;
       font-style: normal;
       text-transform: none;
@@ -592,7 +591,7 @@ const submit = () => {
     }
 
     .item-unb {
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       display: flex;
       align-items: center;
@@ -603,7 +602,7 @@ const submit = () => {
         margin: 0 3px 0 5px;
         font-weight: 400;
         font-size: 16px;
-        color: #ffffff;
+        color: var(--primary-color);
         text-align: left;
         font-style: normal;
         text-transform: none;

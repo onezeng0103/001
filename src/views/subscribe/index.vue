@@ -45,8 +45,8 @@ onMounted(() => {
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--regular-border);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -91,7 +91,7 @@ onMounted(() => {
               >
                 <path
                   d="M330.666667 512c0-14.933333 4.266667-29.866667 14.933333-40.533333l234.666667-277.33333399c23.466667-27.733333 64-29.866667 89.6-8.53333301 27.733333 23.466667 29.866667 64 8.53333299 89.6L477.866667 512l200.53333299 236.8c23.466667 27.733333 19.19999999 68.266667-8.53333299 89.6-27.733333 23.466667-68.266667 19.19999999-89.6-8.53333301l-234.666667-277.33333399c-10.666667-10.666667-14.933333-25.6-14.933333-40.533333z"
-                  fill="#ffffff"
+                  fill="var(--primary-color)"
                   p-id="22724"
                 ></path>
               </svg>
@@ -101,7 +101,7 @@ onMounted(() => {
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -135,8 +135,8 @@ onMounted(() => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: #a0a0a0">平均收益</div>
-        <div style="font-size: 14px; color: #ffffff">{{ info?.avgRate }}%</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">平均收益</div>
+        <div style="font-size: 14px; color: var(--primary-color)">{{ info?.avgRate }}%</div>
       </div>
       <div
         style="
@@ -147,8 +147,8 @@ onMounted(() => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: #a0a0a0">项目周期(天)</div>
-        <div style="font-size: 14px; color: #ffffff">{{ info?.days }}</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">项目周期(天)</div>
+        <div style="font-size: 14px; color: var(--primary-color)">{{ info?.days }}</div>
       </div>
       <div
         style="
@@ -159,10 +159,14 @@ onMounted(() => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: #a0a0a0">起头金额({{info.coin ? info.coin.toUpperCase() : '' }})</div>
-        <div style="font-size: 14px; color: #ffffff">{{ info?.limitMin }}</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">
+          起头金额({{ info.coin ? info.coin.toUpperCase() : '' }})
+        </div>
+        <div style="font-size: 14px; color: var(--primary-color)">{{ info?.limitMin }}</div>
       </div>
-      <div style="font-size: 13px; color: #a0a0a0; margin: 10px 0 10px">申购金额</div>
+      <div style="font-size: 13px; color: var(--secondary-color); margin: 10px 0 10px">
+        申购金额
+      </div>
       <div class="ipt">
         <input
           v-model="limit"
@@ -179,51 +183,69 @@ onMounted(() => {
         <div>{{ info.coin ? info.coin.toUpperCase() : '' }}</div>
       </div>
       <div class="details">
-        <div style="font-size: 14px; color: #a0a0a0;margin-bottom: 10px">产品详情</div>
-        <div style="display: flex;justify-content: space-between;align-items: center;margin: 8px 0;">
-          <div style="font-size: 13px; color: #a0a0a0">项目名称</div>
-          <div style="font-size: 14px; color: #ffffff">{{ info?.title }}</div>
+        <div style="font-size: 14px; color: var(--secondary-color); margin-bottom: 10px">
+          产品详情
         </div>
-        <div style="display: flex;justify-content: space-between;align-items: center;margin: 8px 0;">
-          <div style="font-size: 13px; color: #a0a0a0">项目进度</div>
-          <div style="font-size: 14px; color: #ffffff">{{ info?.process }}</div>
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
+        >
+          <div style="font-size: 13px; color: var(--secondary-color)">项目名称</div>
+          <div style="font-size: 14px; color: var(--primary-color)">{{ info?.title }}</div>
         </div>
-        <div style="display: flex;justify-content: space-between;align-items: center;margin: 8px 0;">
-          <div style="font-size: 13px; color: #a0a0a0">项目总额</div>
-          <div style="font-size: 14px; color: #ffffff">{{ info?.totalInvestAmount }}&nbsp;{{ info?.coin }}</div>
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
+        >
+          <div style="font-size: 13px; color: var(--secondary-color)">项目进度</div>
+          <div style="font-size: 14px; color: var(--primary-color)">{{ info?.process }}</div>
         </div>
-        <div style="display: flex;justify-content: space-between;align-items: center;margin: 8px 0;">
-          <div style="font-size: 13px; color: #a0a0a0">剩余金额</div>
-          <div style="font-size: 14px; color: #ffffff">{{ info?.remainAmount }}&nbsp;{{ info?.coin }}</div>
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
+        >
+          <div style="font-size: 13px; color: var(--secondary-color)">项目总额</div>
+          <div style="font-size: 14px; color: var(--primary-color)">
+            {{ info?.totalInvestAmount }}&nbsp;{{ info?.coin }}
+          </div>
         </div>
-        <div style="display: flex;justify-content: space-between;align-items: center;margin: 8px 0;">
-          <div style="font-size: 13px; color: #a0a0a0">限头次数</div>
-          <div style="font-size: 14px; color: #ffffff">{{ Number(info?.timeLimit) ? Number(info?.timeLimit) : '不限购' }}</div>
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
+        >
+          <div style="font-size: 13px; color: var(--secondary-color)">剩余金额</div>
+          <div style="font-size: 14px; color: var(--primary-color)">
+            {{ info?.remainAmount }}&nbsp;{{ info?.coin }}
+          </div>
         </div>
-        <div style="display: flex;justify-content: space-between;align-items: center;">
-          <div style="font-size: 13px; color: #a0a0a0">平均收益率</div>
-          <div style="font-size: 14px; color: #ffffff">{{ info?.avgRate }}%</div>
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
+        >
+          <div style="font-size: 13px; color: var(--secondary-color)">限头次数</div>
+          <div style="font-size: 14px; color: var(--primary-color)">
+            {{ Number(info?.timeLimit) ? Number(info?.timeLimit) : '不限购' }}
+          </div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <div style="font-size: 13px; color: var(--secondary-color)">平均收益率</div>
+          <div style="font-size: 14px; color: var(--primary-color)">{{ info?.avgRate }}%</div>
         </div>
       </div>
 
       <div class="details">
-        <div style="font-size: 14px; color: #a0a0a0;margin-bottom: 5px">基金介绍</div>
+        <div style="font-size: 14px; color: var(--secondary-color); margin-bottom: 5px">
+          基金介绍
+        </div>
         <div style="margin-bottom: 10px">
-          <div v-if="info?.prodectIntroduction" style="color: #7a7a7a">
+          <div v-if="info?.prodectIntroduction" style="color: var(--secondary-color)">
             {{ info?.prodectIntroduction }}
           </div>
-          <div v-else style="color: #7a7a7a">
-            暂无介绍
-          </div>
+          <div v-else style="color: var(--secondary-color)">暂无介绍</div>
         </div>
-        <div style="font-size: 14px; color: #a0a0a0;margin-bottom: 5px">产品规则</div>
+        <div style="font-size: 14px; color: var(--secondary-color); margin-bottom: 5px">
+          产品规则
+        </div>
         <div style="margin-bottom: 10px">
-          <div v-if="info?.problem" style="color: #7a7a7a">
+          <div v-if="info?.problem" style="color: var(--secondary-color)">
             {{ info?.problem }}
           </div>
-          <div v-else style="color: #7a7a7a">
-            暂无介绍
-          </div>
+          <div v-else style="color: var(--secondary-color)">暂无介绍</div>
         </div>
       </div>
     </div>
@@ -243,22 +265,22 @@ onMounted(() => {
     justify-content: center;
     font-weight: 400;
     font-size: 14px;
-    color: #999999;
+    color: var(--secondary-color);
     text-align: left;
     font-style: normal;
     text-transform: none;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--secondary-color);
     border-radius: 20px 20px 20px 20px;
   }
-  .zf{
-    color: #000000;
-    background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  .zf {
+    color: var(--regular-color);
+    background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   }
-  .details{
+  .details {
     border-radius: 4px;
     padding: 15px;
     box-sizing: border-box;
-    background: rgba(255,255,255,0.1);
+    background: var(--regular-background);
     margin-bottom: 15px;
   }
   .ipt {
@@ -266,10 +288,10 @@ onMounted(() => {
     justify-content: space-between;
     align-items: center;
     border-radius: 4px;
-    padding:0 15px;
+    padding: 0 15px;
     box-sizing: border-box;
     height: 39px !important;
-    background: rgba(255,255,255,0.2);
+    background: var(--regular-background);
     margin-bottom: 10px;
   }
 }

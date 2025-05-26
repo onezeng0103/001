@@ -44,7 +44,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgb(153, 153, 153);
+          color: var(--secondary-color);
         "
         :class="margin == 0 ? 'active' : ''"
         @click="handleTabs(0)"
@@ -58,7 +58,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          color: rgb(153, 153, 153);
+          color: var(--secondary-color);
         "
         :class="margin == 1 ? 'active' : ''"
         @click="handleTabs(1)"
@@ -69,7 +69,7 @@
     <div
       style="
         border-radius: 9px;
-        background: rgb(251, 251, 251);
+        background: var(--primary-color);
         margin-top: 15px;
         display: flex;
         align-items: center;
@@ -79,7 +79,7 @@
     >
       <img style="height: 36px; width: 36px" src="../../../assets/img/dollar.png" alt="" />
       <input
-        style="width: 100%; color: #000"
+        style="width: 100%; color: var(--primary-background)"
         v-model.trim="money"
         type="number"
         maxlength="140"
@@ -89,12 +89,12 @@
         pattern="[0-9]*"
         autocomplete="off"
       />
-      <span style="color: rgb(153, 153, 153)">USDT</span>
+      <span style="color: var(--secondary-color)">USDT</span>
     </div>
     <div style="margin-top: 15px; position: relative">
       <van-slider
-        active-color="#c4eb6e"
-        inactive-color="#232323"
+        active-color="var(--primary-border)"
+        inactive-color="var(--placeholder-border)"
         button-size="16"
         v-model="sliderValue"
       />
@@ -109,20 +109,40 @@
           top: 10px;
         "
       >
-        <div :style="{ color: sliderValue >= 0 ? '#000' : '#999' }">0%</div>
-        <div :style="{ color: sliderValue >= 25 ? '#000' : '#999' }">25%</div>
-        <div :style="{ color: sliderValue >= 50 ? '#000' : '#999' }">50%</div>
-        <div :style="{ color: sliderValue >= 75 ? '#000' : '#999' }">75%</div>
-        <div :style="{ color: sliderValue >= 100 ? '#000' : '#999' }">100%</div>
+        <div
+          :style="{ color: sliderValue >= 25 ? 'var(--regular-color)' : 'var(--secondary-color)' }"
+        >
+          0%
+        </div>
+        <div
+          :style="{ color: sliderValue >= 25 ? 'var(--regular-color)' : 'var(--secondary-color)' }"
+        >
+          25%
+        </div>
+        <div
+          :style="{ color: sliderValue >= 50 ? 'var(--regular-color)' : 'var(--secondary-color)' }"
+        >
+          50%
+        </div>
+        <div
+          :style="{ color: sliderValue >= 75 ? 'var(--regular-color)' : 'var(--secondary-color)' }"
+        >
+          75%
+        </div>
+        <div
+          :style="{ color: sliderValue >= 100 ? 'var(--regular-color)' : 'var(--secondary-color)' }"
+        >
+          100%
+        </div>
       </div>
     </div>
     <div style="margin-top: 40px">
-      <span style="color: rgb(153, 153, 153)">最多增加：</span>
-      <span style="color: #000">{{ atMostValue }} USDT</span>
+      <span style="color: var(--secondary-color)">最多增加：</span>
+      <span style="color: var(--regular-color)">{{ atMostValue }} USDT</span>
     </div>
     <div style="margin-top: 15px">
-      <span style="color: rgb(153, 153, 153)">追加后的强平价格：</span>
-      <span style="color: #000">{{ qiangpingPrice }} USDT</span>
+      <span style="color: var(--secondary-color)">追加后的强平价格：</span>
+      <span style="color: var(--regular-color)">{{ qiangpingPrice }} USDT</span>
     </div>
     <div style="width: 100%; display: flex; align-content: center; justify-content: center">
       <div class="btn2" @click="submit">
@@ -254,24 +274,24 @@ const submit = () => {
 </script>
 <style lang="scss" scoped>
 .van-popup {
-  background: #fff !important;
+  background: var(--primary-color) !important;
   padding: 15px;
-  color: #000;
+  color: var(--regular-color);
 }
 .active {
-  color: #000 !important;
+  color: var(--regular-color) !important;
 }
 .btn2 {
   margin-top: 30px;
   width: 347px;
   height: 41px;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 21px 21px 21px 21px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 400;
   font-size: 16px;
-  color: #000000;
+  color: var(--regular-color);
 }
 </style>

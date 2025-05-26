@@ -2,11 +2,11 @@
   <div class="recharge">
     <template v-if="rowList.length > 0">
       <div class="recharge-cell" v-for="(item, index) in rowList" :key="index">
-        <div class="row" style="color: #baec57">
+        <div class="row" style="color: var(--primary-border)">
           <span>借贷</span>
           <span>{{ priceFormat(item.amount) }}</span>
         </div>
-        <div class="row" style="color: rgb(153, 153, 153)">
+        <div class="row" style="color: var(--secondary-color)">
           <span>{{ _timeFormat(item?.params?.createTime) }}</span>
           <span>
             <template v-if="item?.status == 0">审核中</template>

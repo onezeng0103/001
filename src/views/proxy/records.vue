@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,7 +77,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -87,14 +87,14 @@
       <div class="content-box">
         <div class="content-box-item" @click="handleClickStartDate(1)">
           <span>{{ startDate && Array.isArray(startDate) ? startDate.join('-') : '' }}</span>
-          <div style="color: #999999; font-size: 12px; margin-top: 5px">
+          <div style="color: var(--secondary-color); font-size: 12px; margin-top: 5px">
             <span>开始时间</span>
           </div>
         </div>
         <div class="content-box-item"></div>
         <div class="content-box-item" @click="handleClickStartDate(2)">
           <span>{{ endDate && Array.isArray(endDate) ? endDate.join('-') : '' }}</span>
-          <div style="color: #999999; font-size: 12px; margin-top: 5px">
+          <div style="color: var(--secondary-color); font-size: 12px; margin-top: 5px">
             <span>结束时间</span>
           </div>
         </div>
@@ -320,19 +320,23 @@ onMounted(() => {
       &-item {
         width: 40%;
         height: 41px;
-        background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+        background: linear-gradient(
+          306deg,
+          var(--primary-border) 0%,
+          var(--secondary-background) 100%
+        );
         border-radius: 21px 21px 21px 21px;
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: 400;
         font-size: 16px;
-        color: #000000;
+        color: var(--primary-color);
       }
     }
     .content-list {
       padding: 15px;
-      background: rgba(255, 255, 255, 0.07);
+      background: var(--regular-background);
       border-radius: 8px 8px 8px 8px;
       margin-bottom: 15px;
       &-item {
@@ -345,12 +349,12 @@ onMounted(() => {
   }
 }
 .van-picker {
-  background-color: #fff;
+  background-color: var(--primary-background);
 }
 :deep(.van-picker-column__item) {
-  color: #000;
+  color: var(--primary-color);
 }
 :deep(.van-picker__title) {
-  color: #000;
+  color: var(--primary-color);
 }
 </style>

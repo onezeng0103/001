@@ -70,8 +70,8 @@ const submit = async () => {
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -126,7 +126,7 @@ const submit = async () => {
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -160,8 +160,10 @@ const submit = async () => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: #a0a0a0">限额</div>
-        <div style="font-size: 14px; color: #ffffff">{{ data.limitMin }}~{{ data.limitMax }}</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">限额</div>
+        <div style="font-size: 14px; color: var(--primary-color)">
+          {{ data.limitMin }}~{{ data.limitMax }}
+        </div>
       </div>
       <div
         style="
@@ -172,8 +174,10 @@ const submit = async () => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: #a0a0a0">日收益率</div>
-        <div style="font-size: 14px; color: #ffffff">{{ data.minOdds }}%~{{ data.maxOdds }}%</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">日收益率</div>
+        <div style="font-size: 14px; color: var(--primary-color)">
+          {{ data.minOdds }}%~{{ data.maxOdds }}%
+        </div>
       </div>
 
       <div
@@ -185,8 +189,8 @@ const submit = async () => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: #a0a0a0">周期(天)</div>
-        <div style="font-size: 14px; color: #ffffff">{{ data.days }}</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">周期(天)</div>
+        <div style="font-size: 14px; color: var(--primary-color)">{{ data.days }}</div>
       </div>
       <div class="ipt">
         <input
@@ -203,16 +207,21 @@ const submit = async () => {
         />
       </div>
       <div class="details">
-        <div style="display: flex;justify-content: space-between;align-items: center;margin: 8px 0;">
-          <div style="font-size: 13px; color: #a0a0a0">可用余额</div>
-          <div style="font-size: 14px; color: #ffffff">{{ priceFormat(amount) }} USDT</div>
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
+        >
+          <div style="font-size: 13px; color: var(--secondary-color)">可用余额</div>
+          <div style="font-size: 14px; color: var(--primary-color)">
+            {{ priceFormat(amount) }} USDT
+          </div>
         </div>
-        <div style="display: flex;justify-content: space-between;align-items: center;margin: 8px 0;">
-          <div style="font-size: 13px; color: #a0a0a0">限购次数</div>
-          <div style="font-size: 14px; color: #ffffff">{{ data.timeLimit }}</div>
+        <div
+          style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
+        >
+          <div style="font-size: 13px; color: var(--secondary-color)">限购次数</div>
+          <div style="font-size: 14px; color: var(--primary-color)">{{ data.timeLimit }}</div>
         </div>
       </div>
-
     </div>
 
     <div @click="submit" class="btn" :class="limit ? 'zf' : ''">支付</div>
@@ -230,22 +239,22 @@ const submit = async () => {
     justify-content: center;
     font-weight: 400;
     font-size: 14px;
-    color: #999999;
+    color: var(--secondary-color);
     text-align: left;
     font-style: normal;
     text-transform: none;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: var(--regular-background);
     border-radius: 20px 20px 20px 20px;
   }
-  .zf{
-    color: #000000;
-    background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  .zf {
+    color: var(--primary-background);
+    background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   }
-  .details{
+  .details {
     border-radius: 4px;
     padding: 15px;
     box-sizing: border-box;
-    background: rgba(255,255,255,0.1);
+    background: var(--regular-background);
     margin-bottom: 15px;
   }
   .ipt {
@@ -253,10 +262,10 @@ const submit = async () => {
     justify-content: space-between;
     align-items: center;
     border-radius: 4px;
-    padding:0 15px;
+    padding: 0 15px;
     box-sizing: border-box;
     height: 39px !important;
-    background: rgba(255,255,255,0.2);
+    background: var(--regular-background);
     margin-bottom: 10px;
   }
 }

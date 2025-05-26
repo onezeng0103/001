@@ -14,7 +14,7 @@
         v-for="(item, index) in rowList"
         :key="index"
       >
-        <div class="row" style="color: #baec57">
+        <div class="row" style="color: var(--primary-border)">
           <span>
             <template v-if="item.type == 12">购买质押</template>
             <template v-if="item.type == 6">购买理财</template>
@@ -30,7 +30,7 @@
             {{ _numberWithCommas(item.amount) }}
           </span>
         </div>
-        <div class="row" style="color: rgb(153, 153, 153)">
+        <div class="row" style="color: var(--secondary-color)">
           <span>{{ _timeFormat(item?.createTime) }}</span>
         </div>
       </div>

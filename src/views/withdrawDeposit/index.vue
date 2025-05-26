@@ -36,7 +36,7 @@ const coinList = computed(() => {
       list.push(obj)
     }
   })
-  console.log(list,'123')
+  console.log(list, '123')
   return list
 })
 const showBottom = ref(false)
@@ -71,8 +71,8 @@ const submit = () => {
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--regular-border);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -117,7 +117,7 @@ const submit = () => {
               >
                 <path
                   d="M330.666667 512c0-14.933333 4.266667-29.866667 14.933333-40.533333l234.666667-277.33333399c23.466667-27.733333 64-29.866667 89.6-8.53333301 27.733333 23.466667 29.866667 64 8.53333299 89.6L477.866667 512l200.53333299 236.8c23.466667 27.733333 19.19999999 68.266667-8.53333299 89.6-27.733333 23.466667-68.266667 19.19999999-89.6-8.53333301l-234.666667-277.33333399c-10.666667-10.666667-14.933333-25.6-14.933333-40.533333z"
-                  fill="#ffffff"
+                  fill="var(--primary-color)"
                   p-id="22724"
                 ></path>
               </svg>
@@ -127,7 +127,7 @@ const submit = () => {
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -170,14 +170,14 @@ const submit = () => {
           >
             <path
               d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
-              fill="#BAEC57"
+              fill="var(--primary-border)"
               p-id="9045"
             ></path>
           </svg>
         </div>
       </div>
 
-      <div style="font-size: 14px;margin-top: 20px">币种类型</div>
+      <div style="font-size: 14px; margin-top: 20px">币种类型</div>
       <div class="optionNationality">
         <div class="optionNationality-text" style="flex: 1">
           <input
@@ -188,34 +188,27 @@ const submit = () => {
             placeholder="请填写提现地址"
             class="uni-input-input"
             autocomplete="off"
-            style="width: 100%;"
+            style="width: 100%"
           />
         </div>
       </div>
 
       <div class="btn" @click="submit">确定</div>
-
     </div>
 
-
-
     <van-popup v-model:show="showBottom" position="bottom">
-      <div style="padding-bottom: 8px;background-color: #f5f5f5">
+      <div style="padding-bottom: 8px; background-color: var(--placeholder-color)">
         <template v-for="item in coinList" :key="item.type" @click="close(item)">
           <div class="item" @click="close(item)">{{ item.title }}</div>
         </template>
       </div>
 
-      <div class="item" @click="showBottom = false">
-        取消
-      </div>
-
+      <div class="item" @click="showBottom = false">取消</div>
     </van-popup>
   </div>
 </template>
 
 <style scoped lang="scss">
-
 .btn {
   margin: 40px 0;
   padding: 11px 123px;
@@ -224,26 +217,26 @@ const submit = () => {
   justify-content: center;
   font-weight: 400;
   font-size: 14px;
-  color: #000000;
+  color: var(--primary-background);
   text-align: left;
   font-style: normal;
   text-transform: none;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 20px 20px 20px 20px;
 }
-.item{
+.item {
   width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666666;
+  color: var(--secondary-color);
   font-size: 14px;
-  background-color: #ffffff;
+  background-color: var(--primary-color);
 }
 
 .optionNationality {
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--regular-background);
   border-radius: 8px 8px 8px 8px;
   display: flex;
   align-items: center;
@@ -255,7 +248,7 @@ const submit = () => {
   .optionNationality-text {
     font-weight: 400;
     font-size: 14px;
-    color: #ffffff;
+    color: var(--primary-color);
   }
 }
 </style>

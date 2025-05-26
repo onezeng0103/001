@@ -3,8 +3,8 @@
   <div style="height: 44px">
     <div
       style="
-        background: #000;
-        border-bottom-color: rgb(238, 238, 238);
+        background: var(--primary-background);
+        border-bottom-color: var(--placeholder-color);
         padding-left: 8px;
         padding-right: 8px;
         z-index: 9;
@@ -59,7 +59,7 @@
           <span
             style="
               font-size: 16px;
-              color: #fff;
+              color: var(--primary-color);
               font-weight: 500;
               display: block;
               overflow: hidden;
@@ -149,7 +149,6 @@ const send = () => {
   // 邮箱发送验证码
   if (formData.value.email == '') {
     showToast('请补充邮箱地址')
-    // _toast('login_please_emailCode')
     return
   }
   emailCode('BIND', formData.value.email).then((res) => {
@@ -167,22 +166,17 @@ const finish = () => {
   flag.value = false
 }
 const submit = () => {
-  // bind.value = true
-  // email.value=formData.value.email
   if (formData.value.email == '') {
     showToast('请补充邮箱地址')
-    // _toast('login_please_emailCode')
     return
   }
   if (formData.value.code == '') {
     showToast('验证码')
-    // _toast('verification_code')
     return
   }
   emailBind(formData.value.email, formData.value.code).then((res) => {
     if (res.code == '200') {
       showToast('绑定成功')
-      // _toast('email_bind_success')
       email.value = formData.value.email
       bind.value = true
     } else {
@@ -200,11 +194,11 @@ const submit = () => {
   justify-content: center;
   font-weight: 400;
   font-size: 14px;
-  color: #000000;
+  color: var(--regular-color);
   text-align: left;
   font-style: normal;
   text-transform: none;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 20px 20px 20px 20px;
   //margin-top: 50px;
 }
@@ -229,14 +223,14 @@ const submit = () => {
       .text {
         margin: 20px 0;
         font-size: 15px;
-        color: #a7afb7;
+        color: var(--secondary-color);
       }
 
       .input {
         width: 100%;
         height: 50px;
         padding: 0 10px;
-        background: rgba(255, 255, 255, 0.07);
+        background: var(--regular-background);
         border-radius: 8px;
         display: flex;
         justify-content: space-between;
@@ -244,7 +238,6 @@ const submit = () => {
 
         input {
           height: 100%;
-          //background: rgba(255, 255, 255, 0.07);
           border: none;
           font-size: 14px;
         }
@@ -253,12 +246,16 @@ const submit = () => {
           right: 26px;
           min-width: 80px;
           height: 35px;
-          background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+          background: linear-gradient(
+            306deg,
+            var(--primary-border) 0%,
+            var(--secondary-background) 100%
+          );
           border-radius: 7px;
           display: flex;
           justify-content: center;
           align-items: center;
-          color: #000000;
+          color: var(--regular-color);
           div {
             font-size: 14px;
           }
@@ -274,9 +271,9 @@ const submit = () => {
       justify-content: center;
       align-items: center;
       height: 50px;
-      background: var(--ex-default-background-color);
-      border: 1px solid var(--ex-border-color4);
-      color: var(--ex-font-color9);
+      background: var(--regular-background);
+      border: 1px solid var(--placeholder-border);
+      color: var(--secondary-color);
       font-size: 14px;
     }
   }
@@ -310,8 +307,12 @@ const submit = () => {
       justify-content: center;
       align-items: center;
       height: 50px;
-      color: #000000;
-      background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+      color: var(--regular-color);
+      background: linear-gradient(
+        306deg,
+        var(--primary-border) 0%,
+        var(--secondary-background) 100%
+      );
       font-size: 14px;
       border-radius: 8px;
       opacity: 1;
@@ -323,7 +324,7 @@ const submit = () => {
       align-items: center;
       border-radius: 8px;
       height: 50px;
-      border: 1px solid #ffe415;
+      border: 1px solid var(--secondary-background);
     }
   }
 }

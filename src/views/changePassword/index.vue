@@ -3,9 +3,7 @@ import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/user'
 import { showToast } from 'vant'
-import { reactive, ref } from 'vue'
 import { updateLoginPwd } from '@/api/user'
-
 const userStore = useUserStore()
 const newPwd = ref(true)
 const oldPwd = ref(true)
@@ -15,15 +13,6 @@ const form = ref({
   oldPwd: '',
   NPwd: ''
 })
-const setKeyVal = (val) => {
-  if (val == 'oldPwd') {
-    oldPwd.value = !oldPwd.value
-  } else if (val == 'newPwd') {
-    newPwd.value = !newPwd.value
-  } else {
-    NPwd.value = !NPwd.value
-  }
-}
 const showPwdDiff = ref(false)
 const pwdDiff = () => {
   showPwdDiff.value = !(form.value.newPwd == form.value.NPwd)
@@ -31,17 +20,14 @@ const pwdDiff = () => {
 const submit = () => {
   if (form.value.oldPwd == '') {
     showToast('请输入旧密码')
-    // _toast('Fund_password_pleaseOld')
     return
   }
   if (form.value.newPwd == '') {
     showToast('请输入新密码')
-    // _toast('Fund_password_pleaseNew')
     return
   }
   if (form.value.newPwd !== form.value.NPwd) {
     showToast('两次密码不一致')
-    // _toast('register_pwd_diff')
     return
   }
 
@@ -49,7 +35,6 @@ const submit = () => {
     (res) => {
       if (res.code == '200') {
         showToast('修改成功')
-        // _toast('Bank_update_success')
         form.value.newPwd = form.value.NPwd = form.value.oldPwd = ''
       } else {
         showToast(res.msg)
@@ -58,15 +43,9 @@ const submit = () => {
   )
 }
 
-
 const router = useRouter()
 const { userInfo } = storeToRefs(userStore)
-
-// 进入路由已请求  ---> 用户数据
-// userStore.getUserInfo()
-// ??
 const notPwd = ref(false)
-//修改登录密码的方式(true普通，false邮箱)
 const updateLoginPwdMethod = ref(true)
 //是否已有登录密码
 const loginPassword = ref(userInfo.value.user?.loginPassword || '')
@@ -78,7 +57,6 @@ const changeMethod = () => {
   if (!userInfo.value.user?.email) {
     return showToast('请先绑定邮箱')
   }
-
   updateLoginPwdMethod.value = !updateLoginPwdMethod.value
 }
 </script>
@@ -88,8 +66,8 @@ const changeMethod = () => {
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--regular-border);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -144,7 +122,7 @@ const changeMethod = () => {
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -316,13 +294,9 @@ const changeMethod = () => {
             </svg>
           </div>
         </div>
-        <!--        <p v-if="showPwdDiff" class="pwdDiff">*两次密码不一致</p>-->
         <div class="btnBox" @click="submit">确定</div>
-
         <div v-if="loginPassword" class="box">
-          <div v-if="!updateLoginPwdMethod" class="set" @click="changeMethod">
-            使用原密码修改
-          </div>
+          <div v-if="!updateLoginPwdMethod" class="set" @click="changeMethod">使用原密码修改</div>
           <div v-else class="set" @click="changeMethod">使用邮箱修改</div>
         </div>
       </div>
@@ -338,7 +312,7 @@ const changeMethod = () => {
     margin-top: 15px;
     text-align: center;
     font-size: 15px;
-    color: #ffffff;
+    color: var(--primary-color);
   }
 }
 .content2 {
@@ -346,7 +320,7 @@ const changeMethod = () => {
 
   .tip {
     font-size: 14px;
-    color: #a7afb7;
+    color: var(--secondary-color);
     margin-bottom: 10px;
     text-align: left;
   }
@@ -355,7 +329,7 @@ const changeMethod = () => {
     padding: 0 15px;
     width: 100%;
     height: 50px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -392,12 +366,11 @@ const changeMethod = () => {
   justify-content: center;
   font-weight: 400;
   font-size: 14px;
-  color: #000000;
+  color: var(--regular-color);
   text-align: left;
   font-style: normal;
   text-transform: none;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 20px 20px 20px 20px;
-  //margin-top: 50px;
 }
 </style>

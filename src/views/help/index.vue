@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,7 +77,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -87,7 +87,9 @@
       <template v-if="list?.length > 0">
         <div v-for="(item, index) in list" :key="index" style="margin-bottom: 20px">
           <div style="display: flex; align-items: center">
-            <div style="width: 3px; height: 12px; margin-right: 10px; background: #fff"></div>
+            <div
+              style="width: 3px; height: 12px; margin-right: 10px; background: var(--primary-color)"
+            ></div>
             {{ item.title }}
           </div>
           <div v-if="item.infoList?.length > 0">

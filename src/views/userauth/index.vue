@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--regular-border);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -105,7 +105,7 @@
               >
                 <path
                   d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
-                  fill="#BAEC57"
+                  fill="var(--primary-border)"
                   p-id="9045"
                 ></path>
               </svg>
@@ -129,7 +129,7 @@
               >
                 <path
                   d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
-                  fill="#BAEC57"
+                  fill="var(--primary-border)"
                   p-id="9045"
                 ></path>
               </svg>
@@ -185,7 +185,9 @@
         </div>
 
         <div class="upd">
-          <div style="font-weight: 500; font-size: 16px; color: #ffffff">请上传身份证照片</div>
+          <div style="font-weight: 500; font-size: 16px; color: var(--primary-color)">
+            请上传身份证照片
+          </div>
           <van-uploader v-model="fileList1" :after-read="afterRead1" class="upd-list">
             <img
               v-if="fileList1.length == 0"
@@ -411,7 +413,7 @@ const reSubmit = () => {
 .content1 {
   padding: 100px 15px 0;
 
-  color: #ffffff;
+  color: var(--primary-color);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -420,7 +422,7 @@ const reSubmit = () => {
     margin-top: 30px;
     text-align: center;
     font-size: 14px;
-    color: #ffffff;
+    color: var(--primary-color);
   }
 
   .imgLoad {
@@ -431,7 +433,7 @@ const reSubmit = () => {
 
   .text {
     font-size: 14px;
-    color: rgba(192, 198, 204, 0.7);
+    color: var(--secondary-color);
   }
 }
 
@@ -449,7 +451,7 @@ const reSubmit = () => {
   border-bottom: 0px !important;
 }
 :deep(.van-action-sheet__item, .van-action-sheet__cancel) {
-  background-color: #0e1327 !important;
+  background-color: var(--primary-background) !important;
 }
 .label {
   color: var(--ex-input-label-color2);
@@ -461,7 +463,7 @@ const reSubmit = () => {
 
   .tip {
     font-size: 12px;
-    color: #8885fb;
+    color: var(--primary-border);
   }
   .tip_info {
     font-size: 12px;
@@ -482,7 +484,7 @@ const reSubmit = () => {
     padding-top: 0.133333rem;
     font-size: 0.373333rem;
     .label {
-      color: var(--ex-input-label-color2);
+      color: var(--primary-color);
       text-align: left;
     }
     .formInput {
@@ -495,10 +497,8 @@ const reSubmit = () => {
         height: 1.226667rem;
         font-size: 0.373333rem;
         border-radius: 0.213333rem;
-        background: var(--ex-input-background-color);
         border: 0.026667rem solid rgba(0, 0, 0, 0);
         &::placeholder {
-          color: var(--ex-input-font-color);
           font-size: 14px;
         }
       }
@@ -510,21 +510,17 @@ const reSubmit = () => {
 
     .photo {
       font-size: 14px;
-      color: var(--ex-default-font-color);
     }
 
     span {
       font-size: 14px;
-      color: var(--ex-passive-font-color);
     }
   }
 
   .upload-box {
     .item {
       height: 194px;
-      background: var(--ex-default-background-color);
       border-radius: 0.213333rem;
-      border: 0.026667rem dashed var(--ex-border-color10);
       margin-bottom: 10px;
       display: flex;
       flex-direction: column;
@@ -568,8 +564,6 @@ const reSubmit = () => {
       }
 
       .img {
-        // width: 100%;
-        // height: 100%;
         width: 50px;
         height: 50px;
         min-width: none;
@@ -587,7 +581,6 @@ const reSubmit = () => {
         justify-content: center;
         font-size: 14px;
         font-weight: 400;
-        color: var(--ex-passive-font-color);
       }
     }
   }
@@ -604,17 +597,14 @@ const reSubmit = () => {
 
 :deep(.van-action-sheet__content) {
   button {
-    background: var(--ex-select-dialog-background-color);
-    color: var(--ex-select-dialog-font-color);
     height: 45px;
-    // border: 1px solid var(--ex-select-dialog-boder-color);
   }
 }
 
 .element {
-  background: #121212;
+  background: var(--primary-background);
   border-radius: 8px 8px 8px 8px;
-  border: 1px solid rgba(186, 236, 87, 0.26);
+  border: 1px solid var(--primary-border);
   padding: 10px 0;
   margin-top: 5px;
 
@@ -627,12 +617,12 @@ const reSubmit = () => {
     justify-content: center;
     font-weight: 400;
     font-size: 14px;
-    color: #999999;
+    color: var(--secondary-color);
   }
 
   .elect {
-    background: #baec57;
-    color: #000000;
+    background: var(--primary-border);
+    color: var(--primary-color);
   }
 }
 
@@ -644,11 +634,11 @@ const reSubmit = () => {
   justify-content: center;
   font-weight: 400;
   font-size: 14px;
-  color: #000000;
+  color: var(--primary-color);
   text-align: left;
   font-style: normal;
   text-transform: none;
-  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
   border-radius: 20px 20px 20px 20px;
 }
 
@@ -656,7 +646,7 @@ const reSubmit = () => {
   .upd-list {
     margin-top: 15px;
     border-radius: 6px 6px 6px 6px;
-    border: 1px dashed #baec57;
+    border: 1px dashed var(--primary-border);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -671,7 +661,7 @@ const reSubmit = () => {
     .text {
       margin-top: 15px;
       font-size: 14px;
-      color: #999999;
+      color: var(--secondary-color);
     }
   }
 }
@@ -686,13 +676,13 @@ const reSubmit = () => {
     justify-content: space-between;
     font-weight: 400;
     font-size: 16px;
-    color: #ffffff;
+    color: var(--primary-color);
   }
 }
 
 .optionNationality {
   width: 112px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--regular-background);
   border-radius: 8px 8px 8px 8px;
   display: flex;
   align-items: center;
@@ -704,8 +694,7 @@ const reSubmit = () => {
   .optionNationality-text {
     font-weight: 400;
     font-size: 14px;
-    color: #ffffff;
-    //margin-right: 10px;
+    color: var(--primary-color);
   }
 }
 
@@ -778,7 +767,7 @@ const reSubmit = () => {
   z-index: 992;
   visibility: hidden;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 0 0.3125rem rgba(2, 4, 38, 0.05);
+  box-shadow: 0 0 0.3125rem var(--primary-background);
   opacity: 0;
 }
 
@@ -822,7 +811,7 @@ const reSubmit = () => {
   transform: scale(1) translateZ(0);
   flex-direction: row;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--primary-background);
   position: relative;
   cursor: pointer;
 }
@@ -844,7 +833,7 @@ const reSubmit = () => {
 .fui-ddm__item-line:after {
   content: '';
   position: absolute;
-  border-bottom: 1px solid var(--fui-color-border, #eeeeee);
+  border-bottom: 1px solid var(--fui-color-border, var(--regular-background));
   transform: scaleY(0.5);
   transform-origin: 0 100%;
   bottom: 0;
@@ -852,11 +841,6 @@ const reSubmit = () => {
   left: 1rem;
   pointer-events: none;
 }
-
-.fui-dropdown__menu-item:active {
-  background-color: var(--fui-bg-color-hover, rgba(0, 0, 0, 0.2)) !important;
-}
-
 .fui-ddm__reverse {
   justify-content: space-between;
   flex-direction: row-reverse;
@@ -864,7 +848,7 @@ const reSubmit = () => {
 
 .fui-ddm__checkbox {
   font-size: 0;
-  color: rgba(0, 0, 0, 0);
+  color: var(--primary-color);
   width: 1.25rem;
   height: 1.25rem;
   border-width: 1px;
@@ -882,8 +866,8 @@ const reSubmit = () => {
 }
 
 .fui-ddm__checkbox-color {
-  background: var(--fui-color-primary, #465cff) !important;
-  border-color: var(--fui-color-primary, #465cff) !important;
+  background: var(--primary-border) !important;
+  border-color: var(--primary-border) !important;
 }
 
 .fui-is__checkmark {
@@ -896,10 +880,10 @@ const reSubmit = () => {
   height: 1.25rem;
   border-bottom-style: solid;
   border-bottom-width: 3px;
-  border-bottom-color: #fff;
+  border-bottom-color: var(--primary-color);
   border-right-style: solid;
   border-right-width: 3px;
-  border-right-color: #fff;
+  border-right-color: var(--primary-color);
   box-sizing: border-box;
   transform: rotate(45deg) scale(0.5) translateZ(0);
   transform-origin: 54% 48%;
@@ -920,7 +904,7 @@ const reSubmit = () => {
 
 .fui-ddm__icon-box {
   overflow: hidden;
-  background-color: #f1f4fa;
+  background-color: var(--regular-background);
   flex-shrink: 0;
 }
 

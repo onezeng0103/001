@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,7 +77,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -92,8 +92,13 @@
       >
         <div>{{ item.remark }}</div>
         <div>
-          <van-icon name="checked" color="#3070ec" size="20" v-if="current === item.dictValue" />
-          <van-icon name="checked" color="#444444" size="20" v-else />
+          <van-icon
+            name="checked"
+            color="var(--primary-border)"
+            size="20"
+            v-if="current === item.dictValue"
+          />
+          <van-icon name="checked" color="var(--secondary-color)" size="20" v-else />
         </div>
       </div>
     </div>
@@ -129,7 +134,7 @@ const languageList = mainStore.languageList
       margin-bottom: 10px;
       padding: 10px;
       border-radius: 10px;
-      color: #fff;
+      color: var(--primary-color);
       display: flex;
       align-items: center;
       justify-content: space-between;

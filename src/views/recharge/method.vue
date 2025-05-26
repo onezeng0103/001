@@ -3,8 +3,8 @@
     <div style="height: 44px">
       <div
         style="
-          background: #000;
-          border-bottom-color: rgb(238, 238, 238);
+          background: var(--primary-background);
+          border-bottom-color: var(--placeholder-color);
           padding-left: 8px;
           padding-right: 8px;
           z-index: 9;
@@ -59,7 +59,7 @@
             <span
               style="
                 font-size: 16px;
-                color: #fff;
+                color: var(--primary-color);
                 font-weight: 500;
                 display: block;
                 overflow: hidden;
@@ -77,7 +77,7 @@
               width: 4.6875rem;
               justify-content: flex-end;
               align-items: center;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           ></div>
         </div>
@@ -85,12 +85,12 @@
     </div>
 
     <div class="method-main">
-      <div style="font-size: 12px; color: rgba(168, 168, 168, 1); margin-bottom: 15px">网络</div>
+      <div style="font-size: 12px; color: var(--secondary-color); margin-bottom: 15px">网络</div>
       <div
         @click="isNetwork = true"
         style="
           font-size: 16px;
-          color: #fff;
+          color: var(--primary-color);
           margin-bottom: 15px;
           display: flex;
           align-items: center;
@@ -122,13 +122,13 @@
       <div
         style="
           margin-top: 15px;
-          background: rgba(255, 255, 255, 0.07);
+          background: var(--regular-background);
           width: 100%;
           padding: 10px;
           border-radius: 8px;
         "
       >
-        <div style="font-size: 12px; color: #999999">地址</div>
+        <div style="font-size: 12px; color: var(--secondary-color)">地址</div>
         <div style="display: flex; align-items: center; justify-content: space-between">
           <div style="width: 80%; word-break: break-word; white-space: normal">
             {{ extraInfo?.coinAddress }}
@@ -136,10 +136,14 @@
           <div
             @click="handleCopy"
             style="
-              background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+              background: linear-gradient(
+                306deg,
+                var(--primary-border) 0%,
+                var(--secondary-background) 100%
+              );
               border-radius: 15px;
               padding: 5px 12px;
-              color: #000;
+              color: var(--primary-color);
             "
           >
             复制
@@ -155,8 +159,10 @@
           margin-top: 15px;
         "
       >
-        <div style="color: #a8a8a8; font-size: 12px">最小充币额</div>
-        <div style="color: #fff; font-size: 12px">{{ extraInfo?.rechargeMin }} USDT</div>
+        <div style="color: var(--secondary-color); font-size: 12px">最小充币额</div>
+        <div style="color: var(--primary-color); font-size: 12px">
+          {{ extraInfo?.rechargeMin }} USDT
+        </div>
       </div>
       <div
         style="
@@ -167,8 +173,8 @@
           margin-top: 15px;
         "
       >
-        <div style="color: #a8a8a8; font-size: 12px">充币到账时间</div>
-        <div style="color: #fff; font-size: 12px">约 1 分钟</div>
+        <div style="color: var(--secondary-color); font-size: 12px">充币到账时间</div>
+        <div style="color: var(--primary-color); font-size: 12px">约 1 分钟</div>
       </div>
     </div>
   </div>
@@ -199,7 +205,7 @@
           ></path>
         </svg>
       </div>
-      <div style="font-size: 14px; color: #fff">选择充值币种</div>
+      <div style="font-size: 14px; color: var(--primary-color)">选择充值币种</div>
       <div style="width: 25px"></div>
     </div>
     <div
@@ -212,10 +218,10 @@
         <img :src="getImageUrl(item?.icon)" alt="" style="width: 40px; height: 40px" />
         <div style="margin-left: 10px">
           <div>{{ item?.title?.toUpperCase() }}</div>
-          <div style="font-size: 10px; color: rgba(168, 168, 168, 1); margin-top: 5px">
+          <div style="font-size: 10px; color: var(--secondary-color); margin-top: 5px">
             最小充币额：{{ item?.rechargeMin }}USDT
           </div>
-          <div style="font-size: 10px; color: rgba(168, 168, 168, 1); margin-top: 5px">
+          <div style="font-size: 10px; color: var(--secondary-color); margin-top: 5px">
             预计 约 1分钟 内到账
           </div>
         </div>
@@ -375,25 +381,25 @@ onMounted(() => {
     &-form {
       margin-bottom: 30px;
       &-label {
-        color: #fff;
+        color: var(--primary-color);
         font-size: 12px;
         margin-bottom: 15px;
       }
       &-input {
         display: flex;
         align-items: center;
-        background: rgba(255, 255, 255, 0.07);
+        background: var(--regular-background);
         border-radius: 10px;
         height: 40px;
         padding: 0 10px;
         input {
           flex: 1;
-          color: #fff !important;
+          color: var(--primary-color) !important;
         }
         .text {
           margin-left: 10px;
           flex: 1;
-          color: #fff !important;
+          color: var(--primary-color) !important;
         }
       }
     }
@@ -405,21 +411,25 @@ onMounted(() => {
         margin-top: 30px;
         width: 80%;
         height: 40px;
-        background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+        background: linear-gradient(
+          306deg,
+          var(--primary-border) 0%,
+          var(--secondary-background) 100%
+        );
         border-radius: 21px 21px 21px 21px;
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: 400;
         font-size: 16px;
-        color: #000000;
+        color: var(--primary-color);
       }
     }
   }
 }
 .van-popup {
   padding: 15px;
-  color: #fff;
+  color: var(--primary-color);
   .popup-item {
     margin-bottom: 15px;
     display: flex;

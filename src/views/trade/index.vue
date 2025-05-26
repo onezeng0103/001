@@ -160,8 +160,8 @@
       </div>
       <div class="trade-main-slider">
         <van-slider
-          active-color="#c4eb6e"
-          inactive-color="#232323"
+          active-color="var(--primary-border)"
+          inactive-color="var(--regular-color)"
           button-size="16"
           v-model="form.slider"
           @change="sliderChange"
@@ -468,14 +468,14 @@ onMounted(() => {
         }
         &-price {
           .name {
-            color: rgba(255, 255, 255, 1);
+            color: var(--primary-color);
             font-size: 12px;
             margin-bottom: 4px;
           }
           .text {
             display: flex;
             align-items: center;
-            color: rgba(153, 153, 153, 1);
+            color: var(--secondary-color);
             font-size: 12px;
             .eys {
               display: flex;
@@ -487,7 +487,7 @@ onMounted(() => {
       }
       &-price {
         font-size: 20px;
-        color: #fff;
+        color: var(--primary-color);
         margin-top: 10px;
       }
     }
@@ -497,11 +497,11 @@ onMounted(() => {
       align-items: end;
       &-price {
         font-size: 18px;
-        color: rgba(186, 236, 87, 1);
+        color: var(--primary-border);
       }
       &-text {
         margin-top: 20px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         font-size: 10px;
         span {
           margin-left: 5px;
@@ -512,9 +512,9 @@ onMounted(() => {
   &-tab {
     margin-top: 15px;
     padding: 18px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 29px 29px 29px 29px;
-    border: 1px solid rgba(186, 236, 87, 0.26);
+    border: 1px solid var(--primary-border);
     width: auto;
     display: flex;
     align-items: center;
@@ -527,20 +527,20 @@ onMounted(() => {
     &-item {
       width: auto;
       font-size: 14px;
-      color: rgba(153, 153, 153, 1);
+      color: var(--secondary-color);
       cursor: pointer;
       flex-shrink: 0;
       margin-right: 30px;
     }
     .active {
-      color: rgba(186, 236, 87, 1);
+      color: var(--primary-border);
     }
   }
   &-tip {
     margin-top: 15px;
     margin-bottom: 15px;
-    background: #baec57;
-    box-shadow: inset 0px -4px 4px 0px #d7ff89;
+    background: var(--primary-border);
+    box-shadow: inset 0px -4px 4px 0px var(--secondary-border);
     border-radius: 10px 10px 10px 10px;
     padding: 10px 16px;
     display: flex;
@@ -557,7 +557,7 @@ onMounted(() => {
       }
       .text {
         flex: 1;
-        color: #000;
+        color: var(--regular-color);
         &-title {
           font-size: 22px;
           font-weight: 900;
@@ -569,15 +569,15 @@ onMounted(() => {
     }
     &-right {
       border-radius: 16px 16px 16px 16px;
-      border: 1px solid #000000;
+      border: 1px solid var(--primary-background);
       padding: 4px 11px;
       font-size: 12px;
-      color: #000;
+      color: var(--regular-color);
     }
   }
   &-main {
     margin-top: 15px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 8px 8px 8px 8px;
     padding: 14px;
     &-top {
@@ -595,7 +595,7 @@ onMounted(() => {
         .name {
           margin-left: 5px;
           font-size: 12px;
-          color: rgba(153, 153, 153, 1);
+          color: var(--secondary-color);
         }
         svg {
           margin-left: 5px;
@@ -605,21 +605,21 @@ onMounted(() => {
         display: flex;
         align-items: center;
 
-        background: rgba(255, 255, 255, 0.07);
+        background: var(--regular-background);
         border-radius: 18px 18px 18px 18px;
         &-item {
           font-size: 10px;
-          color: #fff;
+          color: var(--primary-color);
           display: flex;
           padding: 3px 7px;
           align-items: center;
           justify-content: center;
         }
         .active {
-          background: #baec57;
+          background: var(--primary-border);
           border-radius: 18px 18px 18px 18px;
           padding: 3px 7px;
-          color: #000;
+          color: var(--regular-color);
         }
       }
     }
@@ -632,7 +632,7 @@ onMounted(() => {
         margin-top: 15px;
         display: flex;
         align-items: end;
-        color: #fff;
+        color: var(--primary-color);
         &-name {
           font-size: 12px;
         }
@@ -644,7 +644,7 @@ onMounted(() => {
     }
     &-tab {
       margin-top: 15px;
-      border: 1px solid #222222;
+      border: 1px solid var(--primary-background);
       border-left: none;
       border-right: none;
       padding: 8px 16px;
@@ -652,10 +652,10 @@ onMounted(() => {
       &-item {
         margin-right: 30px;
         font-size: 13px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
       }
       .actives {
-        color: #fff;
+        color: var(--primary-color);
       }
     }
     &-slider {
@@ -665,7 +665,7 @@ onMounted(() => {
       margin-bottom: 15px;
       height: 40px;
       width: 100%;
-      border: 1px solid rgb(186, 236, 87);
+      border: 1px solid var(--primary-border);
       border-radius: 10px;
       padding: 0 10px;
       display: flex;
@@ -691,9 +691,13 @@ onMounted(() => {
         height: 29px;
         display: flex;
         align-items: center;
-        color: #000;
+        color: var(--regular-color);
         justify-content: center;
-        background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+        background: linear-gradient(
+          306deg,
+          var(--primary-border) 0%,
+          var(--secondary-background) 100%
+        );
         border-radius: 15px 15px 15px 15px;
       }
     }

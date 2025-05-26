@@ -3,13 +3,29 @@
 
 [data-theme='dark'] {
   --primary-background: #000;
+  --regular-background: rgba(255, 255, 255, 0.07);
+  --secondary-background: #ffe414;
   --primary-color: #fff;
-  --footerBar-background: #000;
+  --regular-color: #000;
+  --secondary-color: #999;
+  --placeholder-color: #f5f5f5;
+  --primary-border: #baec57;
+  --regular-border: #eee;
+  --secondary-border: #d7ff89;
+  --placeholder-border: #222;
 }
 [data-theme='light'] {
   --primary-background: #fff;
+  --regular-background: rgba(255, 255, 255, 0.07);
+  --secondary-background: #ffe414;
   --primary-color: #000;
-  --footerBar-background: #ccc;
+  --regular-color: #000;
+  --secondary-color: #999;
+  --placeholder-color: #f5f5f5;
+  --primary-border: #baec57;
+  --regular-border: #eee;
+  --secondary-border: #d7ff89;
+  --placeholder-border: #222;
 }
 html,
 body {

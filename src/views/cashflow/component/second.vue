@@ -2,7 +2,7 @@
   <div class="recharge">
     <template v-if="rowList.length > 0">
       <div class="recharge-cell" v-for="(item, index) in rowList" :key="index">
-        <div class="row" style="color: #baec57">
+        <div class="row" style="color: var(--primary-border)">
           <span>
             <template v-if="item.type == '0'">下单冻结-</template>
             <template v-if="item.type == '0'">亏损-</template>
@@ -13,7 +13,7 @@
             {{ priceFormat(item.amount) }}
           </span>
         </div>
-        <div class="row" style="color: rgb(153, 153, 153)">
+        <div class="row" style="color: var(--secondary-color)">
           <span>{{ _timeFormat(item?.createTime) }}</span>
           <span>账后余额{{ priceFormat(item?.afterAmount) }}</span>
         </div>

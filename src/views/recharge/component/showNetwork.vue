@@ -2,7 +2,7 @@
   <van-popup v-model:show="props.isNetwork" round position="bottom">
     <div style="display: flex; align-items: center; justify-content: space-between">
       <div></div>
-      <div style="font-size: 14px; color: #000">选择充值网络</div>
+      <div style="font-size: 14px; color: var(--primary-background)">选择充值网络</div>
       <div>
         <svg
           @click="handleClose(undefined, currentIndex)"
@@ -23,7 +23,7 @@
         </svg>
       </div>
     </div>
-    <div style="font-size: 12px; color: #999; margin-top: 10px">
+    <div style="font-size: 12px; color: var(--secondary-color); margin-top: 10px">
       请确认您选择的储值网络与您所在的提现平台所使用网络一致，否则资产可能会遗失。
     </div>
     <div
@@ -45,7 +45,7 @@
           height: 30px;
           line-height: 30px;
           text-align: center;
-          background: rgb(240, 240, 240);
+          background: var(--primary-color);
           border-radius: 6px;
           margin-bottom: 15px;
         "
@@ -57,7 +57,6 @@
   </van-popup>
 </template>
 <script setup>
-import { useI18n } from 'vue-i18n'
 const props = defineProps({
   isNetwork: {
     type: Boolean,
@@ -90,19 +89,19 @@ const handleClose = (value, index) => {
 </script>
 <style lang="scss" scoped>
 .van-popup {
-  background-color: #fff !important;
+  background-color: var(--primary-background) !important;
   padding: 15px;
-  color: #000;
+  color: var(--primary-color);
   .popup-item {
     width: 80%;
     height: 30px;
     line-height: 30px;
     text-align: center;
-    background: rgb(240, 240, 240);
+    background: var(--primary-color);
     border-radius: 6px;
   }
 }
 .active {
-  border: 1px solid #000;
+  border: 1px solid var(--primary-color);
 }
 </style>

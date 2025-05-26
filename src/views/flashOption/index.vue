@@ -119,13 +119,13 @@
           align-items: center;
           justify-content: space-between;
           margin-top: 10px;
-          color: rgba(153, 153, 153, 1);
+          color: var(--secondary-color);
           font-size: 12px;
           font-weight: 500;
         "
       >
         <div>下单中</div>
-        <div style="color: #fff">{{ timeRangeCountdown.split('/')[0] }}</div>
+        <div style="color: var(--primary-color)">{{ timeRangeCountdown.split('/')[0] }}</div>
       </div>
       <div
         style="
@@ -133,25 +133,25 @@
           align-items: center;
           justify-content: space-between;
           margin-top: 10px;
-          color: rgba(153, 153, 153, 1);
+          color: var(--secondary-color);
           font-size: 12px;
           font-weight: 500;
         "
       >
         <div>剩余时间</div>
-        <div style="color: #fff">{{ timeRangeCountdown.split('/')[1] }}</div>
+        <div style="color: var(--primary-color)">{{ timeRangeCountdown.split('/')[1] }}</div>
       </div>
       <div class="link"></div>
       <div style="display: flex; align-items: center; justify-content: space-between">
-        <div style="color: #fff; font-size: 12px">快速交易</div>
-        <div style="color: rgba(153, 153, 153, 1); font-size: 10px">
+        <div style="color: var(--primary-color); font-size: 12px">快速交易</div>
+        <div style="color: var(--secondary-color); font-size: 10px">
           可用余额 {{ availableBalance }}
           <span style="margin-left: 2px">USDT</span>
         </div>
       </div>
       <div class="input-box">
         <input v-model="orderAmount" type="text" placeholder="请输入数量" />
-        <span style="color: rgba(153, 153, 153, 1); font-size: 12px">最大</span>
+        <span style="color: var(--secondary-color); font-size: 12px">最大</span>
       </div>
       <el-slider
         size="small"
@@ -223,7 +223,7 @@
                 <div v-else>赢</div>
               </div>
             </div>
-            <div style="font-size: 10px; color: rgb(153, 153, 153); margin-top: 10px">
+            <div style="font-size: 10px; color: var(--secondary-color); margin-top: 10px">
               {{ item.createTime }}
             </div>
             <div class="trade-orderBox-list-item-coll">
@@ -354,7 +354,7 @@
             font-weight: 700;
             font-size: 40px;
             line-height: 24px;
-            background-color: rgb(153, 153, 153);
+            background-color: var(--secondary-color);
           "
         >
           {{ countdownDisplay[0] }}
@@ -371,7 +371,7 @@
             font-weight: 700;
             font-size: 40px;
             line-height: 24px;
-            background-color: rgb(153, 153, 153);
+            background-color: var(--secondary-color);
           "
         >
           {{ countdownDisplay[1] }}
@@ -400,7 +400,7 @@
             font-weight: 700;
             font-size: 40px;
             line-height: 24px;
-            background-color: rgb(153, 153, 153);
+            background-color: var(--secondary-color);
           "
         >
           {{ countdownDisplay[2] }}
@@ -417,7 +417,7 @@
             font-weight: 700;
             font-size: 40px;
             line-height: 24px;
-            background-color: rgb(153, 153, 153);
+            background-color: var(--secondary-color);
           "
         >
           {{ countdownDisplay[3] }}
@@ -436,7 +436,7 @@
               font-style: normal;
               font-weight: 400;
               line-height: 16px;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           >
             预测方向
@@ -483,7 +483,7 @@
               font-style: normal;
               font-weight: 400;
               line-height: 16px;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           >
             交易金额(USDT)
@@ -507,7 +507,7 @@
               font-style: normal;
               font-weight: 400;
               line-height: 16px;
-              color: rgba(153, 153, 153, 1);
+              color: var(--secondary-color);
             "
           >
             盈利金额(USDT)
@@ -531,7 +531,11 @@
           border-radius: 21px;
           font-size: 16px;
           color: #000;
-          background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+          background: linear-gradient(
+            306deg,
+            var(--primary-border) 0%,
+            var(--secondary-background) 100%
+          );
         "
       >
         关闭
@@ -785,14 +789,14 @@ onMounted(async () => {
         }
         &-price {
           .name {
-            color: rgba(255, 255, 255, 1);
+            color: var(--primary-color);
             font-size: 12px;
             margin-bottom: 4px;
           }
           .text {
             display: flex;
             align-items: center;
-            color: rgba(153, 153, 153, 1);
+            color: var(--secondary-color);
             font-size: 12px;
             .eys {
               display: flex;
@@ -804,7 +808,7 @@ onMounted(async () => {
       }
       &-price {
         font-size: 20px;
-        color: #fff;
+        color: var(--primary-color);
         margin-top: 10px;
       }
     }
@@ -814,11 +818,11 @@ onMounted(async () => {
       align-items: end;
       &-price {
         font-size: 18px;
-        color: rgba(186, 236, 87, 1);
+        color: var(--primary-border);
       }
       &-text {
         margin-top: 20px;
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         font-size: 10px;
         span {
           margin-left: 5px;
@@ -829,9 +833,9 @@ onMounted(async () => {
   &-tab {
     margin-top: 15px;
     padding: 18px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 29px 29px 29px 29px;
-    border: 1px solid rgba(186, 236, 87, 0.26);
+    border: 1px solid var(--primary-border);
     width: auto;
     display: flex;
     align-items: center;
@@ -844,20 +848,20 @@ onMounted(async () => {
     &-item {
       width: auto;
       font-size: 14px;
-      color: rgba(153, 153, 153, 1);
+      color: var(--secondary-color);
       cursor: pointer;
       flex-shrink: 0;
       margin-right: 30px;
     }
     .active {
-      color: rgba(186, 236, 87, 1);
+      color: var(--primary-border);
     }
   }
   &-tip {
     margin-top: 15px;
     margin-bottom: 15px;
-    background: #baec57;
-    box-shadow: inset 0px -4px 4px 0px #d7ff89;
+    background: var(--primary-border);
+    box-shadow: inset 0px -4px 4px 0px var(--secondary-background);
     border-radius: 10px 10px 10px 10px;
     padding: 10px 16px;
     display: flex;
@@ -874,7 +878,7 @@ onMounted(async () => {
       }
       .text {
         flex: 1;
-        color: #000;
+        color: var(--primary-background);
         &-title {
           font-size: 22px;
           font-weight: 900;
@@ -886,15 +890,15 @@ onMounted(async () => {
     }
     &-right {
       border-radius: 16px 16px 16px 16px;
-      border: 1px solid #000000;
+      border: 1px solid var(--primary-background);
       padding: 4px 11px;
       font-size: 12px;
-      color: #000;
+      color: var(--primary-background);
     }
   }
   &-main {
     margin-top: 15px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 8px 8px 8px 8px;
     padding: 14px;
     &-top {
@@ -912,21 +916,21 @@ onMounted(async () => {
         .name {
           margin-left: 5px;
           font-size: 12px;
-          color: rgba(153, 153, 153, 1);
+          color: var(--secondary-color);
         }
         svg {
           margin-left: 5px;
         }
       }
       &-right {
-        color: rgba(153, 153, 153, 1);
+        color: var(--secondary-color);
         font-size: 12px;
       }
     }
     .link {
       width: 100%;
       height: 1px;
-      background: rgba(34, 34, 34, 1);
+      background: var(--placeholder-color);
       margin: 10px 0;
     }
     .input-box {
@@ -937,7 +941,7 @@ onMounted(async () => {
       width: 100%;
       height: 28px;
       border-radius: 6px 6px 6px 6px;
-      border: 1px solid #baec57;
+      border: 1px solid var(--primary-border);
       padding: 0 10px;
 
       input {
@@ -946,24 +950,24 @@ onMounted(async () => {
         border: none;
         outline: none;
         margin-right: 10px;
-        color: #fff;
+        color: var(--primary-color);
       }
     }
   }
   &-orderBox {
     margin-top: 15px;
-    background: rgba(255, 255, 255, 0.07);
+    background: var(--regular-background);
     border-radius: 8px 8px 8px 8px;
     padding: 14px;
     &-tab {
       display: flex;
       align-items: center;
       &-item {
-        color: rgb(153, 153, 153);
+        color: var(--secondary-color);
         margin-right: 10px;
       }
       .active {
-        color: #fff;
+        color: var(--primary-color);
       }
     }
     &-list {
@@ -972,34 +976,34 @@ onMounted(async () => {
         margin-top: 10px;
         &-coll {
           font-size: 12px;
-          color: rgb(153, 153, 153);
+          color: var(--secondary-color);
           display: flex;
           align-items: center;
           justify-content: space-between;
           margin-top: 10px;
           &-price {
-            color: #fff;
+            color: var(--primary-color);
           }
         }
         .line {
           margin: 10px 0;
           width: 100%;
           height: 1px;
-          background: rgba(255, 255, 255, 0.1);
+          background: var(--placeholder-color);
         }
       }
     }
   }
 }
 :deep(.el-slider__button) {
-  border: 2px solid #baec57;
+  border: 2px solid var(--primary-border);
 }
 :deep(.el-slider__bar) {
-  background: #baec57;
+  background: var(--primary-border);
 }
 .btn {
   position: fixed;
-  bottom: 40px;
+  bottom: 70px;
   left: 0;
   width: 100%;
   margin-top: 15px;
@@ -1011,7 +1015,7 @@ onMounted(async () => {
     width: 40%;
     height: 35px;
     background-color: rgba(23, 172, 0, 1);
-    color: #fff;
+    color: var(--primary-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1021,15 +1025,15 @@ onMounted(async () => {
     width: 40%;
     height: 35px;
     background-color: rgba(255, 100, 100, 1);
-    color: #fff;
+    color: var(--primary-color);
     display: flex;
     align-items: center;
     justify-content: center;
   }
 }
 .van-popup {
-  background: #fff !important;
+  background: var(--primary-color) !important;
   padding: 15px;
-  color: #000;
+  color: var(--primary-background);
 }
 </style>
