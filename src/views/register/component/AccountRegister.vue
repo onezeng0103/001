@@ -219,8 +219,8 @@ const handleSubmit = () => {
     showToast('请输入账号')
     return
   }
-  // 用户名小写字母+数字限制6-15位
-  if (!/^[a-z0-9]{6,15}$/.test(formData.value.loginName.trim())) {
+  // 用户名大写或小写字母+数字限制6-15位
+  if (!/^[a-zA-Z0-9]{6,15}$/.test(formData.value.loginName.trim())) {
     showToast('请填写6-15位包含数字字母的账号')
     return
   }

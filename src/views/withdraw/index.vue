@@ -120,7 +120,7 @@
           </svg>
         </div>
       </div>
-      <div class="recharge-main-item">
+      <!-- <div class="recharge-main-item">
         <div style="display: flex; align-items: center">
           <div>
             <img
@@ -154,7 +154,7 @@
             ></path>
           </svg>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
