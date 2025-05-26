@@ -52,7 +52,7 @@
       </div>
     </div>
     <div class="form-item" v-if="!showVerifyCode">
-      <div class="form-item-label">登陆密码</div>
+      <div class="form-item-label">登录密码</div>
       <div class="input-box">
         <input
           :type="isPwd ? 'password' : 'text'"
@@ -126,7 +126,7 @@
       </div>
     </div>
     <div class="tip" @click="forget">忘记密码？</div>
-    <div class="btn" @click="handleSubmit">登陆</div>
+    <div class="btn" @click="handleSubmit">登录</div>
     <div class="text">
       还没有账号？
       <span @click="register">立即注册</span>
@@ -193,6 +193,13 @@ const handleSubmit = () => {
   } else {
     if (!password.value) {
       showToast('请输入登录密码')
+      return
+    }
+    //登录密码必须包含 数字、字母、特殊符号
+    if (
+      !/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/.test(password.value)
+    ) {
+      showToast('请填写6-16位包含数字字母特殊符号的密码')
       return
     }
   }

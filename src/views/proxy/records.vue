@@ -161,7 +161,7 @@
               </div>
             </div>
             <div class="content-list-item">
-              <div class="content-list-item-left">分润</div>
+              <div class="content-list-item-left">机构分润</div>
               <div class="content-list-item-right">
                 <template v-if="Math.sign(item.orderEarn) != -1">
                   - {{ Math.abs(truncateDecimals(Subtr(item.orderEarn, item.amountEarn))) }}
@@ -171,7 +171,7 @@
               </div>
             </div>
             <div class="content-list-item">
-              <div class="content-list-item-left">代投时间</div>
+              <div class="content-list-item-left">跟投时间</div>
               <div class="content-list-item-right">
                 {{ item.createTime }}
               </div>

@@ -371,7 +371,7 @@ const moreList = ref([
     key: 'help'
   },
   {
-    title: '退出',
+    title: '退出登录',
     icon: new URL('../../assets/img/26.png', import.meta.url).href,
     link: '',
     key: 'logout'

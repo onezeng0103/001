@@ -10,3 +10,11 @@
   font-family: 'PingFang SC';
   src: url('../font/PingFang Medium_downcc.otf');
 }
+@font-face {
+  font-family: 'YouSheBiaoTiHei';
+  src: url('../font/YouSheBiaoTiHei-2.ttf');
+}
+@font-face {
+  font-family: 'Rowdies-Regular';
+  src: url('../font/Rowdies-Regular.ttf');
+}

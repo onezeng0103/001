@@ -167,7 +167,7 @@ const handleChange = (value, index) => {
 onMounted(() => {
   if (Boolean(Number(isProxy))) {
     list.value.push({
-      name: '代投',
+      name: '跟投',
       type: 'proxy',
       component: proxy
     })

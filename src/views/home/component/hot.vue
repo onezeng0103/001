@@ -47,32 +47,15 @@
 <script setup>
 import { useTradeStore } from '@/store/trade/index'
 import { priceFormat } from '@/utils/decimal.js'
-import { LatestpriceLargeToSmall } from '@/utils/filters'
 import { _isRFD } from '@/utils/public'
 import { useRouter } from 'vue-router'
 const tradeStore = useTradeStore()
-const currentCoinList = ref(tradeStore.secondContractCoinList)
 const listResult = ref()
 const router = useRouter()
 const toRafSort = () => {
-  listResult.value = LatestpriceLargeToSmall(
-    currentCoinList.value,
-    tradeStore.allCoinPriceInfo,
-    'change',
-    1
-  ).filter((item) => {
-    return isShow(
-      tradeStore.allCoinPriceInfo[item.coin]?.openPrice,
-      tradeStore.allCoinPriceInfo[item.coin]?.close
-    )
+  listResult.value = tradeStore.secondContractCoinList.filter((it, inx) => {
+    return it.coinType == 2
   })
-}
-const isShow = (openPrice, close) => {
-  if (_isRFD(openPrice, close) == 'price_down') {
-    return true
-  } else {
-    return false
-  }
 }
 const handleCoinDetail = (item) => {
   router.push(`/flash?symbol=${item.coin}`)

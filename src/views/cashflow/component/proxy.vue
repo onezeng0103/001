@@ -4,11 +4,11 @@
       <div class="recharge-cell" v-for="(item, index) in rowList" :key="index">
         <div class="row" style="color: #baec57">
           <span>
-            <template v-if="item.type == '61'">代投投资</template>
-            <template v-if="item.type == '62'">代投投资取消</template>
-            <template v-if="item.type == '63'">代投投资结算</template>
-            <template v-if="item.type == '64'">代投投资返还</template>
-            <template v-if="item.type == '65'">代投亏损弥补</template>
+            <template v-if="item.type == '61'">跟投投资</template>
+            <template v-if="item.type == '62'">跟投投资取消</template>
+            <template v-if="item.type == '63'">跟投投资结算</template>
+            <template v-if="item.type == '64'">跟投投资返还</template>
+            <template v-if="item.type == '65'">跟投亏损弥补</template>
           </span>
           <span>
             {{ priceFormat(item.amount) }}

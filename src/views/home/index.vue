@@ -90,8 +90,8 @@
         <div class="main-tip-left">
           <img src="../../assets/img/31.png" alt="" />
           <div class="text">
-            <div class="text-title">智能代投</div>
-            <div class="text-desc">智能分析市场趋势，实时监控价格波动，自动执行最优代投策略</div>
+            <div class="text-title">智能跟投</div>
+            <div class="text-desc">智能分析市场趋势，实时监控价格波动，自动执行最优跟投策略</div>
           </div>
         </div>
         <div class="main-tip-right" @click="router.push('/proxy')">立即前往</div>
@@ -103,25 +103,38 @@
             :class="{ active: currentIndex == 0 }"
             @click="handleIndex(0)"
           >
-            24小时涨幅榜
+            热门币种
           </div>
           <div
             class="list-box-header-item"
             :class="{ active: currentIndex == 1 }"
             @click="handleIndex(1)"
           >
-            24小时跌幅榜
+            涨幅榜
+          </div>
+          <div
+            class="list-box-header-item"
+            :class="{ active: currentIndex == 2 }"
+            @click="handleIndex(2)"
+          >
+            跌幅榜
           </div>
         </div>
         <div class="list-box-content">
-          <Rose v-if="currentIndex == 0" />
-          <Fall v-if="currentIndex == 1" />
+          <Hot v-if="currentIndex == 0" />
+          <Rose v-if="currentIndex == 1" />
+          <Fall v-if="currentIndex == 2" />
         </div>
       </div>
     </div>
   </div>
   <div class="black" v-if="showInfoPopup" @click="showInfoPopup = !showInfoPopup"></div>
+
   <div class="rule_box" v-if="showInfoPopup">
+    <div class="rule_box-title">
+      <div>安全预警</div>
+      <div>请你重视此消息</div>
+    </div>
     <div class="close" @click="showInfoPopup = !showInfoPopup"></div>
     <div class="content">
       <div class="content-item" v-for="(item, index) in newList">
@@ -138,6 +151,7 @@ import { useMainStore } from '@/store/index.js'
 import { publiceNotice } from '@/api/common/index.js'
 import { getInfo } from '@/api/info'
 import { dispatchCustomEvent } from '@/utils'
+import Hot from './component/hot.vue'
 import Rose from './component/rose.vue'
 import Fall from './component/fall.vue'
 const userStore = useUserStore()
@@ -382,6 +396,7 @@ onMounted(() => {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
 }
+
 .rule_box {
   position: absolute;
   top: 50%;
@@ -392,6 +407,22 @@ onMounted(() => {
   width: 340px;
   height: 260px;
   z-index: 101;
+  &-title {
+    position: absolute;
+    top: 25px;
+    left: 40px;
+    right: 0;
+    bottom: 0;
+    > div:first-child {
+      font-size: 24px;
+      color: #000;
+      font-family: 'YouSheBiaoTiHei';
+    }
+    > div:last-child {
+      font-size: 14px;
+      color: #000;
+    }
+  }
   .content {
     position: absolute;
     top: 92px;

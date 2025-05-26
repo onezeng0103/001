@@ -156,7 +156,7 @@
         "
       >
         <div style="color: #a8a8a8; font-size: 12px">最小充币额</div>
-        <div style="color: #fff; font-size: 12px">0.01 USDT</div>
+        <div style="color: #fff; font-size: 12px">{{ extraInfo?.rechargeMin }} USDT</div>
       </div>
       <div
         style="
@@ -213,7 +213,7 @@
         <div style="margin-left: 10px">
           <div>{{ item?.title?.toUpperCase() }}</div>
           <div style="font-size: 10px; color: rgba(168, 168, 168, 1); margin-top: 5px">
-            最小充币额：0.01USDT
+            最小充币额：{{ item?.rechargeMin }}USDT
           </div>
           <div style="font-size: 10px; color: rgba(168, 168, 168, 1); margin-top: 5px">
             预计 约 1分钟 内到账
@@ -309,12 +309,13 @@ const handleCopy = async () => {
   }
 }
 const handleClose = (value) => {
+  console.log('123', value)
   handleSwitch(true)
   isSwitch.value = true
   info.value = value
   if (value.extra.length > 0) {
     extra.value = value.extra
-    extraInfo.value = value.extra[0]
+    extraInfo.value = { ...value.extra[0], rechargeMin: value.rechargeMin }
   } else {
     extra.value = [
       {
@@ -324,7 +325,8 @@ const handleClose = (value) => {
     ]
     extraInfo.value = {
       coinName: value.title,
-      coinAddress: value.address
+      coinAddress: value.address,
+      rechargeMin: value.rechargeMin
     }
   }
   createQRImage(extraInfo.value.coinAddress)
@@ -340,7 +342,8 @@ onMounted(() => {
       type: 0, //充值
       title: item.coinName,
       address: item.coinAddress,
-      extra: item.extra
+      extra: item.extra,
+      rechargeMin: item.rechargeMin
     }
   })
   info.value = arr[0]

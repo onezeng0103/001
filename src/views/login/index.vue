@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="title">欢迎登陆</div>
+    <div class="title">欢迎登录</div>
     <div class="tab">
       <div
         class="tab-item"

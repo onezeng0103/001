@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>代投</span>
+              <span>跟投</span>
             </span>
           </div>
           <div
@@ -160,7 +160,7 @@
               </div>
             </div>
             <div class="right">
-              代投天数
+              跟投天数
               <template v-if="isEye">
                 <span>{{ info?.totalNum || 0 }}</span>
               </template>
@@ -170,7 +170,7 @@
         </div>
       </div>
       <div class="management">
-        <div>资产管理</div>
+        <div>机构合作专区</div>
         <template v-if="projectList.length > 0">
           <div class="box">
             <div class="box-item" v-for="(item, index) in projectList" :key="index">
@@ -183,25 +183,25 @@
                 </div>
                 <div class="box-item-top-right">
                   <div class="price">{{ _numberWithCommas(item.limitMin) }}</div>
-                  <div class="text">最低代投金额</div>
+                  <div class="text">最低跟投金额</div>
                 </div>
               </div>
               <div class="box-item-main">
                 <div>
-                  代投保证金
+                  机构保证金
                   <span>{{ _numberWithCommas(item.bail) }}</span>
                 </div>
                 <div>
-                  分润比例
+                  机构分润比例
                   <span>{{ userInfo?.levelRate * 100 }}%</span>
                 </div>
                 <div>
-                  日收益率
+                  预估收益率
                   <span>{{ item.oddsMinShow }}%-{{ item.oddsMaxShow }}%</span>
                 </div>
               </div>
               <div class="box-item-btn">
-                <div class="btn" @click="handleProxy(item)">一键代投</div>
+                <div class="btn" @click="handleProxy(item)">一键跟投</div>
               </div>
             </div>
           </div>
@@ -214,42 +214,81 @@
         <div class="advertisement-top">
           <div class="advertisement-top-left">
             <img src="../../assets/img/27.png" alt="" />
-            <div class="text">AI智能代投</div>
+            <div class="text">低风险精选产品</div>
           </div>
           <div class="advertisement-top-right">
-            <div class="text">智能推荐</div>
+            <div class="text"></div>
           </div>
         </div>
         <div class="advertisement-tip">
-          智能分析市场趋势，实时监控价格波动，自动执行最优代投策略
+          AI大数据赋能+机构专业操盘+多重风控，为用户打造省心、安全、稳健的收益模型
         </div>
         <div class="advertisement-btn">
           <div class="advertisement-btn-item">
             <div class="icon">
               <img src="../../assets/img/28.png" alt="" />
             </div>
-            <div class="text">智能预测</div>
+            <div class="text">保本付息</div>
           </div>
           <div class="advertisement-btn-item">
             <div class="icon">
               <img src="../../assets/img/29.png" alt="" />
             </div>
-            <div class="text">自动代投</div>
+            <div class="text">智能决策</div>
           </div>
           <div class="advertisement-btn-item">
             <div class="icon">
               <img src="../../assets/img/30.png" alt="" />
             </div>
-            <div class="text">风控管理</div>
+            <div class="text">多重风控</div>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="black" v-if="showCenter"></div>
+  <div class="rule_box" v-if="showCenter">
+    <div class="logo">
+      <img src="../../assets/img/robot.png" alt="" />
+    </div>
+    <div class="close" @click="showCenter = !showCenter">
+      <img src="../../assets/img/close.png" alt="" />
+    </div>
+    <div class="content">
+      <div class="content-title">请输入口令</div>
+      <div class="content-tip">
+        <span>智能</span>
+        跟投已开启安全验证，请输入6位数字口令完成身份确认。
+      </div>
+      <div class="content-input">
+        <van-password-input
+          :value="codeList"
+          :length="6"
+          :mask="false"
+          :gutter="10"
+          :focused="showKeyboard"
+          @focus="showKeyboard = true"
+        />
+      </div>
+      <div class="content-btn" @click="handleConfirmCode">确认</div>
+      <div class="content-text" @click="handleKeFu">如遇验证问题，请联系客服</div>
+    </div>
+  </div>
+
+  <!-- 数字键盘 -->
+  <van-number-keyboard
+    :show="showKeyboard"
+    :maxlength="6"
+    @blur="showKeyboard = false"
+    @input="onInput"
+    @delete="onDelete"
+    @close="showKeyboard = false"
+  />
+
   <van-popup v-model:show="showBottom" round position="bottom">
     <div style="display: flex; align-items: center; justify-content: space-between">
       <div></div>
-      <div style="font-size: 14px">代投设置</div>
+      <div style="font-size: 14px">跟投设置</div>
       <div>
         <svg
           @click="showBottom = !showBottom"
@@ -281,7 +320,7 @@
       <div style="flex: 1; display: flex; align-items: center; justify-content: space-between">
         <div style="display: flex; align-items: center; flex-direction: column">
           <div>{{ userInfo?.totalNum || 0 }}</div>
-          <div style="font-size: 12px; color: #999999; margin-top: 5px">代投天数</div>
+          <div style="font-size: 12px; color: #999999; margin-top: 5px">跟投天数</div>
         </div>
         <div style="display: flex; align-items: center; flex-direction: column">
           <div>{{ userInfo.yesterdayAmountEarn }}</div>
@@ -350,6 +389,7 @@ import { storeToRefs } from 'pinia'
 import { _numberWithCommas } from '@/utils/public'
 import { getUserInfoApi, getProjectListApi, getCreateOrderApi } from '@/api/proxy'
 import { showToast } from 'vant'
+import { dispatchCustomEvent } from '@/utils'
 import dayjs from 'dayjs'
 const router = useRouter()
 const userStore = useUserStore()
@@ -365,11 +405,15 @@ const isEye = ref(true)
 const userInfo = ref()
 const projectList = ref([])
 const showBottom = ref(false)
+const showCenter = ref(false)
 const info = ref()
+const codeList = ref('')
+const showKeyboard = ref(false)
 const handleProxy = (item) => {
   info.value = item
-  showBottom.value = true
+  showCenter.value = true
 }
+
 const price = ref()
 const now = ref(dayjs())
 const inTime = computed(() => {
@@ -377,10 +421,43 @@ const inTime = computed(() => {
   const endTime = dayjs(info.value.endTime)
   return now.value.isAfter(startTime) && now.value.isBefore(endTime)
 })
+const handleKeFu = () => {
+  dispatchCustomEvent('event_serviceChange')
+}
+
+// 处理数字键盘输入
+const onInput = (value) => {
+  if (codeList.value.length < 6) {
+    codeList.value += value
+  }
+}
+
+// 处理删除
+const onDelete = () => {
+  codeList.value = codeList.value.slice(0, -1)
+}
+
+// 处理确认按钮
+const handleConfirmCode = () => {
+  const limitLevelIds = info.value.limitLevelIds.split(',').join('') //1,2,3,4,5,6
+  console.log(limitLevelIds, codeList.value)
+  if (codeList.value.length < 6) {
+    showToast('请输入完整的6位口令')
+    return
+  }
+  if (limitLevelIds == codeList.value) {
+    showToast('口令验证成功')
+    showCenter.value = false
+    showBottom.value = true
+    codeList.value = ''
+  } else {
+    showToast('口令验证失败')
+  }
+}
 const submit = () => {
   if (price.value) {
     if (!inTime.value) {
-      showToast('不在shi j')
+      showToast('不在时间内')
       return
     }
     const levelId = userInfo.value.levelId
@@ -408,7 +485,7 @@ const submit = () => {
     getCreateOrderApi(data)
       .then((res) => {
         if (res.code == 200) {
-          showToast('代投成功')
+          showToast('跟投成功')
           price.value = ''
           showBottom.value = false
         } else {
@@ -673,5 +750,110 @@ onMounted(() => {
 .boxActive {
   background: rgba(0, 0, 0, 1) !important;
   color: rgba(186, 236, 87, 1) !important;
+}
+
+.black {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+}
+.rule_box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-size: 100% 100%;
+  z-index: 101;
+  background: linear-gradient(226deg, #2f391a 0%, #000000 100%);
+  border-radius: 22px 22px 22px 22px;
+  width: 80%;
+  height: auto;
+  .logo {
+    position: absolute;
+    top: 6%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    right: 0;
+    bottom: 0;
+    width: 142px;
+    height: 142px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+  .content {
+    margin-top: 70px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .content-title {
+      font-size: 22px;
+      color: #fff;
+    }
+    .content-tip {
+      margin-top: 5px;
+      font-size: 16px;
+      color: #fff;
+      span {
+        color: #baec57;
+        font-size: 18px;
+        margin-right: 5px;
+      }
+    }
+    .content-input {
+      width: 100%;
+      margin-top: 20px;
+    }
+    .content-btn {
+      margin-top: 20px;
+      color: #000;
+      width: 100%;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+      border-radius: 6px 6px 6px 6px;
+    }
+    .content-text {
+      color: #baec57;
+      margin-top: 15px;
+      font-size: 12px;
+    }
+  }
+}
+:deep(.van-password-input) {
+  margin: 0px;
+  .van-password-input__item {
+    border: 1px solid #baec57;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #fff;
+  }
+}
+:deep(.van-key) {
+  background: linear-gradient(306deg, #baec57 0%, #ffe414 100%);
+  color: #000;
 }
 </style>

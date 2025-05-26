@@ -339,7 +339,7 @@ const rankingList = ref([
     value: 0
   },
   {
-    title: '近14日收益率',
+    title: '近14预估收益率',
     value: 1
   },
   {

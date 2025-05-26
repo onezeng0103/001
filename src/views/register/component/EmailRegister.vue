@@ -1,8 +1,6 @@
 <template>
   <div style="margin-top: 15px">
     <div class="form-item">
-<!--      <div class="form-item-label">邮箱</div>-->
-
       <div class="input-box">
         <input v-model.trim="formData.email" placeholder="请输入邮箱" autocomplete="off" />
         <div class="icon">
@@ -32,7 +30,7 @@
       <div class="input-box">
         <input
           :type="isPwd ? 'password' : 'text'"
-          placeholder="请输入密码"
+          placeholder="登录密码必须包含 数字、字母、特殊符号"
           v-model.trim="formData.loginPassword"
           autocomplete="off"
         />
@@ -155,23 +153,22 @@
     </div>
 
     <div class="form-item" v-if="showVerifyCode">
-        <div class="form-item-label">验证码</div>
-        <div class="input-box">
-          <input placeholder="请输入验证码" v-model.trim="formData.code" autocomplete="off" />
-          <div class="icon">
-            <span v-if="!flag" @click="getCode">发送</span>
-            <span v-else>
-              <van-count-down :time="time" format="ss" @finish="finish"></van-count-down>
-            </span>
-          </div>
+      <div class="form-item-label">验证码</div>
+      <div class="input-box">
+        <input placeholder="请输入验证码" v-model.trim="formData.code" autocomplete="off" />
+        <div class="icon">
+          <span v-if="!flag" @click="getCode">发送</span>
+          <span v-else>
+            <van-count-down :time="time" format="ss" @finish="finish"></van-count-down>
+          </span>
         </div>
+      </div>
     </div>
 
     <div class="btn" @click="handleSubmit">注册</div>
     <div class="text">
-      <span @click="router.push('/login')">立即登入</span>
+      <span @click="router.push('/login')">立即登录</span>
     </div>
-
   </div>
 </template>
 
@@ -235,11 +232,20 @@ const handleSubmit = () => {
     return
   }
   if (!formData.value.loginPassword) {
-    showToast('请输入登陆密码')
+    showToast('请输入登录密码')
+    return
+  }
+  //登录密码必须包含 数字、字母、特殊符号
+  if (
+    !/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/.test(
+      formData.value.loginPassword
+    )
+  ) {
+    showToast('请填写6-16位包含数字字母特殊符号的密码')
     return
   }
   if (!pwd.value) {
-    showToast('请再次输入登陆密码')
+    showToast('请再次输入登录密码')
     return
   }
   if (requireInviteCode.value && !formData.value.activeCode) {

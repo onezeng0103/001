@@ -1,8 +1,7 @@
 <template>
   <div style="margin-top: 15px">
-
     <div class="form-item">
-<!--      <div class="form-item-label">账号</div>-->
+      <!--      <div class="form-item-label">账号</div>-->
       <div class="input-box">
         <input v-model.trim="formData.loginName" placeholder="请输入账号" autocomplete="off" />
         <div class="icon">
@@ -32,7 +31,7 @@
       <div class="input-box">
         <input
           :type="isPwd ? 'password' : 'text'"
-          placeholder="请输入密码"
+          placeholder="登录密码必须包含 数字、字母、特殊符号"
           v-model.trim="formData.loginPassword"
           autocomplete="off"
         />
@@ -84,12 +83,6 @@
     <div class="form-item">
       <div class="form-item-label">确认密码</div>
       <div class="input-box">
-<!--        <input-->
-<!--          :type="isPwd ? 'password' : 'text'"-->
-<!--          placeholder="请输入确认密码"-->
-<!--          v-model.trim="loginPassword"-->
-<!--          autocomplete="off"-->
-<!--        />-->
         <input
           :type="isPwd2 ? 'password' : 'text'"
           v-model.trim="pwd"
@@ -147,7 +140,6 @@
     <div class="form-item">
       <div class="form-item-label">邀请码({{ requireInviteCode ? '必填' : '选填' }})</div>
       <div class="input-box">
-<!--        <input v-model.trim="loginName" placeholder="请输入邀请码" autocomplete="off" />-->
         <input
           type="text"
           v-model.trim="formData.activeCode"
@@ -162,7 +154,6 @@
     <div class="form-item" v-if="showVerifyCode">
       <div class="form-item-label">验证码</div>
       <div class="input-box">
-<!--        <input placeholder="请输入验证码" v-model.trim="code" autocomplete="off" />-->
         <input
           v-model.trim="formData.code"
           maxlength="140"
@@ -178,15 +169,12 @@
 
     <div class="btn" @click="handleSubmit">
       <div v-if="loading" @click="handleSubmit">加载中...</div>
-      <div v-else @click="handleSubmit">
-        注册
-      </div>
+      <div v-else @click="handleSubmit">注册</div>
     </div>
 
     <div class="text">
-      <span @click="router.push('/login')">立即登入</span>
+      <span @click="router.push('/login')">立即登录</span>
     </div>
-
   </div>
 </template>
 
@@ -235,6 +223,15 @@ const handleSubmit = () => {
   // 用户名小写字母+数字限制6-15位
   if (!/^[a-z0-9]{6,15}$/.test(formData.value.loginName.trim())) {
     showToast('请填写6-15位包含数字字母的账号')
+    return
+  }
+  //登录密码必须包含 数字、字母、特殊符号
+  if (
+    !/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/.test(
+      formData.value.loginPassword
+    )
+  ) {
+    showToast('请填写6-16位包含数字字母特殊符号的密码')
     return
   }
   if (!formData.value.loginPassword.trim()) {

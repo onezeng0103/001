@@ -121,6 +121,7 @@ const handleCoinDetail = (item) => {
         width: 21px;
         height: 21px;
         margin-right: 8px;
+        border-radius: 50%;
       }
     }
     &-price {

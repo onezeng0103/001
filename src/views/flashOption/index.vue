@@ -81,8 +81,8 @@
       <div class="trade-tip-left">
         <img src="../../assets/img/31.png" alt="" />
         <div class="text">
-          <div class="text-title">智能代投</div>
-          <div class="text-desc">智能分析市场趋势，实时监控价格波动，自动执行最优代投策略</div>
+          <div class="text-title">机构合作专区</div>
+          <div class="text-desc">保本付息 智能决策 多重风控</div>
         </div>
       </div>
       <div class="trade-tip-right" @click="router.push('/proxy')">立即前往</div>
@@ -854,6 +854,7 @@ onMounted(async () => {
     }
   }
   &-tip {
+    margin-top: 15px;
     margin-bottom: 15px;
     background: #baec57;
     box-shadow: inset 0px -4px 4px 0px #d7ff89;

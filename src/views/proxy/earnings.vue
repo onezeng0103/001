@@ -103,7 +103,7 @@
           <div>
             {{ info?.totalNum || 0 }}
           </div>
-          <div style="font-size: 12px; color: #999; margin-top: 5px">代投天数</div>
+          <div style="font-size: 12px; color: #999; margin-top: 5px">跟投天数</div>
         </div>
         <div class="box-item">
           <div>{{ info?.todayAmountEarn }}</div>
@@ -139,7 +139,7 @@
       </template>
     </div>
     <div class="btn">
-      <div>近30日代投总收益率:{{ getAllAmountEarn?.toFixed(2) }}</div>
+      <div>近30日跟投总收益率:{{ getAllAmountEarn?.toFixed(2) }}</div>
     </div>
   </div>
 </template>
