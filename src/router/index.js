@@ -153,6 +153,21 @@ const router = createRouter({
       component: () => import('../views/fund-password/index.vue')
     },
     {
+      path: '/livecoin',
+      name: 'livecoin',
+      component: () => import('../views/livecoin/index.vue')
+    },
+    {
+      path: '/livecoin/subscribe',
+      name: 'livecoinSubscribe',
+      component: () => import('../views/livecoin/subscribe.vue')
+    },
+    {
+      path: '/livecoin/eaorders',
+      name: 'livecoinEaorders',
+      component: () => import('../views/livecoin/eaorders.vue')
+    },
+    {
       path: '/recharge',
       name: 'recharge',
       component: () => import('../views/recharge/index.vue')

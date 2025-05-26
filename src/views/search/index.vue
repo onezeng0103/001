@@ -30,6 +30,80 @@
             <div
               class="items"
               @click="router.push(`/flash?symbol=${item.coin}`)"
+
+              v-for="(item, index) in currentCoinList"
+              :key="index"
+            >
+              <div style="display: flex; align-items: center">
+                <div style="font-size: 14px; margin-right: 4px">{{ item.coin?.toUpperCase() }}</div>
+                <div style="font-size: 12px; color: #a0a0a0">/ USDT</div>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: flex-end">
+                <div
+                  :class="
+                  _isRFD(
+                    tradeStore.allCoinPriceInfo[item.coin]?.openPrice,
+                    tradeStore.allCoinPriceInfo[item.coin]?.close
+                  )
+                "
+                  style="font-size: 14px; color: #4d9eb1"
+                >
+                  {{ priceFormat(tradeStore.allCoinPriceInfo[item.coin]?.close) }}
+                </div>
+                <div class="rise">
+                  <div
+                    :class="
+                  _isRFD(
+                    tradeStore.allCoinPriceInfo[item.coin]?.openPrice,
+                    tradeStore.allCoinPriceInfo[item.coin]?.close
+                  )
+                "
+                    style="font-size: 12px; color: #4d9eb1"
+                  >
+                    {{ tradeStore.allCoinPriceInfo[item.coin]?.priceChangePercent }}%
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <no-data/>
+          </template>
+
+        </div>
+      </div>
+    </div>
+    <div class="search-main">
+      <div style="display: flex; align-items: center">
+        <div class="input">
+          <img
+            src="../../../src/assets/img/search.png"
+            alt="search"
+            style="height: 20px; width: 20px; margin-right: 4px"
+          />
+          <input
+            type="search"
+            maxlength="140"
+            enterkeyhint="search"
+            class="uni-input-input"
+            autocomplete="off"
+            v-model="searchValue"
+            @input="inputSearch"
+            placeholder="请输入"
+            style="height: 32px; width: 100%"
+          />
+        </div>
+        <div @click="router.back()">取消</div>
+      </div>
+
+      <div style="margin-top: 20px">
+        <div style="margin-bottom: 15px; font-size: 15px">热门搜寻</div>
+        <div class="lists">
+          <template v-if="currentCoinList?.length > 0">
+            <div
+              class="items"
+              @click="router.push(`/flash?symbol=${item.coin}`)"
               v-for="(item, index) in currentCoinList"
               :key="index"
             >

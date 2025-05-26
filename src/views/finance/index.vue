@@ -124,15 +124,15 @@ onMounted(() => {
     <div class="forget-top">
       <div>
         <div>总投入价值（USDT）</div>
-        <div>{{ headerObj.sumAmount }}</div>
-        <div>累计收益</div>
-        <div>{{ headerObj.sumEarn }}</div>
+        <div style="margin-top: 2px">{{ headerObj.sumAmount }}</div>
+        <div style="margin-top: 10px">累计收益</div>
+        <div style="margin-top: 2px">{{ headerObj.sumEarn }}</div>
       </div>
       <div>
         <div>当日赚取奖励（USDT）</div>
-        <div>{{ headerObj.commission }}</div>
-        <div>持仓数量（个）</div>
-        <div>{{ headerObj.position }}</div>
+        <div style="margin-top: 2px">{{ headerObj.commission }}</div>
+        <div style="margin-top: 10px">持仓数量（个）</div>
+        <div style="margin-top: 2px">{{ headerObj.position }}</div>
       </div>
     </div>
 
@@ -168,6 +168,7 @@ onMounted(() => {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 10px;
 
       .bt {
         padding: 8px 18px;
