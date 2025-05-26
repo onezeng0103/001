@@ -82,7 +82,7 @@
           <div class="imgBox">
             <img src="../../assets/img/09.png" alt="" />
           </div>
-          <span>团队</span>
+          <span>邀请</span>
         </div>
       </div>
       <div class="main-tip">

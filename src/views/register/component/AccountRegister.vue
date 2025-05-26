@@ -291,7 +291,7 @@ const handleSubmit = () => {
 <style lang="scss" scoped>
 .form-item {
   &-label {
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 15px;
     color: var(--primary-color);
     font-size: 12px;
@@ -333,7 +333,7 @@ const handleSubmit = () => {
   cursor: pointer;
 }
 .btn {
-  margin-top: 60px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -347,15 +347,25 @@ const handleSubmit = () => {
   font-style: normal;
   text-transform: none;
   cursor: pointer;
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
 }
 .text {
   font-size: 14px;
-  margin-top: 30px;
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--secondary-color);
   span {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: var(--primary-color);
     cursor: pointer;
   }

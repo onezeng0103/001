@@ -56,7 +56,7 @@ const tabList = computed(() => {
 <style lang="scss" scoped>
 .login {
   padding: 10px;
-  padding-top: 100px;
+  padding-top: 50px;
   .title {
     font-family: 'Source Han Sans Old Style-Bold';
     font-weight: bold;
