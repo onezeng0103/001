@@ -154,14 +154,6 @@ const handleSubmit = () => {
     showToast('请输入登录密码')
     return
   }
-  //登录密码必须包含 数字、字母、特殊符号
-  if (
-    !showVerifyCode.value &&
-    !/^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/.test(loginPassword.value)
-  ) {
-    showToast('请填写6-16位包含数字字母特殊符号的密码')
-    return
-  }
   signIn({
     email: email.value,
     loginPassword: loginPassword.value,
