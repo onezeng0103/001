@@ -2,7 +2,7 @@
   <div class="title">
     <div class="title-item">名称</div>
     <div class="title-item">最新价</div>
-    <div class="title-item">今日跌涨</div>
+    <div class="title-item">24小时跌涨</div>
   </div>
   <div class="list">
     <template v-if="listResult?.length > 0">

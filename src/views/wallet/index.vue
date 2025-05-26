@@ -112,25 +112,25 @@
       </div>
     </div>
     <div class="function">
-      <div class="function-item">
+      <div class="function-item" @click="router.push('/recharge')">
         <div class="icon">
           <img src="../../assets/img/11.png" />
         </div>
         <div class="name">充值</div>
       </div>
-      <div class="function-item">
+      <div class="function-item" @click="router.push('/withdraw')">
         <div class="icon">
           <img src="../../assets/img/12.png" />
         </div>
         <div class="name">提现</div>
       </div>
-      <div class="function-item">
+      <div class="function-item" @click="router.push('/flashExchange')">
         <div class="icon">
           <img src="../../assets/img/13.png" />
         </div>
         <div class="name">闪兑</div>
       </div>
-      <div class="function-item" @click="handleClick('/exchange')">
+      <div class="function-item" @click="router.push('/exchange')">
         <div class="icon">
           <img src="../../assets/img/14.png" />
         </div>
@@ -303,7 +303,7 @@ const allSum = computed(() => {
     Number(platformSum.value) + Number(financSum.value) + Number(contractSum.value)
   )
 })
-const activeNames = ref(['safety'])
+const activeNames = ref([])
 const list = ref([
   {
     title: '修改密码',
@@ -333,10 +333,10 @@ const list = ref([
 ])
 const moreList = ref([
   {
-    title: 'APP下载',
-    icon: new URL('../../assets/img/21.png', import.meta.url).href,
-    link: '',
-    key: 'appDownload'
+    title: '资金流水',
+    icon: new URL('../../assets/img/cashflow.png', import.meta.url).href,
+    link: '/cashflow',
+    key: 'cashflow'
   },
   {
     title: '在线客服',
@@ -351,6 +351,12 @@ const moreList = ref([
     key: 'serviceTerms'
   },
   {
+    title: '帮助中心',
+    icon: new URL('../../assets/img/help.png', import.meta.url).href,
+    link: '/help',
+    key: 'help'
+  },
+  {
     title: '关于我们',
     icon: new URL('../../assets/img/24.png', import.meta.url).href,
     link: '/about',
@@ -363,16 +369,10 @@ const moreList = ref([
     key: 'switchLanguage'
   },
   {
-    title: '资金流水',
-    icon: new URL('../../assets/img/cashflow.png', import.meta.url).href,
-    link: '/cashflow',
-    key: 'cashflow'
-  },
-  {
-    title: '帮助中心',
-    icon: new URL('../../assets/img/help.png', import.meta.url).href,
-    link: '/help',
-    key: 'help'
+    title: 'APP下载',
+    icon: new URL('../../assets/img/21.png', import.meta.url).href,
+    link: '',
+    key: 'appDownload'
   },
   {
     title: '退出登录',

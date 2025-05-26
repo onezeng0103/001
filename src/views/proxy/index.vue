@@ -768,7 +768,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--regular-background);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
 }
 .rule_box {

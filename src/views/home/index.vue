@@ -72,18 +72,17 @@
           </div>
           <span>资金划转</span>
         </div>
-        <div class="menu-item" @click="router.push('/livecoin')">
+        <!-- <div class="menu-item" @click="router.push('/livecoin')">
           <div class="imgBox">
             <img src="../../assets/img/05.png" alt="" />
           </div>
           <span>质押</span>
-        </div>
-
-        <div class="menu-item" @click="router.push('/finance')">
+        </div> -->
+        <div class="menu-item" @click="router.push('/invaite')">
           <div class="imgBox">
-            <img src="../../assets/img/01.png" alt="" />
+            <img src="../../assets/img/09.png" alt="" />
           </div>
-          <span>理财</span>
+          <span>团队</span>
         </div>
       </div>
       <div class="main-tip">
@@ -129,7 +128,6 @@
     </div>
   </div>
   <div class="black" v-if="showInfoPopup" @click="showInfoPopup = !showInfoPopup"></div>
-
   <div class="rule_box" v-if="showInfoPopup">
     <div class="rule_box-title">
       <div>安全预警</div>
@@ -194,7 +192,7 @@ onMounted(() => {
       if (res.code == '200' && res.rows.length > 0) {
         isRed.value = res.rows?.some((item) => item.type == 1 && item.status == 0)
         newList.value = res.rows
-        showInfoPopup.value = true
+        // showInfoPopup.value = true
       } else {
         isRed.value = false
         showInfoPopup.value = false
@@ -393,7 +391,7 @@ onMounted(() => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--secondary-background);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 100;
 }
 

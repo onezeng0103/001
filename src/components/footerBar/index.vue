@@ -62,11 +62,11 @@ const getTabbarList = computed(() => {
       sort: 3
     },
     {
-      imgUrl: new URL('../../assets/img/09.png', import.meta.url).href,
-      checkedImgUrl: new URL('../../assets/img/09.png', import.meta.url).href,
-      linkUrl: '/invaite',
-      key: 'invaite',
-      name: '团队',
+      imgUrl: new URL('../../assets/img/34.png', import.meta.url).href,
+      checkedImgUrl: new URL('../../assets/img/34.png', import.meta.url).href,
+      linkUrl: '/finance',
+      key: 'finance',
+      name: '理财',
       sort: 4
     },
     {

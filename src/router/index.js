@@ -226,6 +226,11 @@ const router = createRouter({
       path: '/cashflow',
       name: 'cashflow',
       component: () => import('../views/cashflow/index.vue')
+    },
+    {
+      path: '/download',
+      name: 'download',
+      component: () => import('../views/download/index.vue')
     }
   ]
 })
