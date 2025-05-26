@@ -271,7 +271,7 @@
         />
       </div>
       <div class="content-btn" @click="handleConfirmCode">确认</div>
-      <div class="content-text" @click="handleKeFu">如遇验证问题，请联系客服</div>
+      <div class="content-text">请输入6位数字口令完成身份确认</div>
     </div>
   </div>
 
@@ -395,7 +395,6 @@ import { storeToRefs } from 'pinia'
 import { _numberWithCommas } from '@/utils/public'
 import { getUserInfoApi, getProjectListApi, getCreateOrderApi } from '@/api/proxy'
 import { showToast } from 'vant'
-import { dispatchCustomEvent } from '@/utils'
 import dayjs from 'dayjs'
 const router = useRouter()
 const userStore = useUserStore()
@@ -427,9 +426,6 @@ const inTime = computed(() => {
   const endTime = dayjs(info.value.endTime)
   return now.value.isAfter(startTime) && now.value.isBefore(endTime)
 })
-const handleKeFu = () => {
-  dispatchCustomEvent('event_serviceChange')
-}
 
 // 处理数字键盘输入
 const onInput = (value) => {

@@ -18,3 +18,7 @@
   font-family: 'Rowdies-Regular';
   src: url('../font/Rowdies-Regular.ttf');
 }
+@font-face {
+  font-family: 'DFZongYiW9-GB-Regular';
+  src: url('../font/DFZongYiW9-GB-Regular.ttc');
+}

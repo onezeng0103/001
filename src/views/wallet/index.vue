@@ -371,7 +371,7 @@ const moreList = ref([
   {
     title: 'APP下载',
     icon: new URL('../../assets/img/21.png', import.meta.url).href,
-    link: '',
+    link: '/download',
     key: 'appDownload'
   },
   {
