@@ -253,7 +253,6 @@ const handleSubmit = () => {
     showToast('两次密码不一致')
     return
   }
-  console.log(1111)
   loading.value = true
   signUp(formData.value)
     .then((res) => {
@@ -278,7 +277,6 @@ const handleSubmit = () => {
         } else {
           router.push('/login')
         }
-
       } else {
         loading.value = false
         showToast(res.msg)
