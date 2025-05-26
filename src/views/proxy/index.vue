@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>跟投</span>
+              <span>机构合作专区</span>
             </span>
           </div>
           <div
@@ -170,7 +170,7 @@
         </div>
       </div>
       <div class="management">
-        <div>机构合作专区</div>
+        <div>机构跟投中心</div>
         <template v-if="projectList.length > 0">
           <div class="box">
             <div class="box-item" v-for="(item, index) in projectList" :key="index">

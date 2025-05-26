@@ -34,7 +34,8 @@ const login = () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 120px;
+  padding-top: 50px;
+  overflow: hidden;
   .title {
     font-size: 30px;
     font-family: 'Rowdies-Regular';
