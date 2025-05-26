@@ -167,7 +167,7 @@
       </div>
     </div>
 
-    <div class="btn" @click="handleSubmit">
+    <div class="btn">
       <div v-if="loading" @click="handleSubmit">加载中...</div>
       <div v-else @click="handleSubmit">注册</div>
     </div>
@@ -254,6 +254,7 @@ const handleSubmit = () => {
     showToast('两次密码不一致')
     return
   }
+  console.log(1111)
   loading.value = true
   signUp(formData.value)
     .then((res) => {
@@ -278,6 +279,7 @@ const handleSubmit = () => {
         } else {
           router.push('/login')
         }
+
       } else {
         loading.value = false
         showToast(res.msg)
