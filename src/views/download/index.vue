@@ -216,6 +216,7 @@ const handleClick = (index) => {
       display: flex;
       justify-content: space-between;
       margin-top: 34px;
+      padding: 0 10px;
 
       .but {
         width: 146px;
