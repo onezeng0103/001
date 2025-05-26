@@ -105,7 +105,6 @@
           </svg>
         </div>
       </div>
-      <div class="form-item-text">忘记密码?</div>
     </div>
     <div class="form-item" v-else>
       <div class="form-item-label">验证码</div>

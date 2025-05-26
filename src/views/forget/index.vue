@@ -243,7 +243,7 @@ const confirm = () => {
 }
 .form-item {
   &-label {
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 15px;
     color: var(--primary-color);
   }
@@ -317,14 +317,14 @@ const confirm = () => {
 }
 
 .form-item-label {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 15px;
   color: var(--primary-color);
   font-size: 12px;
 }
 
 .btn {
-  margin-top: 60px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
