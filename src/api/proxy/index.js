@@ -18,3 +18,4 @@ export const getDayEarnListApi = (startDate, endDate) =>
   get(`/api/broker/dayEarn?startDate=${startDate}&endDate=${endDate}`)
 
 export const getBrokerCoinApi = () => post('/api/common/getBrokerCoin')
+export const getCheckPass = (data) => post('/api/broker/checkCode', data)

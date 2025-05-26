@@ -251,7 +251,7 @@
     <div class="logo">
       <img src="../../assets/img/robot.png" alt="" />
     </div>
-    <div class="close" @click="showCenter = !showCenter">
+    <div class="close" @click="handleShowCenter">
       <img src="../../assets/img/close.png" alt="" />
     </div>
     <div class="content">
@@ -261,29 +261,22 @@
         跟投已开启安全验证，请输入6位数字口令完成身份确认。
       </div>
       <div class="content-input">
-        <van-password-input
-          :value="codeList"
-          :length="6"
-          :mask="false"
-          :gutter="10"
-          :focused="showKeyboard"
-          @focus="showKeyboard = true"
+        <input
+          class="content-input-item"
+          type="number"
+          @focus="onInputFocus($event)"
+          v-for="(item, index) in Array.from({ length: 6 })"
+          :key="index"
+          ref="inputs"
+          v-model="passwords[index]"
+          @input="onInput(index, $event)"
+          maxlength="1"
         />
       </div>
       <div class="content-btn" @click="handleConfirmCode">确认</div>
       <div class="content-text">请输入6位数字口令完成身份确认</div>
     </div>
   </div>
-
-  <!-- 数字键盘 -->
-  <van-number-keyboard
-    :show="showKeyboard"
-    :maxlength="6"
-    @blur="showKeyboard = false"
-    @input="onInput"
-    @delete="onDelete"
-    @close="showKeyboard = false"
-  />
 
   <van-popup v-model:show="showBottom" round position="bottom">
     <div style="display: flex; align-items: center; justify-content: space-between">
@@ -393,7 +386,7 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store/user/index'
 import { storeToRefs } from 'pinia'
 import { _numberWithCommas } from '@/utils/public'
-import { getUserInfoApi, getProjectListApi, getCreateOrderApi } from '@/api/proxy'
+import { getUserInfoApi, getProjectListApi, getCreateOrderApi, getCheckPass } from '@/api/proxy'
 import { showToast } from 'vant'
 import dayjs from 'dayjs'
 const router = useRouter()
@@ -408,21 +401,39 @@ const availableBalance = computed(() => {
 })
 const isEye = ref(true)
 const userInfo = ref()
+const passwords = ref(Array(6).fill(''))
+const onInputFocus = (event) => {
+  event.currentTarget.select()
+}
+const onInput = (index, event) => {
+  const input = event.target
+  if (!input.value) return
+
+  if (index < 5) {
+    input.blur()
+    const nextInput = input.nextElementSibling
+    if (nextInput) {
+      nextInput.focus()
+    }
+  }
+}
 const projectList = ref([])
 const showBottom = ref(false)
 const showCenter = ref(false)
 const info = ref()
-const codeList = ref('')
-const showKeyboard = ref(false)
 const handleProxy = (item) => {
   info.value = item
   if (info.value?.limitCode == 'code') {
-    showBottom.value = true
-  } else {
     showCenter.value = true
+    passwords.value = Array(6).fill('')
+  } else {
+    showBottom.value = true
   }
 }
-
+const handleShowCenter = () => {
+  showCenter.value = false
+  passwords.value = Array(6).fill('')
+}
 const price = ref()
 const now = ref(dayjs())
 const inTime = computed(() => {
@@ -430,39 +441,25 @@ const inTime = computed(() => {
   const endTime = dayjs(info.value.endTime)
   return now.value.isAfter(startTime) && now.value.isBefore(endTime)
 })
-watch(codeList, (newVal) => {
-  if (newVal.length == 6) {
-    showKeyboard.value = false
-  }
-})
-// 处理数字键盘输入
-const onInput = (value) => {
-  if (codeList.value.length < 6) {
-    codeList.value += value
-  }
-}
-
-// 处理删除
-const onDelete = () => {
-  codeList.value = codeList.value.slice(0, -1)
-}
 
 // 处理确认按钮
 const handleConfirmCode = () => {
-  const limitLevelIds = info.value.limitLevelIds.split(',').join('') //1,2,3,4,5,6
-  console.log(limitLevelIds, codeList.value)
-  if (codeList.value.length < 6) {
-    showToast('请输入完整的6位口令')
-    return
+  console.log('123123123', passwords.value)
+  const data = {
+    brokerNo: info.value.brokerNo,
+    code: passwords.value.join('')
   }
-  if (limitLevelIds == codeList.value) {
-    showToast('口令验证成功')
-    showCenter.value = false
-    showBottom.value = true
-    codeList.value = ''
-  } else {
-    showToast('口令验证失败')
-  }
+  getCheckPass(data).then((res) => {
+    if (res.code == 200) {
+      if (res.data == true) {
+        showCenter.value = false
+        showBottom.value = true
+      }
+    } else {
+      console.log(res)
+      showToast(res.msg)
+    }
+  })
 }
 const submit = () => {
   if (price.value) {
@@ -488,9 +485,14 @@ const submit = () => {
       showToast('金额小于最小金额' + info.value.limitMin)
       return
     }
+    if (info.value.limitCode == 'code' && passwords.value.length != 6) {
+      showToast('请输入完整的6位口令')
+      return
+    }
     const data = {
       amount: price.value,
-      brokerNo: info.value.brokerNo
+      brokerNo: info.value.brokerNo,
+      code: passwords.value.join('')
     }
     getCreateOrderApi(data)
       .then((res) => {
@@ -499,6 +501,7 @@ const submit = () => {
           price.value = ''
           showBottom.value = false
         } else {
+          price.value = ''
           showToast(res.msg)
         }
       })
@@ -838,6 +841,22 @@ onMounted(() => {
     .content-input {
       width: 100%;
       margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .content-input-item {
+        width: 32px;
+        height: 32px;
+        text-align: center;
+        font-size: 28px;
+        line-height: 40px;
+        margin: 0 5px;
+        border: 1px solid var(--primary-border);
+        border-radius: 10px;
+        input {
+          font-size: 14px;
+        }
+      }
     }
     .content-btn {
       margin-top: 20px;
@@ -860,18 +879,5 @@ onMounted(() => {
       font-size: 12px;
     }
   }
-}
-:deep(.van-password-input) {
-  margin: 0px;
-  .van-password-input__item {
-    border: 1px solid var(--primary-border);
-    border-radius: 4px;
-    background-color: transparent;
-    color: var(--primary-colo);
-  }
-}
-:deep(.van-key) {
-  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
-  color: var(--regular-color);
 }
 </style>
