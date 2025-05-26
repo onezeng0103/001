@@ -256,10 +256,7 @@
     </div>
     <div class="content">
       <div class="content-title">请输入口令</div>
-      <div class="content-tip">
-        <span>智能</span>
-        跟投已开启安全验证，请输入6位数字口令完成身份确认。
-      </div>
+      <div class="content-tip">请输入6位数字口令完成身份确认</div>
       <div class="content-input">
         <input
           class="content-input-item"
@@ -270,11 +267,11 @@
           ref="inputs"
           v-model="passwords[index]"
           @input="onInput(index, $event)"
+          @keydown="onKeydown(index, $event)"
           maxlength="1"
         />
       </div>
       <div class="content-btn" @click="handleConfirmCode">确认</div>
-      <div class="content-text">请输入6位数字口令完成身份确认</div>
     </div>
   </div>
 
@@ -417,6 +414,23 @@ const onInput = (index, event) => {
     }
   }
 }
+
+const onKeydown = (index, event) => {
+  // 处理删除键（Backspace）
+  if (event.key === 'Backspace') {
+    const input = event.target
+    // 如果当前输入框为空且不是第一个输入框，则移动到前一个输入框
+    if (!input.value && index > 0) {
+      event.preventDefault()
+      const prevInput = input.previousElementSibling
+      if (prevInput) {
+        prevInput.focus()
+        // 清空前一个输入框的值
+        passwords.value[index - 1] = ''
+      }
+    }
+  }
+}
 const projectList = ref([])
 const showBottom = ref(false)
 const showCenter = ref(false)
@@ -444,7 +458,6 @@ const inTime = computed(() => {
 
 // 处理确认按钮
 const handleConfirmCode = () => {
-  console.log('123123123', passwords.value)
   const data = {
     brokerNo: info.value.brokerNo,
     code: passwords.value.join('')
@@ -832,11 +845,6 @@ onMounted(() => {
       margin-top: 5px;
       font-size: 16px;
       color: var(--primary-colo);
-      span {
-        color: var(--primary-border);
-        font-size: 18px;
-        margin-right: 5px;
-      }
     }
     .content-input {
       width: 100%;

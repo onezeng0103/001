@@ -87,7 +87,7 @@
         </div>
       </div>
     </div>
-    <div class="tip" @click="forget">忘记密码？</div>
+    <div class="tip" @click="forget">忘记密码?</div>
     <div class="btn" @click="handleSubmit">登录</div>
     <div class="text">
       还没有账号？

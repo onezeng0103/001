@@ -19,8 +19,6 @@ declare module 'vue' {
     VanDatePicker: typeof import('vant/es')['DatePicker']
     VanDialog: typeof import('vant/es')['Dialog']
     VanIcon: typeof import('vant/es')['Icon']
-    VanNumberKeyboard: typeof import('vant/es')['NumberKeyboard']
-    VanPasswordInput: typeof import('vant/es')['PasswordInput']
     VanPopup: typeof import('vant/es')['Popup']
     VanSlider: typeof import('vant/es')['Slider']
     VanSwipe: typeof import('vant/es')['Swipe']
