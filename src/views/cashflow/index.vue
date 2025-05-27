@@ -150,11 +150,11 @@ const list = ref([
     type: 'trade',
     component: trade
   },
-  {
-    name: '期权',
-    type: 'option',
-    component: options
-  },
+  // {
+  //   name: '期权',
+  //   type: 'option',
+  //   component: options
+  // },
   {
     name: '秒合约',
     type: 'second',

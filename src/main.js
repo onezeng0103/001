@@ -33,6 +33,17 @@ app.use(Vant)
 app.use(ConfigProvider)
 app.use(Icon)
 app.use(Dialog)
+document.addEventListener(
+  'touchstart',
+  function (event) {
+    // 当触摸点超过1个时，你阻止了默认行为。
+    // 只有在用户试图进行缩放（通常需要两个触摸点）或其他需要多点触控的操作时，才会阻止默认行为。单点触控的操作，如点击、滑动等，不会被影响。
+    if (event.touches.length > 1) {
+      event.preventDefault()
+    }
+  },
+  { passive: false }
+)
 // 获取币种列表
 const tradeStore = useTradeStore()
 const mainStore = useMainStore()

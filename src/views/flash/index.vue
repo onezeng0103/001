@@ -72,8 +72,8 @@
       <div class="flash-tab-item active">秒合约</div>
       <div class="flash-tab-item" @click="router.push('/contract')">合约交易</div>
       <div class="flash-tab-item" @click="router.push('/trade')">现货交易</div>
-      <div class="flash-tab-item" @click="router.push('/flashOption')">期权交易</div>
-      <div class="flash-tab-item" @click="router.push('/floworder')">跟单交易</div>
+      <!-- <div class="flash-tab-item" @click="router.push('/flashOption')">期权交易</div>
+      <div class="flash-tab-item" @click="router.push('/floworder')">跟单交易</div> -->
     </div>
     <div class="flash-tip">
       <div class="flash-tip-left">
@@ -1217,6 +1217,7 @@ const updateList = () => {
     width: auto;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-width: none;
@@ -1229,7 +1230,7 @@ const updateList = () => {
       color: var(--secondary-color);
       cursor: pointer;
       flex-shrink: 0;
-      margin-right: 30px;
+      /* margin-right: 30px; */
     }
     .active {
       color: var(--primary-border);

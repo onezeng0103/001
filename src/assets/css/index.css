@@ -36,4 +36,5 @@ body {
   font-family: 'PingFangSC-Regular';
   color: var(--primary-color);
   font-size: 14px;
+  touch-action: manipulation;
 }

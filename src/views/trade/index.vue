@@ -79,8 +79,8 @@
       <div class="trade-tab-item" @click="router.push('/flash')">秒合约</div>
       <div class="trade-tab-item" @click="router.push('/contract')">合约交易</div>
       <div class="trade-tab-item active">现货交易</div>
-      <div class="trade-tab-item" @click="router.push('/flashOption')">期权交易</div>
-      <div class="trade-tab-item" @click="router.push('/floworder')">跟单交易</div>
+      <!-- <div class="trade-tab-item" @click="router.push('/flashOption')">期权交易</div>
+      <div class="trade-tab-item" @click="router.push('/floworder')">跟单交易</div> -->
     </div>
     <div class="trade-tip">
       <div class="trade-tip-left">
@@ -518,6 +518,7 @@ onMounted(() => {
     width: auto;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     overflow-x: auto;
     white-space: nowrap;
     scrollbar-width: none;
@@ -530,7 +531,7 @@ onMounted(() => {
       color: var(--secondary-color);
       cursor: pointer;
       flex-shrink: 0;
-      margin-right: 30px;
+      /* margin-right: 30px; */
     }
     .active {
       color: var(--primary-border);
