@@ -72,8 +72,8 @@
       <div class="flash-tab-item active">秒合约</div>
       <div class="flash-tab-item" @click="router.push('/contract')">合约交易</div>
       <div class="flash-tab-item" @click="router.push('/trade')">现货交易</div>
-      <!-- <div class="flash-tab-item" @click="router.push('/flashOption')">期权交易</div>
-      <div class="flash-tab-item" @click="router.push('/floworder')">跟单交易</div> -->
+      <!-- <div class="flash-tab-item" @click="router.push('/flashOption')">{{t("optionTrade")}}</div>
+      <div class="flash-tab-item" @click="router.push('/floworder')">{ t('followTrade') }}}</div> -->
     </div>
     <div class="flash-tip">
       <div class="flash-tip-left">
@@ -462,7 +462,9 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: var(--secondary-color); font-size: 12px">{{ t('openOrderDirection') }}</div>
+        <div style="color: var(--secondary-color); font-size: 12px">
+          {{ t('openOrderDirection') }}
+        </div>
         <div style="color: var(--regular-color); font-size: 12px">
           <template v-if="Number(centerData.betContent)">{{ t('flashUp') }}</template>
           <template v-else>{{ t('flashDown') }}</template>
@@ -480,7 +482,9 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: var(--secondary-color); font-size: 12px">{{ t('openPrice') }} / {{ t('settlementPrice') }}</div>
+        <div style="color: var(--secondary-color); font-size: 12px">
+          {{ t('openPrice') }} / {{ t('settlementPrice') }}
+        </div>
         <div style="color: var(--regular-color); font-size: 12px">
           {{ centerData.openPrice }} / {{ centerData.closePrice }}
         </div>
@@ -488,7 +492,9 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: var(--secondary-color); font-size: 12px">{{ t('openPriceCurrency') }}</div>
+        <div style="color: var(--secondary-color); font-size: 12px">
+          {{ t('openPriceCurrency') }}
+        </div>
         <div style="color: var(--regular-color); font-size: 12px">
           {{
             centerData.showCoin

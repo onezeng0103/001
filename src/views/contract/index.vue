@@ -9,7 +9,7 @@
           <div class="contract-top-left-info-price">
             <div class="name">{{ userInfo?.user?.loginName }}</div>
             <div class="text">
-              {{t('fundAmount')}}
+              {{ t('fundAmount') }}
               <div class="eys">
                 <svg
                   @click="isEye = !isEye"
@@ -71,18 +71,18 @@
       <div class="contract-tab-item" @click="router.push('/flash')">秒合约</div>
       <div class="contract-tab-item active">合约交易</div>
       <div class="contract-tab-item" @click="router.push('/trade')">现货交易</div>
-      <!-- <div class="contract-tab-item" @click="router.push('/flashOption')">期权交易</div>
-      <div class="contract-tab-item" @click="router.push('/floworder')">跟单交易</div> -->
+      <!-- <div class="contract-tab-item" @click="router.push('/flashOption')">{{t("optionTrade")}}</div>
+      <div class="contract-tab-item" @click="router.push('/floworder')">{{ t('followTrade') }}}</div> -->
     </div>
     <div class="contract-tip">
       <div class="contract-tip-left">
         <img src="../../assets/img/31.png" alt="" />
         <div class="text">
-          <div class="text-title">{{t('institutionalCooperation')}}</div>
-          <div class="text-desc">{{t('institutionalCooperationDesc')}}</div>
+          <div class="text-title">{{ t('institutionalCooperation') }}</div>
+          <div class="text-desc">{{ t('institutionalCooperationDesc') }}</div>
         </div>
       </div>
-      <div class="contract-tip-right" @click="router.push('/proxy')">{{t('goTo')}}</div>
+      <div class="contract-tip-right" @click="router.push('/proxy')">{{ t('goTo') }}</div>
     </div>
     <div class="contract-main">
       <div class="contract-main-top">
@@ -108,11 +108,11 @@
       </div>
       <div class="contract-main-tip">
         <div class="contract-main-tip-item">
-          <div class="contract-main-tip-item-name">{{t('price')}}</div>
+          <div class="contract-main-tip-item-name">{{ t('price') }}</div>
           <div class="contract-main-tip-item-symbol">{{ coinInfo.baseCoinUpperCase }}</div>
         </div>
         <div class="contract-main-tip-item">
-          <div class="contract-main-tip-item-name">{{t('volume')}}</div>
+          <div class="contract-main-tip-item-name">{{ t('volume') }}</div>
           <div class="contract-main-tip-item-symbol">
             {{
               coinInfo.customizeFlag === 2
@@ -182,18 +182,23 @@
           class="contract-main-tab-item"
           @click="onSelect(1)"
         >
-          {{t('marketOrder')}}
+          {{ t('marketOrder') }}
         </div>
         <div
           :class="transactionLabel === 0 ? 'actives' : ''"
           class="contract-main-tab-item"
           @click="onSelect(0)"
         >
-          {{t('limitOrder')}}
+          {{ t('limitOrder') }}
         </div>
       </div>
       <div class="contract-main-input" v-if="!transactionLabel">
-        <input type="number" v-model.trim="delegatePrice" :placeholder="`${t('price')}`" maxlength="140" />
+        <input
+          type="number"
+          v-model.trim="delegatePrice"
+          :placeholder="`${t('price')}`"
+          maxlength="140"
+        />
       </div>
       <div class="contract-main-input">
         <input
@@ -254,13 +259,17 @@
                 : coinInfo.coin?.toUpperCase()
             }}
           </div>
-          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">{{t('canOpenPosition')}}</div>
+          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">
+            {{ t('canOpenPosition') }}
+          </div>
         </div>
         <div style="display: flex; flex-direction: column; align-items: center">
           <div style="color: var(--primary-color); font-size: 14px">
             {{ _toFixed(marginValue, 4) }} USDT
           </div>
-          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">{{t('margin')}}</div>
+          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">
+            {{ t('margin') }}
+          </div>
         </div>
         <div style="display: flex; flex-direction: column; align-items: center">
           <div style="color: var(--primary-color); font-size: 14px">
@@ -273,7 +282,7 @@
             / {{ t('number') }}
           </div>
           <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">
-            {{t('contractValue')}}
+            {{ t('contractValue') }}
           </div>
         </div>
       </div>
@@ -286,8 +295,8 @@
           justify-content: space-between;
         "
       >
-        <div class="btn1" @click="buyOrSell(0)">{{t('buy')}}</div>
-        <div class="btn2" @click="buyOrSell(1)">{{t('sell')}}</div>
+        <div class="btn1" @click="buyOrSell(0)">{{ t('buy') }}</div>
+        <div class="btn2" @click="buyOrSell(1)">{{ t('sell') }}</div>
       </div>
     </div>
     <div class="contract-orderBox">
@@ -371,11 +380,11 @@
                 "
                 @click="currentDelegation(item.id)"
               >
-                <span>{{t('cancel')}}</span>
+                <span>{{ t('cancel') }}</span>
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('time')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{ t('time') }}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{
                   _timeFormat(
@@ -387,27 +396,31 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('totalOrder')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('totalOrder') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.delegateTotal }}
                 {{ item.showCoin ? matchText(item.showCoin, '/USDT') : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegatePrice')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('delegatePrice') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.delegatePrice }} USDT
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('dealNum')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{ t('dealNum') }}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.dealNum ? item.dealNum : '0' }}
                 {{ item.showCoin ? matchText(item.showCoin, '/USDT') : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('dealPrice')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{ t('dealPrice') }}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.dealPrice ? item.dealPrice : '---' }}
               </div>
@@ -475,11 +488,13 @@
                 "
                 @click="stoplossBullshit(item.id)"
               >
-                <span>{{t('cancel')}}</span>
+                <span>{{ t('cancel') }}</span>
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegateTime')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('delegateTime') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{
                   _timeFormat(item.params?.createTime || item.createTime, 'DD/MM/YYYY HH:mm', true)
@@ -487,26 +502,34 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegateType')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('delegateType') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.lossType ? t('stopLoss') : t('stopProfit') }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('totalOrder')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('totalOrder') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.lossType ? item.loseNumber : item.earnNumber }}
                 {{ item.showCoin ? item.showCoin : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegatePrice')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('delegatePrice') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.delegateType ? t('marketOrder') : item.loseDelegatePrice + ' USDT' }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('triggerPrice')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('triggerPrice') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.lossType ? item.losePrice : item.earnPrice }}
                 USDT
@@ -569,38 +592,46 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('totalOrder')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('totalOrder') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.openNum }}
                 {{ item.showCoin ? matchText(item.showCoin, '/USDT') : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('entrustmentValue')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('entrustmentValue') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.entrustmentValue }} USDT
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegatePrice')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('delegatePrice') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.openPrice }} USDT
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('closePrice')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">
+                {{ t('closePrice') }}
+              </div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.dealPrice }} USDT
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('yield')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{ t('yield') }}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ yieldHisValue(item) }}%
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">{{t('earn')}}</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{ t('earn') }}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ _toFixed(item.earn, 4) }} USDT
               </div>
