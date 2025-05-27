@@ -2,13 +2,13 @@
   <div class="store">
     <div class="store-header">
       <div class="store-header-item" :class="{ active: activeIndex == 0 }" @click="activeIndex = 0">
-        {{t('flashContract')}}
+        {{ t('flashContract') }}
       </div>
       <div class="store-header-item" :class="{ active: activeIndex == 1 }" @click="activeIndex = 1">
-        {{t('spot')}}
+        {{ t('spot') }}
       </div>
       <div class="store-header-item" :class="{ active: activeIndex == 2 }" @click="activeIndex = 2">
-        {{t('UContract')}}
+        {{ t('contract') }}
       </div>
     </div>
     <SpotGoods v-if="activeIndex == 1" />

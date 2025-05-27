@@ -161,7 +161,13 @@ const downLoadList = computed(() => {
   return data
 })
 const handleClick = (index) => {
-  window.open(downLoadList.value[index]?.path)
+  let android = downLoadList.value.find((item) => item.icon == 'android.png')
+  let apple = downLoadList.value.find((item) => item.icon == 'apple.png')
+  if (index == 0) {
+    window.open(android?.path)
+  } else {
+    window.open(apple?.path)
+  }
 }
 </script>
 
