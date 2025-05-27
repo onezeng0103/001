@@ -809,5 +809,7 @@
   "withdrawCard": "銀行口座への出金",
   "pleaseInputValidAddress": "有効なアドレスを入力してください",
   "pleaseInputWithdrawalAddress": "出金アドレスを入力してください",
-  "pleaseContactOnlineCustomerService": "変更が必要な場合は、オンラインカスタマーサービスにご連絡ください"
+  "pleaseContactOnlineCustomerService": "変更が必要な場合は、オンラインカスタマーサービスにご連絡ください",
+  "noData": "データがありません",
+  "country": "国"
 }

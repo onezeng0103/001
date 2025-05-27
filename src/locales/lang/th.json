@@ -809,5 +809,7 @@
   "withdrawCard": "ถอนเข้าบัญชีธนาคาร",
   "pleaseInputValidAddress": "กรุณากรอกที่อยู่ที่ถูกต้อง",
   "pleaseInputWithdrawalAddress": "กรุณากรอกที่อยู่สำหรับถอน",
-  "pleaseContactOnlineCustomerService": "หากต้องการแก้ไข กรุณาติดต่อฝ่ายบริการลูกค้าออนไลน์"
+  "pleaseContactOnlineCustomerService": "หากต้องการแก้ไข กรุณาติดต่อฝ่ายบริการลูกค้าออนไลน์",
+  "noData": "ไม่มีข้อมูล",
+  "country": "ประเทศ"
 }

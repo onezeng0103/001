@@ -809,5 +809,7 @@
   "withdrawCard": "سحب عبر البطاقة البنكية",
   "pleaseInputValidAddress": "يرجى إدخال عنوان صالح",
   "pleaseInputWithdrawalAddress": "يرجى إدخال عنوان السحب",
-  "pleaseContactOnlineCustomerService": "للتعديل، يرجى التواصل مع خدمة العملاء المباشرة"
+  "pleaseContactOnlineCustomerService": "للتعديل، يرجى التواصل مع خدمة العملاء المباشرة",
+  "noData": "لا يوجد بيانات",
+  "country": "البلد"
 }

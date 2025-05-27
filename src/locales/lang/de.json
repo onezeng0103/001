@@ -809,5 +809,7 @@
   "withdrawCard": "Bankkarten-Auszahlung",
   "pleaseInputValidAddress": "Bitte gültige Adresse eingeben",
   "pleaseInputWithdrawalAddress": "Bitte Auszahlungsadresse eingeben",
-  "pleaseContactOnlineCustomerService": "Bei Änderungen kontaktieren Sie bitte den Online-Kundendienst"
+  "pleaseContactOnlineCustomerService": "Bei Änderungen kontaktieren Sie bitte den Online-Kundendienst",
+  "noData": "Keine Daten",
+  "country": "Land"
 }

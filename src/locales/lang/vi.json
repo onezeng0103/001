@@ -809,5 +809,7 @@
   "withdrawCard": "Rút tiền bằng thẻ ngân hàng",
   "pleaseInputValidAddress": "Vui lòng nhập địa chỉ hợp lệ",
   "pleaseInputWithdrawalAddress": "Vui lòng nhập địa chỉ rút tiền",
-  "pleaseContactOnlineCustomerService": "Nếu cần thay đổi, vui lòng liên hệ dịch vụ khách hàng trực tuyến"
+  "pleaseContactOnlineCustomerService": "Nếu cần thay đổi, vui lòng liên hệ dịch vụ khách hàng trực tuyến",
+  "noData": "Không có dữ liệu",
+  "country": "Quốc gia"
 }

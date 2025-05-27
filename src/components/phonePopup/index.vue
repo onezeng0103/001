@@ -70,7 +70,7 @@
                     text-overflow: ellipsis;
                   "
                 >
-                  <span>国家</span>
+                  <span>{{t('country')}}</span>
                 </span>
               </div>
               <div

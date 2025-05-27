@@ -809,5 +809,7 @@
   "withdrawCard": "Udbetaling til bankkort",
   "pleaseInputValidAddress": "Indtast venligst en gyldig adresse",
   "pleaseInputWithdrawalAddress": "Indtast udbetalingsadresse",
-  "pleaseContactOnlineCustomerService": "Kontakt venligst online kundeservice for ændringer"
+  "pleaseContactOnlineCustomerService": "Kontakt venligst online kundeservice for ændringer",
+  "noData": "Ingen data",
+  "country": "Land"
 }

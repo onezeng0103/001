@@ -809,5 +809,7 @@
   "withdrawCard": "Retrait par carte bancaire",
   "pleaseInputValidAddress": "Veuillez saisir une adresse valide",
   "pleaseInputWithdrawalAddress": "Veuillez saisir l'adresse de retrait",
-  "pleaseContactOnlineCustomerService": "Pour modification, veuillez contacter le service client en ligne"
+  "pleaseContactOnlineCustomerService": "Pour modification, veuillez contacter le service client en ligne",
+  "noData": "Aucune donnée",
+  "country": "Pays" 
 }

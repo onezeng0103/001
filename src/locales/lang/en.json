@@ -809,5 +809,7 @@
   "withdrawCard": "Bank Card Withdrawal",
   "pleaseInputValidAddress": "Please enter a valid address",
   "pleaseInputWithdrawalAddress": "Please enter the withdrawal address",
-  "pleaseContactOnlineCustomerService": "For changes, please contact online support"
+  "pleaseContactOnlineCustomerService": "For changes, please contact online support",
+  "noData": "No Data",
+  "country": "Country"
 }

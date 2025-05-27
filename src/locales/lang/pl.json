@@ -809,5 +809,7 @@
   "withdrawCard": "Wypłata na konto bankowe",
   "pleaseInputValidAddress": "Proszę wprowadzić prawidłowy adres",
   "pleaseInputWithdrawalAddress": "Proszę wprowadzić adres wypłaty",
-  "pleaseContactOnlineCustomerService": "W razie potrzeby zmiany prosimy o kontakt z obsługą online"
+  "pleaseContactOnlineCustomerService": "W razie potrzeby zmiany prosimy o kontakt z obsługą online",
+  "noData": "Brak danych",
+  "country": "Kraj"
 }

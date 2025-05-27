@@ -809,5 +809,7 @@
   "withdrawCard": "Retiro por tarjeta",
   "pleaseInputValidAddress": "Ingrese dirección válida",
   "pleaseInputWithdrawalAddress": "Ingrese dirección de retiro",
-  "pleaseContactOnlineCustomerService": "Para modificaciones, contacte al servicio en línea"
+  "pleaseContactOnlineCustomerService": "Para modificaciones, contacte al servicio en línea",
+  "noData": "Sin datos",
+  "country": "País"
 }

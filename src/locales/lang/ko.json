@@ -809,5 +809,7 @@
   "withdrawCard": "은행 카드 출금",
   "pleaseInputValidAddress": "유효한 주소를 입력해 주세요",
   "pleaseInputWithdrawalAddress": "출금 주소를 입력해 주세요",
-  "pleaseContactOnlineCustomerService": "수정이 필요하면 온라인 고객 서비스에 문의하세요"
+  "pleaseContactOnlineCustomerService": "수정이 필요하면 온라인 고객 서비스에 문의하세요",
+  "noData": "데이터 없음",
+  "country": "국가"
 }

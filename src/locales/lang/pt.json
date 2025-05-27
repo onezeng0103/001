@@ -809,5 +809,7 @@
   "withdrawCard": "Saque para conta bancária",
   "pleaseInputValidAddress": "Por favor, insira um endereço válido",
   "pleaseInputWithdrawalAddress": "Por favor, insira o endereço para saque",
-  "pleaseContactOnlineCustomerService": "Para alterações, por favor contate o atendimento online"
+  "pleaseContactOnlineCustomerService": "Para alterações, por favor contate o atendimento online",
+  "noData": "Nenhum dado",
+  "country": "País"
 }

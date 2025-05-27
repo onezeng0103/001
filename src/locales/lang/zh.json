@@ -809,5 +809,7 @@
   "withdrawCard": "银行卡提现",
   "pleaseInputValidAddress": "请输入有效的地址",
   "pleaseInputWithdrawalAddress": "请输入提现地址",
-  "pleaseContactOnlineCustomerService": "如需修改，请联系在线客服"
+  "pleaseContactOnlineCustomerService": "如需修改，请联系在线客服",
+  "noData": "暂无资料",
+  "country": "国家"
 }

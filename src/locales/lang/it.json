@@ -809,5 +809,7 @@
   "withdrawCard": "Prelievo su conto bancario",
   "pleaseInputValidAddress": "Inserisci un indirizzo valido",
   "pleaseInputWithdrawalAddress": "Inserisci indirizzo prelievo",
-  "pleaseContactOnlineCustomerService": "Per modifiche, contatta l'assistenza online"
+  "pleaseContactOnlineCustomerService": "Per modifiche, contatta l'assistenza online",
+  "noData": "Nessun dato",
+  "country": "Nazione"
 }

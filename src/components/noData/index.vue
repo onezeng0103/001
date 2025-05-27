@@ -1,7 +1,7 @@
 <template>
   <div class="no-data">
     <img class="no-data-img" src="../../assets/img/noData.png" draggable="false" />
-    <div class="no-data-name">暂无资料</div>
+    <div class="no-data-name">{{ t('noData') }}</div>
   </div>
 </template>
 <script setup>

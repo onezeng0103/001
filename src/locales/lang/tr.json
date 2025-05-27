@@ -809,5 +809,7 @@
   "withdrawCard": "Banka Kartı ile Çekim",
   "pleaseInputValidAddress": "Lütfen Geçerli Bir Adres Girin",
   "pleaseInputWithdrawalAddress": "Lütfen Çekim Adresini Girin",
-  "pleaseContactOnlineCustomerService": "Değişiklik İçin Lütfen Çevrimiçi Müşteri Hizmetleri ile İletişime Geçin"
+  "pleaseContactOnlineCustomerService": "Değişiklik İçin Lütfen Çevrimiçi Müşteri Hizmetleri ile İletişime Geçin",
+  "noData": "Veri Yok",
+  "country": "Ülke"
 }
