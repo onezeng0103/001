@@ -97,7 +97,7 @@
           <div style="margin-left: 10px">
             <div style="color: var(--primary-color); font-size: 14px">提币</div>
             <div style="color: var(--secondary-color); font-size: 12px">
-              从链上钱包或交易所转入数字货币
+              从链上提币到其他交易所或链上钱包
             </div>
           </div>
         </div>

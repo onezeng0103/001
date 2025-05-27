@@ -119,13 +119,13 @@
         <div class="icon">
           <img src="../../assets/img/11.png" />
         </div>
-        <div class="name">充值</div>
+        <div class="name">充币</div>
       </div>
       <div class="function-item" @click="router.push('/withdraw')">
         <div class="icon">
           <img src="../../assets/img/12.png" />
         </div>
-        <div class="name">提现</div>
+        <div class="name">提币</div>
       </div>
       <div class="function-item" @click="router.push('/flashExchange')">
         <div class="icon">

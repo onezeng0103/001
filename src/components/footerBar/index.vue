@@ -11,7 +11,7 @@
         <div class="uni-tabbar__bd" style="height: 50px">
           <div
             class="uni-tabbar__icon uni-tabbar__icon__diff"
-            :class="{ 'trade-icon': item.key === 'trade' }"
+            :class="{ 'trade-icon': item.key === 'flash' }"
           >
             <img :src="item.imgUrl" />
           </div>
@@ -56,8 +56,8 @@ const getTabbarList = computed(() => {
     {
       imgUrl: new URL('../../assets/img/08.png', import.meta.url).href,
       checkedImgUrl: new URL('../../assets/img/08.png', import.meta.url).href,
-      linkUrl: '/trade',
-      key: 'trade',
+      linkUrl: '/flash',
+      key: 'flash',
       name: '交易',
       sort: 3
     },

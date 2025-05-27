@@ -96,7 +96,7 @@
           <div style="margin-left: 10px">
             <div style="color: var(--primary-color); font-size: 14px">充币</div>
             <div style="color: var(--secondary-color); font-size: 12px">
-              从链上钱包或交易所转入数字货币
+              从链上钱包或其他交易所转入数字货币
             </div>
           </div>
         </div>

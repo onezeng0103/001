@@ -204,14 +204,14 @@
             />
             <div v-if="fileList2.length == 0" class="text">上传证件照反面</div>
           </van-uploader>
-          <van-uploader v-model="fileList3" :after-read="afterRead3" class="upd-list">
+          <!-- <van-uploader v-model="fileList3" :after-read="afterRead3" class="upd-list">
             <img
               v-if="fileList3.length == 0"
               style="width: 36px; height: 36px"
               src="../../assets/img/Frame.png"
             />
             <div v-if="fileList3.length == 0" class="text">上传手持证件照</div>
-          </van-uploader>
+          </van-uploader> -->
         </div>
       </div>
       <div class="btn" @click="submit">提交认证</div>
@@ -370,29 +370,28 @@ const submit = () => {
     showToast('请上传证件背面')
     return
   }
-  if (fileList3.value.length == 0) {
-    showToast('请上传手持证件照')
-    return
-  }
+  // if (fileList3.value.length == 0) {
+  //   showToast('请上传手持证件照')
+  //   return
+  // }
   const file1 = fileList1.value[0] || {}
   let filePath1 = file1.res
   const file2 = fileList2.value[0] || {}
   let filePath2 = file2.res
-  const file3 = fileList3.value[0] || {}
-  let filePath3 = file3.res
+  // const file3 = fileList3.value[0] || {}
+  // let filePath3 = file3.res
   if (file1.status != 'success' || file2.status != 'success') {
     showToast('图片上传中')
     return
   }
-  if (file3.status != 'success') {
-    showToast('图片上传中')
-    return
-  }
-  let params = `realName=${formData.value.userName}&idCard=${formData.value.number}&flag=2&frontUrl=${filePath1}&backUrl=${filePath2}&country=${action.value.englishName}&handelUrl=${filePath3}&cardType=${formData.value?.type}`
+  // if (file3.status != 'success') {
+  //   showToast('图片上传中')
+  //   return
+  // }
+  let params = `realName=${formData.value.userName}&idCard=${formData.value.number}&flag=2&frontUrl=${filePath1}&backUrl=${filePath2}&country=${action.value.englishName}&cardType=${formData.value?.type}`
   uploadKYC(params).then((res) => {
     if (res.code == '200') {
       showToast('提交成功，请等待...')
-      // router.push('/')
       advancedAuth.value = 3
     } else {
       showToast(res.msg)

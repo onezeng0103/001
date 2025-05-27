@@ -68,9 +68,9 @@
       <div class="contract-top-right"></div>
     </div>
     <div class="contract-tab">
-      <div class="contract-tab-item" @click="router.push('/trade')">现货交易</div>
-      <div class="contract-tab-item active">合约交易</div>
       <div class="contract-tab-item" @click="router.push('/flash')">秒合约</div>
+      <div class="contract-tab-item active">合约交易</div>
+      <div class="contract-tab-item" @click="router.push('/trade')">现货交易</div>
       <div class="contract-tab-item" @click="router.push('/flashOption')">期权交易</div>
       <div class="contract-tab-item" @click="router.push('/floworder')">跟单交易</div>
     </div>

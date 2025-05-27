@@ -322,7 +322,17 @@ const coinList = computed(() => {
         />
         <div style="margin: 0 10px" @click="allNum">全部</div>
       </div>
-      <div style="font-size: 12px">提现密码</div>
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; font-size: 12px"
+      >
+        <div style="font-size: 12px">提现密码</div>
+        <div>
+          实际到账
+          {{ ((allAmount || 0 * (info?.ratio || 0)) / 100).toFixed(2) }}
+          USDT
+        </div>
+      </div>
+
       <div class="details" style="margin-bottom: 20px">
         <input
           v-model="password"

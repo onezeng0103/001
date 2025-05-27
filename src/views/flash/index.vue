@@ -69,9 +69,9 @@
       <div class="flash-top-right"></div>
     </div>
     <div class="flash-tab">
-      <div class="flash-tab-item" @click="router.push('/trade')">现货交易</div>
-      <div class="flash-tab-item" @click="router.push('/contract')">合约交易</div>
       <div class="flash-tab-item active">秒合约</div>
+      <div class="flash-tab-item" @click="router.push('/contract')">合约交易</div>
+      <div class="flash-tab-item" @click="router.push('/trade')">现货交易</div>
       <div class="flash-tab-item" @click="router.push('/flashOption')">期权交易</div>
       <div class="flash-tab-item" @click="router.push('/floworder')">跟单交易</div>
     </div>
@@ -418,9 +418,9 @@
   <van-dialog
     v-model:show="showMessage"
     :message="message"
-    :title="t('system_tip')"
-    :confirmButtonText="t('confirm')"
-    :cancelButtonText="t('cancel')"
+    title="系统提示"
+    confirmButtonText="确认"
+    cancelButtonText="取消"
     show-cancel-button
   ></van-dialog>
   <van-popup v-model:show="showCenter" round>
@@ -565,7 +565,7 @@ const message = ref('')
 const historyList = ref([])
 const historyNewList = ref([])
 const currentEntruset = ref(0) // 委托状态 0 进行中 1 完成
-const all = ref(t(`all`, ['ebc']))
+const all = ref('全部')
 const availableBalance = computed(() => {
   let tempValue = 0
   if (asset.value.length) {
@@ -688,11 +688,11 @@ const quantityList = ref([
 ])
 const getType = (value) => {
   if (value > 0) {
-    return t('profits')
+    return '获利'
   } else if (value < 0) {
-    return t('loss')
+    return '亏损'
   } else {
-    return t('flat')
+    return '平'
   }
 }
 
@@ -1067,19 +1067,19 @@ const determine = async () => {
     // 最少输入
     showOrder.value = false
     showMessage.value = true
-    message.value = `${t(`minimum_input`)} ${cycleObj.value.minAmount} USDT`
+    message.value = `最少输入 ${cycleObj.value.minAmount} USDT`
     return
   }
   if (Number(quantity.value) > cycleObj.value.maxAmount) {
     showOrder.value = false
     showMessage.value = true
-    message.value = `${t(`Maximum_input`)} ${cycleObj.value.maxAmount} USDT`
+    message.value = `最多输入 ${cycleObj.value.maxAmount} USDT`
     return
   }
   if (Number(quantity.value) > availableBalance.value) {
     showOrder.value = false
     showMessage.value = true
-    message.value = t(`Input_amount_exceeds`)
+    message.value = '输入量超出可用余额'
     return
   }
   let data = {
@@ -1098,7 +1098,7 @@ const determine = async () => {
     if (res.code === 200) {
       showOrder.value = false
       showMessage.value = true
-      message.value = t('order_success')
+      message.value = '下单成功'
       updateList()
     } else {
       showOrder.value = false
