@@ -4,12 +4,12 @@
       <div class="recharge-cell" v-for="(item, index) in rowList" :key="index">
         <div class="row" style="color: var(--primary-border)">
           <span>
-            <template v-if="item.type == '0'">开仓手续费</template>
-            <template v-if="item.type == '0'">保证金冻结</template>
-            <template v-if="item.type == '0'">保证金解锁</template>
-            <template v-if="item.type == '0'">平仓盈亏</template>
-            <template v-if="item.type == '0'">合约交易调整保证金</template>
-            <template v-if="item.type == '0'">合约交易强平</template>
+            <template v-if="item.type == '0'">{{t('openPositionFee')}}</template>
+            <template v-if="item.type == '0'">{{t('marginFrozen')}}</template>
+            <template v-if="item.type == '0'">{{t('marginUnlocked')}}</template>
+            <template v-if="item.type == '0'">{{t('settlementProfit')}}</template>
+            <template v-if="item.type == '0'">{{t('contractAdjustmentMargin')}}</template>
+            <template v-if="item.type == '0'">{{t("contractForceClose")}}</template>
           </span>
           <span>
             {{ priceFormat(item.amount) }}
@@ -17,7 +17,7 @@
         </div>
         <div class="row" style="color: var(--secondary-color)">
           <span>{{ _timeFormat(item?.createTime) }}</span>
-          <span>账后余额{{ priceFormat(item?.afterAmount) }}</span>
+          <span>{{t("accountBalance")}}{{ priceFormat(item?.afterAmount) }}</span>
         </div>
       </div>
     </template>

@@ -4,6 +4,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { pledgeSubmit } from '@/api/pledge/index'
 import { priceFormat } from '@/utils/decimal.js'
 import { useUserStore } from '@/store/user/index'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
 const data = reactive(JSON.parse(decodeURI(route.query.data)))
@@ -49,12 +51,12 @@ const submit = async () => {
   }
   let params = { planId: data.id, amount: limit.value }
   if (limit.value == '' || limit.value > data.limitMax || limit.value < data.limitMin) {
-    showToast('购买金额有误')
+    showToast(t('purchaseAmountError'))
     return
   }
   pledgeSubmit(params).then((res) => {
     if (res.code == '200') {
-      showToast('购买成功')
+      showToast(t('purchaseSuccess'))
       setTimeout(() => {
         router.push('/livecoin/eaorders?type=2')
       }, 500)
@@ -134,7 +136,7 @@ const submit = async () => {
                 text-overflow: ellipsis;
               "
             >
-              <span>参投 {{ data?.title }}</span>
+              <span>{{ t('subscribe') }} {{ data?.title }}</span>
             </span>
           </div>
           <div
@@ -160,7 +162,7 @@ const submit = async () => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: var(--secondary-color)">限额</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">{{ t('limit') }}</div>
         <div style="font-size: 14px; color: var(--primary-color)">
           {{ data.limitMin }}~{{ data.limitMax }}
         </div>
@@ -174,7 +176,7 @@ const submit = async () => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: var(--secondary-color)">日收益率</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">{{ t('dailyYieldRate') }}</div>
         <div style="font-size: 14px; color: var(--primary-color)">
           {{ data.minOdds }}%~{{ data.maxOdds }}%
         </div>
@@ -189,7 +191,9 @@ const submit = async () => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: var(--secondary-color)">周期(天)</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">
+          {{ t('cycle') }}({{ t('days') }})
+        </div>
         <div style="font-size: 14px; color: var(--primary-color)">{{ data.days }}</div>
       </div>
       <div class="ipt">
@@ -198,7 +202,7 @@ const submit = async () => {
           type="number"
           maxlength="140"
           step="0.000000000000000001"
-          :placeholder="`最低参投${data?.limitMin}`"
+          :placeholder="`${t('minimumSubscribe')}${data?.limitMin}`"
           enterkeyhint="done"
           pattern="[0-9]*"
           class="uni-input-input"
@@ -210,7 +214,7 @@ const submit = async () => {
         <div
           style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
         >
-          <div style="font-size: 13px; color: var(--secondary-color)">可用余额</div>
+          <div style="font-size: 13px; color: var(--secondary-color)">{{ t('availableBalance') }}</div>
           <div style="font-size: 14px; color: var(--primary-color)">
             {{ priceFormat(amount) }} USDT
           </div>
@@ -218,13 +222,13 @@ const submit = async () => {
         <div
           style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
         >
-          <div style="font-size: 13px; color: var(--secondary-color)">限购次数</div>
+          <div style="font-size: 13px; color: var(--secondary-color)">{{ t('purchaseLimit') }}</div>
           <div style="font-size: 14px; color: var(--primary-color)">{{ data.timeLimit }}</div>
         </div>
       </div>
     </div>
 
-    <div @click="submit" class="btn" :class="limit ? 'zf' : ''">支付</div>
+    <div @click="submit" class="btn" :class="limit ? 'zf' : ''">{{ t('pay') }}</div>
   </div>
 </template>
 

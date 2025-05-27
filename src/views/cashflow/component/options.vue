@@ -4,8 +4,8 @@
       <div class="recharge-cell" v-for="(item, index) in rowList" :key="index">
         <div class="row" style="color: var(--primary-border)">
           <span>
-            <template v-if="item.type == '56'">下注</template>
-            <template v-if="item.type == '57'">结算</template>
+            <template v-if="item.type == '56'">{{t("bet")}}</template>
+            <template v-if="item.type == '57'">{{t("settlement")}}</template>
           </span>
           <span>
             {{ priceFormat(item.amount) }}
@@ -13,7 +13,7 @@
         </div>
         <div class="row" style="color: var(--secondary-color)">
           <span>{{ _timeFormat(item?.createTime) }}</span>
-          <span>账后余额{{ priceFormat(item?.afterAmount) }}</span>
+          <span>{{t("accountBalance")}}{{ priceFormat(item?.afterAmount) }}</span>
         </div>
       </div>
     </template>

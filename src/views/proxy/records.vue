@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>交易记录</span>
+              <span>{{ t('transactionRecord') }}</span>
             </span>
           </div>
           <div
@@ -88,60 +88,60 @@
         <div class="content-box-item" @click="handleClickStartDate(1)">
           <span>{{ startDate && Array.isArray(startDate) ? startDate.join('-') : '' }}</span>
           <div style="color: var(--secondary-color); font-size: 12px; margin-top: 5px">
-            <span>开始时间</span>
+            <span>{{ t('startDate') }}</span>
           </div>
         </div>
         <div class="content-box-item"></div>
         <div class="content-box-item" @click="handleClickStartDate(2)">
           <span>{{ endDate && Array.isArray(endDate) ? endDate.join('-') : '' }}</span>
           <div style="color: var(--secondary-color); font-size: 12px; margin-top: 5px">
-            <span>结束时间</span>
+            <span>{{ t('endDate') }}</span>
           </div>
         </div>
       </div>
       <div class="content-btn">
-        <div class="content-btn-item" @click="handleSearch">搜索</div>
-        <div class="content-btn-item" @click="handleReset">重置</div>
+        <div class="content-btn-item" @click="handleSearch">{{ t('search') }}</div>
+        <div class="content-btn-item" @click="handleReset">{{ t('reset') }}</div>
       </div>
       <template v-if="orderList.length > 0">
         <div class="content-list" v-for="(item, index) in orderList" :key="index">
           <div class="content-list-item">
-            <div class="content-list-item-left">状态</div>
+            <div class="content-list-item-left">{{ t('status') }}</div>
             <div class="content-list-item-right">
-              <template v-if="item.reimburseFlag == 1">弥补损失</template>
+              <template v-if="item.reimburseFlag == 1">{{ t('compensateLoss') }}</template>
               <template v-else>
-                <template v-if="item.status == 1">已发放</template>
-                <template v-if="item.status == 0">待发放</template>
+                <template v-if="item.status == 1">{{ t('issued') }}</template>
+                <template v-if="item.status == 0">{{ t('pendingIssuance') }}</template>
               </template>
             </div>
           </div>
           <div class="content-list-item">
-            <div class="content-list-item-left">单号</div>
+            <div class="content-list-item-left">{{ t('orderNumber') }}</div>
             <div class="content-list-item-right">
               {{ item.brokerNo }}
             </div>
           </div>
           <div class="content-list-item">
-            <div class="content-list-item-left">币种</div>
+            <div class="content-list-item-left">{{ t('coin') }}</div>
             <div class="content-list-item-right">
               {{ item.symbol }}
             </div>
           </div>
           <template v-if="item.reimburseFlag == 1">
             <div class="content-list-item">
-              <div class="content-list-item-left">亏损金额</div>
+              <div class="content-list-item-left">{{ t('lossAmount') }}</div>
               <div class="content-list-item-right">
                 {{ truncateDecimals(item.orderEarn) }}{{ item.coin.toUpperCase() }}
               </div>
             </div>
             <div class="content-list-item">
-              <div class="content-list-item-left">补偿金额</div>
+              <div class="content-list-item-left">{{ t('compensateAmount') }}</div>
               <div class="content-list-item-right">
                 {{ truncateDecimals(item.reimburse) }}{{ item.coin.toUpperCase() }}
               </div>
             </div>
             <div class="content-list-item">
-              <div class="content-list-item-left">补偿时间</div>
+              <div class="content-list-item-left">{{ t('compensateTime') }}</div>
               <div class="content-list-item-right">
                 {{ item.updateTime }}
               </div>
@@ -149,19 +149,19 @@
           </template>
           <template v-else>
             <div class="content-list-item">
-              <div class="content-list-item-left">金额</div>
+              <div class="content-list-item-left">{{ t('amount') }}</div>
               <div class="content-list-item-right">
                 {{ item.amount }}{{ item.coin.toUpperCase() }}
               </div>
             </div>
             <div class="content-list-item">
-              <div class="content-list-item-left">收益</div>
+              <div class="content-list-item-left">{{ t('earnings') }}</div>
               <div class="content-list-item-right">
                 {{ truncateDecimals(item.orderEarn) }}{{ item.coin.toUpperCase() }}
               </div>
             </div>
             <div class="content-list-item">
-              <div class="content-list-item-left">机构分润</div>
+              <div class="content-list-item-left">{{ t('institutionalProfit') }}</div>
               <div class="content-list-item-right">
                 <template v-if="Math.sign(item.orderEarn) != -1">
                   - {{ Math.abs(truncateDecimals(Subtr(item.orderEarn, item.amountEarn))) }}
@@ -171,13 +171,13 @@
               </div>
             </div>
             <div class="content-list-item">
-              <div class="content-list-item-left">跟投时间</div>
+              <div class="content-list-item-left">{{ t('proxyTime') }}</div>
               <div class="content-list-item-right">
                 {{ item.createTime }}
               </div>
             </div>
             <div class="content-list-item">
-              <div class="content-list-item-left">结算时间</div>
+              <div class="content-list-item-left">{{ t('settlementTime') }}</div>
               <div class="content-list-item-right">
                 {{ item.settleTime }}
               </div>
@@ -195,15 +195,15 @@
       <van-date-picker
         theme="dark"
         v-model="currentDate"
-        title="选择日期"
+        :title="t('selectDate')"
         @cancel="showBottom = false"
         @confirm="handleConfirm"
       >
         <template #confirm>
-          <div class="text-text-primary text-style-web-body-bold">确定</div>
+          <div class="text-text-primary text-style-web-body-bold">{{ t('confirm') }}</div>
         </template>
         <template #cancel>
-          <div class="text-text-primary text-style-web-body-bold">取消</div>
+          <div class="text-text-primary text-style-web-body-bold">{{ t('cancel1') }}</div>
         </template>
       </van-date-picker>
     </van-config-provider>
@@ -214,6 +214,8 @@
 import dayjs from 'dayjs'
 import { useRouter } from 'vue-router'
 import { getOrderListApi } from '@/api/proxy'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const showBottom = ref(false)
 const startDate = ref('')

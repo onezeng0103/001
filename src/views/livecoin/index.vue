@@ -2,7 +2,8 @@
 import { useRouter } from 'vue-router'
 import { getPledgeProductList, getPledgeShowInfo } from '@/api/pledge/index'
 import { priceFormat } from '@/utils/decimal.js'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const showInfo = ref({})
 const allList = async () => {
@@ -103,7 +104,7 @@ onMounted(() => {
                 text-overflow: ellipsis;
               "
             >
-              <span>质押生息</span>
+              <span>{{ t('pledgeInterest') }}</span>
             </span>
           </div>
           <div
@@ -121,9 +122,9 @@ onMounted(() => {
 
     <div class="forget-top">
       <div>
-        <div>正在托管</div>
+        <div>{{ t('ongoingPledge') }}</div>
         <div style="margin-top: 2px">{{ showInfo.amount || 0 }}</div>
-        <div style="margin-top: 10px">今日收益</div>
+        <div style="margin-top: 10px">{{ t('todayProfit') }}</div>
         <div style="margin-top: 2px">
           {{
             showInfo?.todayProfit
@@ -135,9 +136,9 @@ onMounted(() => {
         </div>
       </div>
       <div>
-        <div>委托订单</div>
+        <div>{{ t('order') }}</div>
         <div style="margin-top: 2px">{{ showInfo.orderNum || 0 }}</div>
-        <div style="margin-top: 10px">累计收益</div>
+        <div style="margin-top: 10px">{{ t('totalProfit') }}</div>
         <div style="margin-top: 2px">{{ priceFormat(showInfo.profitMoney) || 0 }}</div>
       </div>
     </div>
@@ -147,10 +148,10 @@ onMounted(() => {
         <div style="display: flex; align-items: center">
           <div>
             <div class="title">{{ item.title }}</div>
-            <samp class="label">回报率{{ item.minOdds }}%~{{ item.maxOdds }}%</samp>
+            <samp class="label">{{t('returnRate')}}{{ item.minOdds }}%~{{ item.maxOdds }}%</samp>
           </div>
         </div>
-        <div class="bt" @click="toView(item)">购买</div>
+        <div class="bt" @click="toView(item)">{{t('purchase')}}</div>
       </div>
     </div>
   </div>

@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>机构合作专区</span>
+              <span>{{ t('institutionalCooperationZone') }}</span>
             </span>
           </div>
           <div
@@ -81,7 +81,7 @@
               color: var(--secondary-color);
             "
           >
-            交易记录
+            {{t('transactionRecord')}}
           </div>
         </div>
       </div>
@@ -89,8 +89,8 @@
     <div class="main">
       <div class="info">
         <div class="title">
-          <div class="text">资产金额</div>
-          <div class="text" @click="router.push('/proxy/earnings')">收益记录</div>
+          <div class="text">{{ t('assetAmount') }}</div>
+          <div class="text" @click="router.push('/proxy/earnings')">{{ t('earningsRecord') }}</div>
         </div>
         <div class="price">
           <div class="top">
@@ -145,14 +145,14 @@
           <div class="total">
             <div class="left">
               <div class="total-item">
-                今日收益
+                {{ t('todayEarnings') }}
                 <template v-if="isEye">
                   <span>{{ userInfo?.todayAmountEarn.toFixed(2) }}</span>
                 </template>
                 <template v-else>******</template>
               </div>
               <div class="total-item">
-                累计收益
+                {{ t('totalEarnings') }}
                 <template v-if="isEye">
                   <span>{{ userInfo?.totalAmountEarn?.toFixed(2) }}</span>
                 </template>
@@ -160,7 +160,7 @@
               </div>
             </div>
             <div class="right">
-              跟投天数
+              {{ t('proxyDays') }}
               <template v-if="isEye">
                 <span>{{ info?.totalNum || 0 }}</span>
               </template>
@@ -170,7 +170,7 @@
         </div>
       </div>
       <div class="management">
-        <div>机构跟投中心</div>
+        <div>{{ t('institutionalProxyCenter') }}</div>
         <template v-if="projectList.length > 0">
           <div class="box">
             <div class="box-item" v-for="(item, index) in projectList" :key="index">
@@ -183,25 +183,25 @@
                 </div>
                 <div class="box-item-top-right">
                   <div class="price">{{ _numberWithCommas(item.limitMin) }}</div>
-                  <div class="text">最低跟投金额</div>
+                  <div class="text">{{ t('minimumProxyAmount') }}</div>
                 </div>
               </div>
               <div class="box-item-main">
                 <div>
-                  机构保证金
+                  {{ t('institutionalMargin') }}
                   <span>{{ _numberWithCommas(8000000) }}</span>
                 </div>
                 <div>
-                  机构分润比例
+                  {{ t('institutionalProfitRatio') }}
                   <span>{{ userInfo?.levelRate * 100 }}%</span>
                 </div>
                 <div>
-                  预估收益率
+                  {{ t('estimatedYieldRate') }}
                   <span>{{ item.oddsMinShow }}%-{{ item.oddsMaxShow }}%</span>
                 </div>
               </div>
               <div class="box-item-btn">
-                <div class="btn" @click="handleProxy(item)">一键跟投</div>
+                <div class="btn" @click="handleProxy(item)">{{ t('oneKeyProxy') }}</div>
               </div>
             </div>
           </div>
@@ -214,33 +214,33 @@
         <div class="advertisement-top">
           <div class="advertisement-top-left">
             <img src="../../assets/img/27.png" alt="" />
-            <div class="text">低风险精选产品</div>
+            <div class="text">{{ t('lowRiskSelectiveProducts') }}</div>
           </div>
           <div class="advertisement-top-right">
             <div class="text"></div>
           </div>
         </div>
         <div class="advertisement-tip">
-          AI大数据赋能+机构专业操盘+多重风控，为用户打造省心、安全、稳健的收益模型
+          {{ t('aiBigDataEmpowerment') }}+{{ t('institutionalProfessionalOperation') }}+{{ t('multiRiskControl') }},{{ t('userFriendly') }},{{ t('safe') }},{{ t('stable') }},{{ t('profitModel') }}
         </div>
         <div class="advertisement-btn">
           <div class="advertisement-btn-item">
             <div class="icon">
               <img src="../../assets/img/28.png" alt="" />
             </div>
-            <div class="text">保本付息</div>
+            <div class="text">{{ t('guaranteedInterest') }}</div>
           </div>
           <div class="advertisement-btn-item">
             <div class="icon">
               <img src="../../assets/img/29.png" alt="" />
             </div>
-            <div class="text">智能决策</div>
+            <div class="text">{{ t('intelligentDecision') }}</div>
           </div>
           <div class="advertisement-btn-item">
             <div class="icon">
               <img src="../../assets/img/30.png" alt="" />
             </div>
-            <div class="text">多重风控</div>
+            <div class="text">{{ t('multiRiskControl') }}</div>
           </div>
         </div>
       </div>
@@ -255,8 +255,8 @@
       <img src="../../assets/img/close.png" alt="" />
     </div>
     <div class="content">
-      <div class="content-title">请输入口令</div>
-      <div class="content-tip">请输入6位数字口令完成身份确认</div>
+      <div class="content-title">{{ t('pleaseEnterThePassword') }}</div>
+      <div class="content-tip">{{ t('pleaseEnterThe6DigitPasswordToCompleteTheIdentityConfirmation') }}</div>
       <div class="content-input">
         <input
           class="content-input-item"
@@ -271,14 +271,14 @@
           maxlength="1"
         />
       </div>
-      <div class="content-btn" @click="handleConfirmCode">确认</div>
+      <div class="content-btn" @click="handleConfirmCode">{{ t('confirm') }}</div>
     </div>
   </div>
 
   <van-popup v-model:show="showBottom" round position="bottom">
     <div style="display: flex; align-items: center; justify-content: space-between">
       <div></div>
-      <div style="font-size: 14px">跟投设置</div>
+      <div style="font-size: 14px">{{ t('proxySettings') }}</div>
       <div>
         <svg
           @click="showBottom = !showBottom"
@@ -311,19 +311,19 @@
         <div style="display: flex; align-items: center; flex-direction: column">
           <div>{{ userInfo?.totalNum || 0 }}</div>
           <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
-            跟投天数
+            {{ t('proxyDays') }}
           </div>
         </div>
         <div style="display: flex; align-items: center; flex-direction: column">
           <div>{{ userInfo.yesterdayAmountEarn }}</div>
           <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
-            昨日收益
+            {{ t('yesterdayEarnings') }}
           </div>
         </div>
         <div style="display: flex; align-items: center; flex-direction: column">
           <div>{{ userInfo.totalAmountEarn?.toFixed(2) }}</div>
           <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
-            累计收益
+            {{ t('totalEarnings') }}
           </div>
         </div>
       </div>
@@ -337,9 +337,9 @@
       "
     >
       <div style="display: flex; align-items: center; justify-content: space-between">
-        <div style="color: var(--primary-background); font-weight: 500; font-size: 16px">金额</div>
+        <div style="color: var(--primary-background); font-weight: 500; font-size: 16px">{{ t('amount') }}</div>
         <div style="color: var(--regular-background); font-size: 12px">
-          可用{{ availableBalance }} USDT
+          {{ t('available') }} {{ availableBalance }} USDT
         </div>
       </div>
 
@@ -349,7 +349,7 @@
           v-model.trim="price"
           type="number"
           maxlength="140"
-          :placeholder="info.limitMin ? '最小' + info.limitMin : ''"
+          :placeholder="info.limitMin ? t('min') + info.limitMin : ''"
           style="color: var(--primary-background) !important"
         />
       </div>
@@ -374,7 +374,7 @@
         </div>
       </div>
     </div>
-    <div class="btn2" @click="submit">确认</div>
+    <div class="btn2" @click="submit">{{ t('confirm') }}</div>
   </van-popup>
 </template>
 
@@ -386,6 +386,8 @@ import { _numberWithCommas } from '@/utils/public'
 import { getUserInfoApi, getProjectListApi, getCreateOrderApi, getCheckPass } from '@/api/proxy'
 import { showToast } from 'vant'
 import dayjs from 'dayjs'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const userStore = useUserStore()
 const { asset } = storeToRefs(userStore)
@@ -477,29 +479,29 @@ const handleConfirmCode = () => {
 const submit = () => {
   if (price.value) {
     if (!inTime.value) {
-      showToast('不在时间内')
+      showToast(t('notInTime'))
       return
     }
     const levelId = userInfo.value.levelId
     const limitLevelIds = info.value.limitLevelIds
     if (!limitLevelIds.includes(levelId)) {
-      showToast('vip等级不足')
+      showToast(t('vipLevelInsufficient'))
       return
     }
     if (price.value > info.value.limitMax) {
-      showToast('金额大于最大金额' + info.value.limitMax)
+      showToast(t('amountGreaterThanMaximumAmount') + info.value.limitMax)
       return
     }
     if (price.value > availableBalance.value) {
-      showToast('金额大于可用余额' + availableBalance.value)
+      showToast(t('amountGreaterThanAvailableBalance') + availableBalance.value)
       return
     }
     if (price.value < info.value.limitMin) {
-      showToast('金额小于最小金额' + info.value.limitMin)
+      showToast(t('amountLessThanMinimumAmount') + info.value.limitMin)
       return
     }
     if (info.value.limitCode == 'code' && passwords.value.length != 6) {
-      showToast('请输入完整的6位口令')
+      showToast(t('pleaseEnterTheComplete6DigitPassword'))
       return
     }
     const data = {
@@ -510,7 +512,7 @@ const submit = () => {
     getCreateOrderApi(data)
       .then((res) => {
         if (res.code == 200) {
-          showToast('跟投成功')
+          showToast(t('proxySuccess'))
           price.value = ''
           showBottom.value = false
         } else {
@@ -520,7 +522,7 @@ const submit = () => {
       })
       .catch((err) => {})
   } else {
-    showToast('请输入固定金额')
+    showToast(t('pleaseEnterTheFixedAmount'))
   }
 }
 const proportionList = [1, 25, 75, 100]

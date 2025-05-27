@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>成为交易专家</span>
+              <span>{{ t('becomeTrader') }}</span>
             </span>
           </div>
           <div

@@ -16,12 +16,12 @@
       >
         <div class="row" style="color: var(--primary-border)">
           <span>
-            <template v-if="item.type == 12">购买质押</template>
-            <template v-if="item.type == 6">购买理财</template>
-            <template v-if="item.type == 15">质押收益</template>
-            <template v-if="item.type == 7">理财收益</template>
-            <template v-if="item.type == 14">质押赎回</template>
-            <template v-if="item.type == 55">理财赎回</template>
+            <template v-if="item.type == 12">{{t('purchaseStaking')}}</template>
+            <template v-if="item.type == 6">{{t("purchaseFinance")}}</template>
+            <template v-if="item.type == 15">{{t("stakingProfit")}}</template>
+            <template v-if="item.type == 7">{{t("financeProfit")}}</template>
+            <template v-if="item.type == 14">{{t("stakingRedemption")}}</template>
+            <template v-if="item.type == 55">{{t("financeRedemption")}}</template>
           </span>
           <span>
             +
@@ -44,7 +44,7 @@
 import { useI18n } from 'vue-i18n'
 import { _numberWithCommas, _timeFormat } from '@/utils/public'
 import { getFinancialList } from '@/api/account'
-const { t } = useI18n()
+const {t} = useI18n()
 const rowList = ref([])
 const purchasePledge = ref(0)
 const pledgeIncome = ref(0)

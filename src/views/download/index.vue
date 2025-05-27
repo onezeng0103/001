@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>下载中心</span>
+              <span>{{ t('downloadCenter') }}</span>
             </span>
           </div>
           <div
@@ -85,7 +85,7 @@
     </div>
 
     <div class="download-main">
-      <div class="title">世界首个区块链生态聚合产品</div>
+      <div class="title">{{ t('worldsFirstBlockchainEcosystemAggregatedProduct') }}</div>
 
       <div style="display: flex; justify-content: center">
         <img src="../../../src/assets/img/xiazai.png" alt="" style="height: 311px; width: 302px" />
@@ -94,22 +94,22 @@
       <div class="list">
         <div class="item">
           <img src="../../../src/assets/img/qzxhcz.png" style="width: 19px; height: 19px" />
-          <div style="margin-top: 9px">去中心化操作</div>
+          <div style="margin-top: 9px">{{ t('decentralizedOperation') }}</div>
         </div>
         <div class="item">
           <img src="../../../src/assets/img/sjkx.png" style="width: 19px; height: 19px" />
 
-          <div style="margin-top: 9px">数据可信</div>
+          <div style="margin-top: 9px">{{ t('dataTrust') }}</div>
         </div>
         <div class="item">
           <img src="../../../src/assets/img/jgbh.png" style="width: 19px; height: 19px" />
 
-          <div style="margin-top: 9px">监管保护</div>
+          <div style="margin-top: 9px">{{ t('regulatoryProtection') }}</div>
         </div>
         <div class="item">
           <img src="../../../src/assets/img/dyhfn.png" style="width: 19px; height: 19px" />
 
-          <div style="margin-top: 9px">多样化赋能</div>
+          <div style="margin-top: 9px">{{ t('diversifiedEmpowerment') }}</div>
         </div>
       </div>
 
@@ -120,15 +120,15 @@
             alt=""
             style="width: 34px; height: 34px; margin: 0 10px"
           />
-          Android
+          {{ t('android') }}
         </div>
-        <div class="but"  @click="handleClick(0)">
+        <div class="but" @click="handleClick(1)">
           <img
             src="../../../src/assets/img/pg.png"
             alt=""
             style="width: 34px; height: 34px; margin: 0 9px"
           />
-          APP Store
+          {{ t('appStore') }}
         </div>
       </div>
 
@@ -142,7 +142,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { useMainStore } from '@/store/index.js'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const mainStore = useMainStore()
 /**

@@ -9,7 +9,7 @@
           <div class="contract-top-left-info-price">
             <div class="name">{{ userInfo?.user?.loginName }}</div>
             <div class="text">
-              资金金额
+              {{t('fundAmount')}}
               <div class="eys">
                 <svg
                   @click="isEye = !isEye"
@@ -78,11 +78,11 @@
       <div class="contract-tip-left">
         <img src="../../assets/img/31.png" alt="" />
         <div class="text">
-          <div class="text-title">机构合作专区</div>
-          <div class="text-desc">保本付息 智能决策 多重风控</div>
+          <div class="text-title">{{t('institutionalCooperation')}}</div>
+          <div class="text-desc">{{t('institutionalCooperationDesc')}}</div>
         </div>
       </div>
-      <div class="contract-tip-right" @click="router.push('/proxy')">立即前往</div>
+      <div class="contract-tip-right" @click="router.push('/proxy')">{{t('goTo')}}</div>
     </div>
     <div class="contract-main">
       <div class="contract-main-top">
@@ -108,11 +108,11 @@
       </div>
       <div class="contract-main-tip">
         <div class="contract-main-tip-item">
-          <div class="contract-main-tip-item-name">价格</div>
+          <div class="contract-main-tip-item-name">{{t('price')}}</div>
           <div class="contract-main-tip-item-symbol">{{ coinInfo.baseCoinUpperCase }}</div>
         </div>
         <div class="contract-main-tip-item">
-          <div class="contract-main-tip-item-name">成交量</div>
+          <div class="contract-main-tip-item-name">{{t('volume')}}</div>
           <div class="contract-main-tip-item-symbol">
             {{
               coinInfo.customizeFlag === 2
@@ -182,24 +182,24 @@
           class="contract-main-tab-item"
           @click="onSelect(1)"
         >
-          市价委托
+          {{t('marketOrder')}}
         </div>
         <div
           :class="transactionLabel === 0 ? 'actives' : ''"
           class="contract-main-tab-item"
           @click="onSelect(0)"
         >
-          限价委托
+          {{t('limitOrder')}}
         </div>
       </div>
       <div class="contract-main-input" v-if="!transactionLabel">
-        <input type="number" v-model.trim="delegatePrice" :placeholder="`价格`" maxlength="140" />
+        <input type="number" v-model.trim="delegatePrice" :placeholder="`${t('price')}`" maxlength="140" />
       </div>
       <div class="contract-main-input">
         <input
           type="number"
           v-model.trim="delegateTotal"
-          :placeholder="`数量(手)`"
+          :placeholder="`${t('number')}(手)`"
           maxlength="140"
         />
       </div>
@@ -254,13 +254,13 @@
                 : coinInfo.coin?.toUpperCase()
             }}
           </div>
-          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">可空开</div>
+          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">{{t('canOpenPosition')}}</div>
         </div>
         <div style="display: flex; flex-direction: column; align-items: center">
           <div style="color: var(--primary-color); font-size: 14px">
             {{ _toFixed(marginValue, 4) }} USDT
           </div>
-          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">保证金</div>
+          <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">{{t('margin')}}</div>
         </div>
         <div style="display: flex; flex-direction: column; align-items: center">
           <div style="color: var(--primary-color); font-size: 14px">
@@ -273,7 +273,7 @@
             / {{ t('number') }}
           </div>
           <div style="color: var(--secondary-color); font-size: 10px; margin-top: 5px">
-            合约面值
+            {{t('contractValue')}}
           </div>
         </div>
       </div>
@@ -286,8 +286,8 @@
           justify-content: space-between;
         "
       >
-        <div class="btn1" @click="buyOrSell(0)">买入(做多)</div>
-        <div class="btn2" @click="buyOrSell(1)">卖出(空开)</div>
+        <div class="btn1" @click="buyOrSell(0)">{{t('buy')}}</div>
+        <div class="btn2" @click="buyOrSell(1)">{{t('sell')}}</div>
       </div>
     </div>
     <div class="contract-orderBox">
@@ -352,7 +352,7 @@
                   "
                 >
                   <span>
-                    {{ !item?.type ? '做多' : '开空' }}
+                    {{ !item?.type ? t('goingLong') : t('openBlank') }}
                   </span>
                 </div>
                 <span>
@@ -371,11 +371,11 @@
                 "
                 @click="currentDelegation(item.id)"
               >
-                <span>撤单</span>
+                <span>{{t('cancel')}}</span>
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">时间</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('time')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{
                   _timeFormat(
@@ -387,27 +387,27 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">委托总量</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('totalOrder')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.delegateTotal }}
                 {{ item.showCoin ? matchText(item.showCoin, '/USDT') : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">委托价格</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegatePrice')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.delegatePrice }} USDT
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">已成交量</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('dealNum')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.dealNum ? item.dealNum : '0' }}
                 {{ item.showCoin ? matchText(item.showCoin, '/USDT') : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">成交均价</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('dealPrice')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.dealPrice ? item.dealPrice : '---' }}
               </div>
@@ -475,11 +475,11 @@
                 "
                 @click="stoplossBullshit(item.id)"
               >
-                <span>撤单</span>
+                <span>{{t('cancel')}}</span>
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">委托时间</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegateTime')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{
                   _timeFormat(item.params?.createTime || item.createTime, 'DD/MM/YYYY HH:mm', true)
@@ -487,26 +487,26 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">委托类型</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegateType')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
-                {{ item.lossType ? '止损' : '止盈' }}
+                {{ item.lossType ? t('stopLoss') : t('stopProfit') }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">委托总量</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('totalOrder')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.lossType ? item.loseNumber : item.earnNumber }}
                 {{ item.showCoin ? item.showCoin : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">委托价格</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegatePrice')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
-                {{ item.delegateType ? '市价委托' : item.loseDelegatePrice + ' USDT' }}
+                {{ item.delegateType ? t('marketOrder') : item.loseDelegatePrice + ' USDT' }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">触发价格</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('triggerPrice')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.lossType ? item.losePrice : item.earnPrice }}
                 USDT
@@ -556,7 +556,7 @@
                   "
                 >
                   <span>
-                    {{ !item?.type ? '做多' : '开空' }}
+                    {{ !item?.type ? t('goingLong') : t('openBlank') }}
                   </span>
                 </div>
                 <span>
@@ -565,42 +565,42 @@
                 <div style="font-size: 10px; margin-left: 5px">{{ item?.leverage }}X</div>
               </div>
               <div style="font-size: 10px; color: var(--regular-color)">
-                <span>{{ item.status ? '完成成交' : '等待成交' }}</span>
+                <span>{{ item.status ? t('complete') : t('wait') }}</span>
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">委托总量</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('totalOrder')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.openNum }}
                 {{ item.showCoin ? matchText(item.showCoin, '/USDT') : item.symbol.toUpperCase() }}
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">委托价值</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('entrustmentValue')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.entrustmentValue }} USDT
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">委托价格</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('delegatePrice')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.openPrice }} USDT
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">平仓价格</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('closePrice')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ item.dealPrice }} USDT
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">收益率</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('yield')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ yieldHisValue(item) }}%
               </div>
             </div>
             <div style="display: flex; align-items: center; justify-content: space-between">
-              <div style="font-size: 12px; color: var(--secondary-color)">收益</div>
+              <div style="font-size: 12px; color: var(--secondary-color)">{{t('earn')}}</div>
               <div style="color: var(--primary-color); font-size: 12px">
                 {{ _toFixed(item.earn, 4) }} USDT
               </div>
@@ -820,7 +820,7 @@ watch(
     if (n) {
       const regex = /^[1-9]\d*$/
       if (!regex.test(n)) {
-        return showToast('数量只能输入整数')
+        return showToast(t('numberOnlyInputInteger'))
       } else {
         var typeId = ''
         numList.value.forEach((element) => {
@@ -845,7 +845,7 @@ watch(
   (n) => {
     if (n) {
       if (!/^[1-9]\d*(\.\d{1,6})?$|^0(\.\d{1,6})?$/.test(n) || Number(n) === 0) {
-        return showToast('请输入最多保留6位小数的大于0的价格')
+        return showToast(t('pleaseInputPrice'))
       }
     } else {
       sliderValue.value = 0
@@ -922,10 +922,10 @@ const buyOrSell = (type) => {
     !/^[1-9]\d*(\.\d{1,6})?$|^0(\.\d{1,6})?$/.test(data.delegatePrice) ||
     Number(data.delegatePrice) === 0
   ) {
-    return showToast('请输入最多保留6位数小数的大于0的价格')
+    return showToast(t('pleaseInputPrice'))
   }
   if (!/^[1-9]\d*$/.test(data.delegateTotal)) {
-    return showToast('数量只能输入整数')
+    return showToast(t('numberOnlyInputInteger'))
   }
   try {
     showLoadingToast({
@@ -934,7 +934,7 @@ const buyOrSell = (type) => {
     })
     submitUcontract(data).then((res) => {
       if (res.code === 200) {
-        showToast('操作成功')
+        showToast(t('operationSuccess'))
         // 刷新订单
         updateUser()
         getHistoryList()
@@ -950,25 +950,25 @@ const historyList = ref([])
 const getHistoryList = async () => {
   let res = await contractHistoryList({ status: 0 })
   historyList.value = res.rows
-  tabList.value[0].label = `当前持仓(${historyList.value.length})`
+  tabList.value[0].label = `${t('currentPosition')}(${historyList.value.length})`
 }
 const orderArr = ref([])
 const getOrderList = async () => {
   let res = await orderList({ status: 0 })
   orderArr.value = res.rows
-  tabList.value[1].label = `委托订单(${orderArr.value.length})`
+  tabList.value[1].label = `${t('order')}(${orderArr.value.length})`
 }
 const contractLossArr = ref([])
 const getContractLossList = async () => {
   let res = await contractLossList()
   contractLossArr.value = res.rows
-  tabList.value[2].label = `止盈止损(${contractLossArr.value.length})`
+  tabList.value[2].label = `${t('stopProfitLoss')}(${contractLossArr.value.length})`
 }
 const historyOrderList = ref([])
 const getHistoryOrderList = async () => {
   let res = await contractHistoryList({ status: 1 })
   historyOrderList.value = res.rows
-  tabList.value[3].label = `历史订单(${historyOrderList.value.length})`
+  tabList.value[3].label = `${t('historyOrder')}(${historyOrderList.value.length})`
 }
 
 const updateUser = () => {
@@ -1163,10 +1163,10 @@ const init = () => {
   getHistoryOrderList()
 }
 const tabList = ref([
-  { label: `当前持仓(0)`, value: 0 },
-  { label: `委托订单(0)`, value: 1 },
-  { label: `止盈止损`, value: 2 },
-  { label: `历史订单(0)`, value: 3 }
+  { label: `${t('currentPosition')}(0)`, value: 0 },
+  { label: `${t('order')}(0)`, value: 1 },
+  { label: `${t('stopProfitLoss')}`, value: 2 },
+  { label: `${t('historyOrder')}(0)`, value: 3 }
 ])
 const currentIndex = ref(0)
 const handleCurrentIndex = (index) => {
@@ -1185,7 +1185,7 @@ const stoplossBullshit = async (id) => {
   try {
     const res = await cancelLoss(id)
     if (res.code === 200) {
-      showToast('撤单成功')
+      showToast(t('cancelSuccess'))
       getContractLossList()
     } else {
       showToast(res.msg)
@@ -1196,7 +1196,7 @@ const currentDelegation = async (id) => {
   try {
     const res = await canCelOrder(id)
     if (res.code === 200) {
-      showToast('撤单成功')
+      showToast(t('cancelSuccess'))
       getOrderList()
     } else {
       showToast(res.msg)

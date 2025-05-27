@@ -29,8 +29,8 @@
                   color: var(--primary-color);
                 "
               >
-                <template v-if="item.type == 0">买入</template>
-                <template v-if="item.type == 1">卖出</template>
+                <template v-if="item.type == 0">{{ t('buy1') }}</template>
+                <template v-if="item.type == 1">{{ t('sell1') }}</template>
               </div>
               <div>
                 {{
@@ -52,7 +52,7 @@
                 color: var(--primary-color);
               "
             >
-              撤单
+              {{ t('cancelOrder') }}
             </div>
           </div>
           <div
@@ -62,19 +62,19 @@
             {{ _timeFormat(item.params?.delegateTime, 'HH:mm MM/DD', true) }}
           </div>
           <div class="order-box-list-item">
-            <div>委托价</div>
+            <div>{{ t('delegatePrice') }}</div>
             <div class="order-box-list-item-price">{{ item.delegatePrice || 0 }}</div>
           </div>
           <div class="order-box-list-item">
-            <div>委托量</div>
+            <div>{{ t('delegateTotal') }}</div>
             <div class="order-box-list-item-price">{{ item.delegateTotal || 0 }}</div>
           </div>
           <div class="order-box-list-item">
-            <div>数量</div>
+            <div>{{ t('quantity') }}</div>
             <div class="order-box-list-item-price">{{ item.dealNum || 0 }}</div>
           </div>
           <div class="order-box-list-item">
-            <div>成交价</div>
+            <div>{{ t('dealPrice') }}</div>
             <div class="order-box-list-item-price">{{ item.dealPrice || 0 }}</div>
           </div>
           <div class="line"></div>
@@ -101,8 +101,8 @@ const props = defineProps({
   }
 })
 const tabList = ref([
-  { label: '当前委托', value: 0, num: 0 },
-  { label: '历史委托', value: 1, num: 0 }
+  { label: t('currentDelegate'), value: 0, num: 0 },
+  { label: t('historyDelegate'), value: 1, num: 0 }
 ])
 /**
  * 订单数据

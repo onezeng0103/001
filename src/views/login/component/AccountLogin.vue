@@ -2,7 +2,7 @@
   <div style="margin-top: 15px">
     <div class="form-item">
       <div class="input-box">
-        <input v-model.trim="loginName" placeholder="请输入账号" autocomplete="off" />
+        <input v-model.trim="loginName" :placeholder="t('pleaseInputAccount')" autocomplete="off" />
         <div class="icon">
           <svg
             @click="close"
@@ -25,11 +25,11 @@
       </div>
     </div>
     <div class="form-item">
-      <div class="form-item-label">密码</div>
+      <div class="form-item-label">{{ t('password') }}</div>
       <div class="input-box">
         <input
           :type="isPwd ? 'password' : 'text'"
-          placeholder="请输入密码"
+          :placeholder="t('pleaseInputPassword')"
           v-model.trim="loginPassword"
           autocomplete="off"
         />
@@ -79,19 +79,19 @@
       </div>
     </div>
     <div class="form-item" v-if="showVerifyCode">
-      <div class="form-item-label">验证码</div>
+      <div class="form-item-label">{{t('verificationCode')}}</div>
       <div class="input-box">
-        <input placeholder="请输入验证码" v-model.trim="code" autocomplete="off" />
+        <input :placeholder="t('pleaseInputVerificationCode')" v-model.trim="code" autocomplete="off" />
         <div class="icon">
           <img @click="refreshCode" style="width: 80px; height: 30px" :src="codeUrl" />
         </div>
       </div>
     </div>
-    <div class="tip" @click="forget">忘记密码?</div>
-    <div class="btn" @click="handleSubmit">登录</div>
+    <div class="tip" @click="forget">{{t('forgetPassword')}}?</div>
+    <div class="btn" @click="handleSubmit">{{t('login')}}</div>
     <div class="text">
-      还没有账号？
-      <span @click="register">立即注册</span>
+      {{t('noAccount')}}？
+      <span @click="register">{{t('registerNow')}}</span>
     </div>
   </div>
 </template>
@@ -101,6 +101,8 @@ import { showToast } from 'vant'
 import { signIn } from '@/api/user'
 import { useMainStore } from '@/store/index'
 import { useUserStore } from '@/store/user/index'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const userStore = useUserStore()
 const mainStore = useMainStore()
@@ -124,21 +126,21 @@ const refreshCode = () => {
 }
 const handleSubmit = () => {
   if (!loginName.value) {
-    showToast('请输入用户名')
+    showToast(t('pleaseInputUsername'))
     return
   }
   if (!loginPassword.value) {
-    showToast('请输入登录密码')
+    showToast(t('pleaseInputLoginPassword'))
     return
   }
   if (showVerifyCode.value && !code.value) {
-    showToast('请输入验证码')
+    showToast(t('pleaseInputVerificationCode'))
     return
   }
   // 用户名小写字母+数字限制6-15位
   if (!/^[a-z0-9]{6,15}$/.test(loginName.value)) {
-    showToast('请填写6-15位包含数字字母的账号')
-    // return
+    showToast(t('pleaseInputUsernameDesc'))
+    return
   }
   signIn({
     loginName: loginName.value,
@@ -148,7 +150,7 @@ const handleSubmit = () => {
   })
     .then((res) => {
       if (res.code == '200' && res.data.satoken) {
-        showToast('登录成功')
+        showToast(t('loginSuccess'))
         let token = res.data.satoken
         userStore.setIsSign(true)
         userStore.setToken(token)

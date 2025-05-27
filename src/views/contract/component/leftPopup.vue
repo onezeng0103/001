@@ -3,11 +3,11 @@
     <div style="height: 100vh; width: 300px; padding: 15px">
       <div class="search">
         <img src="../../../assets/img/search.png" alt="" />
-        <input type="text" placeholder="搜索币种" v-model.trim="searchName" />
+        <input type="text" :placeholder="t('searchCoin')" v-model.trim="searchName" />
       </div>
       <div class="tip">
-        <div>名称</div>
-        <div>最新价/涨跌幅</div>
+        <div>{{ t('name') }}</div>
+        <div>{{ t('latestPrice') }}/{{ t('priceChangePercent') }}</div>
       </div>
       <div class="list">
         <div

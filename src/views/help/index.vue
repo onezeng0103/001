@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>帮助中心</span>
+              <span>{{ t('helpCenter') }}</span>
             </span>
           </div>
           <div
@@ -112,6 +112,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { getHelpcenter } from '@/api/help/index'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const list = ref([])
 const isShow = ref(false)

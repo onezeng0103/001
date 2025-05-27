@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>跟单设置</span>
+              <span>{{ t('followSetting') }}</span>
             </span>
           </div>
           <div
@@ -89,27 +89,35 @@
           <div style="color: var(--primary-color); font-size: 14px">
             {{ tradeInfo?.followOrder || 0 }}
           </div>
-          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">带单天数</div>
+          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
+            {{ t('followDays') }}
+          </div>
         </div>
         <div class="confirm-main-info-item">
           <div style="color: var(--primary-color); font-size: 14px">
             {{ tradeInfo?.followUser || 0 }}
           </div>
-          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">跟单人数</div>
+          <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
+            {{ t('followPeople') }}
+          </div>
         </div>
         <div class="confirm-main-info-item">
           <div style="color: var(--primary-color); font-size: 14px">
             {{ tradeInfo?.rewardAmount || 0 }}
           </div>
           <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
-            收益(USDT)
+            {{ t('profit') }}
           </div>
         </div>
       </div>
       <div class="confirm-main-type">
         <div class="confirm-main-type-top">
-          <div style="color: var(--primary-color); font: 14px">跟单币种</div>
-          <div style="color: var(--primary-border); font-size: 12px" @click="handleAll">全选</div>
+          <div style="color: var(--primary-color); font: 14px">
+            {{ t('followCoin') }}
+          </div>
+          <div style="color: var(--primary-border); font-size: 12px" @click="handleAll">
+            {{ t('selectAll') }}
+          </div>
         </div>
         <div class="confirm-main-type-content">
           <div
@@ -125,7 +133,9 @@
       </div>
       <div class="confirm-main-content">
         <div class="confirm-main-content-top">
-          <div style="color: var(--primary-color); font: 14px">跟单模式</div>
+          <div style="color: var(--primary-color); font: 14px">
+            {{ t('followMode') }}
+          </div>
         </div>
         <div class="confirm-main-content-tab">
           <div
@@ -133,37 +143,41 @@
             :class="{ active: currentIndex == 0 }"
             @click="currentIndex = 0"
           >
-            固定比例
+            {{ t('fixedRatio') }}
           </div>
           <div
             class="confirm-main-content-tab-item"
             :class="{ active: currentIndex == 1 }"
             @click="currentIndex = 1"
           >
-            固定金额
+            {{ t('fixedAmount') }}
           </div>
         </div>
         <div class="confirm-main-content-input" v-show="currentIndex == 0">
           <img style="height: 36px; width: 36px" src="../../assets/img/dollar.png" alt="" />
-          <input type="number" v-model="followRate" placeholder="跟单比例1-500" />
+          <input type="number" v-model="followRate" :placeholder="t('followRate1-500')" />
           <div>%</div>
         </div>
         <div class="confirm-main-content-input" v-show="currentIndex == 1">
           <img style="height: 36px; width: 36px" src="../../assets/img/dollar.png" alt="" />
-          <input type="number" v-model="followAmount" placeholder="跟单金额" />
+          <input type="number" v-model="followAmount" :placeholder="t('followAmount')" />
           <div>USDT</div>
         </div>
         <div class="confirm-main-content-tip">
           <div style="color: var(--secondary-color); font-size: 12px">
-            可用：
+            {{ t('available') }}：
             <span style="color: var(--primary-color)">{{ amountSum }}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="confirm-btn">
-      <div class="confirm-btn-item" @click="handleFinish">结束跟单</div>
-      <div class="confirm-btn-item" @click="handleConfirm">确认</div>
+      <div class="confirm-btn-item" @click="handleFinish">
+        {{ t('endFollow') }}
+      </div>
+      <div class="confirm-btn-item" @click="handleConfirm">
+        {{ t('confirm') }}
+      </div>
     </div>
   </div>
 </template>
@@ -246,18 +260,18 @@ const handleFinish = () => {
 }
 const handleConfirm = () => {
   if (activeList.value.length === 0) {
-    showToast('请选择跟单币种')
+    showToast(t('pleaseSelectFollowCoin'))
     return
   }
   if (currentIndex.value == 0) {
     if (!followRate.value) {
-      showToast('请输入跟单比例')
+      showToast(t('pleaseInputFollowRate'))
       return
     }
   }
   if (currentIndex.value == 1) {
     if (!followAmount.value) {
-      showToast('请输入跟单金额')
+      showToast(t('pleaseInputFollowAmount'))
       return
     }
   }

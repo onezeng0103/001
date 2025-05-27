@@ -1,6 +1,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { personalIncome, getFinancial } from '@/api/financial/index'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const headerObj = ref({
   sumAmount: 0,
@@ -105,7 +107,7 @@ onMounted(() => {
                 text-overflow: ellipsis;
               "
             >
-              <span>理财</span>
+              <span>{{ t('financial') }}</span>
             </span>
           </div>
           <div
@@ -123,15 +125,15 @@ onMounted(() => {
 
     <div class="forget-top">
       <div>
-        <div>总投入价值（USDT）</div>
+        <div>{{ t('totalInvestmentValue') }}</div>
         <div style="margin-top: 2px">{{ headerObj.sumAmount }}</div>
-        <div style="margin-top: 10px">累计收益</div>
+        <div style="margin-top: 10px">{{ t('cumulativeEarnings') }}</div>
         <div style="margin-top: 2px">{{ headerObj.sumEarn }}</div>
       </div>
       <div>
-        <div>当日赚取奖励（USDT）</div>
+        <div>{{ t('dailyEarnings') }}</div>
         <div style="margin-top: 2px">{{ headerObj.commission }}</div>
-        <div style="margin-top: 10px">持仓数量（个）</div>
+        <div style="margin-top: 10px">{{ t('position') }}</div>
         <div style="margin-top: 2px">{{ headerObj.position }}</div>
       </div>
     </div>
@@ -146,11 +148,11 @@ onMounted(() => {
           />
           <div>
             <div class="title">{{ item.title }}</div>
-            <samp class="label">回报率{{ item.avgRate }}%</samp>
-            <samp class="label">锁仓天数{{ item.days }}</samp>
+            <samp class="label">{{ t('returnRate') }} {{ item.avgRate }}%</samp>
+            <samp class="label">{{ t('lockDays') }} {{ item.days }}</samp>
           </div>
         </div>
-        <div class="bt" @click="router.push(`/finance/subscribe/${item.id}`)">申请理财</div>
+        <div class="bt" @click="router.push(`/finance/subscribe/${item.id}`)">{{ t('applyForFinance') }}</div>
       </div>
     </div>
   </div>

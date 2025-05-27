@@ -9,7 +9,9 @@
           <div class="trade-top-left-info-price">
             <div class="name">{{ userInfo?.user?.loginName }}</div>
             <div class="text">
-              资金金额
+
+              {{ t('fundAmount') }}
+
               <div class="eys">
                 <svg
                   @click="isEye = !isEye"
@@ -71,21 +73,21 @@
       <div class="trade-top-right"></div>
     </div>
     <div class="trade-tab">
-      <div class="trade-tab-item" @click="router.push('/flash')">秒合约</div>
-      <div class="trade-tab-item" @click="router.push('/contract')">合约交易</div>
-      <div class="trade-tab-item" @click="router.push('/trade')">现货交易</div>
-      <div class="trade-tab-item active">期权交易</div>
-      <div class="trade-tab-item" @click="router.push('/floworder')">跟单交易</div>
+      <div class="trade-tab-item" @click="router.push('/flash')">{{ t('secondContract') }}</div>
+      <div class="trade-tab-item" @click="router.push('/contract')">{{ t('contract') }}</div>
+      <div class="trade-tab-item" @click="router.push('/trade')">{{ t('spot') }}</div>
+      <div class="trade-tab-item active">{{ t('options') }}</div>
+      <div class="trade-tab-item" @click="router.push('/floworder')">{{ t('copyTrade') }}</div>
     </div>
     <div class="trade-tip">
       <div class="trade-tip-left">
         <img src="../../assets/img/31.png" alt="" />
         <div class="text">
-          <div class="text-title">机构合作专区</div>
-          <div class="text-desc">保本付息 智能决策 多重风控</div>
+          <div class="text-title">{{ t('institutionalCooperation') }}</div>
+          <div class="text-desc">{{ t('guaranteedInterestDesc') }}</div>
         </div>
       </div>
-      <div class="trade-tip-right" @click="router.push('/proxy')">立即前往</div>
+      <div class="trade-tip-right" @click="router.push('/proxy')">{{ t('goTo') }}</div>
     </div>
     <div class="trade-main">
       <div class="trade-main-top">
@@ -124,7 +126,7 @@
           font-weight: 500;
         "
       >
-        <div>下单中</div>
+        <div>{{ t('placingOrder') }}</div>
         <div style="color: var(--primary-color)">{{ timeRangeCountdown.split('/')[0] }}</div>
       </div>
       <div
@@ -138,20 +140,20 @@
           font-weight: 500;
         "
       >
-        <div>剩余时间</div>
+        <div>{{ t('remainingTime') }}</div>
         <div style="color: var(--primary-color)">{{ timeRangeCountdown.split('/')[1] }}</div>
       </div>
       <div class="link"></div>
       <div style="display: flex; align-items: center; justify-content: space-between">
-        <div style="color: var(--primary-color); font-size: 12px">快速交易</div>
+        <div style="color: var(--primary-color); font-size: 12px">{{ t('quickTrade') }}</div>
         <div style="color: var(--secondary-color); font-size: 10px">
           可用余额 {{ availableBalance }}
           <span style="margin-left: 2px">USDT</span>
         </div>
       </div>
       <div class="input-box">
-        <input v-model="orderAmount" type="number" placeholder="请输入数量" />
-        <span style="color: var(--secondary-color); font-size: 12px">最大</span>
+        <input v-model="orderAmount" type="number" :placeholder="t('pleaseEnterQuantity')" />
+        <span style="color: var(--secondary-color); font-size: 12px">{{ t('max') }}</span>
       </div>
       <el-slider
         size="small"
@@ -168,14 +170,14 @@
           :class="currentEntruset == 0 ? 'active' : ''"
           @click="switchingEntrust(0)"
         >
-          当前订单
+          {{ t('currentOrder') }}
         </div>
         <div
           class="trade-orderBox-tab-item"
           :class="currentEntruset == 1 ? 'active' : ''"
           @click="switchingEntrust(1)"
         >
-          历史订单
+          {{ t('historyOrder') }}
         </div>
       </div>
       <div class="trade-orderBox-list">
@@ -198,7 +200,7 @@
                     color: #000;
                   "
                 >
-                  上涨
+                  {{ t('up') }}
                 </div>
                 <div
                   v-else
@@ -211,7 +213,7 @@
                     color: #000;
                   "
                 >
-                  下跌
+                  {{ t('down') }}
                 </div>
                 <div>
                   {{ item.symbol?.toUpperCase() }}
@@ -219,52 +221,52 @@
               </div>
 
               <div v-if="currentEntruset == 1">
-                <div v-if="item.openResult == 1">输</div>
-                <div v-else>赢</div>
+                <div v-if="item.openResult == 1">{{ t('lose') }}</div>
+                <div v-else>{{ t('win') }}</div>
               </div>
             </div>
             <div style="font-size: 10px; color: var(--secondary-color); margin-top: 10px">
               {{ item.createTime }}
             </div>
             <div class="trade-orderBox-list-item-coll">
-              <div>期权编号</div>
+              <div>{{ t('optionNumber') }}</div>
               <div class="trade-orderBox-list-item-coll-price">
                 {{ item.orderNo }}
               </div>
             </div>
             <div class="trade-orderBox-list-item-coll">
-              <div>预测周期</div>
+              <div>{{ t('predictionCycle') }}</div>
               <div class="trade-orderBox-list-item-coll-price">
                 {{ item.type }}sec({{ item.openTime }})
               </div>
             </div>
             <div class="trade-orderBox-list-item-coll">
-              <div>交易金额(USDT)</div>
+              <div>{{ t('transactionAmount') }}</div>
               <div class="trade-orderBox-list-item-coll-price">
                 {{ item.betAmount }}
               </div>
             </div>
             <div class="trade-orderBox-list-item-coll">
-              <div>委托价格(USDT)</div>
+              <div>{{ t('delegatePrice') }}</div>
               <div class="trade-orderBox-list-item-coll-price">
                 {{ item.openPrice }}
               </div>
             </div>
             <template v-if="currentEntruser === 1">
               <div class="trade-orderBox-list-item-coll">
-                <div>平仓价格</div>
+                <div>{{ t('closePrice') }}</div>
                 <div class="trade-orderBox-list-item-coll-price">
                   {{ item.closePrice }}
                 </div>
               </div>
               <div class="trade-orderBox-list-item-coll">
-                <div>收益(USDT)</div>
+                <div>{{ t('profit') }}</div>
                 <div class="trade-orderBox-list-item-coll-price">
                   {{ item.rewardAmount }}
                 </div>
               </div>
               <div class="trade-orderBox-list-item-coll">
-                <div>手续费(USDT)</div>
+                <div>{{ t('fee') }}</div>
                 <div class="trade-orderBox-list-item-coll-price">
                   {{ item.feeAmount }}
                 </div>
@@ -279,8 +281,8 @@
       </div>
     </div>
     <div class="btn">
-      <div class="fall" @click="showBtn(1)">看跌</div>
-      <div class="rose" @click="showBtn(0)">看涨</div>
+      <div class="fall" @click="showBtn(1)">{{ t('down') }}</div>
+      <div class="rose" @click="showBtn(0)">{{ t('up') }}</div>
     </div>
   </div>
   <LeftPopup
@@ -294,7 +296,7 @@
         v-if="!countdownCompleted"
         style="font-weight: 700; font-size: 20px; line-height: 24px; color: #000"
       >
-        下单成功
+        {{ t('orderSuccess') }}
       </div>
       <template v-else>
         <div
@@ -317,7 +319,7 @@
             background: rgb(23, 172, 0);
           "
         >
-          赢
+          {{ t('win') }}
         </div>
         <div
           v-else
@@ -339,7 +341,7 @@
             background: rgb(255, 100, 100);
           "
         >
-          输
+          {{ t('lose') }}
         </div>
       </template>
       <div style="display: flex; margin-top: 20px">
@@ -424,7 +426,7 @@
         </div>
       </div>
       <div style="font-weight: 400; font-size: 14px; line-height: 20px; margin-top: 8px">
-        剩余时间
+        {{ t('remainingTime') }}
       </div>
       <div style="margin-top: 24px">
         <div
@@ -439,7 +441,7 @@
               color: var(--secondary-color);
             "
           >
-            预测方向
+            {{ t('predictionDirection') }}
           </div>
           <div
             v-if="!orderResult.betContent"
@@ -452,7 +454,7 @@
               justify-content: center;
             "
           >
-            上涨
+            {{ t('up') }}
           </div>
           <div
             style="
@@ -465,7 +467,7 @@
             "
             v-else
           >
-            下跌
+            {{ t('down') }}
           </div>
         </div>
         <div
@@ -486,7 +488,7 @@
               color: var(--secondary-color);
             "
           >
-            交易金额(USDT)
+            {{ t('transactionAmount') }}
           </div>
           <div style="font-size: 13px; font-style: normal; font-weight: 700; line-height: 16px">
             {{ orderResult.betAmount }}
@@ -510,7 +512,7 @@
               color: var(--secondary-color);
             "
           >
-            盈利金额(USDT)
+            {{ t('profitAmount') }}
           </div>
           <div style="font-size: 13px; font-style: normal; font-weight: 700; line-height: 16px">
             {{ orderResult.rewardAmount }}
@@ -538,7 +540,7 @@
           );
         "
       >
-        关闭
+        {{ t('close') }}
       </div>
     </div>
   </van-popup>
@@ -561,7 +563,8 @@ import LeftPopup from './component/leftPopup.vue'
 import TradeOptionContract from './component/tradeOptionContract.vue'
 import dayjs from 'dayjs'
 import durationPlugin from 'dayjs/plugin/duration'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 dayjs.extend(durationPlugin)
 
 const mainStore = useMainStore()
@@ -669,10 +672,10 @@ const showBtn = (betContent) => {
   countdownCompleted.value = false
 
   if (!orderAmount.value || orderAmount.value < currentTimeSpace.value.minAmount) {
-    return showToast(`下单金额不能小于${currentTimeSpace.value.minAmount}USDT`)
+    return showToast(`${t('orderAmountNotLessThan')} ${currentTimeSpace.value.minAmount}USDT`)
   }
   if (orderAmount.value > currentTimeSpace.value.maxAmount) {
-    return showToast(`下单金额不能大于${currentTimeSpace.value.maxAmount}USDT`)
+    return showToast(`${t('orderAmountNotGreaterThan')} ${currentTimeSpace.value.maxAmount}USDT`)
   }
 
   let data = {

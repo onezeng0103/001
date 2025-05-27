@@ -13,6 +13,7 @@ import { useTradeStore } from '@/store/trade'
 import { _add, _div, _mul, priceFormat } from '@/utils/decimal'
 import { _klineTimeFormat } from '@/utils/public'
 
+
 const props = defineProps({
   /**
    * 类型

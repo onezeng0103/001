@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>忘记密码</span>
+              <span>{{ t('forgetPassword') }}</span>
             </span>
           </div>
           <div
@@ -85,17 +85,17 @@
 
     <div class="body-wrap">
       <div class="login-mode">
-        <div class="item">邮箱</div>
+        <div class="item">{{ t('email') }}</div>
       </div>
       <div class="login-label">
         <div class="form-item">
-          <div class="form-item-label">邮箱账号</div>
+          <div class="form-item-label">{{ t('emailAccount') }}</div>
 
           <div class="input-box">
             <input
               style="flex: 1"
               v-model.trim="email"
-              placeholder="请输入邮箱"
+              :placeholder="t('pleaseInputEmail')"
               autocomplete="off"
             />
             <div class="icon">
@@ -122,14 +122,14 @@
       </div>
 
       <div class="button-box">
-        <div class="btn" @click="next">下一步</div>
+        <div class="btn" @click="next">{{ t('nextStep') }}</div>
       </div>
 
       <div class="black" v-if="showBottom" @click="showBottom = !showBottom"></div>
 
       <div class="rule_box" :class="showBottom ? 'downwards' : 'upwards'">
         <div class="rule_title">
-          安全验证
+          {{t('securityVerification')}}
           <div style="position: absolute; right: 0" class="icon">
             <svg
               @click="showBottom = !showBottom"
@@ -155,27 +155,27 @@
           class="form-item-label"
           style="color: var(--primary-background); font-weight: 500; font-size: 16px"
         >
-          验证码
+          {{ t('verificationCode') }}
         </div>
         <div class="input-box" style="background: var(--placeholder-color)">
           <input
             v-model="code"
             type="number"
             maxlength="140"
-            placeholder="请输入验证码"
+            :placeholder="t('pleaseInputVerificationCode')"
             class="uni-input-input"
             autocomplete="off"
             style="color: var(--primary-background) !important"
           />
           <div class="icon">
-            <span v-if="!flag" @click="emailCode('FIND_PASSWORD', email)">重新发送</span>
+            <span v-if="!flag" @click="emailCode('FIND_PASSWORD', email)">{{ t('resend') }}</span>
             <span v-else>
               <van-count-down :time="time" format="ss" @finish="finish"></van-count-down>
             </span>
           </div>
         </div>
 
-        <div class="btn2" @click="confirm">确认</div>
+        <div class="btn2" @click="confirm">{{ t('confirm') }}</div>
       </div>
     </div>
   </div>
@@ -185,7 +185,8 @@
 import { useRouter } from 'vue-router'
 import { showToast } from 'vant'
 import { emailCode } from '@/api/user'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const email = ref('')
 const code = ref('')
@@ -198,7 +199,7 @@ const close = () => {
 
 const next = () => {
   if (!email.value) {
-    showToast('请输入邮箱')
+    showToast(t('pleaseInputEmail'))
     return
   }
   emailCode('FIND_PASSWORD', email.value).then((res) => {
@@ -219,7 +220,7 @@ const finish = () => {
 }
 const confirm = () => {
   if (!code.value) {
-    showToast('请输入验证码')
+    showToast(t('pleaseInputVerificationCode'))
     return
   }
   showBottom.value = false

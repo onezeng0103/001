@@ -121,32 +121,32 @@ const activeIndex = ref(0)
 
 const list = ref([
   {
-    name: '充值',
+    name: t('recharge'),
     type: 'recharge',
     component: recharge
   },
   {
-    name: '提现',
+    name: t('withdraw'),
     type: 'withdraw',
     component: withdraw
   },
   {
-    name: '理财',
+    name: t('finance'),
     type: 'finance',
     component: finance
   },
   // {
-  //   name: '借贷',
+  //   name: t("loan"),
   //   type: 'loan',
   //   component: loan
   // },
   {
-    name: '合约',
+    name: t('contract'),
     type: 'contract',
     component: contract
   },
   {
-    name: '现货',
+    name: t("spot"),
     type: 'trade',
     component: trade
   },
@@ -156,7 +156,7 @@ const list = ref([
   //   component: options
   // },
   {
-    name: '秒合约',
+    name: t("secondContract"),
     type: 'second',
     component: second
   }

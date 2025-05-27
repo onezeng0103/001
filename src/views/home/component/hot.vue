@@ -1,8 +1,8 @@
 <template>
   <div class="title">
-    <div class="title-item">名称</div>
-    <div class="title-item">最新价</div>
-    <div class="title-item">24小时跌涨</div>
+    <div class="title-item">{{ t('name') }}</div>
+    <div class="title-item">{{ t('latestPrice') }}</div>
+    <div class="title-item">{{ t('priceChangePercent24') }}</div>
   </div>
   <div class="list">
     <template v-if="listResult?.length > 0">
@@ -49,6 +49,8 @@ import { useTradeStore } from '@/store/trade/index'
 import { priceFormat } from '@/utils/decimal.js'
 import { _isRFD } from '@/utils/public'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const tradeStore = useTradeStore()
 const listResult = ref()
 const router = useRouter()

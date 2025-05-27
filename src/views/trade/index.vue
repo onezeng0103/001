@@ -9,7 +9,7 @@
           <div class="trade-top-left-info-price">
             <div class="name">{{ userInfo?.user?.loginName }}</div>
             <div class="text">
-              资金金额
+              {{t('fundAmount')}}
               <div class="eys">
                 <svg
                   @click="isEye = !isEye"
@@ -76,21 +76,21 @@
       <div class="trade-top-right"></div>
     </div>
     <div class="trade-tab">
-      <div class="trade-tab-item" @click="router.push('/flash')">秒合约</div>
-      <div class="trade-tab-item" @click="router.push('/contract')">合约交易</div>
-      <div class="trade-tab-item active">现货交易</div>
-      <!-- <div class="trade-tab-item" @click="router.push('/flashOption')">期权交易</div>
-      <div class="trade-tab-item" @click="router.push('/floworder')">跟单交易</div> -->
+      <div class="trade-tab-item" @click="router.push('/flash')">{{t('flashContract')}}</div>
+      <div class="trade-tab-item" @click="router.push('/contract')">{{t('contractTrade')}}</div>
+      <div class="trade-tab-item active">{{t('spotTrade')}}</div>
+      <!-- <div class="trade-tab-item" @click="router.push('/flashOption')">{{t('optionTrade')}}</div>
+      <div class="trade-tab-item" @click="router.push('/floworder')">{{t('followTrade')}}</div> -->
     </div>
     <div class="trade-tip">
       <div class="trade-tip-left">
         <img src="../../assets/img/31.png" alt="" />
         <div class="text">
-          <div class="text-title">机构合作专区</div>
-          <div class="text-desc">保本付息 智能决策 多重风控</div>
+          <div class="text-title">{{t('institutionalCooperation')}}</div>
+          <div class="text-desc">{{t('institutionalCooperationDesc')}}</div>
         </div>
       </div>
-      <div class="trade-tip-right" @click="router.push('/proxy')">立即前往</div>
+      <div class="trade-tip-right" @click="router.push('/proxy')">{{t('goTo')}}</div>
     </div>
     <div class="trade-main">
       <div class="trade-main-top">
@@ -119,24 +119,24 @@
             :class="{ active: form.type === '0' }"
             @click="form.type = '0'"
           >
-            买入
+            {{t('buy1')}}
           </div>
           <div
             class="trade-main-top-right-item"
             :class="{ active: form.type === '1' }"
             @click="form.type = '1'"
           >
-            卖出
+            {{t('sell1')}}
           </div>
         </div>
       </div>
       <div class="trade-main-tip">
         <div class="trade-main-tip-item">
-          <div class="trade-main-tip-item-name">价格</div>
+          <div class="trade-main-tip-item-name">{{t('price')}}</div>
           <div class="trade-main-tip-item-symbol">{{ coinInfo.baseCoinUpperCase }}</div>
         </div>
         <div class="trade-main-tip-item">
-          <div class="trade-main-tip-item-name">成交量</div>
+          <div class="trade-main-tip-item-name">{{t('volume')}}</div>
           <div class="trade-main-tip-item-symbol">
             {{
               coinInfo.customizeFlag === 2
@@ -172,7 +172,7 @@
           <input
             type="text"
             v-model="form.price"
-            :placeholder="`成交金额(${coinInfo.baseCoinUpperCase})`"
+            :placeholder="`${t('turnover')}(${coinInfo.baseCoinUpperCase})`"
             maxlength="140"
           />
           <span>USDT</span>
@@ -181,7 +181,7 @@
           <input
             type="text"
             v-model="form.count"
-            :placeholder="`数量(${
+            :placeholder="`${t('quantity')}(${
               coinInfo.customizeFlag === 2
                 ? matchText(coinInfo.showSymbol, '/USDT')
                 : coinInfo.coin.toUpperCase()
@@ -202,14 +202,14 @@
           type="number"
           v-model="form.turnover"
           @input="turnoverChange"
-          :placeholder="`成交金额(${coinInfo.baseCoinUpperCase})`"
+          :placeholder="`${t('turnover')}(${coinInfo.baseCoinUpperCase})`"
           maxlength="140"
         />
       </div>
       <div class="trade-main-btn">
         <div class="btn" @click="submit">
-          <span v-if="form.type == 0">买入</span>
-          <span v-else>卖出</span>
+          <span v-if="form.type == 0">{{t('buy1')}}</span>
+          <span v-else>{{t('sell1')}}</span>
           <span v-if="coinInfo.customizeFlag == 2">
             {{ coinInfo.showSymbol.replace('/USDT', '') }}
           </span>
@@ -232,12 +232,14 @@ import { _div, _mul, _toFixed, priceFormat } from '@/utils/decimal'
 import Handicap from './component/handicap.vue'
 import LeftPopup from './component/leftPopup.vue'
 import OrderBox from './component/orderBox.vue'
+import { useI18n } from 'vue-i18n'
 const mainStore = useMainStore()
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 const tradeStore = useTradeStore()
 const router = useRouter()
 const route = useRoute()
+const { t } = useI18n()
 const form = reactive({
   type: '0',
   delegateType: 1
@@ -367,8 +369,8 @@ const restForm = () => {
   Object.assign(form, tempForm) //复制tempForm到form
 }
 const delegateTypeList = [
-  { label: '市价委托', value: '1' },
-  { label: '限价委托', value: '0' }
+  { label: t('marketOrder'), value: '1' },
+  { label: t('limitOrder'), value: '0' }
 ]
 // 当前选中交易价格类型：限价/市价
 const currentDelegateType = ref({})
@@ -391,27 +393,27 @@ const submit = async () => {
   if (form.delegateType == 1 && form.type == 1) {
     // 市价&&卖出
     if (!form.count) {
-      msg = '请输入数量'
+      msg = t('pleaseInputQuantity')
     } else if (form.count > availableBalance.value) {
-      msg = '可用余额不足'
+      msg = t('insufficientBalance')
     }
   } else if (form.delegateType == 0 && form.type == 1) {
     // 限价&&卖出
     if (!form.price) {
-      msg = '请输入价格'
+      msg = t('pleaseInputPrice')
     } else if (!form.count) {
-      msg = '请输入数量'
+      msg = t('pleaseInputQuantity')
     } else if (form.count > availableBalance.value) {
-      msg = '可用余额不足'
+      msg = t('insufficientBalance')
     }
   } else {
     // (市价&&买入)||(限价&&买入)
     if (!form.turnover) {
-      msg = '请输入成交金额'
+      msg = t('pleaseInputTurnover')
     } else if (form.turnover <= 0) {
-      msg = '成交金额不正确'
+      msg = t('turnoverIsNotCorrect')
     } else if (form.turnover > availableBalance.value) {
-      msg = '可用余额不足'
+      msg = t('insufficientBalance')
     }
   }
   if (msg) {

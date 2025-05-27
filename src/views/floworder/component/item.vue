@@ -9,34 +9,34 @@
       </div>
       <div class="list-item-top-right">
         <div class="price">{{ item.followUser || 0 }}/{{ TRADER_SETTING.maxUserCount || 0 }}</div>
-        <div class="text">当前跟随</div>
+        <div class="text">{{ t('currentFollow') }}</div>
       </div>
     </div>
     <div class="list-item-main">
       <div>
-        30天收益率
+        {{ t('30DaysProfitRate') }}
         <span>{{ item.profitRate30 }}%</span>
       </div>
       <div>
-        30天收益
+        {{ t('30DaysProfit') }}
         <span>{{ item.profitAmount30 }}</span>
       </div>
       <div>
-        14日胜率
+        {{ t('14DaysWinRate') }}
         <span>{{ item.profitRate14 }}%</span>
       </div>
       <div>
-        当前资金管理规模
+        {{ t('currentFundManagementScale') }}
         <span>{{ item.followAmount }}</span>
       </div>
       <div>
-        最低跟随金额
+        {{ t('minimumFollowAmount') }}
         <span>{{ item.minFollowAmount }}</span>
       </div>
     </div>
     <div class="list-item-chart" ref="containerRef"></div>
     <div class="list-item-btn">
-      <div class="btn" @click.stop="router.push(`/floworder/confirm/${item.id}`)">跟随</div>
+      <div class="btn" @click.stop="router.push(`/floworder/confirm/${item.id}`)">{{ t('follow') }}</div>
     </div>
     <div class="list-item-link"></div>
   </div>

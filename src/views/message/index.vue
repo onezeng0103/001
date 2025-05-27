@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>站内信</span>
+              <span>{{ t('message') }}</span>
             </span>
           </div>
           <div
@@ -94,7 +94,7 @@
           v-if="item.status == 0 && item.type == 1"
           style="position: absolute; top: 10px; right: 20px; color: #ea4337; font-size: 12px"
         >
-          未读
+          {{ t('unread') }}
         </div>
         <div class="message-content-item-title">
           <span>{{ item.title }}</span>
@@ -110,6 +110,8 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { getInfo } from '@/api/info'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const list = ref([])
 onMounted(() => {

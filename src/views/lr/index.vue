@@ -1,7 +1,7 @@
 <template>
   <div class="lr">
     <div class="title">{{ VITE_APP_TITLE }}</div>
-    <div class="text">专注于每一次交易的价值</div>
+    <div class="text">{{ t('focusOnEveryTransaction') }}</div>
     <div class="img-box">
       <img src="../../assets/img/Frame 9304.png" alt="" />
       <div class="dizzy01">
@@ -13,8 +13,8 @@
     </div>
 
     <div class="btn">
-      <div class="register" @click="register">注册</div>
-      <div class="login" @click="login">登录</div>
+      <div class="register" @click="register">{{ t('register') }}</div>
+      <div class="login" @click="login">{{ t('login') }}</div>
     </div>
   </div>
 </template>
@@ -22,6 +22,8 @@
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const VITE_APP_TITLE = import.meta.env.VITE_APP_TITLE
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const register = () => {
   router.push('/register')
 }

@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>选择币种</span>
+              <span>{{ t('selectCoin') }}</span>
             </span>
           </div>
           <div
@@ -83,7 +83,7 @@
       </div>
     </div>
 
-    <div style="margin: 10px 20px">币种名称</div>
+    <div style="margin: 10px 20px">{{ t('coinName') }}</div>
     <div class="list">
       <div class="list-item" v-for="item in list" :key="item.coin" @click="handleClose(item)">
         <div style="display: flex; align-items: center">
@@ -100,6 +100,8 @@
 </template>
 
 <script setup>
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const props = defineProps({
   showBottom: {
     type: Boolean,

@@ -4,11 +4,11 @@
       <div class="recharge-cell" v-for="(item, index) in rowList" :key="index">
         <div class="row" style="color: var(--primary-border)">
           <span>
-            <template v-if="item.type == '61'">跟投投资</template>
-            <template v-if="item.type == '62'">跟投投资取消</template>
-            <template v-if="item.type == '63'">跟投投资结算</template>
-            <template v-if="item.type == '64'">跟投投资返还</template>
-            <template v-if="item.type == '65'">跟投亏损弥补</template>
+            <template v-if="item.type == '61'">{{t("followInvestment")}}</template>
+            <template v-if="item.type == '62'">{{t("followInvestmentCancel")}}</template>
+            <template v-if="item.type == '63'">{{t("followInvestmentSettlement")}}</template>
+            <template v-if="item.type == '64'">{{t("followInvestmentReturn")}}</template>
+            <template v-if="item.type == '65'">{{t("followInvestmentLoss")}}</template>
           </span>
           <span>
             {{ priceFormat(item.amount) }}
@@ -16,7 +16,7 @@
         </div>
         <div class="row" style="color: var(--secondary-color)">
           <span>{{ _timeFormat(item?.createTime) }}</span>
-          <span>账后余额{{ priceFormat(item?.afterAmount) }}</span>
+          <span>{{ t("accountBalance") }}{{ priceFormat(item?.afterAmount) }}</span>
         </div>
       </div>
     </template>
