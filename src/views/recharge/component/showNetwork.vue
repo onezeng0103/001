@@ -1,8 +1,15 @@
 <template>
   <van-popup v-model:show="props.isNetwork" round position="bottom">
-    <div style="display: flex; align-items: center; justify-content: space-between">
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--primary-background);
+      "
+    >
       <div></div>
-      <div style="font-size: 14px; color: var(--primary-background)">选择充值网络</div>
+      <div style="font-size: 14px">选择充值网络</div>
       <div>
         <svg
           @click="handleClose(undefined, currentIndex)"
@@ -23,7 +30,7 @@
         </svg>
       </div>
     </div>
-    <div style="font-size: 12px; color: var(--secondary-color); margin-top: 10px">
+    <div style="font-size: 12px; color: var(--primary-background); margin-top: 10px">
       请确认您选择的储值网络与您所在的提现平台所使用网络一致，否则资产可能会遗失。
     </div>
     <div
@@ -45,7 +52,7 @@
           height: 30px;
           line-height: 30px;
           text-align: center;
-          background: var(--primary-color);
+          background: var(--primary-background);
           border-radius: 6px;
           margin-bottom: 15px;
         "
@@ -89,7 +96,7 @@ const handleClose = (value, index) => {
 </script>
 <style lang="scss" scoped>
 .van-popup {
-  background-color: var(--primary-background) !important;
+  background-color: var(--primary-color) !important;
   padding: 15px;
   color: var(--primary-color);
   .popup-item {
@@ -97,7 +104,6 @@ const handleClose = (value, index) => {
     height: 30px;
     line-height: 30px;
     text-align: center;
-    background: var(--primary-color);
     border-radius: 6px;
   }
 }

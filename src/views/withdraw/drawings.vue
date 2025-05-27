@@ -139,7 +139,7 @@ const submit = () => {
   withdrawSubmit(str).then((res) => {
     if (res.code == '200') {
       showToast('提现成功')
-      router.push('/withdraw/record')
+      router.push('/')
     } else {
       showToast(res.msg)
     }
@@ -149,6 +149,10 @@ const addressList = ref([])
 const showAddressBottom = ref(false)
 const saveCacheAddressFn = () => {
   getWithdrawAddressList().then((res) => {
+    if (res.data.length > 0) {
+    } else {
+      router.push('/withdrawDeposit')
+    }
     addressList.value = res.data.map((item) => ({
       ...item,
       title: item.symbol.toUpperCase()
@@ -161,16 +165,15 @@ const close = (item) => {
   showAddressBottom.value = false
 }
 onMounted(() => {
-  saveCacheAddressFn()
-  console.log('coinList.value===>', coinList.value)
   list.value = coinList.value
   if (userInfo.value.detail?.userTardPwd == null) {
     showToast('请设置资金密码')
     setTimeout(() => {
       router.push('/fund-password')
     }, 800)
-    // return
+    return
   }
+  saveCacheAddressFn()
 })
 
 //
@@ -328,7 +331,7 @@ const coinList = computed(() => {
         <div style="font-size: 12px">提现密码</div>
         <div>
           实际到账
-          {{ ((allAmount || 0 * (info?.ratio || 0)) / 100).toFixed(2) }}
+          {{ Number((allAmount / info?.ratio || 0).toFixed(2)) }}
           USDT
         </div>
       </div>

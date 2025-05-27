@@ -3,8 +3,9 @@ import { useRouter } from 'vue-router'
 import { showToast } from 'vant'
 import { useMainStore } from '@/store/index'
 import { TronWeb } from 'tronweb'
-import { updateUserWithdrawAddress } from '@/api/account'
+import { updateUserWithdrawAddress, getWithdrawAddressList } from '@/api/account'
 import { filterCoin2 } from '@/utils/public.js'
+import { dispatchCustomEvent } from '@/utils'
 
 const router = useRouter()
 const mainStore = useMainStore()
@@ -13,6 +14,22 @@ const formData = ref({
   address: '',
   title: ''
 })
+const type = ref(0)
+const addressList = ref([])
+const getAddressList = () => {
+  getWithdrawAddressList().then((res) => {
+    addressList.value = res.data
+    if (res.data.length > 0) {
+      type.value = 1
+    } else {
+      type.value = 0
+    }
+    console.log(type.value)
+  })
+}
+const handleKeFu = () => {
+  dispatchCustomEvent('event_serviceChange')
+}
 const coinList = computed(() => {
   let list = []
   mainStore.getWithdrawList.forEach((item, index) => {
@@ -36,7 +53,6 @@ const coinList = computed(() => {
       list.push(obj)
     }
   })
-  console.log(list, '123')
   return list
 })
 const showBottom = ref(false)
@@ -47,13 +63,16 @@ const close = (value) => {
   showBottom.value = false
 }
 const submit = () => {
-  console.log(TronWeb)
-  if (!TronWeb.isAddress(formData.value.address.trim())) {
+  if (!formData.value.type) {
+    showToast('请选择币种')
+    return
+  }
+  if (!TronWeb.isAddress(formData.value.address)) {
     showToast('请输入有效的地址')
     return
   }
   updateUserWithdrawAddress({
-    address: formData.value.address.trim(),
+    address: formData.value.address,
     type: formData.value.type
   }).then((res) => {
     if (res.code == '200') {
@@ -64,6 +83,9 @@ const submit = () => {
     }
   })
 }
+onMounted(() => {
+  getAddressList()
+})
 </script>
 
 <template>
@@ -152,48 +174,66 @@ const submit = () => {
     </div>
 
     <div style="padding: 15px 10px">
-      <div style="font-size: 14px">币种类型</div>
-      <div class="optionNationality" @click="showBottom = true">
-        <span class="optionNationality-text">
-          {{ formData.title }}
-        </span>
-        <div>
-          <svg
-            t="1747924804750"
-            class="icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="9044"
-            width="12"
-            height="12"
-          >
-            <path
-              d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
-              fill="var(--primary-border)"
-              p-id="9045"
-            ></path>
-          </svg>
+      <template v-if="type == 0">
+        <div style="font-size: 14px">币种类型</div>
+        <div class="optionNationality" @click="showBottom = true">
+          <span class="optionNationality-text">
+            {{ formData.title }}
+          </span>
+          <div>
+            <svg
+              t="1747924804750"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="9044"
+              width="12"
+              height="12"
+            >
+              <path
+                d="M966.4 323.2c-9.6-9.6-25.6-9.6-35.2 0l-416 416-425.6-416c-9.6-9.6-25.6-9.6-35.2 0-9.6 9.6-9.6 25.6 0 35.2l441.6 432c9.6 9.6 25.6 9.6 35.2 0l435.2-432c9.6-12.8 9.6-25.6 0-35.2z"
+                fill="var(--primary-border)"
+                p-id="9045"
+              ></path>
+            </svg>
+          </div>
         </div>
-      </div>
 
-      <div style="font-size: 14px; margin-top: 20px">币种类型</div>
-      <div class="optionNationality">
-        <div class="optionNationality-text" style="flex: 1">
-          <input
-            v-model.trim="formData.address"
-            type="text"
-            maxlength="140"
-            enterkeyhint="done"
-            placeholder="请填写提现地址"
-            class="uni-input-input"
-            autocomplete="off"
-            style="width: 100%"
-          />
+        <div style="font-size: 14px; margin-top: 20px">币种类型</div>
+        <div class="optionNationality">
+          <div class="optionNationality-text" style="flex: 1">
+            <input
+              v-model.trim="formData.address"
+              type="text"
+              maxlength="140"
+              enterkeyhint="done"
+              placeholder="请填写提现地址"
+              class="uni-input-input"
+              autocomplete="off"
+              style="width: 100%"
+            />
+          </div>
         </div>
-      </div>
-
-      <div class="btn" @click="submit">确定</div>
+        <div class="btn">
+          <div class="btn1" @click="submit">确定</div>
+        </div>
+      </template>
+      <template v-else>
+        <div
+          style="
+            background-color: var(--regular-background);
+            padding: 30px 10px;
+            border-radius: 8px;
+          "
+        >
+          <div>币种：{{ addressList[0].symbol?.toUpperCase() }}</div>
+          <div style="margin-top: 10px">地址：{{ addressList[0].address }}</div>
+        </div>
+        <div class="btn">
+          <div class="btn1" @click="handleKeFu">如需修改，请联系在线客服</div>
+        </div>
+      </template>
     </div>
 
     <van-popup v-model:show="showBottom" position="bottom">
@@ -210,19 +250,26 @@ const submit = () => {
 
 <style scoped lang="scss">
 .btn {
-  margin: 40px 0;
-  padding: 11px 123px;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 400;
-  font-size: 14px;
-  color: var(--primary-background);
-  text-align: left;
-  font-style: normal;
-  text-transform: none;
-  background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
-  border-radius: 20px 20px 20px 20px;
+  .btn1 {
+    width: 80%;
+    margin: 40px 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 14px;
+    color: var(--primary-background);
+    text-align: left;
+    font-style: normal;
+    text-transform: none;
+    background: linear-gradient(306deg, var(--primary-border) 0%, var(--secondary-background) 100%);
+    border-radius: 20px 20px 20px 20px;
+  }
 }
 .item {
   width: 100%;
