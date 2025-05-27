@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>帮助中心</span>
+              <span>{{ t('helpCenter') }}</span>
             </span>
           </div>
           <div

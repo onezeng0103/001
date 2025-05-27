@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="title">欢迎登录</div>
+    <div class="title">{{ t('welcomeLogin') }}</div>
     <div class="tab">
       <div
         class="tab-item"
@@ -21,6 +21,8 @@ import { useMainStore } from '@/store/index.js'
 import AccountLogin from './component/AccountLogin.vue'
 import EmailLogin from './component/EmailLogin.vue'
 import MobileLogin from './component/MobileLogin.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const mainStore = useMainStore()
 const currentIndex = ref(0)
@@ -30,7 +32,7 @@ const tabList = computed(() => {
   if (mainStore.getLoginMethodList.ordinaryIsOpen) {
     let obj = {}
     obj['id'] = 1
-    obj['title'] = '账号'
+    obj['title'] = t('account')
     obj['type'] = '1'
     obj['componentName'] = AccountLogin
     list.push(obj)
@@ -38,7 +40,7 @@ const tabList = computed(() => {
   if (mainStore.getLoginMethodList.emailIsOpen) {
     let obj = {}
     obj['id'] = 2
-    obj['title'] = '邮箱'
+    obj['title'] = t('email')
     obj['type'] = '2'
     obj['componentName'] = EmailLogin
     list.push(obj)
@@ -46,7 +48,7 @@ const tabList = computed(() => {
   if (mainStore.getLoginMethodList.phoneIsOpen) {
     let obj = {}
     obj['id'] = 3
-    obj['title'] = '手机号'
+    obj['title'] = t('phone')
     obj['type'] = '3'
     obj['componentName'] = MobileLogin
     list.push(obj)

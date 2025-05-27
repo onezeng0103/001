@@ -60,7 +60,7 @@
     <div></div>
     <div class="price">
       <span>{{ priceFormat(tradeStore.allCoinPriceInfo[item.coin]?.close) }}</span>
-      <div class="btn">交易</div>
+      <div class="btn">{{t('trade')}}</div>
     </div>
   </div>
 </template>
@@ -68,6 +68,8 @@
 import { useTradeStore } from '@/store/trade'
 import { priceFormat } from '@/utils/decimal.js'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const $router = useRouter()
 const tradeStore = useTradeStore()
 /**

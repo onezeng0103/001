@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>选择提币方式</span>
+              <span>{{t('selectWithdrawCoin')}}</span>
             </span>
           </div>
           <div
@@ -95,9 +95,9 @@
             />
           </div>
           <div style="margin-left: 10px">
-            <div style="color: var(--primary-color); font-size: 14px">提币</div>
+            <div style="color: var(--primary-color); font-size: 14px">{{t('withdraw1')}}</div>
             <div style="color: var(--secondary-color); font-size: 12px">
-              从链上提币到其他交易所或链上钱包
+              {{t('withdrawFromChain')}}
             </div>
           </div>
         </div>
@@ -160,7 +160,9 @@
 </template>
 <script setup>
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 const router = useRouter()
+const { t } = useI18n()
 </script>
 <style lang="scss" scoped>
 .recharge {

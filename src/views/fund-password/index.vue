@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>绑定提现密码</span>
+              <span>{{t(bindWithdrawPassword)}}</span>
             </span>
           </div>
           <div
@@ -131,15 +131,15 @@
             </svg>
           </div>
         </div>
-        <div class="btnBox" @click="submit">确定</div>
+        <div class="btnBox" @click="submit">{{t('confirm')}}</div>
       </div>
     </template>
 
     <template v-if="notPwd && !success">
       <div class="content2">
-        <div class="tip">旧密码</div>
+        <div class="tip">{{t('oldPassword1')}}</div>
         <div class="input">
-          <input v-model="form1.oldPwd" :type="oldPwd ? 'text' : 'password'" placeholder="请输入" />
+          <input v-model="form1.oldPwd" :type="oldPwd ? 'text' : 'password'" :placeholder="t('pleaseInput')" />
           <div class="icon">
             <svg
               @click="oldPwd = !oldPwd"
@@ -184,9 +184,9 @@
             </svg>
           </div>
         </div>
-        <div class="tip">新密码</div>
+        <div class="tip">{{t('newPassword1')}}</div>
         <div class="input">
-          <input v-model="form1.newPwd" :type="newPwd ? 'text' : 'password'" placeholder="请输入" />
+          <input v-model="form1.newPwd" :type="newPwd ? 'text' : 'password'" :placeholder="t('pleaseInput')" />
           <div class="icon">
             <svg
               @click="newPwd = !newPwd"
@@ -231,12 +231,12 @@
             </svg>
           </div>
         </div>
-        <div class="tip">确认密码</div>
+        <div class="tip">{{t('confirmPassword')}}</div>
         <div class="input">
           <input
             v-model="form1.NPwd"
             :type="NPwd ? 'text' : 'password'"
-            placeholder="请输入"
+            :placeholder="t('pleaseInput')"
             @input="pwdDiff"
           />
           <div class="icon">
@@ -283,16 +283,16 @@
             </svg>
           </div>
         </div>
-        <div class="btnBox" @click="changePwd1">确定</div>
+        <div class="btnBox" @click="changePwd1">{{t('confirm')}}</div>
       </div>
     </template>
 
     <template v-if="notPwd && success">
       <div class="content1">
         <img src="../..//assets/img/cg.png" class="imgLoad" />
-        <div class="text">已设置资金密码</div>
-        <div class="btnBox" @click="changePwd" style="width: 345px">修改安全密码</div>
-        <div class="forgot" @click="toCustorm">忘记安全密码？</div>
+        <div class="text">{{t('fundPasswordSet')}}</div>
+        <div class="btnBox" @click="changePwd" style="width: 345px">{{t('modifySecurityPassword')}}</div>
+        <div class="forgot" @click="toCustorm">{{t('forgotSecurityPassword')}}</div>
       </div>
     </template>
   </div>
@@ -307,6 +307,8 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/user/index'
 
 import { updateFundPwd } from '@/api/user'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const newPwd = ref(false)
 const oldPwd = ref(false)
@@ -323,20 +325,20 @@ const pwdDiff = () => {
 }
 const changePwd1 = () => {
   if (form1.value.oldPwd == '') {
-    showToast('请输入旧密码')
+    showToast(t('oldPassword'))
     return
   }
   if (form1.value.newPwd == '') {
-    showToast('请输入新密码')
+    showToast(t('newPassword'))
     return
   }
   if (form1.value.newPwd !== form1.value.NPwd) {
-    showToast('两次密码不一致')
+    showToast(t('passwordNotMatch'))
     return
   }
   updateFundPwd(form1.value.oldPwd, form1.value.newPwd, 1).then((res) => {
     if (res.code == '200') {
-      showToast('资金密码修改成功')
+      showToast(t('fundPasswordModifySuccess'))
       success1.value = true
       notPwd.value = true
       userStore.getUserInfo()
@@ -358,7 +360,7 @@ const changePwd = () => {
   userStore.getUserInfo()
 }
 const toCustorm = () => {
-  showToast('请联系客服')
+  showToast(t('contactCustomerService'))
 }
 
 const router = useRouter()
@@ -378,13 +380,13 @@ const formData = ref({
 
 const submit = () => {
   if (formData.value.password == '') {
-    showToast('请输入资金密码')
+    showToast(t('pleaseInputFundPassword'))
     return
   }
 
   setFundPwd(formData.value.password).then((res) => {
     if (res.code == '200') {
-      showToast('设置成功')
+      showToast(t('setSuccess'))
       success.value = true
       notPwd.value = true
       userStore.getUserInfo()

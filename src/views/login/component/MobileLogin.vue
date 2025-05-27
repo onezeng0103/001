@@ -27,7 +27,7 @@
           type="number"
           v-model.trim="number"
           pattern="[0-9]*"
-          placeholder="请输入手机号"
+          :placeholder="t('pleaseInputPhone')"
           autocomplete="off"
         />
         <div class="icon">
@@ -52,11 +52,11 @@
       </div>
     </div>
     <div class="form-item" v-if="!showVerifyCode">
-      <div class="form-item-label">登录密码</div>
+      <div class="form-item-label">{{t('loginPassword')}}</div>
       <div class="input-box">
         <input
           :type="isPwd ? 'password' : 'text'"
-          placeholder="请输入密码"
+          :placeholder="t('pleaseInputPassword')"
           v-model.trim="password"
           class="uni-input-input"
           autocomplete="off"
@@ -107,28 +107,28 @@
       </div>
     </div>
     <div class="form-item" v-else>
-      <div class="form-item-label">验证码</div>
+      <div class="form-item-label">{{t('verificationCode')}}</div>
       <div class="input-box">
         <input
           :type="isPwd ? 'password' : 'text'"
-          placeholder="请输入验证码"
+          :placeholder="t('pleaseInputVerificationCode')"
           v-model.trim="password"
           class="uni-input-input"
           autocomplete="off"
         />
         <div class="icon">
-          <span v-if="!flag" @click="getCode">发送</span>
+          <span v-if="!flag" @click="getCode">{{t('send')}}</span>
           <span v-else>
             <van-count-down :time="time" format="ss" @finish="finish"></van-count-down>
           </span>
         </div>
       </div>
     </div>
-    <div class="tip" @click="forget">忘记密码？</div>
-    <div class="btn" @click="handleSubmit">登录</div>
+    <div class="tip" @click="forget">{{t('forgetPassword')}}?</div>
+    <div class="btn" @click="handleSubmit">{{t('login')}}</div>
     <div class="text">
-      还没有账号？
-      <span @click="register">立即注册</span>
+      {{t('noAccount')}}?
+      <span @click="register">{{t('registerNow')}}</span>
     </div>
   </div>
   <PhonePopup :showBottom="showBottom" @close="handleClose" />
@@ -141,6 +141,8 @@ import { signIn, mobileCode } from '@/api/user'
 import { useMainStore } from '@/store/index'
 import { useUserStore } from '@/store/user/index'
 import PhonePopup from '@/components/phonePopup/index.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const userStore = useUserStore()
 const mainStore = useMainStore()
@@ -156,7 +158,7 @@ const close = () => {
 }
 const getCode = debounce(() => {
   if (!number.value) {
-    showToast('请输入手机号')
+    showToast(t('pleaseInputPhone'))
     return
   }
   loading.value = true
@@ -180,18 +182,18 @@ const finish = () => {
 }
 const handleSubmit = () => {
   if (!number.value) {
-    showToast('请输入手机号')
+    showToast(t('pleaseInputPhone'))
     return
   }
 
   if (mainStore?.getLoginMethodList?.phoneCode) {
     if (!code.value) {
-      showToast('请输入验证码')
+      showToast(t('pleaseInputVerificationCode'))
       return
     }
   } else {
     if (!password.value) {
-      showToast('请输入登录密码')
+      showToast(t('pleaseInputLoginPassword'))
       return
     }
   }
@@ -204,7 +206,7 @@ const handleSubmit = () => {
   signIn(from)
     .then((res) => {
       if (res.code == '200' && res.data.satoken) {
-        showToast('登录成功')
+        showToast(t('loginSuccess'))
         let token = res.data.satoken
         userStore.setIsSign(true)
         userStore.setToken(token)

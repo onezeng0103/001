@@ -9,7 +9,7 @@
       "
     >
       <div></div>
-      <div style="font-size: 14px">选择充值网络</div>
+      <div style="font-size: 14px">{{ t('selectRechargeNetwork') }}</div>
       <div>
         <svg
           @click="handleClose(undefined, currentIndex)"
@@ -31,7 +31,7 @@
       </div>
     </div>
     <div style="font-size: 12px; color: var(--primary-background); margin-top: 10px">
-      请确认您选择的储值网络与您所在的提现平台所使用网络一致，否则资产可能会遗失。
+      {{ t('pleaseConfirmThatTheSelectedRechargeNetworkIsTheSameAsTheWithdrawalPlatformYouAreUsing') }}
     </div>
     <div
       style="
@@ -64,6 +64,8 @@
   </van-popup>
 </template>
 <script setup>
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const props = defineProps({
   isNetwork: {
     type: Boolean,

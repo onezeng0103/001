@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>闪兑</span>
+              <span>{{ t('flashExchange') }}</span>
             </span>
           </div>
           <div
@@ -84,13 +84,13 @@
     </div>
 
     <div style="margin: 15px 10px; font-size: 14px; color: var(--primary-color)">
-      实时最优价兑换，支持跨链资产
+      {{ t('realTimeOptimalPriceExchange') }}
     </div>
 
     <div class="item">
       <div class="item-top">
-        <div>消耗</div>
-        <div>余额：{{ availableAmount }}</div>
+        <div>{{ t('consume') }}</div>
+        <div>{{ t('balance') }}:{{ availableAmount }}</div>
       </div>
       <div class="item-unb">
         <div style="display: flex; align-items: center" @click="showAction('from')">
@@ -125,7 +125,7 @@
             type="number"
             maxlength="140"
             style="text-align: right"
-            placeholder="转出数量"
+            :placeholder="t('transferAmount')"
           />
         </div>
       </div>
@@ -157,8 +157,8 @@
 
     <div class="item">
       <div class="item-top">
-        <div>获得</div>
-        <div>余额：{{ availableAmount2 }}</div>
+        <div>{{ t('get') }}</div>
+        <div>{{ t('balance') }}:{{ availableAmount2 }}</div>
       </div>
       <div class="item-unb">
         <div style="display: flex; align-items: center" @click="showAction('to')">
@@ -189,17 +189,19 @@
 
     <div class="item" style="margin-top: 10px">
       <div class="item-top">
-        <div>手续费 0.05%</div>
+        <div>{{ t('fee') }} 0.05%</div>
         <div style="color: var(--primary-color)">
-          交换价格： 1 {{ list1Current?.coin?.toUpperCase() }} = {{ curRate }}
+          {{ t('exchangePrice') }} 1 {{ list1Current?.coin?.toUpperCase() }} = {{ curRate }}
           {{ list2Current?.coin?.toUpperCase() }}
         </div>
       </div>
     </div>
 
-    <div class="btn" @click="submit">开始兑换</div>
+    <div class="btn" @click="submit">{{ t('startExchange') }}</div>
 
-    <div style="margin: 0 0 15px 10px; font-size: 14px; color: var(--primary-color)">兑换记录</div>
+    <div style="margin: 0 0 15px 10px; font-size: 14px; color: var(--primary-color)">
+      {{ t('exchangeRecord') }}
+    </div>
 
     <div class="list">
       <template v-for="item in texChangeList" :key="item">
@@ -261,6 +263,8 @@ import { useUserStore } from '@/store/user/index'
 import { priceFormat } from '@/utils/decimal.js'
 import CurrencyList from './currencyList.vue'
 import { _numberWithCommas } from '@/utils/public'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const router = useRouter()
 const accountStore = useAccountStore()
@@ -489,12 +493,12 @@ const handleClose = (value) => {
 const submitForm = debounce(() => {
   if (fromNum.value <= 0) {
     // 兑换金额不能小于0
-    showToast('兑换金额不能小于0')
+    showToast(t('exchangeAmountCannotBeLessThan0'))
     return
   }
   // 兑换金额不能超过可用金
   if (fromNum.value > availableAmount.value) {
-    showToast('兑换金额不能超过可用金额')
+    showToast(t('exchangeAmountCannotBeGreaterThanAvailableAmount'))
     return
   }
   let params = {
@@ -505,7 +509,7 @@ const submitForm = debounce(() => {
   toExchange(params).then((res) => {
     if (res.code == '200') {
       // 兑换成功，请稍后查看
-      showToast('兑换成功，请稍后查看')
+      showToast(t('exchangeSuccess'))
       setTimeout(() => {
         userStore.getUserInfo()
         getTexChangeList()

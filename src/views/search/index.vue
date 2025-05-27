@@ -20,11 +20,11 @@
             style="height: 32px; width: 100%"
           />
         </div>
-        <div @click="router.back()">取消</div>
+        <div @click="router.back()">{{t('cancel1')}}</div>
       </div>
 
       <div style="margin-top: 20px">
-        <div style="margin-bottom: 15px; font-size: 15px">热门搜寻</div>
+        <div style="margin-bottom: 15px; font-size: 15px">{{t('hotSearch')}}</div>
         <div class="lists">
           <template v-if="currentCoinList?.length > 0">
             <div
@@ -91,11 +91,11 @@
             style="height: 32px; width: 100%"
           />
         </div>
-        <div @click="router.back()">取消</div>
+        <div @click="router.back()">{{t('cancel1')}}</div>
       </div>
 
       <div style="margin-top: 20px">
-        <div style="margin-bottom: 15px; font-size: 15px">热门搜寻</div>
+        <div style="margin-bottom: 15px; font-size: 15px">{{t('hotSearch')}}</div>
         <div class="lists">
           <template v-if="currentCoinList?.length > 0">
             <div
@@ -153,7 +153,8 @@ import { filterKeyWord } from '@/utils/filters'
 import { priceFormat } from '@/utils/decimal.js'
 import { _isRFD } from '@/utils/public'
 import { setCollect } from '@/api/trade/index.js'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const tradeStore = useTradeStore()
 const currentCoinList = ref([])

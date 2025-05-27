@@ -128,7 +128,7 @@
           border-radius: 8px;
         "
       >
-        <div style="font-size: 12px; color: var(--secondary-color)">地址</div>
+        <div style="font-size: 12px; color: var(--secondary-color)">{{ t('address') }}</div>
         <div style="display: flex; align-items: center; justify-content: space-between">
           <div style="width: 80%; word-break: break-word; white-space: normal">
             {{ extraInfo?.coinAddress }}
@@ -146,7 +146,7 @@
               color: var(--primary-color);
             "
           >
-            复制
+            {{ t('copy') }}
           </div>
         </div>
       </div>
@@ -159,7 +159,7 @@
           margin-top: 15px;
         "
       >
-        <div style="color: var(--secondary-color); font-size: 12px">最小充币额</div>
+        <div style="color: var(--secondary-color); font-size: 12px">{{ t('minimumRechargeAmount') }}</div>
         <div style="color: var(--primary-color); font-size: 12px">
           {{ extraInfo?.rechargeMin }} USDT
         </div>
@@ -173,8 +173,8 @@
           margin-top: 15px;
         "
       >
-        <div style="color: var(--secondary-color); font-size: 12px">充币到账时间</div>
-        <div style="color: var(--primary-color); font-size: 12px">约 1 分钟</div>
+        <div style="color: var(--secondary-color); font-size: 12px">{{ t('rechargeToAccountTime') }}</div>
+        <div style="color: var(--primary-color); font-size: 12px">{{ t('about1Minute') }}</div>
       </div>
     </div>
   </div>
@@ -205,7 +205,7 @@
           ></path>
         </svg>
       </div>
-      <div style="font-size: 14px; color: var(--primary-color)">选择充值币种</div>
+      <div style="font-size: 14px; color: var(--primary-color)">{{ t('selectRechargeCoin') }}</div>
       <div style="width: 25px"></div>
     </div>
     <div
@@ -219,10 +219,10 @@
         <div style="margin-left: 10px">
           <div>{{ item?.title?.toUpperCase() }}</div>
           <div style="font-size: 10px; color: var(--secondary-color); margin-top: 5px">
-            最小充币额：{{ item?.rechargeMin }}USDT
+            {{ t('minimumRechargeAmount') }}：{{ item?.rechargeMin }}USDT
           </div>
           <div style="font-size: 10px; color: var(--secondary-color); margin-top: 5px">
-            预计 约 1分钟 内到账
+            {{ t('estimated1MinuteToAccount') }}
           </div>
         </div>
       </div>
@@ -264,6 +264,8 @@ import Copy from 'vue-clipboard3'
 import { showToast } from 'vant'
 import QRCode from 'qrcode'
 import ShowNetwork from './component/showNetwork.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const showBottom = ref(true)
 const mainStore = useMainStore()

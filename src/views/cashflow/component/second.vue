@@ -4,10 +4,10 @@
       <div class="recharge-cell" v-for="(item, index) in rowList" :key="index">
         <div class="row" style="color: var(--primary-border)">
           <span>
-            <template v-if="item.type == '0'">下单冻结-</template>
-            <template v-if="item.type == '0'">亏损-</template>
-            <template v-if="item.type == '0'">获利+</template>
-            <template v-if="item.type == '0'">获利冻结+</template>
+            <template v-if="item.type == '0'">{{t("orderFrozen")}}-</template>
+            <template v-if="item.type == '0'">{{t("loss")}}-</template>
+            <template v-if="item.type == '0'">{{t("profit")}}+</template>
+            <template v-if="item.type == '0'">{{t("profitFrozen")}}+</template>
           </span>
           <span>
             {{ priceFormat(item.amount) }}
@@ -15,7 +15,7 @@
         </div>
         <div class="row" style="color: var(--secondary-color)">
           <span>{{ _timeFormat(item?.createTime) }}</span>
-          <span>账后余额{{ priceFormat(item?.afterAmount) }}</span>
+          <span>{{t("accountBalance")}}{{ priceFormat(item?.afterAmount) }}</span>
         </div>
       </div>
     </template>

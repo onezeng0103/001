@@ -11,7 +11,7 @@
           </div>
           <div class="nav-bar-search" @click="router.push('/search')">
             <img src="../../assets/img/search.png" alt="search" />
-            <input type="text" placeholder="点击搜索币种" />
+            <input type="text" :placeholder="t('clickSearchCoin')" />
           </div>
           <div class="nav-bar-button" style="position: relative">
             <img
@@ -52,48 +52,48 @@
           <div class="imgBox">
             <img src="../../assets/img/01.png" alt="" />
           </div>
-          <span>充币</span>
+          <span>{{ t('recharge') }}</span>
         </div>
         <div class="menu-item" @click="router.push('/withdraw')">
           <div class="imgBox">
             <img src="../../assets/img/02.png" alt="" />
           </div>
-          <span>提币</span>
+          <span>{{ t('withdraw') }}</span>
         </div>
         <div class="menu-item" @click="router.push('/flashExchange')">
           <div class="imgBox">
             <img src="../../assets/img/03.png" alt="" />
           </div>
-          <span>闪兑</span>
+          <span>{{ t('flashExchange') }}</span>
         </div>
         <div class="menu-item" @click="router.push('/exchange')">
           <div class="imgBox">
             <img src="../../assets/img/04.png" alt="" />
           </div>
-          <span>资金划转</span>
+          <span>{{ t('fundTransfer') }}</span>
         </div>
         <!-- <div class="menu-item" @click="router.push('/livecoin')">
           <div class="imgBox">
             <img src="../../assets/img/05.png" alt="" />
           </div>
-          <span>质押</span>
+          <span>{{ t('pledge') }}</span>
         </div> -->
         <div class="menu-item" @click="router.push('/invaite')">
           <div class="imgBox">
             <img src="../../assets/img/09.png" alt="" />
           </div>
-          <span>邀请</span>
+          <span>{{ t('invite') }}</span>
         </div>
       </div>
       <div class="main-tip">
         <div class="main-tip-left">
           <img src="../../assets/img/31.png" alt="" />
           <div class="text">
-            <div class="text-title">机构合作专区</div>
-            <div class="text-desc">保本付息 智能决策 多重风控</div>
+            <div class="text-title">{{ t('institutionalCooperation') }}</div>
+            <div class="text-desc">{{ t('guaranteedInterest') }}</div>
           </div>
         </div>
-        <div class="main-tip-right" @click="router.push('/proxy')">立即前往</div>
+        <div class="main-tip-right" @click="router.push('/proxy')">{{ t('goTo') }}</div>
       </div>
       <div class="list-box">
         <div class="list-box-header">
@@ -102,21 +102,21 @@
             :class="{ active: currentIndex == 0 }"
             @click="handleIndex(0)"
           >
-            热门币种
+            {{ t('hotCoin') }}
           </div>
           <div
             class="list-box-header-item"
             :class="{ active: currentIndex == 1 }"
             @click="handleIndex(1)"
           >
-            涨幅榜
+            {{ t('riseList') }}
           </div>
           <div
             class="list-box-header-item"
             :class="{ active: currentIndex == 2 }"
             @click="handleIndex(2)"
           >
-            跌幅榜
+            {{ t('fallList') }}
           </div>
         </div>
         <div class="list-box-content">
@@ -130,8 +130,8 @@
   <div class="black" v-if="showInfoPopup" @click="showInfoPopup = !showInfoPopup"></div>
   <div class="rule_box" v-if="showInfoPopup">
     <div class="rule_box-title">
-      <div>安全预警</div>
-      <div>请你重视此消息</div>
+      <div>{{ t('securityAlert') }}</div>
+      <div>{{ t('pleasePayAttention') }}</div>
     </div>
     <div class="close" @click="showInfoPopup = !showInfoPopup"></div>
     <div class="content">
@@ -152,6 +152,8 @@ import { dispatchCustomEvent } from '@/utils'
 import Hot from './component/hot.vue'
 import Rose from './component/rose.vue'
 import Fall from './component/fall.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const userStore = useUserStore()
 const mainStore = useMainStore()
 const isSign = ref(userStore.isSign)

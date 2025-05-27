@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>跟单</span>
+              <span>{{ t('follow') }}</span>
             </span>
           </div>
           <div
@@ -82,7 +82,7 @@
               color: var(--secondary-color);
             "
           >
-            我的跟单
+            {{ t('myFollow') }}
           </div>
           <div
             v-else
@@ -96,7 +96,7 @@
               color: var(--secondary-color);
             "
           >
-            我的主页
+            {{t('myHome')}}
           </div>
         </div>
       </div>
@@ -104,9 +104,9 @@
     <div class="floworder-main">
       <div class="info">
         <div class="title">
-          <div class="text">资产金额</div>
+          <div class="text">{{t('fundAmount')}}</div>
           <div class="text" v-if="traderInfo == null" @click="router.push('/floworder/apply')">
-            成为交易专家
+            {{t('becomeTrader')}}
           </div>
         </div>
         <div class="price">
@@ -162,14 +162,14 @@
           <div class="total">
             <div class="left">
               <div class="total-item">
-                跟单总金额(USDT)
+                {{t('followTotalAmount')}}(USDT)
                 <template v-if="isEye">
                   <span>{{ profitInfo?.betAmount || 0 }}</span>
                 </template>
                 <template v-else>******</template>
               </div>
               <div class="total-item">
-                已实现总盈亏(USDT)
+                {{t('realizedTotalProfit')}}(USDT)
                 <template v-if="isEye">
                   <span>{{ profitInfo?.profitAndLoss || 0 }}</span>
                 </template>
@@ -177,7 +177,7 @@
               </div>
             </div>
             <div class="right">
-              总收益率(USDT)
+              {{t('totalProfitRate')}}(USDT)
               <template v-if="isEye">
                 <span>{{ profitInfo?.profitRate || 0 }}</span>
               </template>
@@ -188,7 +188,7 @@
       </div>
       <div>
         <div style="display: flex; align-items: center; justify-content: space-between">
-          <div>交易专家</div>
+          <div>{{t('trader')}}</div>
           <div
             style="
               color: var(--secondary-color);
@@ -223,7 +223,7 @@
         <img src="../../assets/img/search.png" alt="search" />
         <input
           type="text"
-          placeholder="搜索交易员"
+          :placeholder="t('searchTrader')"
           v-model.trim="searchValue"
           @input="handleSearch"
         />
@@ -335,19 +335,19 @@ const getTradeListFn = async (value) => {
 }
 const rankingList = ref([
   {
-    title: '综合排名',
+    title: t('comprehensiveRanking'),
     value: 0
   },
   {
-    title: '近14预估收益率',
+    title: t('last14DaysEstimatedProfitRate'),
     value: 1
   },
   {
-    title: '近14日胜率',
+    title: t('last14DaysWinRate'),
     value: 2
   },
   {
-    title: '资金实力',
+    title: t('fundStrength'),
     value: 3
   }
 ])

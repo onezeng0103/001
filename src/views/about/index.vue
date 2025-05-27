@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>关于我们</span>
+              <span>{{t('aboutUs')}}</span>
             </span>
           </div>
           <div
@@ -97,9 +97,11 @@
   </div>
 </template>
 <script setup>
+import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { getAboutApi } from '@/api/common'
 const router = useRouter()
+const { t } = useI18n()
 const list = ref([])
 const getAbout = async () => {
   const res = await getAboutApi()

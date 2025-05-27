@@ -67,7 +67,7 @@
               text-overflow: ellipsis;
             "
           >
-            <span>邮箱认证</span>
+            <span>{{ t('emailAuthentication') }}</span>
           </span>
         </div>
         <div
@@ -86,34 +86,34 @@
   <div class="content-box">
     <div v-if="!bind" class="bind-not">
       <div class="item">
-        <div class="text">邮箱</div>
+        <div class="text">{{ t('email') }}</div>
         <div class="input">
-          <input style="width: 100%" v-model="formData.email" type="text" placeholder="请输入" />
+          <input style="width: 100%" v-model="formData.email" type="text" :placeholder="t('pleaseInput')" />
         </div>
       </div>
       <div class="item">
-        <div class="text">验证码</div>
+        <div class="text">{{ t('verificationCode') }}</div>
         <div class="input">
-          <input v-model="formData.code" type="text" placeholder="请输入" />
+          <input v-model="formData.code" type="text" :placeholder="t('pleaseInput')" />
           <div class="code-box">
             <div v-if="flag" class="wait-code">
               <van-count-down :time="time" format="ss" @finish="finish" />
             </div>
-            <div v-else class="send-code" @click="send">发送</div>
+            <div v-else class="send-code" @click="send">{{ t('send') }}</div>
           </div>
         </div>
       </div>
-      <div class="btnBox" @click="submit">确定</div>
+      <div class="btnBox" @click="submit">{{ t('confirm') }}</div>
     </div>
     <div v-else class="bind-yes">
       <div class="top">
         <img src="../../assets/img/cg.png" alt="" style="width: 150px; height: 150px" />
-        <div class="text">恭喜您，邮箱绑定成功</div>
-        <div class="email">你的邮箱：{{ email }}</div>
+        <div class="text">{{ t('congratulations') }}</div>
+        <div class="email">{{ t('yourEmail') }}:{{ email }}</div>
       </div>
 
-      <div class="change-email" @click="bind = false">更改邮箱</div>
-      <div class="back" @click="$router.push('/')">返回首页</div>
+      <div class="change-email" @click="bind = false">{{ t('changeEmail') }}</div>
+      <div class="back" @click="$router.push('/')">{{ t('backToHome') }}</div>
     </div>
   </div>
 </template>
@@ -148,7 +148,7 @@ const flag = ref(false)
 const send = () => {
   // 邮箱发送验证码
   if (formData.value.email == '') {
-    showToast('请补充邮箱地址')
+    showToast(t('pleaseInputEmail'))
     return
   }
   emailCode('BIND', formData.value.email).then((res) => {
@@ -167,16 +167,16 @@ const finish = () => {
 }
 const submit = () => {
   if (formData.value.email == '') {
-    showToast('请补充邮箱地址')
+    showToast(t('pleaseInputEmail'))
     return
   }
   if (formData.value.code == '') {
-    showToast('验证码')
+    showToast(t('verificationCode'))
     return
   }
   emailBind(formData.value.email, formData.value.code).then((res) => {
     if (res.code == '200') {
-      showToast('绑定成功')
+      showToast(t('bindSuccess'))
       email.value = formData.value.email
       bind.value = true
     } else {

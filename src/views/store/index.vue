@@ -2,13 +2,13 @@
   <div class="store">
     <div class="store-header">
       <div class="store-header-item" :class="{ active: activeIndex == 0 }" @click="activeIndex = 0">
-        秒合约
+        {{t('flashContract')}}
       </div>
       <div class="store-header-item" :class="{ active: activeIndex == 1 }" @click="activeIndex = 1">
-        现货
+        {{t('spot')}}
       </div>
       <div class="store-header-item" :class="{ active: activeIndex == 2 }" @click="activeIndex = 2">
-        U本位合约
+        {{t('UContract')}}
       </div>
     </div>
     <SpotGoods v-if="activeIndex == 1" />
@@ -20,6 +20,8 @@
 import Flash from './component/flash.vue'
 import SpotGoods from './component/spotGoods.vue'
 import Pact from './component/pact.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const activeIndex = ref(0)
 </script>
 <style lang="scss" scoped>

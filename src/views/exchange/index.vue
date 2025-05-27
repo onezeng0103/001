@@ -3,7 +3,9 @@ import { useRouter } from 'vue-router'
 import { showToast } from 'vant'
 import { useMainStore } from '@/store'
 import { getUserBalance, getTransferList } from '@/api/account'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter()
 const mainStore = useMainStore()
 const params = ref({
@@ -18,9 +20,9 @@ const tempList = computed(() => {
     // 对应参数key值 -->1 平台资产 2理财资产 3合约账户
     const key = { 平台资产: 1, 理财资产: 2, 合约资产: 3 }
     if (!item.isOpen) return false
-    item.name == '平台资产' && (item.keyStr = '平台资产')
-    item.name == '理财资产' && (item.keyStr = '理财资产')
-    item.name == '合约资产' && (item.keyStr = '合约资产')
+    item.name == '平台资产' && (item.keyStr = t('platformAssets'))
+    item.name == '理财资产' && (item.keyStr = t('financialAssets'))
+    item.name == '合约资产' && (item.keyStr = t('contractAssets'))
 
     item['text'] = item.keyStr
     item['value'] = key[item.name]
@@ -95,12 +97,12 @@ const amountAll = () => {
 }
 const handleConfirm = () => {
   if (!params.value.amount) {
-    showToast('请输入划转金额')
+    showToast(t('pleaseInputTransferAmount'))
     return
   }
   getTransferList(params.value).then((res) => {
     if (res.code == '200') {
-      showToast('操作成功，请稍后...')
+      showToast(t('operationSuccess1'))
       getBalance()
     } else {
       showToast(res.msg || '')
@@ -181,7 +183,7 @@ onMounted(() => {
                 text-overflow: ellipsis;
               "
             >
-              <span>资金划转</span>
+              <span>{{ t('fundTransfer') }}</span>
             </span>
           </div>
           <div
@@ -216,7 +218,7 @@ onMounted(() => {
           ></div>
 
           <div style="display: flex; align-items: center" @click="handleShowBottom(true)">
-            <div style="width: 30px; color: var(--secondary-color)">到</div>
+            <div style="width: 30px; color: var(--secondary-color)">{{ t('to') }}</div>
             <div class="nub">
               {{ returnName(params.transferInAccount) }}
               <div class="triangle-down"></div>
@@ -257,8 +259,8 @@ onMounted(() => {
       <div
         style="display: flex; justify-content: space-between; align-items: center; font-size: 12px"
       >
-        <div>数量</div>
-        <div>可用 {{ availableAmount }}</div>
+        <div>{{ t('quantity') }}</div>
+        <div>{{ t('available') }} {{ availableAmount }}</div>
       </div>
 
       <div class="details bz">
@@ -274,22 +276,24 @@ onMounted(() => {
           autocomplete="off"
           style="flex: 1"
         />
-        <div style="margin: 0 10px" @click="amountAll">全部</div>
+        <div style="margin: 0 10px" @click="amountAll">{{ t('all') }}</div>
       </div>
 
-      <div style="margin-top: 20px">划转须知</div>
+      <div style="margin-top: 20px">{{ t('transferNotice') }}</div>
       <div style="font-size: 12px; margin-top: 10px; color: var(--secondary-color)">
-        只有将资产划转到对应的帐户才可以进行交易。 帐户间的划转不收取手续费。
+        {{ t('transferNoticeContent') }}
       </div>
     </div>
 
-    <div @click="handleConfirm" class="btn" :class="params.amount ? 'zf' : ''">确认划转</div>
+    <div @click="handleConfirm" class="btn" :class="params.amount ? 'zf' : ''">
+      {{ t('confirmTransfer') }}
+    </div>
   </div>
 
   <van-popup v-model:show="showBottom" position="bottom">
     <div class="lists">
       <div style="display: flex; justify-content: center; position: relative; margin-bottom: 20px">
-        <div style="color: var(--regular-color)">选择划入账户</div>
+        <div style="color: var(--regular-color)">{{ t('selectTransferInAccount') }}</div>
         <div class="cha" @click="showBottom = false">
           <svg
             t="1748095662241"

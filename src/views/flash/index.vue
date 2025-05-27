@@ -9,7 +9,7 @@
           <div class="flash-top-left-info-price">
             <div class="name">{{ userInfo?.user?.loginName }}</div>
             <div class="text">
-              资金金额
+              {{ t('fundAmount') }}
               <div class="eys">
                 <svg
                   @click="isEye = !isEye"
@@ -69,21 +69,21 @@
       <div class="flash-top-right"></div>
     </div>
     <div class="flash-tab">
-      <div class="flash-tab-item active">秒合约</div>
-      <div class="flash-tab-item" @click="router.push('/contract')">合约交易</div>
-      <div class="flash-tab-item" @click="router.push('/trade')">现货交易</div>
-      <div class="flash-tab-item" @click="router.push('/flashOption')">期权交易</div>
-      <div class="flash-tab-item" @click="router.push('/floworder')">跟单交易</div>
+      <div class="flash-tab-item active">{{ t('flashContract') }}</div>
+      <div class="flash-tab-item" @click="router.push('/contract')">{{ t('flashContract') }}</div>
+      <div class="flash-tab-item" @click="router.push('/trade')">{{ t('flashSpot') }}</div>
+      <div class="flash-tab-item" @click="router.push('/flashOption')">{{ t('flashOption') }}</div>
+      <div class="flash-tab-item" @click="router.push('/floworder')">{{ t('flashFlow') }}</div>
     </div>
     <div class="flash-tip">
       <div class="flash-tip-left">
         <img src="../../assets/img/31.png" alt="" />
         <div class="text">
-          <div class="text-title">机构合作专区</div>
-          <div class="text-desc">保本付息 智能决策 多重风控</div>
+          <div class="text-title">{{ t('institutionalCooperation') }}</div>
+          <div class="text-desc">{{ t('institutionalCooperationDesc') }}</div>
         </div>
       </div>
-      <div class="flash-tip-right" @click="router.push('/proxy')">立即前往</div>
+      <div class="flash-tip-right" @click="router.push('/proxy')">{{ t('goTo') }}</div>
     </div>
     <div class="flash-main">
       <div class="flash-main-top">
@@ -117,14 +117,14 @@
           @click="switchingEntrust(0)"
           :class="currentEntruset == 0 ? 'active' : ''"
         >
-          <span>进行中</span>
+          <span>{{ t('inProgress') }}</span>
         </div>
         <div
           class="flash-orderBox-tab-item"
           @click="switchingEntrust(1)"
           :class="currentEntruset == 1 ? 'active' : ''"
         >
-          <span>历史记录</span>
+          <span>{{ t('historyRecord') }}</span>
         </div>
       </div>
       <div class="flash-orderBox-list">
@@ -144,7 +144,7 @@
                       color: #000;
                     "
                   >
-                    看涨
+                    {{ t('flashUp') }}
                   </div>
                   <div
                     v-else
@@ -157,7 +157,7 @@
                       color: #000;
                     "
                   >
-                    看跌
+                    {{ t('flashDown') }}
                   </div>
                   <div>
                     {{
@@ -174,15 +174,15 @@
                 {{ itemHistroy?.createTime }}
               </div>
               <div class="flash-orderBox-list-item">
-                <div>开单金额</div>
+                <div>{{ t('openOrderAmount') }}</div>
                 <div class="flash-orderBox-list-item-price">{{ itemHistroy.openPrice }}USDT</div>
               </div>
               <div class="flash-orderBox-list-item">
-                <div>收益率</div>
+                <div>{{ t('returnRate') }}</div>
                 <div class="flash-orderBox-list-item-price">{{ itemHistroy.rate * 100 }}%</div>
               </div>
               <div class="flash-orderBox-list-item">
-                <div>收益</div>
+                <div>{{ t('income') }}</div>
                 <div class="flash-orderBox-list-item-price">
                   {{
                     formatExpectedProfit(
@@ -255,7 +255,7 @@
                       color: #000;
                     "
                   >
-                    看涨
+                    {{ t('flashUp') }}
                   </div>
                   <div
                     v-else
@@ -268,7 +268,7 @@
                       color: #000;
                     "
                   >
-                    看跌
+                    {{ t('flashDown') }}
                   </div>
                   <div>
                     {{
@@ -297,11 +297,11 @@
                 </div>
               </div>
               <div class="flash-orderBox-list-item">
-                <div>收益率</div>
+                <div>{{ t('returnRate') }}</div>
                 <div class="flash-orderBox-list-item-price">{{ itemHistroy.rate * 100 }}%</div>
               </div>
               <div class="flash-orderBox-list-item">
-                <div>盈亏</div>
+                <div>{{ t('profitAndLoss') }}</div>
                 <div class="flash-orderBox-list-item-price">
                   {{ profitAndloss(itemHistroy.betAmount, itemHistroy.rewardAmount) }}
                   {{ itemHistroy.baseSymbol ? itemHistroy.baseSymbol.toUpperCase() : '' }}
@@ -317,15 +317,15 @@
       </div>
     </div>
     <div class="flash-btn">
-      <div class="fall" @click="showBtn(0)">看跌</div>
-      <div class="rose" @click="showBtn(1)">看涨</div>
+      <div class="fall" @click="showBtn(0)">{{ t('flashUp') }}</div>
+      <div class="rose" @click="showBtn(1)">{{ t('flashDown') }}</div>
     </div>
   </div>
   <LeftPopup :showLeft="showLeft" @close="showLeft = false" />
   <van-popup v-model:show="showOrder" round position="bottom">
     <div style="display: flex; align-items: center; justify-content: space-between">
       <div></div>
-      <div style="font-size: 14px">购买（{{ coinInfo.showSymbol }}）</div>
+      <div style="font-size: 14px">{{ t('purchase') }}（{{ coinInfo.showSymbol }}）</div>
       <div>
         <svg
           @click="showOrder = !showOrder"
@@ -348,7 +348,7 @@
     </div>
     <div class="box">
       <div class="cycle">
-        <div class="cycle-title">交割周期</div>
+        <div class="cycle-title">{{ t('deliveryCycle') }}</div>
         <div class="cycle-box">
           <div
             :class="['cycle-box-item', cycleIndex === index && 'tagBtn-selected']"
@@ -357,19 +357,19 @@
             @click="onClickTab(index)"
           >
             <div>{{ getItemPeriod(item) }}</div>
-            <div>收益{{ _mul(item.odds, 100) }}%</div>
+            <div>{{ t('income') }} {{ _mul(item.odds, 100) }}%</div>
           </div>
         </div>
       </div>
       <div class="cycle">
-        <div class="cycle-title">购买数量</div>
+        <div class="cycle-title">{{ t('purchaseQuantity') }}</div>
         <div class="input-box">
           <img style="height: 36px; width: 36px" src="../../assets/img/dollar.png" alt="" />
           <input
             v-model.trim="quantity"
             type="number"
             maxlength="140"
-            placeholder="请输入"
+            :placeholder="t('pleaseInput')"
             style="color: var(--regular-color) !important"
           />
         </div>
@@ -411,16 +411,16 @@
         </div>
       </div>
       <div style="display: flex; align-items: center; justify-content: center">
-        <div class="btn2" @click="determine">立即购买</div>
+        <div class="btn2" @click="determine">{{ t('determine') }}</div>
       </div>
     </div>
   </van-popup>
   <van-dialog
     v-model:show="showMessage"
     :message="message"
-    title="系统提示"
-    confirmButtonText="确认"
-    cancelButtonText="取消"
+    :title="t('systemPrompt')"
+    :confirmButtonText="t('confirm')"
+    :cancelButtonText="t('cancel1')"
     show-cancel-button
   ></van-dialog>
   <van-popup v-model:show="showCenter" round>
@@ -462,16 +462,16 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: var(--secondary-color); font-size: 12px">开单方向</div>
+        <div style="color: var(--secondary-color); font-size: 12px">{{ t('openOrderDirection') }}</div>
         <div style="color: var(--regular-color); font-size: 12px">
-          <template v-if="Number(centerData.betContent)">看涨</template>
-          <template v-else>看跌</template>
+          <template v-if="Number(centerData.betContent)">{{ t('flashUp') }}</template>
+          <template v-else>{{ t('flashDown') }}</template>
         </div>
       </div>
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: var(--secondary-color); font-size: 12px">盈亏</div>
+        <div style="color: var(--secondary-color); font-size: 12px">{{ t('profitAndLoss') }}</div>
         <div style="color: var(--regular-color); font-size: 12px">
           {{ profitAndloss(centerData.betAmount, centerData.rewardAmount) }}
           {{ centerData.baseSymbol ? centerData.baseSymbol.toUpperCase() : '' }}
@@ -480,7 +480,7 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: var(--secondary-color); font-size: 12px">开单价/结算价</div>
+        <div style="color: var(--secondary-color); font-size: 12px">{{ t('openPrice') }} / {{ t('settlementPrice') }}</div>
         <div style="color: var(--regular-color); font-size: 12px">
           {{ centerData.openPrice }} / {{ centerData.closePrice }}
         </div>
@@ -488,7 +488,7 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: var(--secondary-color); font-size: 12px">开单价币种</div>
+        <div style="color: var(--secondary-color); font-size: 12px">{{ t('openPriceCurrency') }}</div>
         <div style="color: var(--regular-color); font-size: 12px">
           {{
             centerData.showCoin
@@ -500,7 +500,7 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: var(--secondary-color); font-size: 12px">收益率</div>
+        <div style="color: var(--secondary-color); font-size: 12px">{{ t('returnRate') }}</div>
         <div style="color: var(--regular-color); font-size: 12px">
           {{ centerData.rate * 100 }} %
         </div>
@@ -508,7 +508,7 @@
       <div
         style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px"
       >
-        <div style="color: var(--secondary-color); font-size: 12px">本期结果</div>
+        <div style="color: var(--secondary-color); font-size: 12px">{{ t('currentResult') }}</div>
         <div style="color: var(--regular-color); font-size: 12px">
           {{ getType(profitAndloss(centerData.betAmount, centerData.rewardAmount)) }}
         </div>
@@ -688,11 +688,11 @@ const quantityList = ref([
 ])
 const getType = (value) => {
   if (value > 0) {
-    return '获利'
+    return t('profit')
   } else if (value < 0) {
-    return '亏损'
+    return t('loss')
   } else {
-    return '平'
+    return t('breakEven')
   }
 }
 
@@ -1067,19 +1067,19 @@ const determine = async () => {
     // 最少输入
     showOrder.value = false
     showMessage.value = true
-    message.value = `最少输入 ${cycleObj.value.minAmount} USDT`
+    message.value = `${t('minInput')} ${cycleObj.value.minAmount} USDT`
     return
   }
   if (Number(quantity.value) > cycleObj.value.maxAmount) {
     showOrder.value = false
     showMessage.value = true
-    message.value = `最多输入 ${cycleObj.value.maxAmount} USDT`
+    message.value = `${t('maxInput')} ${cycleObj.value.maxAmount} USDT`
     return
   }
   if (Number(quantity.value) > availableBalance.value) {
     showOrder.value = false
     showMessage.value = true
-    message.value = '输入量超出可用余额'
+    message.value = `${t('inputExceedsAvailableBalance')} ${availableBalance.value} USDT`
     return
   }
   let data = {
@@ -1098,7 +1098,7 @@ const determine = async () => {
     if (res.code === 200) {
       showOrder.value = false
       showMessage.value = true
-      message.value = '下单成功'
+      message.value = t('orderSuccess')
       updateList()
     } else {
       showOrder.value = false

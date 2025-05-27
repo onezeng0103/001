@@ -4,6 +4,8 @@ import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/store/user'
 import { showToast } from 'vant'
 import { updateLoginPwd } from '@/api/user'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const userStore = useUserStore()
 const newPwd = ref(true)
 const oldPwd = ref(true)
@@ -19,22 +21,22 @@ const pwdDiff = () => {
 }
 const submit = () => {
   if (form.value.oldPwd == '') {
-    showToast('请输入旧密码')
+    showToast(t('oldPassword'))
     return
   }
   if (form.value.newPwd == '') {
-    showToast('请输入新密码')
+    showToast(t('newPassword'))
     return
   }
   if (form.value.newPwd !== form.value.NPwd) {
-    showToast('两次密码不一致')
+    showToast(t('passwordNotMatch'))
     return
   }
 
   updateLoginPwd(form.value.oldPwd, form.value.newPwd, userStore?.userInfo?.user?.userId).then(
     (res) => {
       if (res.code == '200') {
-        showToast('修改成功')
+        showToast(t('modifySuccess'))
         form.value.newPwd = form.value.NPwd = form.value.oldPwd = ''
       } else {
         showToast(res.msg)
@@ -55,7 +57,7 @@ const cuttentRight = { iconRight: [{ iconName: 'kefu', clickTo: 'event_serviceCh
 const changeMethod = () => {
   // 是否绑定邮箱
   if (!userInfo.value.user?.email) {
-    return showToast('请先绑定邮箱')
+    return showToast(t('bindEmail'))
   }
   updateLoginPwdMethod.value = !updateLoginPwdMethod.value
 }
@@ -130,7 +132,7 @@ const changeMethod = () => {
                 text-overflow: ellipsis;
               "
             >
-              <span>设置登陆密码</span>
+              <span>{{t('setLoginPassword')}}</span>
             </span>
           </div>
           <div
@@ -148,9 +150,9 @@ const changeMethod = () => {
 
     <template v-if="loginPassword && updateLoginPwdMethod">
       <div class="content2">
-        <div class="tip">旧密码</div>
+        <div class="tip">{{ t('oldPassword') }}</div>
         <div class="input">
-          <input v-model="form.oldPwd" :type="oldPwd ? 'text' : 'password'" placeholder="请输入" />
+          <input v-model="form.oldPwd" :type="oldPwd ? 'text' : 'password'" :placeholder="t('pleaseInput')" />
           <div class="icon">
             <svg
               @click="oldPwd = !oldPwd"
@@ -195,9 +197,9 @@ const changeMethod = () => {
             </svg>
           </div>
         </div>
-        <div class="tip">新密码</div>
+        <div class="tip">{{ t('newPassword') }}</div>
         <div class="input">
-          <input v-model="form.newPwd" :type="newPwd ? 'text' : 'password'" placeholder="请输入" />
+          <input v-model="form.newPwd" :type="newPwd ? 'text' : 'password'" :placeholder="t('pleaseInput')" />
           <div class="icon">
             <svg
               @click="newPwd = !newPwd"
@@ -242,12 +244,12 @@ const changeMethod = () => {
             </svg>
           </div>
         </div>
-        <div class="tip">确认密码</div>
+        <div class="tip">{{t('confirmPassword')}}</div>
         <div class="input">
           <input
             v-model="form.NPwd"
             :type="NPwd ? 'text' : 'password'"
-            placeholder="请输入"
+            :placeholder="t('pleaseInput')"
             @input="pwdDiff"
           />
           <div class="icon">
@@ -294,10 +296,10 @@ const changeMethod = () => {
             </svg>
           </div>
         </div>
-        <div class="btnBox" @click="submit">确定</div>
+        <div class="btnBox" @click="submit">{{ t('confirm') }}</div>
         <div v-if="loginPassword" class="box">
-          <div v-if="!updateLoginPwdMethod" class="set" @click="changeMethod">使用原密码修改</div>
-          <div v-else class="set" @click="changeMethod">使用邮箱修改</div>
+          <div v-if="!updateLoginPwdMethod" class="set" @click="changeMethod">{{ t('useOldPassword') }}</div>
+          <div v-else class="set" @click="changeMethod">{{ t('useEmail') }}</div>
         </div>
       </div>
     </template>

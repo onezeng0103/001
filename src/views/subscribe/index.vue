@@ -2,7 +2,8 @@
 import { showToast } from 'vant'
 import { useRoute, useRouter } from 'vue-router'
 import { financialDetail, financialSubmit } from '@/api/financial/index'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const route = useRoute()
 const info = ref({})
@@ -18,15 +19,15 @@ const submit = async () => {
   console.log(Number(limit.value))
   console.log(info.value?.limitMin)
   if (Number(limit.value) < info.value?.limitMin) {
-    return showToast(`最少可购买${info.value?.limitMin}`)
+    return showToast(`${t('leastCanPurchase')} ${info.value?.limitMin}`)
   }
 
   if (Number(limit.value) > info.value?.limitMax) {
-    return showToast(`最多可购买${info.value?.limitMax}`)
+    return showToast(`${t('maxCanPurchase')} ${info.value?.limitMax}`)
   }
   let regNum = /^\d+(\.\d{1,4})?$/
   if (!regNum.test(limit.value)) {
-    return showToast('最多输入小数点后四位')
+    return showToast(`${t('maxInputDecimalPoint4')}`)
   }
   const res = await financialSubmit(route.params.id, limit.value, info.value?.days)
   if (res.code === 200) {
@@ -109,7 +110,7 @@ onMounted(() => {
                 text-overflow: ellipsis;
               "
             >
-              <span>申购 {{ info?.title }}</span>
+              <span>{{t('subscribeS')}} {{ info?.title }}</span>
             </span>
           </div>
           <div
@@ -135,7 +136,7 @@ onMounted(() => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: var(--secondary-color)">平均收益</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">{{t('avgRate')}}</div>
         <div style="font-size: 14px; color: var(--primary-color)">{{ info?.avgRate }}%</div>
       </div>
       <div
@@ -147,7 +148,7 @@ onMounted(() => {
           margin: 10px 0 5px;
         "
       >
-        <div style="font-size: 13px; color: var(--secondary-color)">项目周期(天)</div>
+        <div style="font-size: 13px; color: var(--secondary-color)">{{t('projectCycle')}}</div>
         <div style="font-size: 14px; color: var(--primary-color)">{{ info?.days }}</div>
       </div>
       <div
@@ -160,12 +161,12 @@ onMounted(() => {
         "
       >
         <div style="font-size: 13px; color: var(--secondary-color)">
-          起头金额({{ info.coin ? info.coin.toUpperCase() : '' }})
+          {{t('startAmount')}}({{ info.coin ? info.coin.toUpperCase() : '' }})
         </div>
         <div style="font-size: 14px; color: var(--primary-color)">{{ info?.limitMin }}</div>
       </div>
       <div style="font-size: 13px; color: var(--secondary-color); margin: 10px 0 10px">
-        申购金额
+        {{t('subscribeAmount')}}
       </div>
       <div class="ipt">
         <input
@@ -173,7 +174,7 @@ onMounted(() => {
           type="number"
           maxlength="140"
           step="0.000000000000000001"
-          :placeholder="`最低参投${info?.limitMin}${info.coin ? info.coin.toUpperCase() : ''}`"
+          :placeholder="`${t('lowestInvestment')} ${info?.limitMin}${info.coin ? info.coin.toUpperCase() : ''}`"
           enterkeyhint="done"
           pattern="[0-9]*"
           class="uni-input-input"
@@ -184,24 +185,24 @@ onMounted(() => {
       </div>
       <div class="details">
         <div style="font-size: 14px; color: var(--secondary-color); margin-bottom: 10px">
-          产品详情
+          {{t('productDetails')}}
         </div>
         <div
           style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
         >
-          <div style="font-size: 13px; color: var(--secondary-color)">项目名称</div>
+          <div style="font-size: 13px; color: var(--secondary-color)">{{t('projectName')}}</div>
           <div style="font-size: 14px; color: var(--primary-color)">{{ info?.title }}</div>
         </div>
         <div
           style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
         >
-          <div style="font-size: 13px; color: var(--secondary-color)">项目进度</div>
+          <div style="font-size: 13px; color: var(--secondary-color)">{{t('projectProgress')}}</div>
           <div style="font-size: 14px; color: var(--primary-color)">{{ info?.process }}</div>
         </div>
         <div
           style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
         >
-          <div style="font-size: 13px; color: var(--secondary-color)">项目总额</div>
+          <div style="font-size: 13px; color: var(--secondary-color)">{{t('projectTotalAmount')}}</div>
           <div style="font-size: 14px; color: var(--primary-color)">
             {{ info?.totalInvestAmount }}&nbsp;{{ info?.coin }}
           </div>
@@ -209,7 +210,7 @@ onMounted(() => {
         <div
           style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
         >
-          <div style="font-size: 13px; color: var(--secondary-color)">剩余金额</div>
+          <div style="font-size: 13px; color: var(--secondary-color)">{{t('remainingAmount')}}</div>
           <div style="font-size: 14px; color: var(--primary-color)">
             {{ info?.remainAmount }}&nbsp;{{ info?.coin }}
           </div>
@@ -217,40 +218,40 @@ onMounted(() => {
         <div
           style="display: flex; justify-content: space-between; align-items: center; margin: 8px 0"
         >
-          <div style="font-size: 13px; color: var(--secondary-color)">限头次数</div>
+          <div style="font-size: 13px; color: var(--secondary-color)">{{t('limitPurchaseTimes')}}</div>
           <div style="font-size: 14px; color: var(--primary-color)">
             {{ Number(info?.timeLimit) ? Number(info?.timeLimit) : '不限购' }}
           </div>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center">
-          <div style="font-size: 13px; color: var(--secondary-color)">平均收益率</div>
+          <div style="font-size: 13px; color: var(--secondary-color)">{{t('avgRate')}}</div>
           <div style="font-size: 14px; color: var(--primary-color)">{{ info?.avgRate }}%</div>
         </div>
       </div>
 
       <div class="details">
         <div style="font-size: 14px; color: var(--secondary-color); margin-bottom: 5px">
-          基金介绍
+          {{t('fundIntroduction')}}
         </div>
         <div style="margin-bottom: 10px">
           <div v-if="info?.prodectIntroduction" style="color: var(--secondary-color)">
             {{ info?.prodectIntroduction }}
           </div>
-          <div v-else style="color: var(--secondary-color)">暂无介绍</div>
+          <div v-else style="color: var(--secondary-color)">{{t('noIntroduction')}}</div>
         </div>
         <div style="font-size: 14px; color: var(--secondary-color); margin-bottom: 5px">
-          产品规则
+          {{t('productRules')}}
         </div>
         <div style="margin-bottom: 10px">
           <div v-if="info?.problem" style="color: var(--secondary-color)">
             {{ info?.problem }}
           </div>
-          <div v-else style="color: var(--secondary-color)">暂无介绍</div>
+          <div v-else style="color: var(--secondary-color)">{{t('noIntroduction')}}</div>
         </div>
       </div>
     </div>
 
-    <div @click="submit" class="btn" :class="limit ? 'zf' : ''">支付</div>
+    <div @click="submit" class="btn" :class="limit ? 'zf' : ''">{{t('pay')}}</div>
   </div>
 </template>
 

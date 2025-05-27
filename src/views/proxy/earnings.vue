@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>收益记录</span>
+              <span>{{ t('earningsRecord') }}</span>
             </span>
           </div>
           <div
@@ -90,7 +90,7 @@
             {{ user.loginName }}
           </div>
           <div class="info-left-price">
-            个人资金
+            {{ t('personalFunds') }}
             <span>{{ availableBalance }} USDT</span>
           </div>
         </div>
@@ -104,38 +104,38 @@
             {{ info?.totalNum || 0 }}
           </div>
           <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
-            跟投天数
+            {{ t('proxyDays') }}
           </div>
         </div>
         <div class="box-item">
           <div>{{ info?.todayAmountEarn }}</div>
           <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
-            今日收益
+            {{ t('todayEarnings') }}
           </div>
         </div>
         <div class="box-item">
           <div>{{ info?.totalAmountEarn?.toFixed(2) }}</div>
           <div style="font-size: 12px; color: var(--secondary-color); margin-top: 5px">
-            累计收益
+            {{ t('totalEarnings') }}
           </div>
         </div>
       </div>
       <template v-if="orderList.length > 0">
         <div class="list" v-for="(item, index) in orderList">
           <div class="list-item">
-            <div>币种</div>
+            <div>{{ t('coinType') }}</div>
             <div>{{ item.symbol }}</div>
           </div>
           <div class="list-item">
-            <div>赢亏</div>
+            <div>{{ t('winLoss') }}</div>
             <div>{{ item.amountEarn?.toFixed(2) }}</div>
           </div>
           <div class="list-item">
-            <div>收益率</div>
+            <div>{{ t('yieldRate') }}</div>
             <div>{{ truncateDecimals(item.amountEarn / item.amount) }}%</div>
           </div>
           <div class="list-item">
-            <div>交易时间</div>
+            <div>{{ t('transactionTime') }}</div>
             <div>{{ item.createTime }}</div>
           </div>
         </div>
@@ -145,7 +145,7 @@
       </template>
     </div>
     <div class="btn">
-      <div>近30日跟投总收益率:{{ getAllAmountEarn?.toFixed(2) }}</div>
+      <div>{{ t('proxyTotalYield') }}:{{ getAllAmountEarn?.toFixed(2) }}</div>
     </div>
   </div>
 </template>
@@ -154,6 +154,8 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '@/store/user/index'
 import { getUserInfoApi, getEarnListApi } from '@/api/proxy'
 import { useMainStore } from '@/store/index.js'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const userStore = useUserStore()
 const mainStore = useMainStore()

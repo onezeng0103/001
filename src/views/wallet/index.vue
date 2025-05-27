@@ -8,14 +8,14 @@
             <div class="title">
               {{ userInfo?.user?.loginName }}
               <div class="box">
-                <template v-if="advancedAuth == null || advancedAuth == 0">未认证</template>
-                <template v-if="advancedAuth == 1">已认证</template>
-                <template v-if="advancedAuth == 3">审核中</template>
-                <template v-if="advancedAuth == 2">审核失败</template>
+                <template v-if="advancedAuth == null || advancedAuth == 0">{{ t('notAuth') }}</template>
+                <template v-if="advancedAuth == 1">{{ t('auth') }}</template>
+                <template v-if="advancedAuth == 3">{{ t('audit') }}</template>
+                <template v-if="advancedAuth == 2">{{ t('auditFailed') }}</template>
               </div>
             </div>
             <div class="price">
-              资产金额
+              {{t('assetAmount')}}
               <div class="eys">
                 <svg
                   @click="isEye = !isEye"
@@ -76,7 +76,7 @@
       </div>
       <div class="assets">
         <div class="assets-item" v-if="tabList.find((item) => item.name === '理财资产')">
-          <div class="name">理财资产</div>
+          <div class="name">{{t('financialAssets')}}</div>
           <div class="price">
             <template v-if="isEye">
               {{ _numberWithCommas(financSum) }}
@@ -85,7 +85,7 @@
           </div>
         </div>
         <div class="assets-item" v-if="tabList.find((item) => item.name === '平台资产')">
-          <div class="name">可用余额</div>
+          <div class="name">{{t('availableBalance')}}</div>
           <div class="price">
             <template v-if="isEye">
               {{ _numberWithCommas(platformSum) }}
@@ -94,7 +94,7 @@
           </div>
         </div>
         <div class="assets-item" v-if="tabList.find((item) => item.name === '合约资产')">
-          <div class="name">合约资产</div>
+          <div class="name">{{t('contractAssets')}}</div>
           <div class="price">
             <template v-if="isEye">
               {{ _numberWithCommas(contractSum) }}
@@ -103,7 +103,7 @@
           </div>
         </div>
         <div class="assets-item">
-          <div class="name">冻结金额</div>
+          <div class="name">{{t('frozenAmount')}}</div>
           <div class="price">
             <template v-if="isEye">
               {{ _numberWithCommas(zhanyong) }}
@@ -119,25 +119,25 @@
         <div class="icon">
           <img src="../../assets/img/11.png" />
         </div>
-        <div class="name">充币</div>
+        <div class="name">{{t('recharge1')}}</div>
       </div>
       <div class="function-item" @click="router.push('/withdraw')">
         <div class="icon">
           <img src="../../assets/img/12.png" />
         </div>
-        <div class="name">提币</div>
+        <div class="name">{{t('withdraw1')}}</div>
       </div>
       <div class="function-item" @click="router.push('/flashExchange')">
         <div class="icon">
           <img src="../../assets/img/13.png" />
         </div>
-        <div class="name">闪兑</div>
+        <div class="name">{{t('flashExchange')}}</div>
       </div>
       <div class="function-item" @click="router.push('/exchange')">
         <div class="icon">
           <img src="../../assets/img/14.png" />
         </div>
-        <div class="name">划转</div>
+        <div class="name">{{t('transfer')}}</div>
       </div>
     </div>
     <van-collapse v-model="activeNames" :border="false">
@@ -146,7 +146,7 @@
           <div style="display: flex; align-items: center">
             <img src="../../assets/img/15.png" height="20px" alt="" />
             <span style="margin-left: 5px; color: var(--primary-color); font-size: 15px">
-              安全中心
+              {{t('safetyCenter')}}
             </span>
           </div>
         </template>
@@ -326,76 +326,76 @@ const allSum = computed(() => {
 const activeNames = ref([])
 const list = ref([
   {
-    title: '修改密码',
+    title: t('changePassword'),
     icon: new URL('../../assets/img/16.png', import.meta.url).href,
     link: '/changePassword'
   },
   {
-    title: '绑定提现密码',
+    title: t('bindWithdrawPassword'),
     icon: new URL('../../assets/img/17.png', import.meta.url).href,
     link: '/fund-password'
   },
   {
-    title: '绑定提现地址',
+    title: t('bindWithdrawAddress'),
     icon: new URL('../../assets/img/18.png', import.meta.url).href,
     link: '/withdrawDeposit'
   },
   {
-    title: '绑定手机号',
+    title: t('bindPhoneNumber'),
     icon: new URL('../../assets/img/19.png', import.meta.url).href,
     link: ''
   },
   {
-    title: '绑定邮箱',
+    title: t('bindEmail1'),
     icon: new URL('../../assets/img/20.png', import.meta.url).href,
     link: '/emailAuthentication'
   }
 ])
 const moreList = ref([
   {
-    title: '资金流水',
+    title: t('cashflow'),
     icon: new URL('../../assets/img/cashflow.png', import.meta.url).href,
     link: '/cashflow',
     key: 'cashflow'
   },
   {
-    title: '在线客服',
+    title: t('onlineService'),
     icon: new URL('../../assets/img/22.png', import.meta.url).href,
     link: '',
     key: 'onlineService'
   },
   {
-    title: '服务条款',
+    title: t('serviceTerms'),
     icon: new URL('../../assets/img/23.png', import.meta.url).href,
     link: '/termService',
     key: 'serviceTerms'
   },
   {
-    title: '帮助中心',
+    title: t('helpCenter'),
     icon: new URL('../../assets/img/help.png', import.meta.url).href,
     link: '/help',
     key: 'help'
   },
   {
-    title: '关于我们',
+    title: t('aboutUs'),
     icon: new URL('../../assets/img/24.png', import.meta.url).href,
     link: '/about',
     key: 'aboutUs'
   },
   {
-    title: '切换语言',
+    title: t('switchLanguage'),
     icon: new URL('../../assets/img/25.png', import.meta.url).href,
     link: '/langList',
     key: 'switchLanguage'
   },
   {
-    title: 'APP下载',
+    title: t('appDownload'),
     icon: new URL('../../assets/img/21.png', import.meta.url).href,
     link: '/download',
     key: 'appDownload'
   },
   {
-    title: '退出登录',
+    title: t('logout'),
     icon: new URL('../../assets/img/26.png', import.meta.url).href,
     link: '',
     key: 'logout'
@@ -407,7 +407,7 @@ const handleMore = (item) => {
     signOut()
       .then((res) => {
         if (res.code == '200') {
-          showToast('退出成功！')
+          showToast(t('logoutSuccess'))
           userStore.signOut()
           router.replace('/')
           handleClose()

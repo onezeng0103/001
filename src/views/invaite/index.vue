@@ -2,9 +2,9 @@
   <div class="invaite">
     <div class="invaite-top">
       <div>
-        <div class="invaite-top_1">团队人数</div>
+        <div class="invaite-top_1">{{ t('teamNumber') }}</div>
         <div class="invaite-top_2">{{ agentInfo.childCount || 0 }}</div>
-        <div class="invaite-top_3">直属成员 {{ agentInfo.childCount || 0 }}</div>
+        <div class="invaite-top_3">{{ t('directMember') }} {{ agentInfo.childCount || 0 }}</div>
       </div>
       <div>
         <img src="../../assets/img/Frame5.png" style="width: 120px; height: 85px" />
@@ -15,7 +15,7 @@
       <div
         style="font-weight: 500; font-size: 12px; color: var(--primary-color); margin-bottom: 10px"
       >
-        下级成员
+        {{ t('subordinateMember') }}
       </div>
       <div style="display: flex; align-items: center; justify-content: space-between">
         <div>
@@ -29,7 +29,9 @@
 
     <div class="invaite-below">
       <div class="below">
-        <div style="font-weight: 500; font-size: 12px; margin: 10px 0 0 10px">邀请码</div>
+        <div style="font-weight: 500; font-size: 12px; margin: 10px 0 0 10px">
+          {{ t('inviteCode') }}
+        </div>
         <div style="font-size: 10px; color: var(--secondary-color); margin: 5px 0 3px 10px">
           {{ userInfo?.user?.activeCode }}
         </div>
@@ -38,7 +40,7 @@
             <img src="../../assets/img/Frame1.png" style="width: 74px; height: 69px" />
           </div>
           <div class="copy-but" @click="toCopy(userInfo?.user?.activeCode)">
-            复制
+            {{ t('copy') }}
             <svg
               t="1747978644685"
               class="icon"
@@ -60,7 +62,9 @@
       </div>
 
       <div class="below">
-        <div style="font-weight: 500; font-size: 12px; margin: 10px 0 0 10px">我的邀请链接</div>
+        <div style="font-weight: 500; font-size: 12px; margin: 10px 0 0 10px">
+          {{ t('myInviteLink') }}
+        </div>
         <div
           style="
             font-size: 10px;
@@ -72,7 +76,7 @@
           "
           @click="handleShowCenter(shareLink + userInfo?.user?.activeCode)"
         >
-          <div>希望您的加入</div>
+          <div>{{ t('inviteLink') }}</div>
           <svg
             t="1747979240102"
             class="icon"
@@ -95,7 +99,7 @@
             <img src="../../assets/img/Frame2.png" style="width: 74px; height: 69px" />
           </div>
           <div class="copy-but" @click="toCopy(shareLink + userInfo?.user?.activeCode)">
-            复制
+            {{ t('copy') }}
             <svg
               t="1747978644685"
               class="icon"
@@ -129,7 +133,7 @@
         "
       >
         <div>
-          <div style="font-size: 10px; margin-bottom: 8px">今日注册</div>
+          <div style="font-size: 10px; margin-bottom: 8px">{{ t('todayRegister') }}</div>
           <div>
             <img src="../../assets/img/Frame4.png" style="width: 14px; height: 14px" />
           </div>
@@ -148,7 +152,7 @@
         "
       >
         <div>
-          <div style="font-size: 10px; margin-bottom: 8px">昨日注册</div>
+          <div style="font-size: 10px; margin-bottom: 8px">{{ t('yesterdayRegister') }}</div>
           <div>
             <img src="../../assets/img/Frame4.png" style="width: 14px; height: 14px" />
           </div>
@@ -160,10 +164,12 @@
 
   <van-popup v-model:show="showCenter" round>
     <div style="background-color: var(--primary-color); padding: 20px">
-      <div style="color: var(--primary-background); font-size: 13px">立即加入，一起赚钱</div>
+      <div style="color: var(--primary-background); font-size: 13px">
+        {{ t('joinAndMakeMoney') }}
+      </div>
       <div class="code-box">
         <img :src="QRCodeIMG" class="code-canvas" />
-        <div class="color-gray">邀请码</div>
+        <div class="color-gray">{{ t('inviteCode') }}</div>
         <div class="color-black">{{ userInfo?.user?.activeCode }}</div>
       </div>
     </div>
@@ -178,7 +184,8 @@ import { useMainStore } from '@/store'
 import { getAgentInfo } from '@/api/invaite/index.js'
 import Copy from 'vue-clipboard3'
 import QRCode from 'qrcode'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const router = useRouter()
 const useStore = useUserStore()
 const mainStore = useMainStore()
@@ -189,9 +196,9 @@ const agentInfo = ref({})
 const toCopy = async (text) => {
   try {
     await toClipboard(`${text}`)
-    showToast('复制成功')
+    showToast(t('copySuccess'))
   } catch (e) {
-    showToast('复制失败')
+    showToast(t('copyFail'))
   }
 }
 const showCenter = ref(false)

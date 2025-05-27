@@ -7,7 +7,7 @@
   >
     <div style="display: flex; align-items: center; justify-content: space-between">
       <div></div>
-      <div style="font-size: 14px">调整保证金</div>
+      <div style="font-size: 14px">{{ t('adjustmentMargin') }}</div>
       <div>
         <svg
           @click="emit('close')"
@@ -49,7 +49,7 @@
         :class="margin == 0 ? 'active' : ''"
         @click="handleTabs(0)"
       >
-        追加保证金
+        {{ t('addMargin') }}
       </div>
       <div
         style="
@@ -63,7 +63,7 @@
         :class="margin == 1 ? 'active' : ''"
         @click="handleTabs(1)"
       >
-        减少保证金
+        {{ t('reduceMargin') }}
       </div>
     </div>
     <div
@@ -137,26 +137,26 @@
       </div>
     </div>
     <div style="margin-top: 40px">
-      <span style="color: var(--secondary-color)">最多增加：</span>
+      <span style="color: var(--secondary-color)">{{ t('atMost') }}：</span>
       <span style="color: var(--regular-color)">{{ atMostValue }} USDT</span>
     </div>
     <div style="margin-top: 15px">
-      <span style="color: var(--secondary-color)">追加后的强平价格：</span>
+      <span style="color: var(--secondary-color)">{{ t('qiangpingPrice') }}：</span>
       <span style="color: var(--regular-color)">{{ qiangpingPrice }} USDT</span>
     </div>
     <div style="width: 100%; display: flex; align-content: center; justify-content: center">
       <div class="btn2" @click="submit">
-        <span>确认</span>
+        <span>{{ t('confirm') }}</span>
       </div>
     </div>
   </van-popup>
 </template>
 <script setup>
-import { useI18n } from 'vue-i18n'
 import { showToast } from 'vant'
 import { _add, _div, _mul, _sub, _toFixed } from '@/utils/decimal'
 import { useTradeStore } from '@/store/trade'
 import { adjustAmount } from '@/api/trade/index'
+import { useI18n } from 'vue-i18n'
 const { t } = useI18n()
 const tradeStore = useTradeStore()
 const props = defineProps({

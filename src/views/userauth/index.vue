@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>实名认证</span>
+              <span>{{ t('realNameAuth') }}</span>
             </span>
           </div>
           <div
@@ -86,7 +86,7 @@
     <template v-if="advancedAuth == '0' || advancedAuth == null">
       <div style="margin: 35px 10px 0 10px">
         <div style="display: flex; align-items: center; justify-content: space-between">
-          <div>国籍</div>
+          <div>{{ t('nationality') }}</div>
 
           <div class="optionNationality" @click="showBottom2 = true">
             <span class="optionNationality-text">
@@ -112,7 +112,7 @@
             </div>
           </div>
 
-          <div>认证方式</div>
+          <div>{{ t('certificationMethod') }}</div>
 
           <div class="optionNationality fui-dropdown__menu" @click="handleShowPopoverNum()">
             <span class="optionNationality-text">{{ formData.title }}</span>
@@ -159,7 +159,7 @@
 
         <div class="message">
           <div class="message-list">
-            <div>姓名：</div>
+            <div>{{ t('name') }}：</div>
             <input
               v-model.trim="formData.userName"
               type="text"
@@ -167,11 +167,11 @@
               enterkeyhint="done"
               autocomplete="off"
               style="text-align: right"
-              placeholder="请输入真实姓名"
+              :placeholder="t('pleaseInputRealName')"
             />
           </div>
           <div class="message-list">
-            <div>{{ formData.title || '身份证' }}：</div>
+            <div>{{ formData.title || t('idCard') }}：</div>
             <input
               v-model.trim="formData.number"
               type="text"
@@ -179,14 +179,14 @@
               enterkeyhint="done"
               autocomplete="off"
               style="text-align: right"
-              placeholder="请输入"
+              :placeholder="t('pleaseInput')"
             />
           </div>
         </div>
 
         <div class="upd">
           <div style="font-weight: 500; font-size: 16px; color: var(--primary-color)">
-            请上传身份证照片
+            {{ t('pleaseUploadIdCardPhoto') }}
           </div>
           <van-uploader v-model="fileList1" :after-read="afterRead1" class="upd-list">
             <img
@@ -194,7 +194,7 @@
               style="width: 36px; height: 36px"
               src="../../assets/img/Frame.png"
             />
-            <div v-if="fileList1.length == 0" class="text">上传证件照正面</div>
+            <div v-if="fileList1.length == 0" class="text">{{ t('uploadIdCardPhotoFront') }}</div>
           </van-uploader>
           <van-uploader v-model="fileList2" :after-read="afterRead2" class="upd-list">
             <img
@@ -202,7 +202,7 @@
               style="width: 36px; height: 36px"
               src="../../assets/img/Frame.png"
             />
-            <div v-if="fileList2.length == 0" class="text">上传证件照反面</div>
+            <div v-if="fileList2.length == 0" class="text">{{ t('uploadIdCardPhotoBack') }}</div>
           </van-uploader>
           <!-- <van-uploader v-model="fileList3" :after-read="afterRead3" class="upd-list">
             <img
@@ -214,29 +214,29 @@
           </van-uploader> -->
         </div>
       </div>
-      <div class="btn" @click="submit">提交认证</div>
+      <div class="btn" @click="submit">{{ t('submitAuth') }}</div>
     </template>
 
     <template v-if="advancedAuth == '3'">
       <div class="content1">
         <img src="../../assets/img/shz.png" class="imgLoad" />
-        <div class="text">审核中</div>
+        <div class="text">{{ t('audit') }}</div>
       </div>
     </template>
 
     <template v-if="advancedAuth == '2'">
       <div class="content1">
         <img src="../../assets/img/sb.png" class="imgLoad" />
-        <div class="text">审核失败</div>
+        <div class="text">{{ t('auditFailed') }}</div>
       </div>
 
-      <div class="btn" @click="reSubmit">重新提交</div>
+      <div class="btn" @click="reSubmit">{{ t('reSubmit') }}</div>
     </template>
 
     <template v-if="advancedAuth == '1'">
       <div class="content1">
         <img src="../../assets/img/cg.png" class="imgLoad" />
-        <div class="text">认证成功</div>
+        <div class="text">{{ t('authSuccess') }}</div>
       </div>
     </template>
   </div>
@@ -251,7 +251,8 @@ import { storageDict } from '@/config/dict'
 import { uploadImg } from '@/api/common/index.js'
 import { uploadKYC } from '@/api/user'
 import PhonePopup from '@/components/phonePopup/index.vue'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const userStore = useUserStore()
 userStore.getUserInfo()
 // 用户信息
@@ -277,9 +278,9 @@ const formData = ref({
 })
 const action = ref({})
 const certificate = [
-  { name: '身份证', type: 1 }, //身份证
-  { name: '护照', type: 2 }, //护照
-  { name: '驾驶证', type: 3 } //驾驶证
+  { name: t('idCard'), type: 1 }, //身份证
+  { name: t('passport'), type: 2 }, //护照
+  { name: t('driverLicense'), type: 3 } //驾驶证
 ]
 const showBottom = ref(false)
 const close = (value) => {
@@ -347,27 +348,27 @@ const afterRead3 = (file) => {
 }
 const submit = () => {
   if (!formData.value.userName) {
-    showToast('请填写姓名')
+    showToast(t('pleaseInputRealName'))
     return
   }
   if (!formData.value.title) {
-    showToast('请选择证件类型')
+    showToast(t('pleaseSelectCertificateType'))
     return
   }
   if (!formData.value.number) {
-    showToast('请输入证件号')
+    showToast(t('pleaseInputIdCardNumber'))
     return
   }
   if (!action.value?.englishName) {
-    showToast('请选择居住国家')
+    showToast(t('pleaseSelectResidenceCountry'))
     return
   }
   if (fileList1.value.length == 0) {
-    showToast('请上传证件正面')
+    showToast(t('pleaseUploadIdCardPhotoFront'))
     return
   }
   if (fileList2.value.length == 0) {
-    showToast('请上传证件背面')
+    showToast(t('pleaseUploadIdCardPhotoBack'))
     return
   }
   // if (fileList3.value.length == 0) {
@@ -381,7 +382,7 @@ const submit = () => {
   // const file3 = fileList3.value[0] || {}
   // let filePath3 = file3.res
   if (file1.status != 'success' || file2.status != 'success') {
-    showToast('图片上传中')
+    showToast(t('imageUploading'))
     return
   }
   // if (file3.status != 'success') {
@@ -391,7 +392,7 @@ const submit = () => {
   let params = `realName=${formData.value.userName}&idCard=${formData.value.number}&flag=2&frontUrl=${filePath1}&backUrl=${filePath2}&country=${action.value.englishName}&cardType=${formData.value?.type}`
   uploadKYC(params).then((res) => {
     if (res.code == '200') {
-      showToast('提交成功，请等待...')
+      showToast(t('submitSuccess'))
       advancedAuth.value = 3
     } else {
       showToast(res.msg)

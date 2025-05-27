@@ -6,8 +6,8 @@
         <input type="text" placeholder="搜索币种" v-model.trim="searchName" />
       </div>
       <div class="tip">
-        <div>名称</div>
-        <div>最新价/涨跌幅</div>
+        <div>{{t('name')}}</div>
+        <div>{{t('latestPrice')}}/{{t('priceChange')}}</div>
       </div>
       <div class="list">
         <div
@@ -53,9 +53,11 @@ import { filterKeyCoin } from '@/utils/filters'
 import { priceFormat } from '@/utils/decimal.js'
 import { useRouter, useRoute } from 'vue-router'
 import { dispatchCustomEvent } from '@/utils'
+import { useI18n } from 'vue-i18n'
 const router = useRouter()
 const route = useRoute()
 const tradeStore = useTradeStore()
+const { t } = useI18n()
 const props = defineProps({
   showLeft: {
     type: Boolean,

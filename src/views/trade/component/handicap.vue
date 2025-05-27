@@ -75,9 +75,9 @@ const showTypeList = [
   // 默认
   { label: t('default'), value: 0, icon: 'morenpan' },
   // 卖出盘
-  { label: t('sell'), value: 1, icon: 'maichupan' },
+  { label: t('sell2'), value: 1, icon: 'maichupan' },
   // 买入盘
-  { label: t('buyy'), value: 2, icon: 'mairupan' }
+  { label: t('buy2'), value: 2, icon: 'mairupan' }
 ]
 /**
  * 当前显示类型

@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>我的跟单</span>
+              <span>{{ t('myFollow') }}</span>
             </span>
           </div>
           <div
@@ -90,7 +90,7 @@
             {{ profitInfo?.betAmount || 0 }}
           </div>
           <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
-            跟单总金额(USDT)
+            {{ t('followTotalAmount') }}(USDT)
           </div>
         </div>
         <div class="mine-main-info-item">
@@ -98,7 +98,7 @@
             {{ profitInfo?.profitAndLoss || 0 }}
           </div>
           <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
-            已实现总盈亏(USDT)
+            {{ t('realizedTotalProfit') }}(USDT)
           </div>
         </div>
         <div class="mine-main-info-item">
@@ -106,12 +106,12 @@
             {{ profitInfo?.profitRate || 0 }}
           </div>
           <div style="color: var(--secondary-color); font-size: 12; margin-top: 5px">
-            总收益率(USDT)
+            {{ t('totalProfitRate') }}(USDT)
           </div>
         </div>
       </div>
       <div class="mine-main-btn">
-        <div class="btn" @click="router.push('/floworder/apply')">成为交易专家</div>
+        <div class="btn" @click="router.push('/floworder/apply')">{{ t('becomeTrader') }}</div>
       </div>
       <div class="mine-main-list">
         <div class="mine-main-list-tab">
@@ -138,11 +138,11 @@
                       {{ item.traderName }}
                     </div>
                     <div style="color: var(--secondary-color); font-size: 12px">
-                      跟单天数
+                      {{ t('followDays') }}
                       <span style="color: var(--primary-color)">{{ item.followDay }}</span>
                     </div>
                     <div style="color: var(--secondary-color); font-size: 12px">
-                      跟单方式
+                      {{ t('followMode') }}
                       <span style="color: var(--primary-color)">
                         {{ returnFollowName(item.followType) }}
                       </span>
@@ -150,18 +150,18 @@
                   </div>
                 </div>
                 <div class="mine-main-list-item-top-btn" @click="handleUpdate(item)">
-                  修改跟单参数
+                  {{ t('modifyFollowParameter') }}
                 </div>
               </div>
               <div class="mine-main-list-item-info">
                 <div style="color: var(--secondary-color); font-size: 12px">
-                  跟单总收益
+                  {{ t('followTotalProfit') }}
                   <span style="color: var(--primary-color)">
                     {{ item.followAmount || '0.00' }} USD
                   </span>
                 </div>
                 <div style="color: var(--secondary-color); font-size: 12px; margin-top: 10px">
-                  跟单时间
+                  {{ t('followTime') }}
                   <span style="color: var(--primary-color)">
                     {{ _timeFormat(item.createTime, 'MM/DD HH:mm', true) }}
                   </span>
@@ -190,7 +190,7 @@ import { getMineProfitApi, postMineTraderApi, getMineOrderApi } from '@/api/foll
 import { _timeFormat } from '@/utils/public'
 const { t } = useI18n()
 const router = useRouter()
-const list = ['我的交易员', '当前跟随', '历史跟单']
+const list = [t('myTrader'), t('currentFollow'), t('historyFollow')]
 const currentIndex = ref(0)
 const profitInfo = ref({})
 const getMineProfit = () => {
@@ -214,11 +214,11 @@ const postMineTrader = () => {
 const returnFollowName = (index) => {
   switch (index) {
     case 0:
-      return '固定比例'
+      return t('fixedRatio')
     case 1:
-      return '固定金额'
+      return t('fixedAmount')
     default:
-      return '交易员比例'
+      return t('traderRatio')
   }
 }
 const handleUpdate = (item) => {

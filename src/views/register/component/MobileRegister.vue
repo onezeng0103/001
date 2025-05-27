@@ -27,7 +27,7 @@
           type="number"
           v-model.trim="formData.phoneNum"
           pattern="[0-9]*"
-          placeholder="请输入手机号"
+          :placeholder="t('pleaseEnterThePhoneNumber')"
           autocomplete="off"
         />
         <div class="icon">
@@ -53,11 +53,11 @@
     </div>
 
     <div class="form-item">
-      <div class="form-item-label">密码</div>
+      <div class="form-item-label">{{t('password')}}</div>
       <div class="input-box">
         <input
           :type="isPwd ? 'password' : 'text'"
-          placeholder="登录密码必须包含 数字、字母、特殊符号"
+          :placeholder="t('loginPasswordMustContainNumbersLettersSpecialSymbols')"
           v-model.trim="formData.loginPassword"
           class="uni-input-input"
           autocomplete="off"
@@ -109,11 +109,11 @@
     </div>
 
     <div class="form-item">
-      <div class="form-item-label">确认密码</div>
+      <div class="form-item-label">{{t('confirmPassword')}}</div>
       <div class="input-box">
         <input
           :type="isPwd2 ? 'password' : 'text'"
-          placeholder="请再次输入登录密码"
+          :placeholder="t('pleaseEnterTheLoginPasswordAgain')"
           v-model.trim="pwd"
           class="uni-input-input"
           autocomplete="off"
@@ -165,13 +165,13 @@
     </div>
 
     <div class="form-item">
-      <div class="form-item-label">邀请码({{ requireInviteCode ? '必填' : '选填' }})</div>
+      <div class="form-item-label">{{t('inviteCode')}}({{ requireInviteCode ? t('required') : t('optional') }})</div>
       <div class="input-box">
         <input
           type="text"
           v-model.trim="formData.activeCode"
           maxlength="140"
-          placeholder="请输入邀请码"
+          :placeholder="t('pleaseEnterTheInviteCode')"
           class="uni-input-input"
           autocomplete="off"
         />
@@ -179,17 +179,17 @@
     </div>
 
     <div class="form-item" v-if="showVerifyCode">
-      <div class="form-item-label">验证码</div>
+      <div class="form-item-label">{{t('verifyCode')}}</div>
       <div class="input-box">
         <input
-          placeholder="请输入验证码"
+          :placeholder="t('pleaseEnterTheVerifyCode')"
           v-model.trim="formData.code"
           class="uni-input-input"
           autocomplete="off"
         />
 
         <div class="icon">
-          <span v-if="!flag" @click="getCode">发送</span>
+          <span v-if="!flag" @click="getCode">{{t('send')}}</span>
           <span v-else>
             <van-count-down :time="time" format="ss" @finish="finish"></van-count-down>
           </span>
@@ -197,9 +197,9 @@
       </div>
     </div>
 
-    <div class="btn" @click="handleSubmit">注册</div>
+    <div class="btn" @click="handleSubmit">{{t('register')}}</div>
     <div class="text">
-      <span @click="router.push('/login')">立即登录</span>
+      <span @click="router.push('/login')">{{t('login')}}</span>
     </div>
   </div>
   <PhonePopup :showBottom="showBottom" @close="handleClose" />
@@ -213,6 +213,8 @@ import { signUp, mobileCode } from '@/api/user'
 import { useMainStore } from '@/store/index'
 import { useUserStore } from '@/store/user/index'
 import PhonePopup from '@/components/phonePopup/index.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const mainStore = useMainStore()
 const userStore = useUserStore()
 const router = useRouter()
@@ -249,7 +251,7 @@ const handleClose = (value) => {
 const loading = ref(false)
 const getCode = debounce(() => {
   if (!formData.value.phoneNum) {
-    showToast('请输入手机号')
+    showToast(t('pleaseEnterThePhoneNumber'))
     return
   }
   loading.value = true
@@ -275,12 +277,12 @@ const showVerifyCode = computed(() => {
 })
 const handleSubmit = () => {
   if (!formData.value.phoneNum) {
-    showToast('请输入手机号')
+    showToast(t('pleaseEnterThePhoneNumber'))
     return
   }
 
   if (!formData.value.loginPassword) {
-    showToast('请输入登录密码')
+    showToast(t('pleaseEnterTheLoginPassword'))
     return
   }
   //登录密码必须包含 数字、字母、特殊符号
@@ -289,34 +291,34 @@ const handleSubmit = () => {
       formData.value.loginPassword
     )
   ) {
-    showToast('请填写6-16位包含数字字母特殊符号的密码')
+    showToast(t('pleaseEnterThePassword6-16'))
     return
   }
   if (!pwd.value) {
-    showToast('请再次输入登录密码')
+    showToast(t('pleaseEnterTheLoginPasswordAgain'))
     return
   }
   if (requireInviteCode.value && !formData.value.activeCode) {
-    showToast('请输入邀请码')
+    showToast(t('pleaseEnterTheInviteCode'))
     return
   }
   if (showVerifyCode.value && !formData.value.code) {
-    showToast('请输入验证码')
+    showToast(t('pleaseEnterTheVerifyCode'))
     return
   }
   if (formData.value.loginPassword !== pwd.value) {
-    showToast('两次密码不一致')
+    showToast(t('twoPasswordsDoNotMatch'))
     return
   }
   formData.value.phone = phoneCode.value + formData.value.phoneNum
   signUp(formData.value)
     .then((res) => {
       if (res.code == '200') {
-        showToast('注册成功！')
+        showToast(t('registerSuccess'))
         if (autoLogin.value) {
           setTimeout(() => {
             if (res.code == '200' && res.data.satoken) {
-              showToast('登录成功！')
+              showToast(t('loginSuccess'))
               let token = res.data.satoken
               userStore.setIsSign(true)
               userStore.setToken(token)

@@ -7,11 +7,13 @@ import { filterCoin2 } from '@/utils/public'
 import { withdrawSubmit, getWithdrawAddressList } from '@/api/account'
 import { debounce } from 'lodash'
 import { emailCode, mobileCode } from '@/api/user'
+import { useI18n } from 'vue-i18n'
 const router = useRouter()
 const mainStore = useMainStore()
 const showCode = computed(() => {
   return mainStore?.settingConfig?.WITHDRAWAL_SETTING?.checkCode || false
 })
+const { t } = useI18n()
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 const showBottom = ref(false)
@@ -87,7 +89,7 @@ const handleClose = (value) => {
 }
 const submit = () => {
   if (userInfo.value.detail?.userTardPwd == null) {
-    showToast('请设置资金密码')
+    showToast(t('pleaseSetFundPassword'))
     setTimeout(() => {
       router.push('/secrety/fundpwd')
     }, 1000)
@@ -100,29 +102,29 @@ const submit = () => {
     allAmount.value > amount.value ||
     allAmount.value <= 0
   ) {
-    showToast('请输入正确的提现数量')
+    showToast(t('pleaseEnterTheCorrectWithdrawalAmount'))
     return
   }
   let num = Number(allAmount.value)
   if (!num) {
-    showToast('请填写提现数量')
+    showToast(t('pleaseEnterTheWithdrawalAmount'))
     return
   }
   if (num <= 0) {
-    showToast('提现数量不能小于0')
+    showToast(t('withdrawalAmountCannotBeLessThan0'))
     return
   }
   if (!address.value) {
-    showToast('请选择提现地址')
+    showToast(t('pleaseSelectWithdrawalAddress'))
     return
   }
   if (!password.value) {
-    showToast('请填写提现密码')
+    showToast(t('pleaseEnterTheWithdrawalPassword'))
     return
   }
   if (showCode.value) {
     if (!code.value) {
-      showToast('请输入验证码')
+      showToast(t('pleaseEnterTheVerificationCode'))
       return
     }
   }
@@ -138,7 +140,7 @@ const submit = () => {
   console.log(str)
   withdrawSubmit(str).then((res) => {
     if (res.code == '200') {
-      showToast('提现成功')
+      showToast(t('withdrawalSuccess'))
       router.push('/')
     } else {
       showToast(res.msg)
@@ -167,7 +169,7 @@ const close = (item) => {
 onMounted(() => {
   list.value = coinList.value
   if (userInfo.value.detail?.userTardPwd == null) {
-    showToast('请设置资金密码')
+    showToast(t('pleaseSetFundPassword'))
     setTimeout(() => {
       router.push('/fund-password')
     }, 800)
@@ -266,7 +268,7 @@ const coinList = computed(() => {
                 text-overflow: ellipsis;
               "
             >
-              <span>提币</span>
+              <span>{{ t('withdraw1') }}</span>
             </span>
           </div>
           <div
@@ -283,7 +285,7 @@ const coinList = computed(() => {
       </div>
     </div>
     <div style="padding: 20px 10px">
-      <div style="font-size: 12px">提现币种</div>
+      <div style="font-size: 12px">{{ t('withdrawCoin') }}</div>
       <div class="details" @click="handleSelectCoin">
         <template v-if="info?.title">
           <div style="color: var(--primary-color); flex: 1">
@@ -291,11 +293,11 @@ const coinList = computed(() => {
           </div>
         </template>
         <template v-else>
-          <div style="color: var(--secondary-color); flex: 1">请选择币种</div>
+          <div style="color: var(--secondary-color); flex: 1">{{ t('pleaseSelectCoin') }}</div>
         </template>
         <div class="triangle-down"></div>
       </div>
-      <div style="font-size: 12px">提现地址</div>
+      <div style="font-size: 12px">{{ t('withdrawAddress') }}</div>
       <div class="details" @click="showAddressBottom = true">
         <template v-if="address">
           <div style="color: var(--primary-color); flex: 1">
@@ -303,14 +305,14 @@ const coinList = computed(() => {
           </div>
         </template>
         <template v-else>
-          <div style="color: var(--secondary-color); flex: 1">请选择提现地址</div>
+          <div style="color: var(--secondary-color); flex: 1">{{ t('pleaseSelectWithdrawalAddress') }}</div>
         </template>
         <div class="triangle-down"></div>
       </div>
       <div
         style="display: flex; justify-content: space-between; align-items: center; font-size: 12px"
       >
-        <div>提现数量</div>
+        <div>{{ t('withdrawAmount') }}</div>
         <div>可用 {{ amount }} {{ info?.icon?.toUpperCase() }}</div>
       </div>
       <div class="details">
@@ -323,14 +325,14 @@ const coinList = computed(() => {
           autocomplete="off"
           style="flex: 1"
         />
-        <div style="margin: 0 10px" @click="allNum">全部</div>
+        <div style="margin: 0 10px" @click="allNum">{{t('all')}}</div>
       </div>
       <div
         style="display: flex; justify-content: space-between; align-items: center; font-size: 12px"
       >
-        <div style="font-size: 12px">提现密码</div>
+        <div style="font-size: 12px">{{t('withdrawalPassword')}}</div>
         <div>
-          实际到账
+          {{t('actualAmount')}}
           {{ Number((allAmount / info?.ratio || 0).toFixed(2)) }}
           USDT
         </div>
@@ -391,22 +393,22 @@ const coinList = computed(() => {
         </div>
       </div>
 
-      <div style="font-size: 14px">温馨提示</div>
+      <div style="font-size: 14px">{{t('prompt')}}</div>
       <div style="font-size: 12px; color: var(--secondary-color); margin-top: 10px">
-        1.为确保资产安全，当您的账户安全策略发生变更或进行密码修改时，将暂时不能提现。账号重新登录后，需等待1小时后方可提领。
+        {{t('prompt1')}}
       </div>
       <div style="font-size: 12px; color: var(--secondary-color); margin-top: 10px">
-        2.请务必确认操作设备的安全，防止信息被窜改或泄露。
+        {{t('prompt2')}}
       </div>
     </div>
     <div @click="submit" class="btn" :class="address && allAmount && password ? 'zf' : ''">
-      确认
+      {{t('confirm')}}
     </div>
   </div>
   <van-popup v-model:show="showAddressBottom" position="bottom">
     <div class="lists">
       <div style="display: flex; justify-content: center; position: relative; margin-bottom: 20px">
-        <div style="color: var(--primary-background)">选择提现地址</div>
+        <div style="color: var(--primary-background)">{{t('selectWithdrawalAddress')}}</div>
         <div class="cha" @click="showAddressBottom = false">
           <svg
             t="1748095662241"
@@ -439,14 +441,14 @@ const coinList = computed(() => {
         {{ item?.address }}
       </div>
       <div v-else style="color: var(--primary-background); display: flex; justify-content: center">
-        暂无填写地址
+        {{t('noAddress')}}
       </div>
     </div>
   </van-popup>
   <van-popup v-model:show="showBottom" position="bottom">
     <div class="lists">
       <div style="display: flex; justify-content: center; position: relative; margin-bottom: 20px">
-        <div style="color: var(--primary-background)">选择提现币种</div>
+        <div style="color: var(--primary-background)">{{t('selectWithdrawCoin')}}</div>
         <div class="cha" @click="showBottom = false">
           <svg
             t="1748095662241"

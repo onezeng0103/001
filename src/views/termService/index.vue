@@ -67,7 +67,7 @@
                 text-overflow: ellipsis;
               "
             >
-              <span>服务条款</span>
+              <span>{{t('serviceTerms')}}</span>
             </span>
           </div>
           <div
@@ -96,9 +96,11 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { rulesList } from '@/api/common/index'
+import { useI18n } from 'vue-i18n'
 const router = useRouter()
 const list = ref([])
 const currentHtml = ref(null)
+const { t } = useI18n()
 onMounted(async () => {
   try {
     const res = await rulesList('TERMS_CLAUSE')

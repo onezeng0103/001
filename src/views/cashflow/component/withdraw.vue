@@ -4,7 +4,7 @@
       <div class="recharge-cell" v-for="(item, index) in rowList" :key="index">
         <template v-if="item.type == 0">
           <div class="row" style="color: var(--primary-border)">
-            <span>提现</span>
+            <span>{{t("withdraw")}}</span>
             <span>- {{ priceFormat(item.amount) }}</span>
           </div>
           <div
@@ -12,21 +12,21 @@
             v-if="item?.remark && item.remark != '' && item.remark != null"
             style="color: var(--secondary-color)"
           >
-            <span>备注</span>
+            <span>{{t("remark")}}</span>
             <span>{{ item.remark }}</span>
           </div>
           <div class="row" style="color: var(--secondary-color)">
             <span>{{ _timeFormat(item?.params?.createTime) }}</span>
             <span>
-              <template v-if="item?.status == 0">审核中</template>
-              <template v-if="item?.status == 1">成功</template>
-              <template v-if="item?.status == 2">失败</template>
+              <template v-if="item?.status == 0">{{t("audit")}}</template>
+              <template v-if="item?.status == 1">{{t("success")}}</template>
+              <template v-if="item?.status == 2">{{t("failed")}}</template>
             </span>
           </div>
         </template>
         <template v-if="item.type == 1 && item.giveType == 0">
           <div class="row" style="color: var(--primary-border)">
-            <span>系统扣款</span>
+            <span>{{t("systemDeduction")}}</span>
             <span>- {{ priceFormat(item.amount) }}</span>
           </div>
           <div
@@ -34,15 +34,15 @@
             v-if="item?.remark && item.remark != '' && item.remark != null"
             style="color: var(--secondary-color)"
           >
-            <span>备注</span>
+            <span>{{t("remark")}}</span>
             <span>{{ item.remark }}</span>
           </div>
           <div class="row" style="color: var(--secondary-color)">
             <span>{{ _timeFormat(item?.params?.createTime) }}</span>
             <span>
-              <template v-if="item?.status == 0">审核中</template>
-              <template v-if="item?.status == 1">成功</template>
-              <template v-if="item?.status == 2">失败</template>
+              <template v-if="item?.status == 0">{{t("audit")}}</template>
+              <template v-if="item?.status == 1">{{t("success")}}</template>
+              <template v-if="item?.status == 2">{{t("failed")}}</template>
             </span>
           </div>
         </template>
@@ -54,9 +54,11 @@
   </div>
 </template>
 <script setup>
+import { useI18n } from 'vue-i18n'
 import { priceFormat } from '@/utils/decimal'
 import { _timeFormat } from '@/utils/public'
 import { getWithdrawList, getBonsList } from '@/api/account'
+const { t } = useI18n()
 const rowList = ref([])
 const getWithdrawListFun = async () => {
   let str = 'pageNum=1&pageSize=100000'

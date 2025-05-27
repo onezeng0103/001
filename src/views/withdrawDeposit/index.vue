@@ -6,7 +6,9 @@ import { TronWeb } from 'tronweb'
 import { updateUserWithdrawAddress, getWithdrawAddressList } from '@/api/account'
 import { filterCoin2 } from '@/utils/public.js'
 import { dispatchCustomEvent } from '@/utils'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const router = useRouter()
 const mainStore = useMainStore()
 const formData = ref({
@@ -46,7 +48,7 @@ const coinList = computed(() => {
       } else {
         obj['icon'] = 'card'
         // 银行卡提现
-        obj['title'] = '银行卡提现'
+        obj['title'] = t('withdrawCard')
         obj['card'] = filterCoin2(item.rechargeType).toLocaleUpperCase()
       }
 
@@ -64,11 +66,11 @@ const close = (value) => {
 }
 const submit = () => {
   if (!formData.value.type) {
-    showToast('请选择币种')
+    showToast(t('pleaseSelectCoin'))
     return
   }
   if (!TronWeb.isAddress(formData.value.address)) {
-    showToast('请输入有效的地址')
+    showToast(t('pleaseInputValidAddress'))
     return
   }
   updateUserWithdrawAddress({
@@ -157,7 +159,7 @@ onMounted(() => {
                 text-overflow: ellipsis;
               "
             >
-              <span>绑定提现地址</span>
+              <span>{{t('bindWithdrawAddress')}}</span>
             </span>
           </div>
           <div
@@ -175,7 +177,7 @@ onMounted(() => {
 
     <div style="padding: 15px 10px">
       <template v-if="type == 0">
-        <div style="font-size: 14px">币种类型</div>
+        <div style="font-size: 14px">{{t('coinType1')}}</div>
         <div class="optionNationality" @click="showBottom = true">
           <span class="optionNationality-text">
             {{ formData.title }}
@@ -200,7 +202,7 @@ onMounted(() => {
           </div>
         </div>
 
-        <div style="font-size: 14px; margin-top: 20px">币种类型</div>
+        <div style="font-size: 14px; margin-top: 20px">{{t('coinType1')}}</div>
         <div class="optionNationality">
           <div class="optionNationality-text" style="flex: 1">
             <input
@@ -208,7 +210,7 @@ onMounted(() => {
               type="text"
               maxlength="140"
               enterkeyhint="done"
-              placeholder="请填写提现地址"
+              :placeholder="t('pleaseInput')"
               class="uni-input-input"
               autocomplete="off"
               style="width: 100%"
@@ -216,7 +218,7 @@ onMounted(() => {
           </div>
         </div>
         <div class="btn">
-          <div class="btn1" @click="submit">确定</div>
+          <div class="btn1" @click="submit">{{t('confirm')}}</div>
         </div>
       </template>
       <template v-else>
@@ -227,11 +229,11 @@ onMounted(() => {
             border-radius: 8px;
           "
         >
-          <div>币种：{{ addressList[0].symbol?.toUpperCase() }}</div>
-          <div style="margin-top: 10px">地址：{{ addressList[0].address }}</div>
+          <div>{{t('coinType')}}：{{ addressList[0].symbol?.toUpperCase() }}</div>
+          <div style="margin-top: 10px">{{t('address')}}：{{ addressList[0].address }}</div>
         </div>
         <div class="btn">
-          <div class="btn1" @click="handleKeFu">如需修改，请联系在线客服</div>
+          <div class="btn1" @click="handleKeFu">{{t('pleaseContactOnlineCustomerService')}}</div>
         </div>
       </template>
     </div>
@@ -243,7 +245,7 @@ onMounted(() => {
         </template>
       </div>
 
-      <div class="item" @click="showBottom = false">取消</div>
+      <div class="item" @click="showBottom = false">{{t('cancel1')}}</div>
     </van-popup>
   </div>
 </template>

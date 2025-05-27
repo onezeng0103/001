@@ -13,7 +13,7 @@
           "
         >
           <span>
-            {{ !item?.type ? '做多' : '开空' }}
+            {{ !item?.type ? t('goingLong') : t('openBlank') }}
           </span>
         </div>
         <span>
@@ -23,45 +23,45 @@
       </div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">收益</div>
+      <div class="name">{{ t('earn') }}</div>
       <div class="value">{{ incomeValue }} USDT</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">收益率</div>
+      <div class="name">{{ t('yield') }}</div>
       <div class="value">{{ yieldValue }}%</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">持仓量</div>
+      <div class="name">{{ t('openInterest') }}</div>
       <div class="value">
         {{ item.openNum }}
         {{ item.showCoin ? matchText(item?.showCoin, '/USDT') : item?.symbol.toUpperCase() }}
       </div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">持仓担保资产</div>
+      <div class="name">{{ t('openInterest') }}</div>
       <div class="value">{{ item.adjustAmount }} USDT</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">担保资产率</div>
+      <div class="name">{{ t('guaranteePrice') }}</div>
       <div class="value">{{ guaranteePrice }}%</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">开仓均价</div>
+      <div class="name">{{ t('openPrice') }}</div>
       <div class="value">{{ item.openPrice }} USDT</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">最新价</div>
+      <div class="name">{{ t('latestPrice') }}</div>
       <div class="value">{{ coinPriceInfo.close }} USDT</div>
     </div>
     <div style="display: flex; align-items: center; justify-content: space-between">
-      <div class="name">预计强平价</div>
+      <div class="name">{{ t('qiangpingPrice') }}</div>
       <div class="value">{{ item.closePrice <= 0 ? '--' : item.closePrice }} USDT</div>
     </div>
     <div class="item-footer">
       <div class="item-footer-item" @click="showDetail(item.id)">{{ t('fastClose') }}</div>
-      <div class="item-footer-item" @click="handleAdjustmentMarginBtn(item)">调整保证金</div>
-      <div class="item-footer-item" @click="handleTerminationBtn(item, 0)">止盈</div>
-      <div class="item-footer-item" @click="handleTerminationBtn(item, 1)">止损</div>
+      <div class="item-footer-item" @click="handleAdjustmentMarginBtn(item)">{{ t('adjustmentMargin') }}</div>
+      <div class="item-footer-item" @click="handleTerminationBtn(item, 0)">{{ t('stopProfit') }}</div>
+      <div class="item-footer-item" @click="handleTerminationBtn(item, 1)">{{ t('stopLoss') }}</div>
     </div>
   </div>
 </template>

@@ -6,7 +6,8 @@ import { priceFormat } from '@/utils/decimal'
 import { showToast } from 'vant'
 import { getPledgeOrderList, redemption, getPledgeProductList } from '@/api/pledge'
 import { _timeFormat } from '@/utils/public'
-
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const list1 = ref([])
 const getList1 = async () => {
   const res = await getPledgeOrderList()
@@ -30,7 +31,7 @@ const handleClick = () => {
   let params = { id: info.value.id }
   redemption(params).then((res) => {
     if (res.code == '200') {
-      showToast('赎回成功')
+      showToast(t('redeemSuccess'))
       setTimeout(() => {
         showBottom.value = false
         getList()
@@ -52,19 +53,19 @@ const investmentStatus = (type) => {
       // 持仓中
       return {
         color: '#2654FF',
-        name: '持仓中'
+        name: t('hold')
       }
     case 1:
       // 已结算
       return {
         color: '#838B9C',
-        name: '已结算'
+        name: t('settled')
       }
     case 2:
       // 已赎回
       return {
         color: '#17AC74',
-        name: '已赎回'
+        name: t('redeemed')
       }
     default:
       break
@@ -149,7 +150,7 @@ const type = ref(route.query.type || 1)
                 text-overflow: ellipsis;
               "
             >
-              <span>理财记录</span>
+              <span>{{ t('financialRecord') }}</span>
             </span>
           </div>
           <div
@@ -176,7 +177,7 @@ const type = ref(route.query.type || 1)
           style="margin-right: 10px"
           @click="type = 1"
         >
-          奔富理财
+          {{ t('financialRecord') }}
         </div>
         <div
           class="t"
@@ -186,7 +187,7 @@ const type = ref(route.query.type || 1)
           }"
           @click="type = 2"
         >
-          质押生息
+          {{ t('pledgeInterest') }}
         </div>
       </div>
 
@@ -208,7 +209,9 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: var(--secondary-color)">锁仓天数(天)</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">
+              {{ t('lockDaysDesc') }}
+            </div>
             <div style="font-size: 14px; color: var(--primary-color)">{{ item.days }}</div>
           </div>
           <div
@@ -219,7 +222,9 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: var(--secondary-color)">日收益率</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">
+              {{ t('dailyYieldRate') }}
+            </div>
             <div style="font-size: 14px; color: var(--primary-color)">{{ item.avgRate }}%</div>
           </div>
           <div
@@ -244,7 +249,7 @@ const type = ref(route.query.type || 1)
             "
           >
             <div style="font-size: 13px; color: var(--secondary-color)">
-              预估收益({{ item.coin ? item.coin.toUpperCase() : '' }})
+              {{t('estimatedProfit')}}({{ item.coin ? item.coin.toUpperCase() : '' }})
             </div>
             <div style="font-size: 14px; color: var(--primary-color)">
               {{ priceFormat((item.amount * item.days * 0.05) / 100, 6) }}
@@ -258,17 +263,21 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: var(--secondary-color)">到账时间</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">
+              {{ t('settlementTime') }}
+            </div>
             <div style="font-size: 14px; color: var(--primary-color)">
               {{
                 timeOfreceipt(item.settlementType, item.days, item.params.createTime) === '每日结算'
-                  ? '每日结算'
+                  ? t('dailySettlement')
                   : timeOfreceipt(item.settlementType, item.days, item.params.createTime)
               }}
             </div>
           </div>
           <div style="display: flex; justify-content: space-between; align-items: center">
-            <div style="font-size: 13px; color: var(--secondary-color)">状态</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">
+              {{ t('status') }}
+            </div>
             <div style="font-size: 14px; color: var(--primary-color)">
               {{ investmentStatus(item.status)?.name }}
             </div>
@@ -297,7 +306,7 @@ const type = ref(route.query.type || 1)
               </div>
               <div>{{ item.planTitle }}</div>
             </div>
-            <div class="bt" @click="submit(item)">赎回</div>
+            <div class="bt" @click="submit(item)">{{ t('redeem') }}</div>
           </div>
           <div
             style="
@@ -307,7 +316,9 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: var(--secondary-color)">投注金额</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">
+              {{ t('pledgeAmount') }}
+            </div>
             <div style="font-size: 14px; color: var(--primary-color)">
               {{ priceFormat(item.amount) }}
             </div>
@@ -320,11 +331,13 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: var(--secondary-color)">状态</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">
+              {{ t('status') }}
+            </div>
             <div style="font-size: 14px; color: var(--primary-color)">
-              <template v-if="item.status == 0">进行中</template>
-              <template v-if="item.status == 1">已完成</template>
-              <template v-if="item.status == 2">已赎回</template>
+              <template v-if="item.status == 0">{{ t('ongoing') }}</template>
+              <template v-if="item.status == 1">{{ t('completed') }}</template>
+              <template v-if="item.status == 2">{{ t('redeemed') }}</template>
             </div>
           </div>
           <div
@@ -335,7 +348,9 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: var(--secondary-color)">日收益率</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">
+              {{ t('dailyYieldRate') }}
+            </div>
             <div style="font-size: 14px; color: var(--primary-color)">
               {{ item.minOdds }}%~{{ item.maxOdds }}%
             </div>
@@ -348,8 +363,12 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: var(--secondary-color)">周期</div>
-            <div style="font-size: 14px; color: var(--primary-color)">{{ item.days }}天</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">
+              {{ t('cycle') }}
+            </div>
+            <div style="font-size: 14px; color: var(--primary-color)">
+              {{ item.days }} {{ t('days') }}
+            </div>
           </div>
           <div
             style="
@@ -359,7 +378,9 @@ const type = ref(route.query.type || 1)
               margin: 8px 0;
             "
           >
-            <div style="font-size: 13px; color: var(--secondary-color)">开始日期</div>
+            <div style="font-size: 13px; color: var(--secondary-color)">
+              {{ t('startDate') }}
+            </div>
             <div style="font-size: 14px; color: var(--primary-color)">
               {{ _timeFormat(item.params?.createTime) }}
             </div>
