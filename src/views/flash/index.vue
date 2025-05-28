@@ -69,9 +69,9 @@
       <div class="flash-top-right"></div>
     </div>
     <div class="flash-tab">
-      <div class="flash-tab-item active">秒合约</div>
-      <div class="flash-tab-item" @click="router.push('/contract')">合约交易</div>
-      <div class="flash-tab-item" @click="router.push('/trade')">现货交易</div>
+      <div class="flash-tab-item active">{{ t('secondContract') }}</div>
+      <div class="flash-tab-item" @click="router.push('/contract')">{{ t('contract') }}</div>
+      <div class="flash-tab-item" @click="router.push('/trade')">{{ t('spot') }}</div>
       <!-- <div class="flash-tab-item" @click="router.push('/flashOption')">{{t("optionTrade")}}</div>
       <div class="flash-tab-item" @click="router.push('/floworder')">{ t('followTrade') }}}</div> -->
     </div>

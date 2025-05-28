@@ -7,7 +7,7 @@
       </div>
       <div class="tip">
         <div>{{ t('name') }}</div>
-        <div>{{ t('latestPrice') }}/{{ t('priceChangePercent') }}</div>
+        <div>{{ t('priceChangePercent') }}</div>
       </div>
       <div class="list">
         <div
